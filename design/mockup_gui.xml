@@ -1,0 +1,102 @@
+<mockup version="1.0" skin="sketch" measuredW="1027" measuredH="707" mockupW="935" mockupH="687">
+  <controls>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::TitleWindow" x="92" y="20" w="935" h="687" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Window%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::Accordion" x="100" y="128" w="-1" h="-1" measuredW="150" measuredH="351" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>1</selectedIndex>
+        <text>Plugin%201%0APlugin%202%0A-%20Plugin%20option%201%0A-%20Plugin%20option%202%0APlugin%203%0APlugin%204%0A...</text>
+      </controlProperties>
+    </control>
+    <control controlID="49" controlTypeID="com.balsamiq.mockups::Image" x="100" y="47" w="918" h="632" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <filter>true</filter>
+        <text>render</text>
+      </controlProperties>
+    </control>
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::ButtonBar" x="117" y="61" w="-1" h="-1" measuredW="427" measuredH="29" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>-1</selectedIndex>
+        <text>Enable%20Plugins%2C%20Settings%2C%20Overview%2C%20Load%20Room%2C%20Help</text>
+      </controlProperties>
+    </control>
+    <control controlID="51" controlTypeID="com.balsamiq.mockups::CallOut" x="343" y="456" w="-1" h="-1" measuredW="231" measuredH="40" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Clickable%20Sensor%20in%203D%20Environment</text>
+      </controlProperties>
+    </control>
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Arrow" x="467" y="479" w="84" h="86" measuredW="150" measuredH="100" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::TabBar" x="328" y="527" w="435" h="133" measuredW="435" measuredH="100" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <selectedIndex>0</selectedIndex>
+        <text>Sensor%20Information%2CSensor%20Statistics%2C%28Actuator%20Control%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::TextArea" x="336" y="557" w="417" h="95" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>up</state>
+        <text>Type%3A%20...%0AValue%3A%20....</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::Arrow" x="210" y="90" w="164" h="179" measuredW="150" measuredH="100" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>top</direction>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::TitleWindow" x="301" y="202" w="154" h="202" measuredW="450" measuredH="400" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Available%20Plugins</text>
+      </controlProperties>
+    </control>
+    <control controlID="61" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="316" y="234" w="-1" h="-1" measuredW="73" measuredH="126" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%5Bx%5D%20Plugin%201%0A%5Bx%5D%20Plugin%202%0A%5Bx%5D%20Plugin%203%0A%5Bx%5D%20Plugin%204%0A%5B%20%5D%20Plugin%205%0A%5B%20%5D%20Plugin%206</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::Button" x="857" y="544" w="-1" h="-1" measuredW="137" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Plugin%20defined%20button</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Button" x="857" y="571" w="-1" h="-1" measuredW="137" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Plugin%20defined%20button</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Button" x="857" y="598" w="-1" h="-1" measuredW="137" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Plugin%20defined%20button</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Button" x="857" y="625" w="-1" h="-1" measuredW="137" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Plugin%20defined%20button</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::FieldSet" x="845" y="527" w="160" h="140" measuredW="200" measuredH="170" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Plugin%20Controls</text>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::RoundButton" x="851" y="52" w="161" h="150" measuredW="32" measuredH="32" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <shape>rectangle</shape>
+        <text>Minimap%20Overview</text>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::StickyNote" x="639" y="542" w="-1" h="-1" measuredW="109" measuredH="123" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>This%20is%20a%20popup%20menu</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
