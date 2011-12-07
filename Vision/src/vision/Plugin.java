@@ -1,5 +1,7 @@
 package vision;
 
-public abstract class Plugin {
+import java.util.List;
 
+public abstract class Plugin {
+	private List<String> tags;
 }
