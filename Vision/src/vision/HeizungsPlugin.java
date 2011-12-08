@@ -2,6 +2,7 @@ package vision;
 
 import java.util.List;
 import com.jme3.app.Application;
+import com.jme3.scene.Geometry;
 
 
 public class HeizungsPlugin extends Plugin {
