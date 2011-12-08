@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" id="vision" metadata="uml2-1.0" tag="1000" key="32303037303533312D3130303020566973696F6E2F626F6D6F78">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1397,378" id="vision" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D3130303020566973696F6E2F53616D75726169">
+  <children xsi:type="editmodel:ClassEditModel" name="Plugin" location="50,50" size="126,75" id="vision/Plugin" runTimeClassModel="id,tags">
+    <children xsi:type="editmodel:CompartmentEditModel" size="103,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="id" id="vision/Plugin#id"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tags" id="vision/Plugin#tags"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
   <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=3;Product=eUML2" autoName="false"/>
   <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
     <leftRuler/>
