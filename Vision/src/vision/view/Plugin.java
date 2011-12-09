@@ -1,7 +1,11 @@
-package vision;
+package vision.view;
 
 
 import java.util.List;
+
+import vision.model.Model;
+import vision.model.Sensor;
+
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -73,11 +77,11 @@ protected Application getApplication(){
 	return null;
 	}
 
-/** 
- * @uml.property name="daten"
- * @uml.associationEnd multiplicity="(1 1)" inverse="plugin:vision.Model"
+/**
+ * @uml.property   name="daten"
+ * @uml.associationEnd   multiplicity="(1 1)" inverse="plugin:vision.model.Model"
  */
-private Model daten = new vision.Model();
+private Model daten = new vision.model.Model();
 
 /** 
  * Getter of the property <tt>daten</tt>

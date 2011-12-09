@@ -1,13 +1,15 @@
-package vision;
+package vision.controller;
+
+import vision.view.WindowPlugin;
 
 
 public class WindowController extends PluginController {
 
 	/**
-	 * @uml.property  name="windowPlugin"
-	 * @uml.associationEnd  multiplicity="(1 1)" inverse="windowController:vision.WindowPlugin"
+	 * @uml.property   name="windowPlugin"
+	 * @uml.associationEnd   multiplicity="(1 1)" inverse="windowController:vision.view.WindowPlugin"
 	 */
-	private WindowPlugin windowPlugin = new vision.WindowPlugin();
+	private WindowPlugin windowPlugin = new vision.view.WindowPlugin();
 
 	/**
 	 * Getter of the property <tt>windowPlugin</tt>

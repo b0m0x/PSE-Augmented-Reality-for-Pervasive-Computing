@@ -1,9 +1,13 @@
-package vision;
+package vision.view;
 
 import java.util.List;
 
+import vision.controller.WindowController;
+
+
 import com.jme3.app.Application;
 import com.jme3.scene.Geometry;
+
 
 
 public class WindowPlugin extends Plugin {
@@ -45,10 +49,10 @@ public class WindowPlugin extends Plugin {
 
 
 			/**
-			 * @uml.property  name="windowController"
-			 * @uml.associationEnd  multiplicity="(1 1)" inverse="windowPlugin:vision.WindowController"
+			 * @uml.property   name="windowController"
+			 * @uml.associationEnd   multiplicity="(1 1)" inverse="windowPlugin:vision.controller.WindowController"
 			 */
-			private WindowController windowController = new vision.WindowController();
+			private WindowController windowController = new vision.controller.WindowController();
 
 			/**
 			 * Getter of the property <tt>windowController</tt>
