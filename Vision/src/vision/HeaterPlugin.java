@@ -21,27 +21,12 @@ public class HeaterPlugin extends Plugin {
 
 
 			/**
-			 * @uml.property  name="heizungen"
+			 * Getter of the property <tt>heaters</tt>
+			 * @return  Returns the heaters1.
+			 * @uml.property  name="heaters"
 			 */
-			private List<Geometry> heizungen;
-
-			/** 
-			 * Setter of the property <tt>Heizungen</tt>
-			 * @param Heizungen  The heizungen to set.
-			 * @uml.property  name="heizungen"
-			 */
-			public void setHeizungen(List<Geometry> heizungen) {
-				this.heizungen = heizungen;
-			}
-
-			
-			/**
-			 * Getter of the property <tt>Heizungen</tt>
-			 * @return    Returns the heizungen.
-			 * @uml.property    name="heizungen"
-			 */
-			public List<Geometry> getHeizungen() {
-				return heizungen;
+			public List<Geometry> getHeaters() {
+				return heaters;
 			}
 
 
@@ -68,6 +53,21 @@ public class HeaterPlugin extends Plugin {
 			 */
 			public void setHeaterController(HeaterController heaterController) {
 				this.heaterController = heaterController;
+			}
+
+
+			/**
+			 * @uml.property  name="heaters"
+			 */
+			private List<Geometry> heaters;
+
+			/** 
+			 * Setter of the property <tt>Heizungen</tt>
+			 * @param Heizungen  The heizungen to set.
+			 * @uml.property  name="heaters"
+			 */
+			public void setHeaters(List<Geometry> heaters) {
+				this.heaters = heaters;
 			}
 
 }
