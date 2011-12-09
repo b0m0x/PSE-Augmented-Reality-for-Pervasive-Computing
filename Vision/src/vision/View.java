@@ -49,4 +49,31 @@ public class View extends SimpleApplication {
 				this.daten = daten;
 			}
 
+
+			/**
+			 * @uml.property  name="controller"
+			 * @uml.associationEnd  multiplicity="(1 1)" inverse="view:vision.Controller"
+			 */
+			private Controller controller = new vision.Controller();
+
+
+			/**
+			 * Getter of the property <tt>controller</tt>
+			 * @return  Returns the controller.
+			 * @uml.property  name="controller"
+			 */
+			public Controller getController() {
+				return controller;
+			}
+
+
+			/**
+			 * Setter of the property <tt>controller</tt>
+			 * @param controller  The controller to set.
+			 * @uml.property  name="controller"
+			 */
+			public void setController(Controller controller) {
+				this.controller = controller;
+			}
+
 }
