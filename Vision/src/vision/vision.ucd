@@ -18,20 +18,20 @@
         <children xsi:type="editmodel:LabelEditModel" name="0..1" location="599,91" size="18,14" anchorKind="FirstPart"/>
       </children>
       <children xsi:type="editmodel:AssociationEndEditModel" name="daten" location="0,69" id="vision/Plugin@plugin+vision/Model@daten|vision/Model#daten" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - daten" location="646,63" size="37,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name=" + daten" location="644,63" size="39,14" anchorKind="LastPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="0..1" location="665,91" size="18,14" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="HeaterPlugin" location="370,220" size="232,103" id="vision/HeaterPlugin" runTimeClassModel="HeaterPlugin(),heizungen,clientUpdate(Lcom.jme3.app.Application;)">
+  <children xsi:type="editmodel:ClassEditModel" name="HeaterPlugin" location="370,220" size="232,103" id="vision/HeaterPlugin" runTimeClassModel="HeaterPlugin(),heizungen,clientUpdate(Lcom.jme3.app.Application;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="151,18">
       <children xsi:type="editmodel:AttributeEditModel" name="heizungen" id="vision/HeaterPlugin#heizungen"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="209,36">
       <children xsi:type="editmodel:MethodEditModel" name="HeaterPlugin" id="vision/HeaterPlugin#HeaterPlugin()"/>
-      <children xsi:type="editmodel:MethodEditModel" name="clientUpdate" id="vision/HeaterPlugin#clientUpdate(Lcom.jme3.app.Application;)"/>
+      <children xsi:type="editmodel:MethodEditModel" targetConnections="//@children.4/@sourceConnections.0" name="clientUpdate" id="vision/HeaterPlugin#clientUpdate(Lcom.jme3.app.Application;)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="vision/Plugin&lt;-vision/HeaterPlugin" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
@@ -52,10 +52,10 @@
       <children xsi:type="editmodel:AssociationEndEditModel" location="-1,1"/>
     </sourceConnections>
   </children>
-  <children xsi:type="editmodel:NotepadEditModel" location="115,220" size="159,66" fontInfo="Arial-8-0" note="create/manipulate Spacials and&#xD;&#xA; pass them to jMonkey&#xD;&#xA;(#clientUpdate(Application))&#xD;&#xA;">
-    <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.4" target="//@children.1" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="159,33" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="0,33"/>
+  <children xsi:type="editmodel:NotepadEditModel" location="118,285" size="175,66" fontInfo="Arial-8-0" note="create/manipulate Spacials and&#xD;&#xA; pass them to jMonkey&#xD;&#xA;(#clientUpdate(Application))&#xD;&#xA;">
+    <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.4" target="//@children.1/@children.1/@children.1" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="143,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
     </sourceConnections>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="View" location="374,405" size="117,85" id="vision/View" runTimeClassModel="simpleUpdate(),simpleInitApp()">
