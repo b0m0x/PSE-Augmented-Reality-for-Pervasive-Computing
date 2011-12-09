@@ -121,30 +121,6 @@ public class Sensor {
 	}
 
 	/**
-	 * @uml.property   name="daten"
-	 * @uml.associationEnd   inverse="sensor:vision.Model"
-	 */
-	private Model daten;
-
-	/**
-	 * Getter of the property <tt>daten</tt>
-	 * @return  Returns the daten.
-	 * @uml.property  name="daten"
-	 */
-	public Model getDaten() {
-		return daten;
-	}
-
-	/**
-	 * Setter of the property <tt>daten</tt>
-	 * @param daten  The daten to set.
-	 * @uml.property  name="daten"
-	 */
-	public void setDaten(Model daten) {
-		this.daten = daten;
-	}
-
-	/**
 	 * @uml.property   name="messwert"
 	 * @uml.associationEnd   inverse="sensor:vision.Sample"
 	 */

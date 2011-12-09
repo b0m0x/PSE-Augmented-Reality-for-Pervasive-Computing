@@ -1,6 +1,7 @@
 package vision;
 
 import java.util.List;
+import java.util.Collection;
 
 
 public class Model {
@@ -98,33 +99,22 @@ public class Model {
 
 
 
-						/**
-						 * @uml.property  name="sensor"
-						 * @uml.associationEnd  inverse="daten:vision.Sensor"
+						/** 
+						 * @uml.property name="sensor"
+						 * @uml.associationEnd multiplicity="(0 -1)" inverse="daten:vision.Sensor"
 						 */
-						private Sensor sensor;
+						private Collection<Sensor> sensor;
 
 
 
-						/**
+						/** 
 						 * Getter of the property <tt>sensor</tt>
 						 * @return  Returns the sensor.
 						 * @uml.property  name="sensor"
 						 */
-						public Sensor getSensor() {
+						public Collection<Sensor> getSensor() {
 							return sensor;
 						}
-
-
-						/**
-						 * Setter of the property <tt>sensor</tt>
-						 * @param sensor  The sensor to set.
-						 * @uml.property  name="sensor"
-						 */
-						public void setSensor(Sensor sensor) {
-							this.sensor = sensor;
-						}
-
 
 
 						/**
@@ -181,6 +171,16 @@ public class Model {
 						 */
 						public void setUpdate(Update update) {
 							this.update = update;
+						}
+
+
+						/** 
+						 * Setter of the property <tt>sensor</tt>
+						 * @param sensor  The sensor to set.
+						 * @uml.property  name="sensor"
+						 */
+						public void setSensor(Collection<Sensor> sensor) {
+							this.sensor = sensor;
 						}
 
 }
