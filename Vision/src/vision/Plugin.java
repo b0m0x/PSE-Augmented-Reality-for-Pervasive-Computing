@@ -1,7 +1,9 @@
 package vision;
 
-import java.lang.Object;
+
 import java.util.List;
+
+import com.jme3.app.Application;
 
 
 public abstract class Plugin {
@@ -18,15 +20,6 @@ public abstract class Plugin {
 	 */
 	public List<Sensor> getSensors() {
 		return sensors;
-	}
-
-	/**
-	 * Setter of the property <tt>sensors</tt>
-	 * @param sensors  The sensors to set.
-	 * @uml.property  name="sensors"
-	 */
-	public void setSensors(List<Sensor> sensors) {
-		this.sensors = sensors;
 	}
 
 	/**
@@ -61,19 +54,20 @@ public abstract class Plugin {
 			
 	/**
 	 */
-	protected void clientUpdate(Object application){
+	protected void clientUpdate(Application application){
 	}
 
 				
 					
 					
-	public void update(Object application){
+	public void update(Application application){
+		clientUpdate(application);
 	}
 
 						
 /**
  */
-protected Object getApplication(){
+protected Application getApplication(){
 	return null;
 	}
 

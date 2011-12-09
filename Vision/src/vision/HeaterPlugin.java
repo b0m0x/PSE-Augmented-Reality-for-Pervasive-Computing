@@ -9,7 +9,7 @@ public class HeaterPlugin extends Plugin {
 
 	/**
 		 */
-		protected void clientUpdate(Object application){
+		protected void clientUpdate(Application application){
 			return;
 		}
 
