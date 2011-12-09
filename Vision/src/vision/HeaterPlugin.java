@@ -23,7 +23,7 @@ public class HeaterPlugin extends Plugin {
 			/**
 			 * @uml.property  name="heizungen"
 			 */
-			private List heizungen;
+			private List<Geometry> heizungen;
 
 			/** 
 			 * Setter of the property <tt>Heizungen</tt>
@@ -38,7 +38,7 @@ public class HeaterPlugin extends Plugin {
 			/**
 			 * Getter of the property <tt>Heizungen</tt>
 			 * @return    Returns the heizungen.
-			 * @uml.property    name="Heizungen"
+			 * @uml.property    name="heizungen"
 			 */
 			public List<Geometry> getHeizungen() {
 				return heizungen;
