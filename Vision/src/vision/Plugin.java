@@ -4,9 +4,11 @@ package vision;
 import java.util.List;
 
 import com.jme3.app.Application;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
 
 
-public abstract class Plugin {
+public abstract class Plugin extends AbstractAppState{
 
 	/**
 	 * @uml.property  name="sensors"
@@ -94,4 +96,26 @@ public Model getDaten() {
 public void setDaten(Model daten) {
 	this.daten = daten;
 }
+
+	
+	/**
+	 */
+	public void initialize(AppStateManager stateManager, Application app){
+		this.app = app;
+	}
+
+	/**
+	 * @uml.property  name="app"
+	 */
+	private Application app;
+
+	/**
+	 * Getter of the property <tt>app</tt>
+	 * @return  Returns the app.
+	 * @uml.property  name="app"
+	 */
+	public Application getApp() {
+		return app;
+	}
+
 }
