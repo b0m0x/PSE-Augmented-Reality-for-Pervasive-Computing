@@ -1,6 +1,6 @@
 package vision;
 
 
-public class Wand {
+public class Wall {
 
 }

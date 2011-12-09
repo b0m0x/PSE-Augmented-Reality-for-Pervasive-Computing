@@ -22,10 +22,10 @@ public class View {
 
 
 			/**
-			 * @uml.property  name="daten"
-			 * @uml.associationEnd  inverse="view:vision.Daten"
+			 * @uml.property   name="daten"
+			 * @uml.associationEnd   inverse="view:vision.Model"
 			 */
-			private Daten daten;
+			private Model daten;
 
 
 			/**
@@ -33,7 +33,7 @@ public class View {
 			 * @return  Returns the daten.
 			 * @uml.property  name="daten"
 			 */
-			public Daten getDaten() {
+			public Model getDaten() {
 				return daten;
 			}
 
@@ -43,7 +43,7 @@ public class View {
 			 * @param daten  The daten to set.
 			 * @uml.property  name="daten"
 			 */
-			public void setDaten(Daten daten) {
+			public void setDaten(Model daten) {
 				this.daten = daten;
 			}
 

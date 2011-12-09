@@ -3,7 +3,7 @@ package vision;
 import java.util.List;
 
 
-public class Daten {
+public class Model {
 
 		
 		/**
@@ -128,10 +128,10 @@ public class Daten {
 
 
 						/**
-						 * @uml.property  name="datenbank"
-						 * @uml.associationEnd  inverse="daten:vision.Datenbank"
+						 * @uml.property   name="datenbank"
+						 * @uml.associationEnd   inverse="daten:vision.Database"
 						 */
-						private Datenbank datenbank;
+						private Database datenbank;
 
 
 
@@ -140,7 +140,7 @@ public class Daten {
 						 * @return  Returns the datenbank.
 						 * @uml.property  name="datenbank"
 						 */
-						public Datenbank getDatenbank() {
+						public Database getDatenbank() {
 							return datenbank;
 						}
 
@@ -150,7 +150,7 @@ public class Daten {
 						 * @param datenbank  The datenbank to set.
 						 * @uml.property  name="datenbank"
 						 */
-						public void setDatenbank(Datenbank datenbank) {
+						public void setDatenbank(Database datenbank) {
 							this.datenbank = datenbank;
 						}
 

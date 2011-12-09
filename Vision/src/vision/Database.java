@@ -1,20 +1,20 @@
 package vision;
 
 
-public class Datenbank {
+public class Database {
 
 	/**
-	 * @uml.property  name="daten"
-	 * @uml.associationEnd  inverse="datenbank:vision.Daten"
+	 * @uml.property   name="daten"
+	 * @uml.associationEnd   inverse="datenbank:vision.Model"
 	 */
-	private Daten daten;
+	private Model daten;
 
 	/**
 	 * Getter of the property <tt>daten</tt>
 	 * @return  Returns the daten.
 	 * @uml.property  name="daten"
 	 */
-	public Daten getDaten() {
+	public Model getDaten() {
 		return daten;
 	}
 
@@ -23,14 +23,14 @@ public class Datenbank {
 	 * @param daten  The daten to set.
 	 * @uml.property  name="daten"
 	 */
-	public void setDaten(Daten daten) {
+	public void setDaten(Model daten) {
 		this.daten = daten;
 	}
 
 		
 		/**
 		 */
-		public void updateSensors(String id, int zeitpunkt, Messwert messwerte){
+		public void updateSensors(String id, int zeitpunkt, Sample messwerte){
 		}
 
 			

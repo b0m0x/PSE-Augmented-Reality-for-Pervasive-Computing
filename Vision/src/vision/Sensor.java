@@ -121,17 +121,17 @@ public class Sensor {
 	}
 
 	/**
-	 * @uml.property  name="daten"
-	 * @uml.associationEnd  inverse="sensor:vision.Daten"
+	 * @uml.property   name="daten"
+	 * @uml.associationEnd   inverse="sensor:vision.Model"
 	 */
-	private Daten daten;
+	private Model daten;
 
 	/**
 	 * Getter of the property <tt>daten</tt>
 	 * @return  Returns the daten.
 	 * @uml.property  name="daten"
 	 */
-	public Daten getDaten() {
+	public Model getDaten() {
 		return daten;
 	}
 
@@ -140,22 +140,22 @@ public class Sensor {
 	 * @param daten  The daten to set.
 	 * @uml.property  name="daten"
 	 */
-	public void setDaten(Daten daten) {
+	public void setDaten(Model daten) {
 		this.daten = daten;
 	}
 
 	/**
-	 * @uml.property  name="messwert"
-	 * @uml.associationEnd  inverse="sensor:vision.Messwert"
+	 * @uml.property   name="messwert"
+	 * @uml.associationEnd   inverse="sensor:vision.Sample"
 	 */
-	private Messwert messwert;
+	private Sample messwert;
 
 	/**
 	 * Getter of the property <tt>messwert</tt>
 	 * @return  Returns the messwert.
 	 * @uml.property  name="messwert"
 	 */
-	public Messwert getMesswert() {
+	public Sample getMesswert() {
 		return messwert;
 	}
 
@@ -164,7 +164,7 @@ public class Sensor {
 	 * @param messwert  The messwert to set.
 	 * @uml.property  name="messwert"
 	 */
-	public void setMesswert(Messwert messwert) {
+	public void setMesswert(Sample messwert) {
 		this.messwert = messwert;
 	}
 

@@ -1,7 +1,7 @@
 package vision;
 
 
-public class Messwert {
+public class Sample {
 
 	/**
 	 * @uml.property  name="typ"
