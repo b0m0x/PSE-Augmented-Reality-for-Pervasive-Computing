@@ -1,6 +1,5 @@
-package vision.controller;
+package vision;
 
-import vision.model.Model;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
@@ -9,7 +8,9 @@ import de.lessvoid.nifty.screen.ScreenController;
 public abstract class PluginController implements ScreenController {
 
 	
-	
+	public class HeaterController extends PluginController {
+
+	}
 
 	@Override
 	public void bind(Nifty arg0, Screen arg1) {
@@ -30,10 +31,10 @@ public abstract class PluginController implements ScreenController {
 	}
 
 	/**
-	 * @uml.property   name="model"
-	 * @uml.associationEnd   multiplicity="(1 1)" inverse="pluginController:vision.model.Model"
+	 * @uml.property  name="model"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="pluginController:vision.Model"
 	 */
-	private Model model = new vision.model.Model();
+	private Model model = new vision.Model();
 
 	/**
 	 * Getter of the property <tt>model</tt>

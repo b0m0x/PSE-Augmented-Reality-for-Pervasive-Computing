@@ -1,12 +1,11 @@
-package vision.model;
-
+package vision;
 
 
 public class Database {
 
 	/**
 	 * @uml.property   name="daten"
-	 * @uml.associationEnd   inverse="datenbank:vision.model.Model"
+	 * @uml.associationEnd   inverse="datenbank:vision.Model"
 	 */
 	private Model daten;
 

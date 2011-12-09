@@ -1,10 +1,7 @@
-package vision.model;
+package vision;
 
 import java.util.List;
 import java.util.Collection;
-
-import vision.view.View;
-
 
 
 public class Model {
@@ -45,8 +42,8 @@ public class Model {
 
 
 						/**
-						 * @uml.property   name="view"
-						 * @uml.associationEnd   inverse="daten:vision.view.View"
+						 * @uml.property  name="view"
+						 * @uml.associationEnd  inverse="daten:vision.View"
 						 */
 						private View view;
 
@@ -73,9 +70,9 @@ public class Model {
 
 
 
-						/**
-						 * @uml.property   name="sensor"
-						 * @uml.associationEnd   multiplicity="(0 -1)" inverse="daten:vision.model.Sensor"
+						/** 
+						 * @uml.property name="sensor"
+						 * @uml.associationEnd multiplicity="(0 -1)" inverse="daten:vision.Sensor"
 						 */
 						private Collection<Sensor> sensor;
 
@@ -93,7 +90,7 @@ public class Model {
 
 						/**
 						 * @uml.property   name="datenbank"
-						 * @uml.associationEnd   inverse="daten:vision.model.Database"
+						 * @uml.associationEnd   inverse="daten:vision.Database"
 						 */
 						private Database datenbank;
 
@@ -121,8 +118,8 @@ public class Model {
 
 
 						/**
-						 * @uml.property   name="update"
-						 * @uml.associationEnd   inverse="daten:vision.model.Update"
+						 * @uml.property  name="update"
+						 * @uml.associationEnd  inverse="daten:vision.Update"
 						 */
 						private Update update;
 

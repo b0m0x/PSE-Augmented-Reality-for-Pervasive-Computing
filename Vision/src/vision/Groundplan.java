@@ -1,4 +1,4 @@
-package vision.model;
+package vision;
 
 
 public class Groundplan {

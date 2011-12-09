@@ -1,15 +1,13 @@
-package vision.controller;
-
-import vision.view.HeaterPlugin;
+package vision;
 
 
 public class HeaterController extends PluginController {
 
 	/**
-	 * @uml.property   name="heaterPlugin"
-	 * @uml.associationEnd   multiplicity="(1 1)" inverse="heaterController:vision.view.HeaterPlugin"
+	 * @uml.property  name="heaterPlugin"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="heaterController:vision.HeaterPlugin"
 	 */
-	private HeaterPlugin heaterPlugin = new vision.view.HeaterPlugin();
+	private HeaterPlugin heaterPlugin = new vision.HeaterPlugin();
 
 	/**
 	 * Getter of the property <tt>heaterPlugin</tt>

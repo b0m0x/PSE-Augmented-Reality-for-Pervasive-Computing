@@ -1,9 +1,7 @@
 /**
  * 
  */
-package vision.view;
-
-import vision.model.Model;
+package vision;
 
 import com.jme3.app.SimpleApplication;
 
@@ -27,7 +25,7 @@ public class View extends SimpleApplication {
 
 			/**
 			 * @uml.property   name="daten"
-			 * @uml.associationEnd   inverse="view:vision.model.Model"
+			 * @uml.associationEnd   inverse="view:vision.Model"
 			 */
 			private Model daten;
 

@@ -1,4 +1,4 @@
-package vision.model;
+package vision;
 
 
 public class Sample {
@@ -108,8 +108,8 @@ public class Sample {
 			}
 
 			/**
-			 * @uml.property   name="sensor"
-			 * @uml.associationEnd   inverse="messwert:vision.model.Sensor"
+			 * @uml.property  name="sensor"
+			 * @uml.associationEnd  inverse="messwert:vision.Sensor"
 			 */
 			private Sensor sensor;
 

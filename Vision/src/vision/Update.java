@@ -1,4 +1,4 @@
-package vision.model;
+package vision;
 
 
 public class Update {
@@ -28,7 +28,7 @@ public class Update {
 
 	/**
 	 * @uml.property   name="daten"
-	 * @uml.associationEnd   inverse="update:vision.model.Model"
+	 * @uml.associationEnd   inverse="update:vision.Model"
 	 */
 	private Model daten;
 
