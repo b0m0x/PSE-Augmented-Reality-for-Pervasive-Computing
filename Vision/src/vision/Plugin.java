@@ -73,13 +73,13 @@ protected Application getApplication(){
 	return null;
 	}
 
-/**
- * @uml.property   name="daten"
- * @uml.associationEnd   inverse="plugin:vision.Model"
+/** 
+ * @uml.property name="daten"
+ * @uml.associationEnd multiplicity="(1 1)" inverse="plugin:vision.Model"
  */
-private Model daten;
+private Model daten = new vision.Model();
 
-/**
+/** 
  * Getter of the property <tt>daten</tt>
  * @return  Returns the daten.
  * @uml.property  name="daten"
@@ -88,7 +88,7 @@ public Model getDaten() {
 	return daten;
 }
 
-/**
+/** 
  * Setter of the property <tt>daten</tt>
  * @param daten  The daten to set.
  * @uml.property  name="daten"

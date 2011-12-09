@@ -42,35 +42,6 @@ public class Model {
 
 
 						/**
-						 * @uml.property  name="plugin"
-						 * @uml.associationEnd  inverse="daten:vision.Plugin"
-						 */
-						private Plugin plugin;
-
-
-
-						/**
-						 * Getter of the property <tt>plugin</tt>
-						 * @return  Returns the plugin.
-						 * @uml.property  name="plugin"
-						 */
-						public Plugin getPlugin() {
-							return plugin;
-						}
-
-
-						/**
-						 * Setter of the property <tt>plugin</tt>
-						 * @param plugin  The plugin to set.
-						 * @uml.property  name="plugin"
-						 */
-						public void setPlugin(Plugin plugin) {
-							this.plugin = plugin;
-						}
-
-
-
-						/**
 						 * @uml.property  name="view"
 						 * @uml.associationEnd  inverse="daten:vision.View"
 						 */

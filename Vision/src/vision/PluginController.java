@@ -5,7 +5,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 
 
-public class PluginController implements ScreenController {
+public abstract class PluginController implements ScreenController {
 
 	
 	public class HeaterController extends PluginController {
@@ -28,6 +28,30 @@ public class PluginController implements ScreenController {
 	public void onStartScreen() {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * @uml.property  name="model"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="pluginController:vision.Model"
+	 */
+	private Model model = new vision.Model();
+
+	/**
+	 * Getter of the property <tt>model</tt>
+	 * @return  Returns the model.
+	 * @uml.property  name="model"
+	 */
+	public Model getModel() {
+		return model;
+	}
+
+	/**
+	 * Setter of the property <tt>model</tt>
+	 * @param model  The model to set.
+	 * @uml.property  name="model"
+	 */
+	public void setModel(Model model) {
+		this.model = model;
 	}
 
 }
