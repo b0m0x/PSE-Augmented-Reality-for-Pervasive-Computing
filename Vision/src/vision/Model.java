@@ -154,4 +154,90 @@ public class Model {
 							this.sensor = sensor;
 						}
 
+
+
+						/** 
+						 * @uml.property name="pluginLoader"
+						 * @uml.associationEnd multiplicity="(1 1)" inverse="model:vision.PluginLoader"
+						 */
+						private PluginLoader pluginLoader = new vision.PluginLoader();
+
+
+
+						/** 
+						 * Getter of the property <tt>pluginLoader</tt>
+						 * @return  Returns the pluginLoader.
+						 * @uml.property  name="pluginLoader"
+						 */
+						public PluginLoader getPluginLoader() {
+							return pluginLoader;
+						}
+
+
+						/** 
+						 * Setter of the property <tt>pluginLoader</tt>
+						 * @param pluginLoader  The pluginLoader to set.
+						 * @uml.property  name="pluginLoader"
+						 */
+						public void setPluginLoader(PluginLoader pluginLoader) {
+							this.pluginLoader = pluginLoader;
+						}
+
+
+
+						/**
+						 * @uml.property  name="pluginList"
+						 */
+						private List<Plugin> pluginList;
+
+
+
+						/**
+						 * Getter of the property <tt>pluginList</tt>
+						 * @return  Returns the pluginList.
+						 * @uml.property  name="pluginList"
+						 */
+						public List<Plugin> getPluginList() {
+							return pluginList;
+						}
+
+
+						/**
+						 * Setter of the property <tt>pluginList</tt>
+						 * @param pluginList  The pluginList to set.
+						 * @uml.property  name="pluginList"
+						 */
+						public void setPluginList(List<Plugin> pluginList) {
+							this.pluginList = pluginList;
+						}
+
+
+
+						/**
+						 * @uml.property  name="plugin"
+						 * @uml.associationEnd  multiplicity="(0 -1)" inverse="daten:vision.Plugin"
+						 */
+						private Collection<vision.Plugin> plugin;
+
+
+
+						/**
+						 * Getter of the property <tt>plugin</tt>
+						 * @return  Returns the plugin.
+						 * @uml.property  name="plugin"
+						 */
+						public Collection<vision.Plugin> getPlugin() {
+							return plugin;
+						}
+
+
+						/**
+						 * Setter of the property <tt>plugin</tt>
+						 * @param plugin  The plugin to set.
+						 * @uml.property  name="plugin"
+						 */
+						public void setPlugin(Collection<vision.Plugin> plugin) {
+							this.plugin = plugin;
+						}
+
 }

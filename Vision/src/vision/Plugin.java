@@ -10,12 +10,12 @@ import com.jme3.app.state.AppStateManager;
 
 public abstract class Plugin extends AbstractAppState{
 
-	/**
-	 * @uml.property  name="sensors"
+	/** 
+	 * @uml.property name="sensors"
 	 */
 	private List<Sensor> sensors;
 
-	/**
+	/** 
 	 * Getter of the property <tt>sensors</tt>
 	 * @return  Returns the sensors.
 	 * @uml.property  name="sensors"
@@ -116,6 +116,15 @@ public void setDaten(Model daten) {
 	 */
 	public Application getApp() {
 		return app;
+	}
+
+	/**
+	 * Setter of the property <tt>sensors</tt>
+	 * @param sensors  The sensors to set.
+	 * @uml.property  name="sensors"
+	 */
+	public void setSensors(List<Sensor> sensors) {
+		this.sensors = sensors;
 	}
 
 }
