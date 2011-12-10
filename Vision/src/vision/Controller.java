@@ -99,4 +99,10 @@ public class Controller implements ScreenController {
 		this.view = view;
 	}
 
+		
+		/**
+		 */
+		public void pluginButton(String id){
+		}
+
 }

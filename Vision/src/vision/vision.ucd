@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="2232,967" id="vision" metadata="uml2-1.0" initialized="true" scrolledX="3" tag="1000" key="32303037303533312D3130303020566973696F6E2F53616D75726169">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="2232,967" id="vision" metadata="uml2-1.0" initialized="true" scrolledX="388" tag="1000" key="32303037303533312D3130303020566973696F6E2F53616D75726169">
   <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0" name="Plugin" location="270,53" size="351,193" id="vision/Plugin" runTimeClassModel="sensors,tags,app,setSensors(Ljava.util.List;),update(Lcom.jme3.app.Application;),getApplication(),Plugin(),clientUpdate(Lcom.jme3.app.Application;),initialize(Lcom.jme3.app.state.AppStateManager;Lcom.jme3.app.Application;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="139,54">
       <children xsi:type="editmodel:AttributeEditModel" name="sensors" id="vision/Plugin#sensors"/>
@@ -71,7 +71,7 @@
       <children xsi:type="editmodel:AssociationEndEditModel" location="0,1"/>
     </sourceConnections>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.21/@sourceConnections.1" name="View" location="990,339" size="117,85" id="vision/View" runTimeClassModel="simpleUpdate(),simpleInitApp()">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.21/@sourceConnections.1 //@children.25/@sourceConnections.0 //@children.26/@sourceConnections.0" name="View" location="990,339" size="117,85" id="vision/View" runTimeClassModel="simpleUpdate(),simpleInitApp()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="94,36">
       <children xsi:type="editmodel:MethodEditModel" name="simpleInitApp" id="vision/View#simpleInitApp()"/>
@@ -313,20 +313,21 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.17/@sourceConnections.1" name="Controller" location="942,705" size="336,121" id="vision/Controller" runTimeClassModel="bind(Lde.lessvoid.nifty.Nifty;Lde.lessvoid.nifty.screen.Screen;),setPluginController(Ljava.util.Collection;),onEndScreen(),onStartScreen()">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.17/@sourceConnections.1" name="Controller" location="942,705" size="336,139" id="vision/Controller" runTimeClassModel="bind(Lde.lessvoid.nifty.Nifty;Lde.lessvoid.nifty.screen.Screen;),setPluginController(Ljava.util.Collection;),pluginButton(Ljava.lang.String;),onEndScreen(),onStartScreen()">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="313,72">
+    <children xsi:type="editmodel:CompartmentEditModel" size="313,90">
       <children xsi:type="editmodel:MethodEditModel" name="bind" id="vision/Controller#bind(Lde.lessvoid.nifty.Nifty;Lde.lessvoid.nifty.screen.Screen;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="onEndScreen" id="vision/Controller#onEndScreen()"/>
       <children xsi:type="editmodel:MethodEditModel" name="onStartScreen" id="vision/Controller#onStartScreen()"/>
       <children xsi:type="editmodel:MethodEditModel" name="setPluginController" id="vision/Controller#setPluginController(Ljava.util.Collection;)"/>
+      <children xsi:type="editmodel:MethodEditModel" targetConnections="//@children.24/@sourceConnections.0" name="pluginButton" id="vision/Controller#pluginButton(Ljava.lang.String;)"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision/Model@model+vision/Controller@controller" source="//@children.21" target="//@children.7" targetEnd="//@children.21/@sourceConnections.0/@children.1" label="//@children.21/@sourceConnections.0/@children.2" sourceEnd="//@children.21/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" name="controller" location="336,10" id="vision/Model@model+vision/Controller@controller|vision/Controller#controller" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="model" location="10,121" id="vision/Model@model+vision/Controller@controller|vision/Model#model" multiplicityLabel="//@children.21/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.21/@sourceConnections.0/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - model" location="1322,158" size="38,14" anchorKind="LastPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="1" location="1302,158" size="6,14" anchorKind="LastPart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="controller" location="326,0" id="vision/Model@model+vision/Controller@controller|vision/Controller#controller" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="model" location="0,111" id="vision/Model@model+vision/Controller@controller|vision/Model#model" multiplicityLabel="//@children.21/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.21/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - model" location="1260,120" size="38,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="1292,148" size="6,14" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
     </sourceConnections>
@@ -355,6 +356,24 @@
     <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.23" target="//@children.22/@children.1/@children.0" targetEnd="//@children.23/@sourceConnections.0/@children.1" sourceEnd="//@children.23/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
       <children xsi:type="editmodel:AssociationEndEditModel" location="131,0" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="0,1"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:NotepadEditModel" location="843,883" size="293,38" fontInfo="Arial-8-0" note="wird über den ersten Teil der id dem Plugin zugewiesen &#xD;&#xA;und im Plugin wird dann die funktion ausgeführt">
+    <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.24" target="//@children.21/@children.1/@children.4" targetEnd="//@children.24/@sourceConnections.0/@children.1" sourceEnd="//@children.24/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,1"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:NotepadEditModel" location="694,285" size="249,38" fontInfo="Arial-8-0" note="fragt das Plugin welche Buttons es haben will &#xD;&#xA;und zeichnet diese dann">
+    <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.25" target="//@children.5" targetEnd="//@children.25/@sourceConnections.0/@children.1" sourceEnd="//@children.25/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="181,38" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,23"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:NotepadEditModel" location="905,192" size="237,38" fontInfo="Arial-8-0" note="braucht wahrscheinlich noch was von Nifty&#xD;&#xA;">
+    <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.26" target="//@children.5" targetEnd="//@children.26/@sourceConnections.0/@children.1" sourceEnd="//@children.26/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="143,38" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="58,0"/>
     </sourceConnections>
   </children>
   <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=3;Product=eUML2" autoName="false"/>
