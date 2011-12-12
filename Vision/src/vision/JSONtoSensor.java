@@ -48,4 +48,11 @@ public class JSONtoSensor {
 		this.jsonobject = jsonobject;
 	}
 
+		
+		/**
+		 */
+		public Sensor loadToSensor(JSONObject jsonobject){
+			return null;
+		}
+
 }
