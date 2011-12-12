@@ -10,6 +10,11 @@ import com.jme3.app.state.AppStateManager;
 
 public abstract class Plugin extends AbstractAppState{
 
+	
+	public class HTTP {
+
+	}
+
 	/** 
 	 * @uml.property name="sensors"
 	 */
