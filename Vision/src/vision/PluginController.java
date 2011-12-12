@@ -1,6 +1,10 @@
 package vision;
 
-
+/**
+ * 
+ * Administrates the buttonactions and hands them over to the Plugin view part
+ * 
+ */
 public abstract class PluginController {
 
 	

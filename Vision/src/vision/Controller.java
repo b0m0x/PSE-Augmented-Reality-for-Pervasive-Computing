@@ -6,21 +6,34 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
 
-
+/**
+ * This class forwards all the inputs from the view to the model and the plugin-controllers.
+ *  
+ * 
+ *
+ */
 public class Controller implements ScreenController {
 
+	/**
+	 * Binds the Nifty-instance to the controller.
+	 */
 	@Override
 	public void bind(Nifty arg0, Screen arg1) {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public void onEndScreen() {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public void onStartScreen() {
 		// TODO Auto-generated method stub
