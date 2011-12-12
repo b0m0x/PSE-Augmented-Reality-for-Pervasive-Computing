@@ -5,9 +5,7 @@ package vision;
 
 import com.jme3.app.SimpleApplication;
 
-/** 
- * @author Samurai
- */
+
 public class View extends SimpleApplication {
 
 		
