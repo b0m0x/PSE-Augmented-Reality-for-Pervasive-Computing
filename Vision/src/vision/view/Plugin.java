@@ -80,7 +80,7 @@ protected Application getApplication(){
  * @uml.property   name="daten"
  * @uml.associationEnd   multiplicity="(1 1)" inverse="plugin:vision.model.Model"
  */
-private Model daten = new vision.model.Model();
+private Model daten = new vision.model.Model(null);
 
 /** 
  * Getter of the property <tt>daten</tt>
