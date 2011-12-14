@@ -231,13 +231,13 @@ public class Model {
 		return 0;
 	}
 
-	/**
-	 * @uml.property  name="groundplan"
-	 * @uml.associationEnd  multiplicity="(1 1)" inverse="model:vision.model.Groundplan"
+	/** 
+	 * @uml.property name="groundplan"
+	 * @uml.associationEnd multiplicity="(1 1)" inverse="model:vision.model.Groundplan"
 	 */
 	private Groundplan groundplan = new vision.model.Groundplan();
 
-	/**
+	/** 
 	 * Getter of the property <tt>groundplan</tt>
 	 * @return  Returns the groundplan.
 	 * @uml.property  name="groundplan"
@@ -246,7 +246,7 @@ public class Model {
 		return groundplan;
 	}
 
-	/**
+	/** 
 	 * Setter of the property <tt>groundplan</tt>
 	 * @param groundplan  The groundplan to set.
 	 * @uml.property  name="groundplan"

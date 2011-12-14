@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:SequenceDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="visionSequenceUserInteraction" size="1316,455" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D3130303020566973696F6E2F53616D75726169">
+  <children xsi:type="editmodel:ActorEditModel" location="152,20" size="100,297" itemName="User">
+    <children xsi:type="editmodel:ActivationEditModel" location="42,121" size="16,66" sequenceItemContainer="//@children.0" length="66">
+      <sourceConnections xsi:type="editmodel:SequenceMessageEditModel" name="buttonClick" id="vision.controller/Controller#buttonClick(Ljava.lang.String;)" source="//@children.0/@children.0" target="//@children.2/@children.0" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual" associatedMethod="buttonClick(String)" associatedSequenceNumber="1">
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.0" methodLabel="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.1" sequenceNumberLabel="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.2" statementExpression="//@children.0/@children.0/@sourceConnections.0/@children.0/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="135,14" labelValue="click on enable Plugin button"/>
+          <children xsi:type="editmodel:LabelEditModel" name="buttonClick(String)" size="88,14"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" size="6,14"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,14"/>
+        </children>
+        <children xsi:type="editmodel:SequenceEndEditModel" anchorKind="FixedAtEdge" userLabel="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.0" methodLabel="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.1" sequenceNumberLabel="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.2" statementExpression="//@children.0/@children.0/@sourceConnections.0/@children.1/@children.3">
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,14"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,14"/>
+          <children xsi:type="editmodel:LabelEditModel" size="0,14"/>
+          <children xsi:type="editmodel:MessageLabelEditModel" size="0,14"/>
+        </children>
+      </sourceConnections>
+    </children>
+  </children>
+  <children xsi:type="editmodel:InstanceEditModel" name="View" location="465,20" size="100,297" id="vision.view/View" itemName="view"/>
+  <children xsi:type="editmodel:InstanceEditModel" name="Controller" location="300,20" size="140,297" id="vision.controller/Controller" itemName="controller">
+    <children xsi:type="editmodel:ActivationEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.0" location="62,121" size="16,66" sequenceItemContainer="//@children.2" length="66"/>
+  </children>
+  <diagramOptions xsi:type="options:SequenceDiagramOptions" level="0" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <sequenceDiagramPreferences showPopupBars="true" showConnectionHandles="true"/>
+</editmodel:SequenceDiagramEditModel>
