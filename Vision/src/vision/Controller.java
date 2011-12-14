@@ -1,7 +1,6 @@
 package vision;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
@@ -104,10 +103,6 @@ public class Controller implements ScreenController {
 		/**
 		 */
 		public void pluginButton(String id){
-		}
-
-		public void buttonClicked(String id, ButtonClickedEvent bce) {
-			
 		}
 
 }
