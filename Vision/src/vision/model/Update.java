@@ -1,6 +1,9 @@
 package vision.model;
 
-
+/**
+ * manages the server connection
+ *
+ */
 public class Update {
 
 	/**

@@ -8,7 +8,10 @@ import java.util.Collection;
 import vision.model.Model;
 import vision.view.View;
 
-
+/**
+ * the main controller that passes key presses, user inputs and events to the subcontrollers and the model
+ * 
+ */
 public class Controller implements ScreenController {
 
 	@Override

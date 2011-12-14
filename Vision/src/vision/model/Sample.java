@@ -1,6 +1,9 @@
 package vision.model;
 
-
+/**
+ * holds a sensor measurement and the time it was taken
+ *
+ */
 public class Sample {
 
 	/**

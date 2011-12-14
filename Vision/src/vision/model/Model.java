@@ -6,6 +6,10 @@ import java.util.Collection;
 import vision.view.Plugin;
 import vision.view.View;
 
+/**
+ * provides a facade for all objects belonging to the model
+ *
+ */
 public class Model {
 
 	public void loadPlugin() {

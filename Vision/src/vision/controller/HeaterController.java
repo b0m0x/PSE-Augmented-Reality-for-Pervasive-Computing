@@ -2,7 +2,10 @@ package vision.controller;
 
 import vision.view.HeaterPlugin;
 
-
+/**
+ * Controller for the heater-plugin
+ * 
+ */
 public class HeaterController extends PluginController {
 
 	/**

@@ -1,6 +1,8 @@
 package vision.model;
 
-
+/**
+ * 3-dimensional vector
+ */
 public class Position {
 
 	/**

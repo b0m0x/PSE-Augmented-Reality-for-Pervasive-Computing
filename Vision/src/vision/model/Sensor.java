@@ -2,7 +2,10 @@ package vision.model;
 
 import java.util.List;
 
-
+/**
+ * The Sensor class holds all sensor data
+ *
+ */
 public class Sensor {
 
 	/**
