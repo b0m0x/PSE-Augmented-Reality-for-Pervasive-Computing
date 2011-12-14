@@ -77,4 +77,58 @@ public class View extends SimpleApplication {
 				this.controller = controller;
 			}
 
+
+			/**
+			 * @uml.property  name="mainAppState"
+			 * @uml.associationEnd  multiplicity="(1 1)" inverse="view:vision.view.MainAppState"
+			 */
+			private MainAppState mainAppState = new vision.view.MainAppState();
+
+
+			/**
+			 * Getter of the property <tt>mainAppState</tt>
+			 * @return  Returns the mainAppState.
+			 * @uml.property  name="mainAppState"
+			 */
+			public MainAppState getMainAppState() {
+				return mainAppState;
+			}
+
+
+			/**
+			 * Setter of the property <tt>mainAppState</tt>
+			 * @param mainAppState  The mainAppState to set.
+			 * @uml.property  name="mainAppState"
+			 */
+			public void setMainAppState(MainAppState mainAppState) {
+				this.mainAppState = mainAppState;
+			}
+
+
+			/**
+			 * @uml.property  name="guiAppState"
+			 * @uml.associationEnd  multiplicity="(1 1)" inverse="view:vision.view.GuiAppState"
+			 */
+			private GuiAppState guiAppState = new vision.view.GuiAppState();
+
+
+			/**
+			 * Getter of the property <tt>guiAppState</tt>
+			 * @return  Returns the guiAppState.
+			 * @uml.property  name="guiAppState"
+			 */
+			public GuiAppState getGuiAppState() {
+				return guiAppState;
+			}
+
+
+			/**
+			 * Setter of the property <tt>guiAppState</tt>
+			 * @param guiAppState  The guiAppState to set.
+			 * @uml.property  name="guiAppState"
+			 */
+			public void setGuiAppState(GuiAppState guiAppState) {
+				this.guiAppState = guiAppState;
+			}
+
 }
