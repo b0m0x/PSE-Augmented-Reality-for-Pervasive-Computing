@@ -2,8 +2,12 @@ package vision.controller;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
+import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+
+import java.awt.peer.CheckboxPeer;
 import java.util.Collection;
 
 import com.jme3.scene.Geometry;
@@ -17,7 +21,7 @@ import vision.view.View;
  * 
  */
 public class Controller implements ScreenController {
-
+	private Element managePluginsPopup;
 	/**
 	 * binds the nifty instance to this controller
 	 */
@@ -147,7 +151,7 @@ public class Controller implements ScreenController {
 	 * @param id id of the clicked button
 	 */
 	@NiftyEventSubscriber(pattern = "*button*")
-	public void buttonClick(String id) {
+	public void buttonClick(String id, ButtonClickedEvent bce) {
 
 	}
 	
@@ -158,5 +162,23 @@ public class Controller implements ScreenController {
 	public void userPick(Geometry obj) {
 		
 	}
+	
+	/**
+	 * gets called if the user pressed the activate/deactivate button
+	 */
+	@NiftyEventSubscriber(id="btn_manageplugins")
+	public void createManagePluginsPopupMenu() {
+		
+	}
+
+		
+		/**
+		 * gets called if a user checked or unchecked a non-plugin defined checkbox
+		 * @param id the id of the checkbox that was pressed
+		 */
+		@NiftyEventSubscriber(pattern="checkbox*")
+		public void checkboxPressed(String id){
+			
+		}
 
 }

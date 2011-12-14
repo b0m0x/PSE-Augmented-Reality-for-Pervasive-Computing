@@ -136,5 +136,21 @@ public class View extends SimpleApplication {
 			public void setGuiAppState(GuiAppState guiAppState) {
 				this.guiAppState = guiAppState;
 			}
+			
+			/**
+			 * enables a plugin
+			 * @param p the plugin to enable
+			 */
+			public void enablePlugin(Plugin p) {
+				stateManager.attach(p);
+			}
+			
+			/**
+			 * disables a plugin
+			 * @param p the plugin to detach
+			 */
+			public void disablePlugin(Plugin p) {
+				stateManager.detach(p);
+			}
 
 }
