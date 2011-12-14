@@ -8,10 +8,10 @@
       <children xsi:type="editmodel:AttributeEditModel" name="pluginList" id="vision.model/Model#pluginList"/>
       <children xsi:type="editmodel:AttributeEditModel" name="pluginLoader" id="vision.model/PluginLoader@pluginLoader+vision.model/Model@model|vision.model/PluginLoader#pluginLoader"/>
       <children xsi:type="editmodel:AttributeEditModel" name="sensor" id="vision.model/Sensor@sensor+vision.model/Model@daten|vision.model/Sensor#sensor"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="update" id="vision.model/Model@daten+vision.model/Update@update|vision.model/Update#update"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="update" id="vision.model/Update@update+vision.model/Model@daten|vision.model/Update#update"/>
       <children xsi:type="editmodel:AttributeEditModel" name="view" id="vision.model/Model@daten+vision.view/View@view|vision.view/View#view"/>
     </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="99,90">
+    <children xsi:type="editmodel:CompartmentEditModel" size="179,90">
       <children xsi:type="editmodel:MethodEditModel" name="Model" id="vision.model/Model#Model(Lvision.view.View;)"/>
       <children xsi:type="editmodel:MethodEditModel" name="getAllSensors" id="vision.model/Model#getAllSensors()"/>
       <children xsi:type="editmodel:MethodEditModel" name="getSensordata" id="vision.model/Model#getSensordata(Ljava.lang.String;I)"/>

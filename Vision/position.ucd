@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="position" size="964,617" id="vision.model" metadata="uml2-1.0" initialized="true" zoom="2.0" tag="1000" key="32303037303533312D3130303020566973696F6E2F7A65796E6570">
-  <children xsi:type="editmodel:ClassEditModel" name="Position" location="50,50" size="99,111" id="vision.model/Position" runTimeClassModel="sensor,z,y,x">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="position" size="964,617" id="vision.model" metadata="uml2-1.0" initialized="true" zoom="1.5" tag="1000" key="32303037303533312D3130303020566973696F6E2F7A65796E6570">
+  <children xsi:type="editmodel:ClassEditModel" name="Position" location="255,105" size="99,111" id="vision.model/Position" runTimeClassModel="sensor,z,y,x">
     <children xsi:type="editmodel:CompartmentEditModel" size="76,72">
       <children xsi:type="editmodel:AttributeEditModel" name="sensor" id="vision.model/Sensor@sensor+vision.model/Position@position|vision.model/Sensor#sensor"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="x" id="vision.model/Position#x"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="x" location="-6,5" id="vision.model/Position#x"/>
       <children xsi:type="editmodel:AttributeEditModel" name="y" id="vision.model/Position#y"/>
       <children xsi:type="editmodel:AttributeEditModel" name="z" id="vision.model/Position#z"/>
     </children>
