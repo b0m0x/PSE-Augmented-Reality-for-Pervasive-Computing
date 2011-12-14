@@ -25,7 +25,7 @@ public class Model {
 
 	/**
 					 */
-	public void getSensordata(String id, int zeitpunkt) {
+	public void getSensordata(String id, int time) {
 	}
 
 	/**
