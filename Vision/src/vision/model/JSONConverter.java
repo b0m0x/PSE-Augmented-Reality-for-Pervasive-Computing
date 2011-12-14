@@ -19,10 +19,6 @@ public class JSONConverter {
 		
 	}
 	
-	public void saveSensor() {
-		
-	}
-	
 	public void addSensorToList() {
 		
 	}

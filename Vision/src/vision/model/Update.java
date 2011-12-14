@@ -97,5 +97,9 @@ public class Update {
 	public void setDatabase(Database database) {
 		this.database = database;
 	}
+	
+	public void store() {
+		
+	}
 
 }
