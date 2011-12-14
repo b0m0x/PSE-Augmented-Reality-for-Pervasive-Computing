@@ -3,7 +3,6 @@ package vision.view;
 import java.util.List;
 
 import vision.controller.WindowController;
-import vision.view.Plugin;
 
 import com.jme3.app.Application;
 import com.jme3.scene.Geometry;
