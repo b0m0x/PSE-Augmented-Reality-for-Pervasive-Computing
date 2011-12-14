@@ -212,4 +212,11 @@ public class Model {
 		this.plugin = plugin;
 	}
 
+		
+		/**
+		 */
+		private int getAllSensors(){
+			return 0;
+		}
+
 }
