@@ -143,16 +143,14 @@ public class Model {
 		this.sensor = sensor;
 	}
 
-	/**
+	/** 
 	 * @uml.property name="pluginLoader"
-	 * @uml.associationEnd multiplicity="(1 1)"
-	 *                     inverse="model:vision.model.PluginLoader"
+	 * @uml.associationEnd multiplicity="(1 1)" inverse="model:vision.model.PluginLoader"
 	 */
 	private PluginLoader pluginLoader = new vision.model.PluginLoader();
 
-	/**
+	/** 
 	 * Getter of the property <tt>pluginLoader</tt>
-	 * 
 	 * @return Returns the pluginLoader.
 	 * @uml.property name="pluginLoader"
 	 */
@@ -160,12 +158,10 @@ public class Model {
 		return pluginLoader;
 	}
 
-	/**
+	/** 
 	 * Setter of the property <tt>pluginLoader</tt>
-	 * 
-	 * @param pluginLoader
-	 *            The pluginLoader to set.
-	 * @uml.property name="pluginLoader"
+	 * @param pluginLoader The pluginLoader to set.
+	 * @uml.property  name="pluginLoader"
 	 */
 	public void setPluginLoader(PluginLoader pluginLoader) {
 		this.pluginLoader = pluginLoader;
