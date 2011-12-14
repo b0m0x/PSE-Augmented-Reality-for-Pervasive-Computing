@@ -9,7 +9,8 @@ import vision.model.Model;
 import vision.view.View;
 
 /**
- * the main controller that passes key presses, user inputs and events to the subcontrollers and the model
+ * the main controller that passes key presses, user inputs and events to the
+ * subcontrollers and the model
  * 
  */
 public class Controller implements ScreenController {
@@ -36,15 +37,17 @@ public class Controller implements ScreenController {
 	}
 
 	/**
-	 * @uml.property   name="pluginController"
-	 * @uml.associationEnd   multiplicity="(0 -1)" inverse="controller:vision.controller.PluginController"
+	 * @uml.property name="pluginController"
+	 * @uml.associationEnd multiplicity="(0 -1)"
+	 *                     inverse="controller:vision.controller.PluginController"
 	 */
 	private Collection<PluginController> pluginController;
 
 	/**
 	 * Getter of the property <tt>pluginController</tt>
-	 * @return  Returns the pluginController.
-	 * @uml.property  name="pluginController"
+	 * 
+	 * @return Returns the pluginController.
+	 * @uml.property name="pluginController"
 	 */
 	public Collection<PluginController> getPluginController() {
 		return pluginController;
@@ -52,48 +55,56 @@ public class Controller implements ScreenController {
 
 	/**
 	 * Setter of the property <tt>pluginController</tt>
-	 * @param pluginController  The pluginController to set.
-	 * @uml.property  name="pluginController"
+	 * 
+	 * @param pluginController
+	 *            The pluginController to set.
+	 * @uml.property name="pluginController"
 	 */
 	public void setPluginController(
 			Collection<PluginController> pluginController) {
-				this.pluginController = pluginController;
-			}
+		this.pluginController = pluginController;
+	}
 
 	/**
-	 * @uml.property   name="model"
-	 * @uml.associationEnd   multiplicity="(1 1)" inverse="controller:vision.model.Model"
+	 * @uml.property name="model"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="controller:vision.model.Model"
 	 */
 	private Model model = new vision.model.Model();
 
-	/** 
+	/**
 	 * Getter of the property <tt>model</tt>
-	 * @return  Returns the model.
-	 * @uml.property  name="model"
+	 * 
+	 * @return Returns the model.
+	 * @uml.property name="model"
 	 */
 	public Model getModel() {
 		return model;
 	}
 
-	/** 
+	/**
 	 * Setter of the property <tt>model</tt>
-	 * @param model  The model to set.
-	 * @uml.property  name="model"
+	 * 
+	 * @param model
+	 *            The model to set.
+	 * @uml.property name="model"
 	 */
 	public void setModel(Model model) {
 		this.model = model;
 	}
 
 	/**
-	 * @uml.property   name="view"
-	 * @uml.associationEnd   multiplicity="(1 1)" inverse="controller:vision.view.View"
+	 * @uml.property name="view"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="controller:vision.view.View"
 	 */
 	private View view = new vision.view.View();
 
 	/**
 	 * Getter of the property <tt>view</tt>
-	 * @return  Returns the view.
-	 * @uml.property  name="view"
+	 * 
+	 * @return Returns the view.
+	 * @uml.property name="view"
 	 */
 	public View getView() {
 		return view;
@@ -101,18 +112,20 @@ public class Controller implements ScreenController {
 
 	/**
 	 * Setter of the property <tt>view</tt>
-	 * @param view  The view to set.
-	 * @uml.property  name="view"
+	 * 
+	 * @param view
+	 *            The view to set.
+	 * @uml.property name="view"
 	 */
 	public void setView(View view) {
 		this.view = view;
 	}
 
-		
-		/**
-		 * pluginButton gets called by nifty if a button of a plugin was pressed and forwards it to the plugin controller
-		 */
-		public void pluginButton(String id){
-		}
+	/**
+	 * pluginButton gets called by nifty if a button of a plugin was pressed and
+	 * forwards it to the plugin c
+	 */
+	public void pluginButton(String id) {
+	}
 
 }
