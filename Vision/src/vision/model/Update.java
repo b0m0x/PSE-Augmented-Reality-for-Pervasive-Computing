@@ -50,4 +50,52 @@ public class Update {
 		this.daten = daten;
 	}
 
+	/**
+	 * @uml.property  name="jSONConverter"
+	 * @uml.associationEnd  inverse="update:vision.model.JSONConverter"
+	 */
+	private JSONConverter jsonConverter;
+
+	/**
+	 * Getter of the property <tt>jSONConverter</tt>
+	 * @return  Returns the jsonConverter.
+	 * @uml.property  name="jSONConverter"
+	 */
+	public JSONConverter getJSONConverter() {
+		return jsonConverter;
+	}
+
+	/**
+	 * Setter of the property <tt>jSONConverter</tt>
+	 * @param jSONConverter  The jsonConverter to set.
+	 * @uml.property  name="jSONConverter"
+	 */
+	public void setJSONConverter(JSONConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
+	}
+
+	/**
+	 * @uml.property  name="database"
+	 * @uml.associationEnd  inverse="update:vision.model.Database"
+	 */
+	private Database database;
+
+	/**
+	 * Getter of the property <tt>database</tt>
+	 * @return  Returns the database.
+	 * @uml.property  name="database"
+	 */
+	public Database getDatabase() {
+		return database;
+	}
+
+	/**
+	 * Setter of the property <tt>database</tt>
+	 * @param database  The database to set.
+	 * @uml.property  name="database"
+	 */
+	public void setDatabase(Database database) {
+		this.database = database;
+	}
+
 }
