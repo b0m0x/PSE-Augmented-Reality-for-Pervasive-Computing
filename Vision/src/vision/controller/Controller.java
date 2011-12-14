@@ -6,6 +6,8 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
 
+import com.jme3.scene.Geometry;
+
 import vision.model.Model;
 import vision.view.View;
 
@@ -138,6 +140,14 @@ public class Controller implements ScreenController {
 	@NiftyEventSubscriber(pattern="*checkbox*")
 	public void pluginCheckbox(String id) {
 	
+	}
+	
+	/**
+	 * called if the user picked an object
+	 * @param obj the picked geometry object
+	 */
+	public void userPick(Geometry obj) {
+		
 	}
 
 }

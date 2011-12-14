@@ -7,7 +7,7 @@ public class Config {
 	/**
 	 * defines where to fetch the sensor updates
 	 */
-	public static final String serverUrl = "";
+	public static final String serverUrl = "http://cumulus.teco.edu:51525/";
 	
 	/**
 	 * defines how often the sensor data is refreshed
