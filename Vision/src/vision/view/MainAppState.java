@@ -1,4 +1,4 @@
-package vision;
+package vision.view;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;

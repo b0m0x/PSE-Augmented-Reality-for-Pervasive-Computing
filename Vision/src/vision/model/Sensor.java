@@ -1,4 +1,4 @@
-package vision;
+package vision.model;
 
 import java.util.List;
 
@@ -122,7 +122,7 @@ public class Sensor {
 
 	/**
 	 * @uml.property   name="messwert"
-	 * @uml.associationEnd   inverse="sensor:vision.Sample"
+	 * @uml.associationEnd   inverse="sensor:vision.model.Sample"
 	 */
 	private Sample messwert;
 
@@ -145,8 +145,8 @@ public class Sensor {
 	}
 
 	/**
-	 * @uml.property  name="position"
-	 * @uml.associationEnd  inverse="sensor:vision.Position"
+	 * @uml.property   name="position"
+	 * @uml.associationEnd   inverse="sensor:vision.model.Position"
 	 */
 	private Position position;
 

@@ -1,7 +1,10 @@
 /**
  * 
  */
-package vision;
+package vision.view;
+
+import vision.controller.Controller;
+import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
 
@@ -23,7 +26,7 @@ public class View extends SimpleApplication {
 
 			/**
 			 * @uml.property   name="daten"
-			 * @uml.associationEnd   inverse="view:vision.Model"
+			 * @uml.associationEnd   inverse="view:vision.model.Model"
 			 */
 			private Model daten;
 
@@ -49,10 +52,10 @@ public class View extends SimpleApplication {
 
 
 			/**
-			 * @uml.property  name="controller"
-			 * @uml.associationEnd  multiplicity="(1 1)" inverse="view:vision.Controller"
+			 * @uml.property   name="controller"
+			 * @uml.associationEnd   multiplicity="(1 1)" inverse="view:vision.controller.Controller"
 			 */
-			private Controller controller = new vision.Controller();
+			private Controller controller = new vision.controller.Controller();
 
 
 			/**

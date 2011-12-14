@@ -1,4 +1,4 @@
-package vision;
+package vision.model;
 
 
 public class Position {
@@ -26,8 +26,8 @@ public class Position {
 		this.x = x;
 	}
 
-	/** 
-	 * @uml.property name="y"
+	/**
+	 * @uml.property   name="y"
 	 */
 	private float y;
 
@@ -73,8 +73,8 @@ public class Position {
 	}
 
 	/**
-	 * @uml.property  name="sensor"
-	 * @uml.associationEnd  inverse="position:vision.Sensor"
+	 * @uml.property   name="sensor"
+	 * @uml.associationEnd   inverse="position:vision.model.Sensor"
 	 */
 	private Sensor sensor;
 
