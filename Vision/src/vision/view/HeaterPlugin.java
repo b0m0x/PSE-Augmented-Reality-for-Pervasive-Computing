@@ -8,9 +8,14 @@ import com.jme3.app.Application;
 import com.jme3.scene.Geometry;
 
 
+/**
+ * @author idle
+ *	This class represents the plugins of the heater
+ */
 public class HeaterPlugin extends Plugin {
 
 	/**
+	 * updates the client 
 		 */
 		protected void clientUpdate(Application application){
 			return;
