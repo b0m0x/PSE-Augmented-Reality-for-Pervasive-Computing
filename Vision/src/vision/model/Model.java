@@ -12,13 +12,14 @@ import vision.view.View;
  */
 public class Model {
 
-	/**
-	 */
-	public Model(View view) {
-		loadPlugins();
-		getAllSensors();
-		groundplan.load();
-	}
+		
+		
+		public Model(View view){
+		
+				loadPlugins();
+				getAllSensors();
+				groundplan.load();
+			 }
 
 	private void loadPlugins() {
 	}

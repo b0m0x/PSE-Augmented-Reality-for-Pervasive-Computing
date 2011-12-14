@@ -8,17 +8,23 @@ import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
 
-
+/**
+ * main class of the view package.
+ * contains the main update loop and calls the plugin and main views
+ *
+ */
 public class View extends SimpleApplication {
 
 		
 		/**
+		 * is called every frame by jmonkey
 		 */
 		public void simpleUpdate(){
 		}
 
 			
 			/**
+			 * initializes the view
 			 */
 			public void simpleInitApp(){
 			}

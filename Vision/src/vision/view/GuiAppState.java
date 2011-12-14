@@ -5,8 +5,7 @@ import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 
 /**
- * @author idle This class represents the different states of the application,
- *         e.g. GUI, 3D-Rendering and plugins
+ *	renders the user interface
  */
 public class GuiAppState extends AbstractAppState {
 	
