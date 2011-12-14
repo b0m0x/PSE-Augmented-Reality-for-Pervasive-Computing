@@ -1,0 +1,47 @@
+body {
+	font-family: Helvetica,
+	font-size: 11pt;
+	color: black;
+}
+
+a {
+	color:blue;
+	text-decoration: underline;
+}
+
+
+.header {
+	background-color:gray;
+	width:100%;
+	font-weight: bold;
+	font-size:18pt;
+	color:white;
+}
+
+.package-title, .class-title {
+	font-weight: bold;
+	font-size:24pt;
+	color:black;
+}
+
+.constructor-title, .method-title, .field-title {
+	font-weight: bold;
+	font-size:18pt;
+	color:black;
+}
+
+.class-separator {
+	rule-thickness: 5pt;
+	color: silver;
+}
+
+.class-item-separator {
+	rule-thickness: 1pt;
+	color: silver;
+}
+
+.page-header, .page-footer {
+	font-size:12pt;
+	color:silver;
+}
+

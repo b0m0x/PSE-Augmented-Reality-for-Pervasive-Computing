@@ -9,32 +9,6 @@ import java.util.List;
  */
 public class Database {
 
-	/**
-	 * @uml.property name="daten"
-	 * @uml.associationEnd inverse="datenbank:vision.model.Model"
-	 */
-	private Model daten;
-
-	/**
-	 * Getter of the property <tt>daten</tt>
-	 * 
-	 * @return Returns the daten.
-	 * @uml.property name="daten"
-	 */
-	public Model getDaten() {
-		return daten;
-	}
-
-	/**
-	 * Setter of the property <tt>daten</tt>
-	 * 
-	 * @param daten
-	 *            The daten to set.
-	 * @uml.property name="daten"
-	 */
-	public void setDaten(Model daten) {
-		this.daten = daten;
-	}
 
 	/**
 	 * saves a sensor object in the database
@@ -57,12 +31,6 @@ public class Database {
 	public List<Sample> getAllSensorData(int id) {
 		throw new UnsupportedOperationException();	
 	}
-
-	/**
-	 * @uml.property  name="update"
-	 * @uml.associationEnd  inverse="database:vision.model.Update"
-	 */
-	private Update update;
 
 	/**
 	 * Getter of the property <tt>update</tt>

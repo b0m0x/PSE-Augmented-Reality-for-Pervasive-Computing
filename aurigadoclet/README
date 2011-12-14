@@ -1,0 +1,41 @@
+What is AurigaDoclet?
+======================
+AurigaDoclet is a Javadoc doclet which can generate Java API document in fo, pdf, postscript, pcl, and svg format. AurigaDoclet accepts command line options which can be used to further customize the generated output.
+
+AurigaDoclet generates javadoc as an XML tree which is the transformed into FO. This FO stream is then serialized using Apache FOP to generate pdf, postscript, pcl and svg output.
+
+The distribution hierarchy
+===================================
+This distribution includes the following files, among others:
+
+	bin/: Directory containing the AurigaDoclet jar file
+	build/: Directory containing the compiled files and javadoc for AurigaDoclet.
+	build.properties: Custom property file
+	build.xml: Ant build file.
+	docs/: Directory containing the documentation.
+	docsrc/: Directory containing the documentation source.
+	etc/: Extra files.
+	includes/: Directory containing miscellaneous files.
+	lib/: Directory containing the libraries used by AurigaDoclet.
+	LICENSE: LICENSE information.
+	README: This file. 
+	src/: Directory containing the java source files of AurigaDoclet.
+	version: File containing the version information
+
+Build instructions
+===================================
+Inorder to build the AurigaDoc package from source you will nee Apache Ant from
+http://jakarta.apache.org/ant/
+
+Inorder to build the source type: ant 
+Inorder to build the user guide and sample docs type: ant doc
+Inorder to build the javadoc api type: ant javadoc
+
+Acknowledgements
+====================================
+This product includes  software developed  by the  Apache Software 
+Foundation  (http://www.apache.org/).
+
+If you use this software please send me an email at kshaikh@aurigalogic.com.
+
+$Id: README,v 1.1 2003/12/31 12:37:49 kshaikh Exp $

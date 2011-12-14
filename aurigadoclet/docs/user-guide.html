@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "--//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- $Id: user-guide.xml,v 1.3 2004/02/07 07:47:00 kshaikh Exp $ --><html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet" href="style.css">
+<meta content="AurigaDoc" name="generator">
+<title>AurigaDoclet: User Guide</title>
+</head>
+<body>
+<div class="document-title">AurigaDoclet: User Guide</div>
+<br>
+<br>
+<div class="document-attributes">Author: <a href="mailto:kshaikh@aurigalogic.com">Khurshidali Shaikh</a>
+<br>
+<br>Revision: $Revision: 1.3 $<br>
+<br>Last Modified: $Date: 2004/02/07 07:47:00 $<br>
+<br>
+</div>
+<hr noshade="true" size="4">
+<div class="document-header">
+
+<table width="100%">
+<tr>
+<td align="left"><img src="logo_auriga.gif" alt=""></td>
+<td valign="middle" align="right"><strong>AurigaDoclet: User Guide</strong></td>
+</tr>
+
+</table>
+
+<hr size="1" color="#C00000" noshade="true">
+
+</div>
+<a name="table_of_content"><b>Table of Contents</b></a>
+<ul>
+<li>
+<a href="#what_is">What Is AurigaDoclet</a>
+</li>
+<li>
+<a href="#installation">Download/Installation</a>
+</li>
+<li>
+<a href="#usage">Usage</a>
+</li>
+<li>
+<a href="#options">AurigaDoclet Options</a>
+</li>
+<li>
+<a href="#troubleshooting">Troubleshooting</a>
+</li>
+</ul>
+<hr noshade="true" size="1">
+<!-- meta info -->
+
+
+
+<div class="navigation">
+<a name="what_is"></a> <a href="#table_of_content">Table of Contents</a> | Next: <a href="#installation">Download/Installation</a>
+<br>
+<br>
+</div>
+<div class="section-heading-1">
+<b>What Is AurigaDoclet</b> 
+</div>
+<div class="section-body-1">
+
+<p>AurigaDoclet is a Javadoc doclet which can generate Java API document in fo, pdf, postscript, pcl, and svg format. AurigaDoclet accepts command line options which can be used to further customize the generated output.</p>
+
+
+<p>AurigaDoclet generates javadoc as an XML tree which is then transformed into FO. This FO stream is then serialized using <a href="http://xml.apache.org/fop/" target="_blank">Apache FOP</a> to generate pdf, postscript, pcl and svg output.</p>
+
+
+<hr class="separator">
+
+</div>
+<hr noshade="true" size="1">
+
+
+<div class="navigation">
+<a name="installation"></a> <a href="#table_of_content">Table of Contents</a> | Previous: <a href="#what_is">What Is AurigaDoclet</a> | Next: <a href="#usage">Usage</a>
+<br>
+<br>
+</div>
+<div class="section-heading-1">
+<b>Download/Installation</b> 
+</div>
+<div class="section-body-1">
+
+<ul>
+	
+<li>Download the latest AurigaDoclet version from <a href="http://sourceforge.net/projects/aurigadoclet/" target="_blank">http://sourceforge.net/projects/aurigadoclet/</a>
+<br>
+<br>
+</li>
+	
+<li>Extract the distribution. This will create a directory called aurigadoclet. This directory has all the source and binary files.</li>
+
+</ul>
+
+<hr class="separator">
+
+</div>
+<hr noshade="true" size="1">
+
+
+<div class="navigation">
+<a name="usage"></a> <a href="#table_of_content">Table of Contents</a> | Previous: <a href="#installation">Download/Installation</a> | Next: <a href="#options">AurigaDoclet Options</a>
+<br>
+<br>
+</div>
+<div class="section-heading-1">
+<b>Usage</b> 
+</div>
+<div class="section-body-1">
+
+<p>
+
+<strong>Command Line:</strong> AurigaDoclet can be invoked from <code>javadoc</code> command line program by using the <code>-doclet</code> parameter like this.<br>
+
+<code>javadoc -doclet com.aurigalogic.doclet.core.Doclet -docletpath <em>docletpath</em> ...</code>
+
+<br>
+
+<dl>
+
+<dt>
+<strong>docletpath</strong>
+</dt> 
+<dd>is the absolute path of AurigaDoclet.jar file in the AurigaDoclet bin directory</dd>
+
+</dl>
+
+</p>
+
+<br>
+
+<p>
+
+<strong>Apache ANT:</strong> AurigaDoclet can used from ANT using the <code>javadoc</code> task like this.
+<pre>
+<code>&lt;javadoc packagenames="<em>package-names</em>"
+		sourcepath="<em>source-path</em>"
+		doclet="com.aurigalogic.doclet.core.Doclet"
+		docletpath="<em>aurigadoclet-path</em>"
+		additionalparam="<em>options</em>"
+	&gt;
+	&lt;classpath refid="aurigadoclet.class.path" /&gt;
+&lt;/javadoc&gt;</code>
+</pre>
+
+<br>
+
+<dl>
+	
+<dt>
+<strong>package-names</strong>
+</dt>
+	
+<dd>package names </dd>
+	
+<dt>
+<strong>source-path</strong>
+</dt>
+	
+<dd>path of the java source files</dd>
+	
+<dt>
+<strong>aurigadoclet-path</strong>
+</dt>
+	
+<dd>path to the AurigaDoclet.jar file in AurigaDoclet's bin directory</dd>
+	
+<dt>
+<strong>options</strong>
+</dt>
+	
+<dd>AurigaDoclet options. See <a href="#options">Supported Options</a>
+</dd>
+
+</dl>
+
+</p>
+
+<hr class="separator">
+
+</div>
+<hr noshade="true" size="1">
+
+
+<div class="navigation">
+<a name="options"></a> <a href="#table_of_content">Table of Contents</a> | Previous: <a href="#usage">Usage</a> | Next: <a href="#troubleshooting">Troubleshooting</a>
+<br>
+<br>
+</div>
+<div class="section-heading-1">
+<b>Options</b> 
+</div>
+<div class="section-body-1">
+AurigaDoclet supports the following command line options:<br>
+
+<dl>
+
+<dt>
+<strong>-format</strong>
+</dt>
+
+<dd>The output format.<br>Supported values: fo,pdf,ps,pcl,svg.</dd>
+
+<dt>
+<strong>-out</strong>
+</dt>
+
+<dd>Output file path.</dd>
+
+<dt>
+<strong>-notoc</strong>
+</dt>
+
+<dd>Do not generate TOC page.</dd>
+
+<dt>
+<strong>-nonavigation</strong>
+</dt>
+
+<dd>Do not generate navigation tree.</dd>
+
+<dt>
+<strong>-nolinks</strong>
+</dt>
+
+<dd>Do not use hyperlinks.</dd>
+
+<dt>
+<strong>-noindex</strong>
+</dt>
+
+<dd>Do not generate a keyword index.</dd>
+
+<dt>
+<strong>-leftmargin</strong>
+</dt>
+
+<dd>Left margin in points. Default is 30.</dd>
+
+<dt>
+<strong>-rightmargin</strong>
+</dt>
+
+<dd>Right margin in points. Default is 30.</dd>
+
+<dt>
+<strong>-topmargin</strong>
+</dt>
+
+<dd>Top margin in points. Default is 10.</dd>
+
+<dt>
+<strong>-bottommargin</strong>
+</dt>
+
+<dd>Bottom margin in points. Default is 10.</dd>
+
+<dt>
+<strong>-headertext</strong>
+</dt>
+
+<dd>XHTML text to be used as page header.</dd>
+
+<dt>
+<strong>-headerfile</strong>
+</dt>
+
+<dd>XHTML file to be used as page header.</dd>
+
+<dt>
+<strong>-footertext</strong>
+</dt>
+
+<dd>XHTML text to be used as page footer.</dd>
+
+<dt>
+<strong>-footerfile</strong>
+</dt>
+
+<dd>XHTML file to be used as page footer.</dd>
+
+<dt>
+<strong>-headerheight</strong>
+</dt>
+
+<dd>Height of page headers in points. Default is 50.</dd>
+
+<dt>
+<strong>-footerheight</strong>
+</dt>
+
+<dd>Height of page footer in points. Default is 20.</dd>
+
+<dt>
+<strong>-coverfile</strong>
+</dt>
+
+<dd>XHTML file to be used a cover page.</dd>
+
+<dt>
+<strong>-cssfile</strong>
+</dt>
+
+<dd>CSS file to used for formatting the output.
+<br>Default css file is located in <em>src/com/aurigalogic/doclet/resources/default.css</em>
+
+</dd>
+
+<dt>
+<strong>-xslfile</strong>
+</dt>
+
+<dd>Custom xsl file to be used for formatting the output.
+<br>Default xsl is located in <em>src/com/aurigalogic/doclet/resources/xml2fo.xsl</em>
+
+</dd>
+
+</dl>
+
+<br>
+
+<p class="note">
+AurigaDoclet will try to cleanup the XHTML content in the header, footer, cover and also the javadoc comments to make it XML compliant. But if the content could not be cleaned up, it will use the original contant which may cause XML parser errors.
+</p>
+
+<hr class="separator">
+
+</div>
+<hr noshade="true" size="1">
+
+
+
+<div class="navigation">
+<a name="troubleshooting"></a> <a href="#table_of_content">Table of Contents</a> | Previous: <a href="#options">AurigaDoclet Options</a>
+<br>
+<br>
+</div>
+<div class="section-heading-1">
+<b>Troubleshooting</b> 
+</div>
+<div class="section-body-1">
+
+<strong>org.apache.xml.dtm.DTMException: No more DTM IDs are available</strong>
+
+<blockquote>
+This error is usually encountered with JDK 1.4 or above. This error is caused by xalan library shipped with the JDK. In order to resolve this copy the xerces and xalan jars from AurigaDoclet's lib directory to your jre's endorsed folder. The exact path of the endorsed folder can be determined by the system property <code>java.endorsed.dirs</code>.
+</blockquote>
+
+
+<strong>Cannot find doclet class com.aurigalogic.doclet.core.Doclet</strong>
+
+<blockquote>
+Make sure you have specified the correct path to AurigaDoclet.jar in the -docletpath argument. Also make sure that the AurigaDoclet.jar is located in AurigaDoclet's bin directory. This is so that AurigaDoclet.jar can find the additional jars which are located in AurigaDoclet's lib directory.
+</blockquote>
+
+</div>
+
+
+<div class="document-footer">
+
+<hr size="1" color="#C00000" noshade="true">
+
+<table width="100%">
+
+<tr>
+
+<td align="left"></td>
+<td align="right"><a href="http://aurigadoc.sourceforge.net/">Generated using AurigaDoc</a></td>
+
+</tr>
+</table>
+
+</div>
+</body>
+</html>

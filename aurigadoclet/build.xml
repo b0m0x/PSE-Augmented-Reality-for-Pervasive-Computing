@@ -1,0 +1,270 @@
+<project name="AurigaDoclet" default="compile" basedir=".">
+
+	<!-- set global properties for this build -->
+	<property name="src" value="src" />
+	<property name="bin" value="bin" />
+	<property name="docsrc" value="docsrc" />
+	<property name="docs" value="docs" />
+	<property name="build" value="build" />
+	<property name="javadoc" value="build/javadoc" />
+	<property name="includes" value="includes" />
+	<property name="test" value="test" />
+	<property name="dist" value="dist" />
+	<property name="Name" value="AurigaDoclet" />
+	<property name="lib" value="lib" />
+	<property name="version" value="0.1b" />
+	<property file="build.properties" />
+	<property name="aurigadoclet.doclet.path" value="${bin}/${Name}.jar" />
+	<property name="aurigadoclet.doclet.class" value="com.aurigalogic.doclet.core.Doclet" />
+
+	<target name="prepare" description="Create the required directories">
+		<available file="${aurigadoc.home}/lib/aurigadoc.jar" property="aurigadoc.present" />
+		<mkdir dir="${bin}" />
+		<mkdir dir="${build}" />
+		<mkdir dir="${javadoc}" />
+		<mkdir dir="${build}/classes" />
+	</target>
+
+	<target name="compile" depends="prepare" 
+			description="Compiles the java source and bundles the classes into a jar file.">
+		<javac srcdir="${src}" destdir="${build}/classes" debug="true">
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+		<jar jarfile="${bin}/${Name}.jar" manifest="etc/MANIFEST.MF">
+			<fileset includes="com/**" dir="${build}/classes" />
+			<fileset includes="com/aurigalogic/doclet/resources/**" dir="${src}" />
+		</jar>
+	</target>
+
+
+	<target name="test" depends="compile" 
+			description="Tests the doclet by generating javadoc for AurigaDoclet's own api.">
+		<mkdir dir="${test}" />
+		<echo message="${aurigadoclet.doclet.path}" />
+
+		<path id="aurigadoclet.class.path">
+			<pathelement path="${classpath}" />
+			<fileset dir="lib">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	
+		<property name="common-param" value="-headerfile ${includes}/header.html -footerfile ${includes}/footer.html -coverfile ${includes}/cover.html -cssfile ${includes}/style.css -headerheight 75 -footerheight 65" />
+		<echo message="******************** FO *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format fo -out ${test}/test.fo"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** PDF *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format pdf -out ${test}/test.pdf"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** PS *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format ps -out ${test}/test.ps"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** PCL *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format pcl -out ${test}/test.pcl"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** SVG *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format svg -out ${test}/test.svg"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+	</target>
+	
+	<target name="javadoc" depends="compile" description="Generates javadoc in html format.">
+		<mkdir dir="${build}/includes" />
+		<copy todir="${build}/includes">
+			<fileset dir="${includes}" includes="*.gif" />
+		</copy>
+
+		<path id="aurigadoclet.class.path">
+			<pathelement path="${classpath}" />
+			<fileset dir="lib">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<property name="common-param" value="-headerfile ${includes}/header.html -footerfile ${includes}/footer.html -coverfile ${includes}/cover.html -cssfile ${includes}/style.css -headerheight 75 -footerheight 65" />
+
+		<echo message="******************** HTML *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+            destdir="${javadoc}/html"
+			author="true"
+			version="true"
+			>
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javadoc>
+
+		<echo message="******************** FO *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format fo -out ${javadoc}/aurigadoclet-api.fo"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** PDF *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format pdf -out ${javadoc}/aurigadoclet-api.pdf"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** PS *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format ps -out ${javadoc}/aurigadoclet-api.ps"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** PCL *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format pcl -out ${javadoc}/aurigadoclet-api.pcl"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+		<echo message="******************** SVG *******************" />
+		<javadoc packagenames="com.*"
+			sourcepath="${src}"
+			author="true"
+			version="true"
+			doclet="${aurigadoclet.doclet.class}"
+			docletpath="${aurigadoclet.doclet.path}"
+			additionalparam="${common-param} -format svg -out ${javadoc}/aurigadoclet-api.svg"
+			>
+			<classpath refid="aurigadoclet.class.path" />
+		</javadoc>
+
+
+	</target>
+	
+	<target name="ug" description="Generates the user guide using AurigaDoc" depends="prepare" 
+			if="aurigadoc.present">
+		<taskdef resource="aurigadoctask.properties">
+			<classpath>
+				<dirset dir="${aurigadoc.home}/bin" />
+				<fileset dir="${aurigadoc.home}/lib">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</taskdef>
+		<copy todir="${docs}">
+			<fileset dir="${docsrc}" includes="*.css, *.gif" />
+		</copy>
+		<aurigadoc format="html" 
+			input="${docsrc}/user-guide.xml" 
+			output="${docs}/user-guide.html" />
+		<aurigadoc format="pdf" 
+			input="${docsrc}/user-guide.xml" 
+			output="${docs}/user-guide.pdf" />
+	</target>
+
+	<target name="doc" depends="javadoc,ug">
+	</target>
+	
+	<target name="clean">
+		<delete dir="${build}" />
+		<delete dir="${test}" />
+		<delete dir="${docs}" />
+		<delete dir="${bin}" />
+	</target>
+	
+	<target name="dist">
+		<mkdir dir="${dist}" />
+		<zip destfile="${dist}/${Name}-${version}.zip">
+			<zipfileset dir="." includes="build.*,version,README" prefix="aurigadoclet" />
+			<zipfileset dir="lib" prefix="aurigadoclet/lib" />
+			<zipfileset dir="bin" prefix="aurigadoclet/bin" />
+			<zipfileset dir="src" prefix="aurigadoclet/src" />
+			<zipfileset dir="docsrc" prefix="aurigadoclet/docsrc" />
+			<zipfileset dir="docs" prefix="aurigadoclet/docs" />
+			<zipfileset dir="build" prefix="aurigadoclet/build" />
+			<zipfileset dir="includes" prefix="aurigadoclet/includes" />
+			<zipfileset dir="etc" prefix="aurigadoclet/etc" />
+		</zip>
+		<tar destfile="${dist}/${Name}-${version}.tar.gz" compression="gzip">
+			<tarfileset dir="." includes="build.*,version,README" prefix="aurigadoclet" />
+			<tarfileset dir="lib" prefix="aurigadoclet/lib" />
+			<tarfileset dir="bin" prefix="aurigadoclet/bin" />
+			<tarfileset dir="src" prefix="aurigadoclet/src" />
+			<tarfileset dir="docsrc" prefix="aurigadoclet/docsrc" />
+			<tarfileset dir="docs" prefix="aurigadoclet/docs" />
+			<tarfileset dir="build" prefix="aurigadoclet/build" />
+			<tarfileset dir="includes" prefix="aurigadoclet/includes" />
+			<tarfileset dir="etc" prefix="aurigadoclet/etc" />
+		</tar>
+	</target>
+
+	<target name="all" depends="compile,test,javadoc,ug" />
+
+</project>

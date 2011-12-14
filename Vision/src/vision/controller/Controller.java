@@ -6,6 +6,8 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
 
+import com.jme3.scene.Geometry;
+
 import vision.model.Model;
 import vision.view.View;
 
@@ -126,18 +128,35 @@ public class Controller implements ScreenController {
 	 * pluginButton gets called by nifty if a button of a plugin was pressed and
 	 * forwards it to the respective plugin controller
 	 */
-	@NiftyEventSubscriber(pattern="*button*")
+	@NiftyEventSubscriber(pattern = "*button*")
 	public void pluginButton(String id) {
-	
+
+	}
+
+	/**
+	 * gets called by nifty if a checkbox of a plugin was pressed and forwards
+	 * it to the respective plugin controller
+	 */
+	@NiftyEventSubscriber(pattern = "*checkbox*")
+	public void pluginCheckbox(String id) {
+
+	}
+
+	/**
+	 * gets called by nifty if a button in the GUI wass pressed
+	 * @param id id of the clicked button
+	 */
+	@NiftyEventSubscriber(pattern = "*button*")
+	public void buttonClick(String id) {
+
 	}
 	
 	/**
-	 * gets called by nifty if a checkbox of a plugin was pressed and
-	 * forwards it to the respective plugin controller
+	 * called if the user picked an object
+	 * @param obj the picked geometry object
 	 */
-	@NiftyEventSubscriber(pattern="*checkbox*")
-	public void pluginCheckbox(String id) {
-	
+	public void userPick(Geometry obj) {
+		
 	}
 
 }
