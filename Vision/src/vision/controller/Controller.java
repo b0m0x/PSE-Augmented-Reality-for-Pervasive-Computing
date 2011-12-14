@@ -14,6 +14,9 @@ import vision.view.View;
  */
 public class Controller implements ScreenController {
 
+	/**
+	 * binds the nifty instance to this controller
+	 */
 	@Override
 	public void bind(Nifty arg0, Screen arg1) {
 		// TODO Auto-generated method stub
@@ -107,6 +110,7 @@ public class Controller implements ScreenController {
 
 		
 		/**
+		 * pluginButton gets called by nifty if a button of a plugin was pressed and forwards it to the plugin controller
 		 */
 		public void pluginButton(String id){
 		}
