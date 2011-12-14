@@ -101,8 +101,15 @@ public class Update {
 		this.database = database;
 	}
 	
-	public void store() {
 		
-	}
+		
+		public void store(int time){
+		}
+
+		
+		/**
+		 */
+		public void getAllData(){
+		}
 
 }
