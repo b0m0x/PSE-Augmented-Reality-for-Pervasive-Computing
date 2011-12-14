@@ -1,4 +1,4 @@
-package vision;
+package vision.model;
 
 class ObjectFactory {
 	

@@ -1,6 +1,9 @@
-package vision;
+package vision.view;
 
 import java.util.List;
+
+import vision.controller.HeaterController;
+
 import com.jme3.app.Application;
 import com.jme3.scene.Geometry;
 
@@ -31,10 +34,10 @@ public class HeaterPlugin extends Plugin {
 
 
 			/**
-			 * @uml.property  name="heaterController"
-			 * @uml.associationEnd  multiplicity="(1 1)" inverse="heaterPlugin:vision.HeaterController"
+			 * @uml.property   name="heaterController"
+			 * @uml.associationEnd   multiplicity="(1 1)" inverse="heaterPlugin:vision.controller.HeaterController"
 			 */
-			private HeaterController heaterController = new vision.HeaterController();
+			private HeaterController heaterController = new vision.controller.HeaterController();
 
 			/**
 			 * Getter of the property <tt>heaterController</tt>

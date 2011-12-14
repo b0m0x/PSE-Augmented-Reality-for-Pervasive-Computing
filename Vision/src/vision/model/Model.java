@@ -1,7 +1,10 @@
-package vision;
+package vision.model;
 
 import java.util.List;
 import java.util.Collection;
+
+import vision.view.Plugin;
+import vision.view.View;
 
 
 public class Model {
@@ -42,8 +45,8 @@ public class Model {
 
 
 						/**
-						 * @uml.property  name="view"
-						 * @uml.associationEnd  inverse="daten:vision.View"
+						 * @uml.property   name="view"
+						 * @uml.associationEnd   inverse="daten:vision.view.View"
 						 */
 						private View view;
 
@@ -70,9 +73,9 @@ public class Model {
 
 
 
-						/** 
-						 * @uml.property name="sensor"
-						 * @uml.associationEnd multiplicity="(0 -1)" inverse="daten:vision.Sensor"
+						/**
+						 * @uml.property   name="sensor"
+						 * @uml.associationEnd   multiplicity="(0 -1)" inverse="daten:vision.model.Sensor"
 						 */
 						private Collection<Sensor> sensor;
 
@@ -90,7 +93,7 @@ public class Model {
 
 						/**
 						 * @uml.property   name="datenbank"
-						 * @uml.associationEnd   inverse="daten:vision.Database"
+						 * @uml.associationEnd   inverse="daten:vision.model.Database"
 						 */
 						private Database datenbank;
 
@@ -118,8 +121,8 @@ public class Model {
 
 
 						/**
-						 * @uml.property  name="update"
-						 * @uml.associationEnd  inverse="daten:vision.Update"
+						 * @uml.property   name="update"
+						 * @uml.associationEnd   inverse="daten:vision.model.Update"
 						 */
 						private Update update;
 
@@ -156,11 +159,11 @@ public class Model {
 
 
 
-						/** 
-						 * @uml.property name="pluginLoader"
-						 * @uml.associationEnd multiplicity="(1 1)" inverse="model:vision.PluginLoader"
+						/**
+						 * @uml.property   name="pluginLoader"
+						 * @uml.associationEnd   multiplicity="(1 1)" inverse="model:vision.model.PluginLoader"
 						 */
-						private PluginLoader pluginLoader = new vision.PluginLoader();
+						private PluginLoader pluginLoader = new vision.model.PluginLoader();
 
 
 
@@ -214,10 +217,10 @@ public class Model {
 
 
 						/**
-						 * @uml.property  name="plugin"
-						 * @uml.associationEnd  multiplicity="(0 -1)" inverse="daten:vision.Plugin"
+						 * @uml.property   name="plugin"
+						 * @uml.associationEnd   multiplicity="(0 -1)" inverse="daten:vision.view.Plugin"
 						 */
-						private Collection<vision.Plugin> plugin;
+						private Collection<vision.view.Plugin> plugin;
 
 
 
@@ -226,7 +229,7 @@ public class Model {
 						 * @return  Returns the plugin.
 						 * @uml.property  name="plugin"
 						 */
-						public Collection<vision.Plugin> getPlugin() {
+						public Collection<vision.view.Plugin> getPlugin() {
 							return plugin;
 						}
 
@@ -236,7 +239,7 @@ public class Model {
 						 * @param plugin  The plugin to set.
 						 * @uml.property  name="plugin"
 						 */
-						public void setPlugin(Collection<vision.Plugin> plugin) {
+						public void setPlugin(Collection<vision.view.Plugin> plugin) {
 							this.plugin = plugin;
 						}
 

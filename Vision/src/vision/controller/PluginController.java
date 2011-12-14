@@ -1,4 +1,6 @@
-package vision;
+package vision.controller;
+
+import vision.model.Model;
 
 
 public abstract class PluginController {
@@ -8,10 +10,10 @@ public abstract class PluginController {
 
 
 	/**
-	 * @uml.property  name="model"
-	 * @uml.associationEnd  multiplicity="(1 1)" inverse="pluginController:vision.Model"
+	 * @uml.property   name="model"
+	 * @uml.associationEnd   multiplicity="(1 1)" inverse="pluginController:vision.model.Model"
 	 */
-	private Model model = new vision.Model();
+	private Model model = new vision.model.Model();
 
 	/**
 	 * Getter of the property <tt>model</tt>

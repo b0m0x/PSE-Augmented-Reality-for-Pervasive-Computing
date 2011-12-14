@@ -1,9 +1,12 @@
-package vision;
+package vision.controller;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
+
+import vision.model.Model;
+import vision.view.View;
 
 
 public class Controller implements ScreenController {
@@ -27,8 +30,8 @@ public class Controller implements ScreenController {
 	}
 
 	/**
-	 * @uml.property  name="pluginController"
-	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="controller:vision.PluginController"
+	 * @uml.property   name="pluginController"
+	 * @uml.associationEnd   multiplicity="(0 -1)" inverse="controller:vision.controller.PluginController"
 	 */
 	private Collection<PluginController> pluginController;
 
@@ -51,11 +54,11 @@ public class Controller implements ScreenController {
 				this.pluginController = pluginController;
 			}
 
-	/** 
-	 * @uml.property name="model"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="controller:vision.Model"
+	/**
+	 * @uml.property   name="model"
+	 * @uml.associationEnd   multiplicity="(1 1)" inverse="controller:vision.model.Model"
 	 */
-	private Model model = new vision.Model();
+	private Model model = new vision.model.Model();
 
 	/** 
 	 * Getter of the property <tt>model</tt>
@@ -76,10 +79,10 @@ public class Controller implements ScreenController {
 	}
 
 	/**
-	 * @uml.property  name="view"
-	 * @uml.associationEnd  multiplicity="(1 1)" inverse="controller:vision.View"
+	 * @uml.property   name="view"
+	 * @uml.associationEnd   multiplicity="(1 1)" inverse="controller:vision.view.View"
 	 */
-	private View view = new vision.View();
+	private View view = new vision.view.View();
 
 	/**
 	 * Getter of the property <tt>view</tt>
