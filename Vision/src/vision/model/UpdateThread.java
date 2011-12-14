@@ -1,6 +1,9 @@
 package vision.model;
 
-
+/**
+ * updates the sensor data in the background.
+ * 
+ */
 public class UpdateThread extends Thread {
 
 	/**
