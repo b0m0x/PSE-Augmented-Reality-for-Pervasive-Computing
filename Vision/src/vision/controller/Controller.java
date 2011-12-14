@@ -1,6 +1,7 @@
 package vision.controller;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import java.util.Collection;
@@ -123,9 +124,20 @@ public class Controller implements ScreenController {
 
 	/**
 	 * pluginButton gets called by nifty if a button of a plugin was pressed and
-	 * forwards it to the plugin c
+	 * forwards it to the respective plugin controller
 	 */
+	@NiftyEventSubscriber(pattern="*button*")
 	public void pluginButton(String id) {
+	
+	}
+	
+	/**
+	 * gets called by nifty if a checkbox of a plugin was pressed and
+	 * forwards it to the respective plugin controller
+	 */
+	@NiftyEventSubscriber(pattern="*checkbox*")
+	public void pluginCheckbox(String id) {
+	
 	}
 
 }

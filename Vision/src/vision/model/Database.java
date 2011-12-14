@@ -49,6 +49,11 @@ public class Database {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+	 * 
+	 * @param id id of the sensor
+	 * @return a list of all sensor samples belonging to the given sensor
+	 */
 	public List<Sample> getAllSensorData(int id) {
 		throw new UnsupportedOperationException();	
 	}
