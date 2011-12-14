@@ -6,5 +6,11 @@ package vision.model;
  */
 public class Groundplan {
 
+		
+		/**
+		 */
+		public void load(){
+		}
+
 }
 
