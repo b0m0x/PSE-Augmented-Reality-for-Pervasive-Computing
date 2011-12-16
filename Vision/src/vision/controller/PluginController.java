@@ -73,4 +73,29 @@ public abstract class PluginController {
 		throw new UnsupportedOperationException();
 	}
 
+
+	/**
+	 * @uml.property  name="plugin1"
+	 * @uml.associationEnd  inverse="pluginController:vision.view.Plugin"
+	 */
+	private Plugin plugin1;
+
+	/**
+	 * Getter of the property <tt>plugin1</tt>
+	 * @return  Returns the plugin1.
+	 * @uml.property  name="plugin1"
+	 */
+	public Plugin getPlugin1() {
+		return plugin1;
+	}
+
+	/**
+	 * Setter of the property <tt>plugin1</tt>
+	 * @param plugin1  The plugin1 to set.
+	 * @uml.property  name="plugin1"
+	 */
+	public void setPlugin1(Plugin plugin1) {
+		this.plugin1 = plugin1;
+	}
+
 }

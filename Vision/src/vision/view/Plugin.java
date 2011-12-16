@@ -9,6 +9,7 @@ import vision.model.Sensor;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
+import vision.controller.PluginController;
 
 
 public abstract class Plugin extends AbstractAppState{
@@ -128,6 +129,30 @@ public void setDaten(Model daten) {
 	 */
 	public void setSensors(List<Sensor> sensors) {
 		this.sensors = sensors;
+	}
+
+	/**
+	 * @uml.property  name="pluginController"
+	 * @uml.associationEnd  inverse="plugin1:vision.controller.PluginController"
+	 */
+	private PluginController pluginController;
+
+	/**
+	 * Getter of the property <tt>pluginController</tt>
+	 * @return  Returns the pluginController.
+	 * @uml.property  name="pluginController"
+	 */
+	public PluginController getPluginController() {
+		return pluginController;
+	}
+
+	/**
+	 * Setter of the property <tt>pluginController</tt>
+	 * @param pluginController  The pluginController to set.
+	 * @uml.property  name="pluginController"
+	 */
+	public void setPluginController(PluginController pluginController) {
+		this.pluginController = pluginController;
 	}
 
 }
