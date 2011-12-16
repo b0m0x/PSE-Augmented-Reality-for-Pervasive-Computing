@@ -3,7 +3,7 @@
   <children xsi:type="editmodel:ClassEditModel" name="Database" location="150,90" size="309,103" id="vision.model/Database" runTimeClassModel="getAllSensorData(I),getSensordata(II),updateSensors(Ljava.lang.String;ILvision.model.Sample;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="94,54">
-      <children xsi:type="editmodel:MethodEditModel" name="getAllSensorData" id="vision.model/Database#getAllSensorData(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAllSensorData" id="vision.model/Database#getSensorData(I)"/>
       <children xsi:type="editmodel:MethodEditModel" name="getSensordata" id="vision.model/Database#getSensordata(II)"/>
       <children xsi:type="editmodel:MethodEditModel" name="updateSensors" id="vision.model/Database#updateSensors(Ljava.lang.String;ILvision.model.Sample;)"/>
     </children>
