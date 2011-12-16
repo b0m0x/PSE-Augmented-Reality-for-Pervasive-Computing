@@ -35,33 +35,7 @@ public class HeaterPlugin extends Plugin {
 			 */
 			public List<Geometry> getHeaters() {
 				return heaters;
-			}
-
-
-			/**
-			 * @uml.property   name="heaterController"
-			 * @uml.associationEnd   multiplicity="(1 1)" inverse="heaterPlugin:vision.controller.HeaterController"
-			 */
-			private HeaterController heaterController = new vision.controller.HeaterController();
-
-			/**
-			 * Getter of the property <tt>heaterController</tt>
-			 * @return  Returns the heaterController.
-			 * @uml.property  name="heaterController"
-			 */
-			public HeaterController getHeaterController() {
-				return heaterController;
-			}
-
-
-			/**
-			 * Setter of the property <tt>heaterController</tt>
-			 * @param heaterController  The heaterController to set.
-			 * @uml.property  name="heaterController"
-			 */
-			public void setHeaterController(HeaterController heaterController) {
-				this.heaterController = heaterController;
-			}
+			}	
 
 
 			/**
