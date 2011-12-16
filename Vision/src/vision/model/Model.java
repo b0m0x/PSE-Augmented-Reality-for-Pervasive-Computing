@@ -34,32 +34,11 @@ public class Model {
 	public void getTaggedSensors(List<String> tags) {
 	}
 
-	/**
+	/** 
 	 * @uml.property name="view"
 	 * @uml.associationEnd inverse="daten:vision.view.View"
 	 */
 	private View view;
-
-	/**
-	 * Getter of the property <tt>view</tt>
-	 * 
-	 * @return Returns the view.
-	 * @uml.property name="view"
-	 */
-	public View getView() {
-		return view;
-	}
-
-	/**
-	 * Setter of the property <tt>view</tt>
-	 * 
-	 * @param view
-	 *            The view to set.
-	 * @uml.property name="view"
-	 */
-	public void setView(View view) {
-		this.view = view;
-	}
 
 	/**
 	 * @uml.property name="sensor"
@@ -149,24 +128,6 @@ public class Model {
 	 */
 	private PluginLoader pluginLoader = new vision.model.PluginLoader();
 
-	/** 
-	 * Getter of the property <tt>pluginLoader</tt>
-	 * @return Returns the pluginLoader.
-	 * @uml.property name="pluginLoader"
-	 */
-	public PluginLoader getPluginLoader() {
-		return pluginLoader;
-	}
-
-	/** 
-	 * Setter of the property <tt>pluginLoader</tt>
-	 * @param pluginLoader The pluginLoader to set.
-	 * @uml.property  name="pluginLoader"
-	 */
-	public void setPluginLoader(PluginLoader pluginLoader) {
-		this.pluginLoader = pluginLoader;
-	}
-
 	/**
 	 * @uml.property name="pluginList"
 	 */
@@ -249,6 +210,42 @@ public class Model {
 	 */
 	public void setGroundplan(Groundplan groundplan) {
 		this.groundplan = groundplan;
+	}
+
+	/**
+	 * Getter of the property <tt>view</tt>
+	 * @return  Returns the view.
+	 * @uml.property  name="view"
+	 */
+	public View getView() {
+		return view;
+	}
+
+	/**
+	 * Setter of the property <tt>view</tt>
+	 * @param view  The view to set.
+	 * @uml.property  name="view"
+	 */
+	public void setView(View view) {
+		this.view = view;
+	}
+
+	/**
+	 * Getter of the property <tt>pluginLoader</tt>
+	 * @return  Returns the pluginLoader.
+	 * @uml.property  name="pluginLoader"
+	 */
+	public PluginLoader getPluginLoader() {
+		return pluginLoader;
+	}
+
+	/**
+	 * Setter of the property <tt>pluginLoader</tt>
+	 * @param pluginLoader  The pluginLoader to set.
+	 * @uml.property  name="pluginLoader"
+	 */
+	public void setPluginLoader(PluginLoader pluginLoader) {
+		this.pluginLoader = pluginLoader;
 	}
 
 }
