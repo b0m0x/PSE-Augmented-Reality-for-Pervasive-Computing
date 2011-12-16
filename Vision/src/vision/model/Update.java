@@ -31,13 +31,13 @@ public class Update {
 		this.daten = daten;
 	}
 
-	/**
-	 * @uml.property  name="jSONConverter"
-	 * @uml.associationEnd  inverse="update:vision.model.JSONConverter"
+	/** 
+	 * @uml.property name="jSONConverter"
+	 * @uml.associationEnd inverse="update:vision.model.JSONConverter"
 	 */
 	private JSONConverter jsonConverter;
 
-	/**
+	/** 
 	 * Getter of the property <tt>jSONConverter</tt>
 	 * @return  Returns the jsonConverter.
 	 * @uml.property  name="jSONConverter"
@@ -46,7 +46,7 @@ public class Update {
 		return jsonConverter;
 	}
 
-	/**
+	/** 
 	 * Setter of the property <tt>jSONConverter</tt>
 	 * @param jSONConverter  The jsonConverter to set.
 	 * @uml.property  name="jSONConverter"
