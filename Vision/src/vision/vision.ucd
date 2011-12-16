@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="vision" size="2275,948" id="vision.model" metadata="uml2-1.0" initialized="true" zoom="0.75" scrolledX="949" scrolledY="94" tag="1000" key="32303037303533312D3130303020566973696F6E2F69646C65">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="vision" size="2405,1244" id="vision.model" metadata="uml2-1.0" initialized="true" zoom="0.75" scrolledX="212" scrolledY="235" tag="1000" key="32303037303533312D3130303020566973696F6E2F626F6D6F78">
   <children xsi:type="editmodel:NotepadEditModel" location="15,164" size="140,52" fontInfo="Arial-8-0" note="Lade Models, &#xD;&#xA;speichere App und tags&#xD;&#xA;">
     <sourceConnections xsi:type="editmodel:IndicationEditModel" autoLocated="true" source="//@children.0" target="//@children.29/@children.1/@children.0" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
       <children xsi:type="editmodel:AssociationEndEditModel" location="92,52" attachSource="true"/>
@@ -30,9 +30,17 @@
       <children xsi:type="editmodel:MethodEditModel" name="load" id="vision.model/Groundplan#load()"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.model/Wall@wall+vision.model/Groundplan@groundplan" source="//@children.4" target="//@children.5" targetEnd="//@children.4/@sourceConnections.0/@children.1" label="//@children.4/@sourceConnections.0/@children.2" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="groundplan" location="86,68" id="vision.model/Wall@wall+vision.model/Groundplan@groundplan|vision.model/Groundplan#groundplan" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="wall" location="37,0" id="vision.model/Wall@wall+vision.model/Groundplan@groundplan|vision.model/Wall#wall" multiplicityLabel="//@children.4/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.4/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - wall" location="2297,129" size="32,13" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="2278,129" size="5,13" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+    </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.12/@sourceConnections.1" name="Wall" location="2254,150" size="76,30" id="vision.model/Wall" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.12/@sourceConnections.1 //@children.4/@sourceConnections.0" name="Wall" location="2254,150" size="76,30" id="vision.model/Wall" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
@@ -102,6 +110,14 @@
       <children xsi:type="editmodel:AssociationEndEditModel" name="view" location="30,128" id="vision.view/MainAppState@mainAppState+vision.view/View@view|vision.view/View#view"/>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
     </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.model/CustomMesh@wallMesh+vision.view/MainAppState@mainAppState" source="//@children.13" target="//@children.35" targetEnd="//@children.13/@sourceConnections.1/@children.1" label="//@children.13/@sourceConnections.1/@children.2" sourceEnd="//@children.13/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="mainAppState" location="218,81" id="vision.model/CustomMesh@wallMesh+vision.view/MainAppState@mainAppState|vision.view/MainAppState#mainAppState" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="wallMesh" location="68,0" id="vision.model/CustomMesh@wallMesh+vision.view/MainAppState@mainAppState|vision.model/CustomMesh#wallMesh" multiplicityLabel="//@children.13/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.13/@sourceConnections.1/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - wallMesh" location="824,524" size="61,13" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="805,524" size="5,13" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+    </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="GuiAppState" location="1035,420" size="401,81" id="vision.view/GuiAppState" runTimeClassModel="initialize(Lcom.jme3.app.state.AppStateManager;Lcom.jme3.app.Application;)">
@@ -130,13 +146,13 @@
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.model/Model@daten+vision.view/View@view" source="//@children.15" target="//@children.23" targetEnd="//@children.15/@sourceConnections.0/@children.1" label="//@children.15/@sourceConnections.0/@children.2" sourceEnd="//@children.15/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" name="view" location="176,0" id="vision.model/Model@daten+vision.view/View@view|vision.view/View#view" attachSource="true" multiplicityLabel="//@children.15/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.15/@sourceConnections.0/@children.0/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" + view" location="1067,220" size="40,13" anchorKind="FirstPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1121,220" size="20,13" anchorKind="FirstPart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="view" location="186,10" id="vision.model/Model@daten+vision.view/View@view|vision.view/View#view" attachSource="true" multiplicityLabel="//@children.15/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.15/@sourceConnections.0/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" + view" location="1131,256" size="40,13" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1131,229" size="20,13" anchorKind="FirstPart"/>
       </children>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="daten" location="0,130" id="vision.model/Model@daten+vision.view/View@view|vision.model/Model#daten" multiplicityLabel="//@children.15/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.15/@sourceConnections.0/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - daten" location="1255,140" size="42,13" anchorKind="LastPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1277,167" size="20,13" anchorKind="LastPart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="daten" location="10,140" id="vision.model/Model@daten+vision.view/View@view|vision.model/Model#daten" multiplicityLabel="//@children.15/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.15/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - daten" location="1321,176" size="42,13" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1287,176" size="20,13" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
     </sourceConnections>
@@ -217,7 +233,7 @@
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.25/@sourceConnections.0" name="Controller" location="939,900" size="328,225" id="vision.controller/Controller" runTimeClassModel="bind(Lde.lessvoid.nifty.Nifty;Lde.lessvoid.nifty.screen.Screen;),createManagePluginsPopupMenu(),pluginCheckbox(Ljava.lang.String;),managePluginsPopup,pluginButton(Ljava.lang.String;),buttonClick(Ljava.lang.String;Lde.lessvoid.nifty.controls.ButtonClickedEvent;),onStartScreen(),onEndScreen(),userPick(Lcom.jme3.scene.Geometry;),checkboxPressed(Ljava.lang.String;)">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.25/@sourceConnections.0" name="Controller" location="939,900" size="328,225" id="vision.controller/Controller" runTimeClassModel="createManagePluginsPopupMenu(),bind(Lde.lessvoid.nifty.Nifty;Lde.lessvoid.nifty.screen.Screen;),pluginCheckbox(Ljava.lang.String;),managePluginsPopup,buttonClick(Ljava.lang.String;Lde.lessvoid.nifty.controls.ButtonClickedEvent;),pluginButton(Ljava.lang.String;),onEndScreen(),userPick(Lcom.jme3.scene.Geometry;),onStartScreen(),checkboxPressed(Ljava.lang.String;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="189,18">
       <children xsi:type="editmodel:AttributeEditModel" name="managePluginsPopup" id="vision.controller/Controller#managePluginsPopup"/>
     </children>
@@ -261,7 +277,7 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.19/@sourceConnections.0 //@children.23/@sourceConnections.4" name="Database" location="1235,630" size="441,122" id="vision.model/Database" runTimeClassModel="getAllSensorData(I),getSensorDataInterval(IJJ),getSensordata(II),updateSensors(Ljava.lang.String;ILvision.model.Sample;)">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.19/@sourceConnections.0 //@children.23/@sourceConnections.4" name="Database" location="1235,630" size="441,122" id="vision.model/Database" runTimeClassModel="getSensorDataInterval(IJJ),getAllSensorData(I),getSensordata(II),updateSensors(Ljava.lang.String;ILvision.model.Sample;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="418,72">
       <children xsi:type="editmodel:MethodEditModel" name="getSensordata" id="vision.model/Database#getSensordata(II)"/>
@@ -291,13 +307,13 @@
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
     </sourceConnections>
-    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.model/Model@daten+vision.model/Update@update" source="//@children.23" target="//@children.19" targetEnd="//@children.23/@sourceConnections.1/@children.1" label="//@children.23/@sourceConnections.1/@children.2" sourceEnd="//@children.23/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" name="daten" location="215,140" id="vision.model/Model@daten+vision.model/Update@update|vision.model/Model#daten" attachSource="true" multiplicityLabel="//@children.23/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.23/@sourceConnections.1/@children.0/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" - daten" location="1527,176" size="42,13" anchorKind="FirstPart"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.model/Update@update+vision.model/Model@daten" source="//@children.23" target="//@children.19" targetEnd="//@children.23/@sourceConnections.1/@children.1" label="//@children.23/@sourceConnections.1/@children.2" sourceEnd="//@children.23/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="daten" location="215,140" id="vision.model/Update@update+vision.model/Model@daten|vision.model/Model#daten" attachSource="true" multiplicityLabel="//@children.23/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.23/@sourceConnections.1/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" + daten" location="1527,176" size="47,13" anchorKind="FirstPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1493,176" size="20,13" anchorKind="FirstPart"/>
       </children>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="update" location="44,0" id="vision.model/Model@daten+vision.model/Update@update|vision.model/Update#update" multiplicityLabel="//@children.23/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.23/@sourceConnections.1/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name=" + update" location="1527,224" size="54,13" anchorKind="LastPart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="update" location="44,0" id="vision.model/Update@update+vision.model/Model@daten|vision.model/Update#update" multiplicityLabel="//@children.23/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.23/@sourceConnections.1/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - update" location="1527,224" size="49,13" anchorKind="LastPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1493,224" size="20,13" anchorKind="LastPart"/>
       </children>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
@@ -495,12 +511,12 @@
       <children xsi:type="editmodel:MethodEditModel" name="saveSensor"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.model/Update@update+vision.model/JSONConverter@jSONConverter" source="//@children.31" target="//@children.19" targetEnd="//@children.31/@sourceConnections.0/@children.1" label="//@children.31/@sourceConnections.0/@children.2" sourceEnd="//@children.31/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" name="jSONConverter" location="35,0" id="vision.model/Update@update+vision.model/JSONConverter@jSONConverter|vision.model/JSONConverter#jSONConverter" attachSource="true" multiplicityLabel="//@children.31/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.31/@sourceConnections.0/@children.0/@children.0" navigable="true">
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.model/JSONConverter@jSONConverter+vision.model/Update@update" source="//@children.31" target="//@children.19" targetEnd="//@children.31/@sourceConnections.0/@children.1" label="//@children.31/@sourceConnections.0/@children.2" sourceEnd="//@children.31/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="jSONConverter" location="35,0" id="vision.model/JSONConverter@jSONConverter+vision.model/Update@update|vision.model/JSONConverter#jSONConverter" attachSource="true" multiplicityLabel="//@children.31/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.31/@sourceConnections.0/@children.0/@children.0" navigable="true">
         <children xsi:type="editmodel:LabelEditModel" name=" - jSONConverter" location="1585,384" size="89,13" anchorKind="FirstPart"/>
         <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1551,384" size="20,13" anchorKind="FirstPart"/>
       </children>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="update" location="103,86" id="vision.model/Update@update+vision.model/JSONConverter@jSONConverter|vision.model/Update#update"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="update" location="103,86" id="vision.model/JSONConverter@jSONConverter+vision.model/Update@update|vision.model/Update#update"/>
       <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
     </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
@@ -531,6 +547,20 @@
       <children xsi:type="editmodel:AttributeEditModel" name="serverUrl" id="vision/Config#serverUrl"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.13/@sourceConnections.1" name="CustomMesh" location="750,544" size="137,30" id="vision.model/CustomMesh" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="CustomMeshCreator" location="2024,252" size="236,68" id="vision.model/CustomMeshCreator" runTimeClassModel="convert(Lvision.model.Wall;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="213,18">
+      <children xsi:type="editmodel:MethodEditModel" name="convert" location="2020,299" id="vision.model/CustomMeshCreator#convert(Lvision.model.Wall;)"/>
+    </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
