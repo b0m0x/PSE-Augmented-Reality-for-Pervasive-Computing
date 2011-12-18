@@ -30,14 +30,14 @@ public class View extends SimpleApplication {
 			}
 
 
-			/**
-			 * @uml.property   name="daten"
-			 * @uml.associationEnd   inverse="view:vision.model.Model"
+			/** 
+			 * @uml.property name="daten"
+			 * @uml.associationEnd inverse="view:vision.model.Model"
 			 */
 			private Model daten;
 
 
-			/**
+			/** 
 			 * Getter of the property <tt>daten</tt>
 			 * @return  Returns the daten.
 			 * @uml.property  name="daten"
@@ -47,7 +47,7 @@ public class View extends SimpleApplication {
 			}
 
 
-			/**
+			/** 
 			 * Setter of the property <tt>daten</tt>
 			 * @param daten  The daten to set.
 			 * @uml.property  name="daten"
