@@ -45,29 +45,4 @@ public class WindowPlugin extends Plugin {
 			public WindowPlugin(){
 			}
 
-
-			/**
-			 * @uml.property   name="windowController"
-			 * @uml.associationEnd   multiplicity="(1 1)" inverse="windowPlugin:vision.controller.WindowController"
-			 */
-			private WindowController windowController = new vision.controller.WindowController();
-
-			/**
-			 * Getter of the property <tt>windowController</tt>
-			 * @return  Returns the windowController.
-			 * @uml.property  name="windowController"
-			 */
-			public WindowController getWindowController() {
-				return windowController;
-			}
-
-			/**
-			 * Setter of the property <tt>windowController</tt>
-			 * @param windowController  The windowController to set.
-			 * @uml.property  name="windowController"
-			 */
-			public void setWindowController(WindowController windowController) {
-				this.windowController = windowController;
-			}
-
 }

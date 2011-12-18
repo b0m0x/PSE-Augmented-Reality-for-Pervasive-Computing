@@ -1,6 +1,8 @@
 package vision.controller;
 
+import vision.model.Model;
 import vision.view.HeaterPlugin;
+import vision.view.Plugin;
 
 /**
  * Controller for the heater-plugin
@@ -8,28 +10,9 @@ import vision.view.HeaterPlugin;
  */
 public class HeaterController extends PluginController {
 
-	/**
-	 * @uml.property   name="heaterPlugin"
-	 * @uml.associationEnd   multiplicity="(1 1)" inverse="heaterController:vision.view.HeaterPlugin"
-	 */
-	private HeaterPlugin heaterPlugin = new vision.view.HeaterPlugin();
-
-	/**
-	 * Getter of the property <tt>heaterPlugin</tt>
-	 * @return  Returns the heaterPlugin.
-	 * @uml.property  name="heaterPlugin"
-	 */
-	public HeaterPlugin getHeaterPlugin() {
-		return heaterPlugin;
+	public HeaterController(Model model, Plugin plugin) {
+		super(model, plugin);
+		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * Setter of the property <tt>heaterPlugin</tt>
-	 * @param heaterPlugin  The heaterPlugin to set.
-	 * @uml.property  name="heaterPlugin"
-	 */
-	public void setHeaterPlugin(HeaterPlugin heaterPlugin) {
-		this.heaterPlugin = heaterPlugin;
-	}
-
+	
 }
