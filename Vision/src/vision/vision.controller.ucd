@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="969,622" id="vision.controller" metadata="uml2-1.0" initialized="true" zoom="1.5" tag="1000" key="32303037303533312D3130303020566973696F6E2F7A65796E6570">
+  <children xsi:type="editmodel:ClassEditModel" name="Controller" location="435,30" size="196,283" id="vision.controller/Controller" runTimeClassModel="createManagePluginsPopupMenu(),model,pluginCheckbox(Ljava.lang.String;),managePluginsPopup,onEndScreen(),onStartScreen(),bind(Lde.lessvoid.nifty.Nifty;Lde.lessvoid.nifty.screen.Screen;),buttonClick,pluginButton(Ljava.lang.String;),pluginController,view,userPick(Lcom.jme3.scene.Geometry;),checkboxPressed(Ljava.lang.String;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="173,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="managePluginsPopup" id="vision.controller/Controller#managePluginsPopup"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="model" id="vision.model/Model@model+vision.controller/Controller@controller|vision.model/Model#model"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="pluginController" id="vision.controller/PluginController@pluginController+vision.controller/Controller@controller|vision.controller/PluginController#pluginController"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="view" id="vision.view/View@view+vision.controller/Controller@controller|vision.view/View#view"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="159,162">
+      <children xsi:type="editmodel:MethodEditModel" name="bind" id="vision.controller/Controller#bind(Lde.lessvoid.nifty.Nifty;Lde.lessvoid.nifty.screen.Screen;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="buttonClick" id="vision.controller/Controller#buttonClick"/>
+      <children xsi:type="editmodel:MethodEditModel" name="checkboxPressed" id="vision.controller/Controller#checkboxPressed(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createManagePluginsPopupMenu" id="vision.controller/Controller#createManagePluginsPopupMenu()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onEndScreen" id="vision.controller/Controller#onEndScreen()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="onStartScreen" id="vision.controller/Controller#onStartScreen()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="pluginButton" id="vision.controller/Controller#pluginButton(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="pluginCheckbox" id="vision.controller/Controller#pluginCheckbox(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="userPick" id="vision.controller/Controller#userPick(Lcom.jme3.scene.Geometry;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="vision.controller/PluginController@pluginController+vision.controller/Controller@controller" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="controller" location="0,87" id="vision.controller/PluginController@pluginController+vision.controller/Controller@controller|vision.controller/Controller#controller" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="pluginController" location="244,87" id="vision.controller/PluginController@pluginController+vision.controller/Controller@controller|vision.controller/PluginController#pluginController" multiplicityLabel="//@children.0/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - pluginController" location="325,99" size="74,10" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="325,123" size="4,10" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.3/@sourceConnections.0 //@children.0/@sourceConnections.0" name="PluginController" location="75,30" size="244,175" id="vision.controller/PluginController" runTimeClassModel="model,PluginController(Lvision.model.Model;Lvision.view.Plugin;),plugin1,buttonPressed(Ljava.lang.String;),createCheckBoxes(),createButtons(),plugin">
+    <children xsi:type="editmodel:CompartmentEditModel" size="78,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="model" id="vision.model/Model@model+vision.controller/PluginController@pluginController|vision.model/Model#model"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="plugin" id="vision.controller/PluginController#plugin"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="plugin1" id="vision.controller/PluginController@pluginController+vision.view/Plugin@plugin1|vision.view/Plugin#plugin1"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="221,72">
+      <children xsi:type="editmodel:MethodEditModel" name="PluginController" id="vision.controller/PluginController#PluginController(Lvision.model.Model;Lvision.view.Plugin;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="buttonPressed" id="vision.controller/PluginController#buttonPressed(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createButtons" id="vision.controller/PluginController#createButtons()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createCheckBoxes" id="vision.controller/PluginController#createCheckBoxes()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="WindowController" location="210,285" size="155,57" id="vision.controller/WindowController" runTimeClassModel="windowPlugin">
+    <children xsi:type="editmodel:CompartmentEditModel" size="132,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="windowPlugin" id="vision.controller/WindowController@windowController+vision.view/WindowPlugin@windowPlugin|vision.view/WindowPlugin#windowPlugin"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="vision.controller/PluginController&lt;-vision.controller/WindowController" source="//@children.2" target="//@children.3/@sourceConnections.0" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="76,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="HeaterController" location="45,285" size="146,57" id="vision.controller/HeaterController" runTimeClassModel="heaterPlugin">
+    <children xsi:type="editmodel:CompartmentEditModel" size="123,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="heaterPlugin" id="vision.controller/HeaterController@heaterController+vision.view/HeaterPlugin@heaterPlugin|vision.view/HeaterPlugin#heaterPlugin"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.2/@sourceConnections.0" autoLocated="true" id="vision.controller/PluginController&lt;-vision.controller/HeaterController" source="//@children.3" target="//@children.1" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="73,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="122,174" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+</editmodel:ClassDiagramEditModel>
