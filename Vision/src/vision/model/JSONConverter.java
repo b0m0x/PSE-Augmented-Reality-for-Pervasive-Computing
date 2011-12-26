@@ -18,6 +18,10 @@ public class JSONConverter {
 	public String getUrl() {
 		return "";
 	}
+	
+	public JSONObject getJson() {
+		return this.json;
+	}
 
 	public void convert() {
 		try {
