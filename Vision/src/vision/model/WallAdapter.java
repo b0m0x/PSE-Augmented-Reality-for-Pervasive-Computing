@@ -1,6 +1,7 @@
 package vision.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WallAdapter {
 	private Wall wall;
@@ -10,8 +11,7 @@ public class WallAdapter {
 	}
 	
 	public Position getPosition() {
-		//TODO: stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 	
 	public Position getStart() {
@@ -23,10 +23,22 @@ public class WallAdapter {
 	}
 	
 	public Size3D getSize() {
-		return null;
+		throw new UnsupportedOperationException();
 	}
 	
 	public List<Hole> getHoles() {
 		return new ArrayList<Hole>();
+	}
+
+	public float getWidth() {
+		throw new UnsupportedOperationException();
+	}
+
+	public float getHeight() {
+		throw new UnsupportedOperationException();
+	}
+
+	public float getDepth() {
+		throw new UnsupportedOperationException();
 	}
 }
