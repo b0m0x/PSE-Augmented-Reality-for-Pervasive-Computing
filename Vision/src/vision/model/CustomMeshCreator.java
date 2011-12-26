@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.VertexBuffer;
@@ -24,7 +25,7 @@ public class CustomMeshCreator {
 	 * creates a mesh off of a wall object. builds in holes for windows if
 	 * necessary.
 	 */
-	public CustomMesh convert(Wall w) {
+	public Geometry convert(Wall w) {
 			WallAdapter wall = new WallAdapter(w);
 			//TODO (b0m0x): implement. depends on Wall to be finished
 			CustomMesh wallMesh = new CustomMesh();
@@ -67,18 +68,16 @@ public class CustomMeshCreator {
 				addWallPlane(new Position((leftBoundH + rightBoundPrevH) / 2, 0, (wall.getHeight() + minHole) / 2f), new Size3D(leftBoundH - rightBoundPrevH, wall.getDepth() ,wall.getHeight() - minHole));
 				prevH = h;
 			}
-			transformCoordinates(wall);
-			return assembleMesh();
+			CustomMesh m = assembleMesh();
+			return transformCoordinates(m, wall); 
 		}
 
-	private void transformCoordinates(WallAdapter wall) {
-		//create rotation matrix
-		Matrix3f m = new Matrix3f();
-		//TODO:  Rotation matrix or JME mesh rotation
-		m.setColumn(0, new Vector3f(1f, 0f, 0f));
-		m.setColumn(1, new Vector3f(0f, 0f, 0f));
-		m.setColumn(2, new Vector3f(0f, 0f, 0f));
-		
+	private Geometry transformCoordinates(CustomMesh wallMesh, WallAdapter wall) {
+		Geometry wallGeometry = new Geometry();
+		wallGeometry.setMesh(wallMesh);
+		float a = 0;
+		//TODO: Calculate angle
+		return (Geometry) wallGeometry.rotate(0, 0, a);
 	}
 
 	private CustomMesh assembleMesh() {
