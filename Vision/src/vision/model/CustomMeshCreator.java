@@ -76,7 +76,9 @@ public class CustomMeshCreator {
 		Geometry wallGeometry = new Geometry();
 		wallGeometry.setMesh(wallMesh);
 		float a = 0;
-		//TODO: Calculate angle
+		Vector3f wallDir = new Vector3f(wall.getStart().getX() - wall.getEnd().getX(), wall.getStart().getY() - wall.getEnd().getY(), 0); 
+		a = wallDir.angleBetween(new Vector3f());
+		wallGeometry.move(wall.getPosition().getX(), wall.getPosition().getY(), 0);
 		return (Geometry) wallGeometry.rotate(0, 0, a);
 	}
 
@@ -87,7 +89,6 @@ public class CustomMeshCreator {
 		return wallMesh;
 	}
 
-	// TODO: implement
 	private void addWallPlane(Position pos, Size3D dim) {
 		float[] addvertices = new float[3 * 8];
 
