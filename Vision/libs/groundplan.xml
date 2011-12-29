@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groundplan>
+    <wall>
+	<wallNumber>1</wallNumber>
+        <positionX1>23.422332333316</positionX1>
+	<positionY1>12.374903487847</positionY1>
+	<positionX2>23.422332333316</positionX2>
+	<positionY2>32.821344374763</positionY2>
+	<wide>3.4123432</wide>
+    </wall>
+    <wall>
+        <wallNumber>2</wallNumber>
+        <positionX1>23.422332333316</positionX1>
+	<positionY1>12.374903487847</positionY1>
+	<positionX2>44.932532783242</positionX2>
+	<positionY2>12.374903487847</positionY2>
+	<wide>3.4123432</wide>
+    </wall>
+</groundplan>
+
