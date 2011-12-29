@@ -4,12 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import java.io.File;
-import java.math.BigInteger;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import vision.model.Groundplan;
 import vision.model.Wall;
@@ -20,13 +16,8 @@ public class GroundplanTest {
 	
 	@Before
 	public void setUp() throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("vision.model");
-		Unmarshaller unmarshaller = jc.createUnmarshaller();
-
-		gp = (Groundplan) unmarshaller
-				.unmarshal(new File(
-						"C://Users//Benedikt//PSE-Augmented-Reality-for-Pervasive-Computing//Vision//libs//groundplan.xml"));
-	}
+		gp = vision.model.Groundplan.load();
+		}
 
 	@Test
 	public void testGroundplan() {

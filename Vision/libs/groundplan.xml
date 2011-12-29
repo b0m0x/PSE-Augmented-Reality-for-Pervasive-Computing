@@ -6,13 +6,15 @@
 	<positionY1>12.374903487847</positionY1>
 	<positionX2>23.422332333316</positionX2>
 	<positionY2>32.821344374763</positionY2>
-	<height>2,435644</height>
+	<height>2.435644</height>
 	<wide>3.4123432</wide>
 		<hole>
 			<positionX1>23.422332333316</positionX1>
 			<positionY1>18.374903487847</positionY1>
 			<positionX2>23.422332333316</positionX2>
 			<positionY2>21.821344374763</positionY2>
+			<heightGround>0.834455</heightGround>
+			<heightWindow>1.100012</heightWindow>
 		</hole>
     </wall>
     <wall>
@@ -21,13 +23,15 @@
 	<positionY1>12.374903487847</positionY1>
 	<positionX2>44.932532783242</positionX2>
 	<positionY2>12.374903487847</positionY2>
-	<height>2,435644</height>
+	<height>2.435644</height>
 	<wide>3.4123432</wide>
 		<hole>
 			<positionX1>28.422332333316</positionX1>
 			<positionY1>12.374903487847</positionY1>
 			<positionX2>33.422332333316</positionX2>
 			<positionY2>12.821344374763</positionY2>
+			<heightGround>0.834455</heightGround>
+			<heightWindow>1.100012</heightWindow>
 		</hole>
     </wall>
 </groundplan>

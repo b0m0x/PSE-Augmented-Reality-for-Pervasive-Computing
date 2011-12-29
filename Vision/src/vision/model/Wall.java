@@ -22,7 +22,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{}positionY1"/>
  *         &lt;element ref="{}positionX2"/>
  *         &lt;element ref="{}positionY2"/>
+ *         &lt;element ref="{}height"/>
  *         &lt;element ref="{}wide"/>
+ *         &lt;element ref="{}hole"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,7 +40,9 @@ import javax.xml.bind.annotation.XmlType;
     "positionY1",
     "positionX2",
     "positionY2",
-    "wide"
+    "height",
+    "wide",
+    "hole"
 })
 @XmlRootElement(name = "wall")
 public class Wall {
@@ -49,7 +53,10 @@ public class Wall {
     protected float positionY1;
     protected float positionX2;
     protected float positionY2;
+    protected float height;
     protected float wide;
+    @XmlElement(required = true)
+    protected Hole hole;
 
     /**
      * Gets the value of the wallNumber property.
@@ -140,6 +147,22 @@ public class Wall {
     }
 
     /**
+     * Gets the value of the height property.
+     * 
+     */
+    public float getHeight() {
+        return height;
+    }
+
+    /**
+     * Sets the value of the height property.
+     * 
+     */
+    public void setHeight(float value) {
+        this.height = value;
+    }
+
+    /**
      * Gets the value of the wide property.
      * 
      */
@@ -153,6 +176,30 @@ public class Wall {
      */
     public void setWide(float value) {
         this.wide = value;
+    }
+
+    /**
+     * Gets the value of the hole property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Hole }
+     *     
+     */
+    public Hole getHole() {
+        return hole;
+    }
+
+    /**
+     * Sets the value of the hole property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Hole }
+     *     
+     */
+    public void setHole(Hole value) {
+        this.hole = value;
     }
 
 }

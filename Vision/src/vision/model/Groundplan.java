@@ -1,7 +1,12 @@
 package vision.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -9,9 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * contains all static models, building architecture.
- *
- 
  * <p>
  * Java class for anonymous complex type.
  * 
@@ -40,7 +42,13 @@ public class Groundplan {
 
 	/**
 		 */
-	public void load() {
+	public static Groundplan load() throws JAXBException {
+		JAXBContext jc = JAXBContext.newInstance("vision.model");
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
+		return (Groundplan) unmarshaller
+				.unmarshal(new File(
+						"C://Users//Benedikt//PSE-Augmented-Reality-for-Pervasive-Computing//Vision//libs//groundplan.xml"));
+
 	}
 
 	@XmlElement(required = true)

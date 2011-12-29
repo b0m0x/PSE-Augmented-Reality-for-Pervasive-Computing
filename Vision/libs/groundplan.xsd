@@ -22,7 +22,7 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="wallNumber" type="xs:integer"/>
-  <xs:element name="height" type="xs:string"/>
+  <xs:element name="height" type="xs:float"/>
   <xs:element name="wide" type="xs:float"/>
   <xs:element name="hole">
     <xs:complexType>
@@ -31,9 +31,13 @@
         <xs:element ref="positionY1"/>
         <xs:element ref="positionX2"/>
         <xs:element ref="positionY2"/>
+        <xs:element ref="heightGround"/>
+        <xs:element ref="heightWindow"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="heightGround" type="xs:float"/>
+  <xs:element name="heightWindow" type="xs:float"/>
   <xs:element name="positionX1" type="xs:float"/>
   <xs:element name="positionY1" type="xs:float"/>
   <xs:element name="positionX2" type="xs:float"/>
