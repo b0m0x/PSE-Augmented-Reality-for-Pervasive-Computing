@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import com.jme3.math.Matrix3f;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
@@ -76,9 +77,9 @@ public class CustomMeshCreator {
 		Geometry wallGeometry = new Geometry();
 		wallGeometry.setMesh(wallMesh);
 		float a = 0;
-		Vector3f wallDir = new Vector3f(wall.getStart().getX() - wall.getEnd().getX(), wall.getStart().getY() - wall.getEnd().getY(), 0); 
-		a = wallDir.angleBetween(new Vector3f());
-		wallGeometry.move(wall.getPosition().getX(), wall.getPosition().getY(), 0);
+		Vector2f wallDir = new Vector2f(wall.getStart().getX() - wall.getEnd().getX(), wall.getStart().getY() - wall.getEnd().getY()); 
+		a = wallDir.angleBetween(new Vector2f(1f, 0f));
+		wallGeometry = (Geometry) wallGeometry.move(wall.getPosition().getX(), wall.getPosition().getY(), 0);
 		return (Geometry) wallGeometry.rotate(0, 0, a);
 	}
 
@@ -89,42 +90,47 @@ public class CustomMeshCreator {
 		return wallMesh;
 	}
 
+	/** 
+	 * adds a 3D-Rectangle to the Mesh. 
+	 * @param pos the position of the rectangle, in center coordinates
+	 * @param dim dimension (x,y,z) of the rectangle
+	 */
 	private void addWallPlane(Position pos, Size3D dim) {
 		float[] addvertices = new float[3 * 8];
 
 		// lower left front
-		vertices[0] = pos.getX() - dim.getX() / 2;
-		vertices[1] = pos.getY() - dim.getY() / 2;
-		vertices[2] = pos.getZ() - dim.getZ() / 2;
+		addvertices[0] = pos.getX() - dim.getX() / 2;
+		addvertices[1] = pos.getY() - dim.getY() / 2;
+		addvertices[2] = pos.getZ() - dim.getZ() / 2;
 		// lower right front
-		vertices[3] = pos.getX() + dim.getX() / 2;
-		vertices[4] = pos.getY() - dim.getY() / 2;
-		vertices[5] = pos.getZ() - dim.getZ() / 2;
+		addvertices[3] = pos.getX() + dim.getX() / 2;
+		addvertices[4] = pos.getY() - dim.getY() / 2;
+		addvertices[5] = pos.getZ() - dim.getZ() / 2;
 		// upper right front
-		vertices[6] = pos.getX() + dim.getX() / 2;
-		vertices[7] = pos.getY() - dim.getY() / 2;
-		vertices[8] = pos.getZ() + dim.getZ() / 2;
+		addvertices[6] = pos.getX() + dim.getX() / 2;
+		addvertices[7] = pos.getY() - dim.getY() / 2;
+		addvertices[8] = pos.getZ() + dim.getZ() / 2;
 		// upper left front
-		vertices[9] = pos.getX() - dim.getX() / 2;
-		vertices[10] = pos.getY() - dim.getY() / 2;
-		vertices[11] = pos.getZ() + dim.getZ() / 2;
+		addvertices[9] = pos.getX() - dim.getX() / 2;
+		addvertices[10] = pos.getY() - dim.getY() / 2;
+		addvertices[11] = pos.getZ() + dim.getZ() / 2;
 
 		// lower left back
-		vertices[0] = pos.getX() - dim.getX() / 2;
-		vertices[1] = pos.getY() + dim.getY() / 2;
-		vertices[2] = pos.getZ() - dim.getZ() / 2;
+		addvertices[0] = pos.getX() - dim.getX() / 2;
+		addvertices[1] = pos.getY() + dim.getY() / 2;
+		addvertices[2] = pos.getZ() - dim.getZ() / 2;
 		// lower right back
-		vertices[3] = pos.getX() + dim.getX() / 2;
-		vertices[4] = pos.getY() + dim.getY() / 2;
-		vertices[5] = pos.getZ() - dim.getZ() / 2;
+		addvertices[3] = pos.getX() + dim.getX() / 2;
+		addvertices[4] = pos.getY() + dim.getY() / 2;
+		addvertices[5] = pos.getZ() - dim.getZ() / 2;
 		// upper right back
-		vertices[6] = pos.getX() + dim.getX() / 2;
-		vertices[7] = pos.getY() + dim.getY() / 2;
-		vertices[8] = pos.getZ() + dim.getZ() / 2;
+		addvertices[6] = pos.getX() + dim.getX() / 2;
+		addvertices[7] = pos.getY() + dim.getY() / 2;
+		addvertices[8] = pos.getZ() + dim.getZ() / 2;
 		// upper left back
-		vertices[9] = pos.getX() - dim.getX() / 2;
-		vertices[10] = pos.getY() + dim.getY() / 2;
-		vertices[11] = pos.getZ() + dim.getZ() / 2;
+		addvertices[9] = pos.getX() - dim.getX() / 2;
+		addvertices[10] = pos.getY() + dim.getY() / 2;
+		addvertices[11] = pos.getZ() + dim.getZ() / 2;
 
 		int[] addindices = new int[] { 0, 1, 2, 3, 
 									4, 5, 6, 7, 
@@ -153,7 +159,6 @@ public class CustomMeshCreator {
 		for (int i = 0; i < addvertices.length; i++) {
 			newvertices[i + vertices.length] = addvertices[i];
 		}
-		vertices = newvertices;
-				
+		vertices = newvertices;				
 	}
 }
