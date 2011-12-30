@@ -3,6 +3,7 @@ package vision.model;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.UUID;
 
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector2f;
@@ -76,7 +77,7 @@ public class CustomMeshCreator {
 		}
 
 	private Geometry transformCoordinates(CustomMesh wallMesh, WallAdapter wall) {
-		Geometry wallGeometry = new Geometry();
+		Geometry wallGeometry = new Geometry("Static Wall " + UUID.randomUUID());
 		wallGeometry.setMesh(wallMesh);
 		float a = 0;
 		Vector2f wallDir = new Vector2f(wall.getStart().getX() - wall.getEnd().getX(), wall.getStart().getY() - wall.getEnd().getY()); 

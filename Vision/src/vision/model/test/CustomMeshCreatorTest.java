@@ -33,8 +33,7 @@ public class CustomMeshCreatorTest {
 		assertEquals(Math.PI/4, g.getLocalRotation().toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(0.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
-
-	
+		
 	@Test
 	public void testConvertWall2() {
 		Wall wall = new Wall();

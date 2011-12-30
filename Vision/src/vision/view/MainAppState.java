@@ -42,7 +42,8 @@ public class MainAppState extends AbstractAppState {
 		}
 		app.getRootNode().attachChild(mainGeometryNode);
 		
-		//TODO: init camera
+		//init camera
+		app.getFlyByCamera().setEnabled(true);
 	}
 	
 	@Override
