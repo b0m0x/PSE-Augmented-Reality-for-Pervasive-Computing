@@ -105,6 +105,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 	          String hit = results.getCollision(i).getGeometry().getName();
 	          if (hit.equals("floor")) {
 	        	  app.getCamera().setLocation(pt.add(new Vector3f(0f, 0f, 1f)));
+	        	  overviewCam = false;
 	          }
 	        }
 		}
