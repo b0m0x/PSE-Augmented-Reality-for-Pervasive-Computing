@@ -1,14 +1,9 @@
 package vision;
 
-import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.screen.Screen;
 import vision.controller.Controller;
-import vision.controller.PluginController;
-import vision.model.Groundplan;
+
 import vision.model.Model;
-import vision.model.PluginLoader;
-import vision.model.UpdateThread;
-import vision.view.Plugin;
+
 import vision.view.View;
 
 /**
