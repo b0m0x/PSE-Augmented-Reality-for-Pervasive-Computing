@@ -21,6 +21,11 @@ public class Model {
 				loadPlugins();
 				getAllSensors();
 				groundplan.load();
+				/**
+				 * provides a facade for all objects belonging to the model
+				 * 
+				 */
+
 			 }
 
 	private void loadPlugins() {

@@ -1,19 +1,12 @@
 package vision.model;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
-import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
-import com.jme3.scene.Spatial;
-import com.jme3.scene.VertexBuffer;
 import com.jme3.scene.VertexBuffer.Type;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 /**
  * converts a Wall object to a renderable Mesh
@@ -29,7 +22,6 @@ public class CustomMeshCreator {
 	 */
 	public Geometry convert(Wall w) {
 			WallAdapter wall = new WallAdapter(w);
-			//TODO (b0m0x): implement. depends on Wall to be finished
 			CustomMesh wallMesh = new CustomMesh();
 			
 			//build first orthogonal, then transform
