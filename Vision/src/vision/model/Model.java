@@ -3,6 +3,8 @@ package vision.model;
 import java.util.List;
 import java.util.Collection;
 
+import com.jme3.scene.Geometry;
+
 import vision.view.Plugin;
 import vision.view.View;
 
@@ -251,6 +253,11 @@ public class Model {
 	 */
 	public void setPluginLoader(PluginLoader pluginLoader) {
 		this.pluginLoader = pluginLoader;
+	}
+
+	public List<Geometry> getStaticGeometry() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
