@@ -22,6 +22,12 @@ import vision.view.View;
  * 
  */
 public class Controller implements ScreenController {
+	
+	public Controller(View view, Model model) {
+		this.view = view;
+		this.model = model;
+	}
+	
 	private Element managePluginsPopup;
 	/**
 	 * binds the nifty instance to this controller

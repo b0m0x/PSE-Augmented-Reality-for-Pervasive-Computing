@@ -24,7 +24,6 @@ public class Vision {
 		mainView.setController(mainController);
 		mainView.setDaten(mainModel);
 		mainView.start();
-		
 	}
 	
 	
