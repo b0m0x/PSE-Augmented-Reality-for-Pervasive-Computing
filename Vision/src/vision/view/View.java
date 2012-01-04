@@ -31,8 +31,11 @@ public class View extends SimpleApplication {
 			
 			/**
 			 * initializes the view
+			 * call only after setDaten(..)
 			 */
 			public void simpleInitApp(){
+				mainAppState = new MainAppState(daten);
+				
 			}
 
 
@@ -67,7 +70,7 @@ public class View extends SimpleApplication {
 			 * @uml.property   name="controller"
 			 * @uml.associationEnd   multiplicity="(1 1)" inverse="view:vision.controller.Controller"
 			 */
-			private Controller controller = new vision.controller.Controller();
+			private Controller controller;
 
 
 			/**
@@ -94,7 +97,7 @@ public class View extends SimpleApplication {
 			 * @uml.property  name="mainAppState"
 			 * @uml.associationEnd  multiplicity="(1 1)" inverse="view:vision.view.MainAppState"
 			 */
-			private MainAppState mainAppState = new vision.view.MainAppState();
+			private MainAppState mainAppState;
 
 
 			/**
