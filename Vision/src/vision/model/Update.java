@@ -9,7 +9,7 @@ import java.sql.*;
  */
 public class Update {
 
-	private Connection conn;
+	
 
 	/**
 	 * @uml.property name="daten"
@@ -86,27 +86,9 @@ public class Update {
 		return database;
 	}
 
-	private void connect() {
-		try {
-			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:", "", "");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
-	private void disconnect() {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
+
 
 	/**
 	 * Setter of the property <tt>database</tt>
@@ -120,17 +102,7 @@ public class Update {
 	}
 
 	public void store(int time) {
-		List<Sensor> sensorList = jsonConverter.getSensorList();
-		this.connect();
-		try {
-			Statement statement = conn.createStatement();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-
 	}
 
 	/**
