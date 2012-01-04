@@ -20,7 +20,6 @@ public class Vision {
 		View mainView = new View();
 		Model mainModel = new Model(mainView);
 		Controller mainController = new Controller(mainView, mainModel);
-		
 		mainView.setController(mainController);
 		mainView.setDaten(mainModel);
 		mainView.start();
