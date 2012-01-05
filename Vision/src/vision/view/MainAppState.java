@@ -57,7 +57,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		
 		app.getInputManager().addMapping("select", new KeyTrigger(MouseInput.BUTTON_LEFT));
 		app.getInputManager().addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
-		app.getInputManager().addListener(this, new String[] {"zoom"});
+		app.getInputManager().addListener(this, new String[] { "zoom", "select"});
 	}
 	
 	@Override
