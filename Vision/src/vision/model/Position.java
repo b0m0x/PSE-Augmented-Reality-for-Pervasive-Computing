@@ -10,6 +10,12 @@ public class Position {
 	 */
 	private float x;
 
+	public Position(float f, float g, float h) {
+		setX(f);
+		setY(g);
+		setZ(h);
+	}
+
 	/**
 	 * Getter of the property <tt>x</tt>
 	 * @return  Returns the x.
