@@ -9,7 +9,6 @@ import vision.controller.Controller;
 import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.AppStateManager;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -22,28 +21,28 @@ public class View extends SimpleApplication {
 	 * @uml.property name="daten"
 	 * @uml.associationEnd inverse="view:vision.model.Model"
 	 */
-	private Model daten = new Model(this);
+	private Model daten;
 
 	/**
 	 * @uml.property name="controller"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 *                     inverse="view:vision.controller.Controller"
 	 */
-	private Controller controller = new vision.controller.Controller(daten.getView(), daten);
+	private Controller controller;
 
 	/**
 	 * @uml.property name="guiAppState"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 *                     inverse="view:vision.view.GuiAppState"
 	 */
-	private GuiAppState guiAppState = new vision.view.GuiAppState();
+	private GuiAppState guiAppState;
 	
 	/**
 	 * @uml.property name="mainAppState"
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 *                     inverse="view:vision.view.MainAppState"
 	 */
-	private MainAppState mainAppState = new vision.view.MainAppState(daten);
+	private MainAppState mainAppState;
 
 	/**
 	 * is called every frame by jmonkey
@@ -55,16 +54,18 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		setController(controller);
-		setDaten(daten);
+		daten = new vision.model.Model(this);
+		controller = new vision.controller.Controller(this, daten);
+		guiAppState = new vision.view.GuiAppState();
+		mainAppState = new vision.view.MainAppState(daten);
 		List<Plugin> plugins = daten.getPluginList();
-		AppStateManager appStateManager = new AppStateManager(this);
 		for(int i = 0; i < plugins.size(); i++) 
 		{
-			plugins.get(i).initialize(appStateManager, this);
-			appStateManager.attach(plugins.get(i));
-
+			plugins.get(i).initialize(stateManager, this);
+			stateManager.attach(plugins.get(i));
 		}
+		stateManager.attach(mainAppState);
+		stateManager.attach(guiAppState);
 		
 	}
 
