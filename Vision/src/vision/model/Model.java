@@ -1,5 +1,6 @@
 package vision.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Collection;
 
@@ -39,7 +40,7 @@ public class Model {
 	/**
 					 */
 	public void getSensordata(String id, int time) {
-		sampleList = datenbank.getSensordata(id, time); //Datenbank fehler?
+		//sampleList = datenbank.getSensordata(id, time); //Datenbank fehler?
 	}
 
 	/**
@@ -145,7 +146,7 @@ public class Model {
 	/**
 	 * @uml.property name="pluginList"
 	 */
-	private List<Plugin> pluginList;
+	private List<Plugin> pluginList = Collections.EMPTY_LIST;
 
 	/**
 	 * Getter of the property <tt>pluginList</tt>
@@ -274,7 +275,7 @@ public class Model {
 
 	public List<Geometry> getStaticGeometry() {
 		// TODO Auto-generated method stub
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 }

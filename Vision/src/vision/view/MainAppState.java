@@ -44,6 +44,9 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 	
 	@Override
 	public void stateAttached(AppStateManager stateManager) {
+		if (isInitialized()) {
+			return;
+		}
 		super.stateAttached(stateManager);
 		mainGeometryNode = new Node("static");
 		List<Geometry> staticObjects = model.getStaticGeometry();
