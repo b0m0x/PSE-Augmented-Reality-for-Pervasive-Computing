@@ -87,7 +87,7 @@ public class Sample {
 	/**
 	 * @uml.property name="update"
 	 */
-	private int update;
+	private long update;
 
 	/**
 	 * Getter of the property <tt>update</tt>
@@ -95,19 +95,19 @@ public class Sample {
 	 * @return Returns the update.
 	 * @uml.property name="update"
 	 */
-	public int getUpdate() {
+	public long getUpdate() {
 		return update;
 	}
 
 	/**
 	 * Setter of the property <tt>update</tt>
 	 * 
-	 * @param update
+	 * @param l
 	 *            The update to set.
 	 * @uml.property name="update"
 	 */
-	public void setUpdate(int update) {
-		this.update = update;
+	public void setUpdate(long l) {
+		this.update = l;
 	}
 
 	/**

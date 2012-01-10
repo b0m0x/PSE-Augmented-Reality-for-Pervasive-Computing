@@ -108,6 +108,7 @@ public class Update {
 	/**
 		 */
 	public void getAllData() {
+		jsonConverter.convert(); 
 	}
 
 }

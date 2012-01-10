@@ -7,6 +7,10 @@ public class DatabaseTest extends TestCase {
 	
 	Database db = new Database();
 	
+	public void testUpdate() {
+		
+	}
+	
 	public void testGetSensorData() {
 		assertNotNull(db.getSensordata(0, 0));
 	}

@@ -1,10 +1,24 @@
 package vision.model;
 
+import vision.Config;
+
 /**
  * updates the sensor data in the background.
  * 
  */
 public class UpdateThread extends Thread {
+	
+	public void run() {
+		this.update = new Update();
+		update.getDaten();
+		try {
+			wait(Config.updateIntervall);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	/**
 	 * @uml.property  name="update"
