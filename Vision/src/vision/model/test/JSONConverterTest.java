@@ -1,4 +1,4 @@
-package vision.model.unitTest;
+package vision.model.test;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package vision.model.unitTest;
+package vision.model.test;
 
 import vision.model.Database;
 import junit.framework.TestCase;
