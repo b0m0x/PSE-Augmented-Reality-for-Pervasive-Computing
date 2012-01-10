@@ -3,6 +3,8 @@ package vision.model;
 import java.util.List;
 import java.util.Collection;
 
+import javax.xml.bind.JAXBException;
+
 import com.jme3.scene.Geometry;
 
 import vision.view.Plugin;
@@ -14,26 +16,30 @@ import vision.view.View;
  */
 public class Model {
 
-		
-		
-		public Model(View view){
-		
-				loadPlugins();
-				getAllSensors();
-				groundplan.load();
-				/**
-				 * provides a facade for all objects belonging to the model
-				 * 
-				 */
+	private Groundplan gp;
+	private List<Plugin> plugins;
+	private List<Sample> sampleList;
 
-			 }
+	public Model(View view) throws JAXBException {
+
+		loadPlugins();
+		getAllSensors();
+		this.gp = vision.model.Groundplan.load();
+		/**
+		 * provides a facade for all objects belonging to the model
+		 * 
+		 */
+
+	}
 
 	private void loadPlugins() {
+		plugins = pluginLoader.loadPlugins();
 	}
 
 	/**
 					 */
 	public void getSensordata(String id, int time) {
+		sampleList = datenbank.getSensordata(id, time); //Datenbank fehler?
 	}
 
 	/**
@@ -41,7 +47,7 @@ public class Model {
 	public void getTaggedSensors(List<String> tags) {
 	}
 
-	/** 
+	/**
 	 * @uml.property name="view"
 	 * @uml.associationEnd inverse="daten:vision.view.View"
 	 */
@@ -129,9 +135,10 @@ public class Model {
 		this.sensor = sensor;
 	}
 
-	/** 
+	/**
 	 * @uml.property name="pluginLoader"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="model:vision.model.PluginLoader"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="model:vision.model.PluginLoader"
 	 */
 	private PluginLoader pluginLoader = new vision.model.PluginLoader();
 
@@ -195,25 +202,29 @@ public class Model {
 		return 0;
 	}
 
-	/** 
+	/**
 	 * @uml.property name="groundplan"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="model:vision.model.Groundplan"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="model:vision.model.Groundplan"
 	 */
 	private Groundplan groundplan = new vision.model.Groundplan();
 
-	/** 
+	/**
 	 * Getter of the property <tt>groundplan</tt>
-	 * @return  Returns the groundplan.
-	 * @uml.property  name="groundplan"
+	 * 
+	 * @return Returns the groundplan.
+	 * @uml.property name="groundplan"
 	 */
 	public Groundplan getGroundplan() {
 		return groundplan;
 	}
 
-	/** 
+	/**
 	 * Setter of the property <tt>groundplan</tt>
-	 * @param groundplan  The groundplan to set.
-	 * @uml.property  name="groundplan"
+	 * 
+	 * @param groundplan
+	 *            The groundplan to set.
+	 * @uml.property name="groundplan"
 	 */
 	public void setGroundplan(Groundplan groundplan) {
 		this.groundplan = groundplan;
@@ -221,8 +232,9 @@ public class Model {
 
 	/**
 	 * Getter of the property <tt>view</tt>
-	 * @return  Returns the view.
-	 * @uml.property  name="view"
+	 * 
+	 * @return Returns the view.
+	 * @uml.property name="view"
 	 */
 	public View getView() {
 		return view;
@@ -230,8 +242,10 @@ public class Model {
 
 	/**
 	 * Setter of the property <tt>view</tt>
-	 * @param view  The view to set.
-	 * @uml.property  name="view"
+	 * 
+	 * @param view
+	 *            The view to set.
+	 * @uml.property name="view"
 	 */
 	public void setView(View view) {
 		this.view = view;
@@ -239,8 +253,9 @@ public class Model {
 
 	/**
 	 * Getter of the property <tt>pluginLoader</tt>
-	 * @return  Returns the pluginLoader.
-	 * @uml.property  name="pluginLoader"
+	 * 
+	 * @return Returns the pluginLoader.
+	 * @uml.property name="pluginLoader"
 	 */
 	public PluginLoader getPluginLoader() {
 		return pluginLoader;
@@ -248,8 +263,10 @@ public class Model {
 
 	/**
 	 * Setter of the property <tt>pluginLoader</tt>
-	 * @param pluginLoader  The pluginLoader to set.
-	 * @uml.property  name="pluginLoader"
+	 * 
+	 * @param pluginLoader
+	 *            The pluginLoader to set.
+	 * @uml.property name="pluginLoader"
 	 */
 	public void setPluginLoader(PluginLoader pluginLoader) {
 		this.pluginLoader = pluginLoader;

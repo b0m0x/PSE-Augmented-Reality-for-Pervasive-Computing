@@ -41,14 +41,13 @@ import javax.xml.bind.annotation.XmlType;
 public class Groundplan {
 
 	/**
-	 * @throws MalformedURLException 
-		 */
+	 * @throws MalformedURLException
+	 */
 	public static Groundplan load() throws JAXBException {
 		JAXBContext jc = JAXBContext.newInstance("vision.model");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
-		return (Groundplan) unmarshaller
-				.unmarshal(new File(
-						"libs//groundplan.xml"));
+		return (Groundplan) unmarshaller.unmarshal(new File(
+				"libs//groundplan.xml"));
 
 	}
 
