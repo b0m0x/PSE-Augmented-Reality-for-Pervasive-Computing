@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
+import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.VertexBuffer.Type;
@@ -75,6 +76,7 @@ public class CustomMeshCreator {
 		Vector2f wallDir = new Vector2f(wall.getStart().getX() - wall.getEnd().getX(), wall.getStart().getY() - wall.getEnd().getY()); 
 		a = wallDir.angleBetween(new Vector2f(1f, 0f));
 		wallGeometry = (Geometry) wallGeometry.move(wall.getPosition().getX(), wall.getPosition().getY(), 0);
+		wallGeometry.setMaterial(new Material()); //TODO: set unshaded material. requires reference to an asset manager
 		return (Geometry) wallGeometry.rotate(0, 0, a);
 	}
 

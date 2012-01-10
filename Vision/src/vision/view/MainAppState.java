@@ -45,6 +45,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 	@Override
 	public void stateAttached(AppStateManager stateManager) {
 		super.stateAttached(stateManager);
+		mainGeometryNode = new Node("static");
 		List<Geometry> staticObjects = model.getStaticGeometry();
 		for (Geometry g : staticObjects) {
 			mainGeometryNode.attachChild(g);
@@ -56,7 +57,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		
 		app.getInputManager().addMapping("select", new KeyTrigger(MouseInput.BUTTON_LEFT));
 		app.getInputManager().addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
-		app.getInputManager().addListener(this, new String[] {"zoom"});
+		app.getInputManager().addListener(this, new String[] { "zoom", "select"});
 	}
 	
 	@Override
@@ -105,6 +106,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 	          String hit = results.getCollision(i).getGeometry().getName();
 	          if (hit.equals("floor")) {
 	        	  app.getCamera().setLocation(pt.add(new Vector3f(0f, 0f, 1f)));
+	        	  overviewCam = false;
 	          }
 	        }
 		}
