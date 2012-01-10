@@ -9,6 +9,7 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.material.Material;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
@@ -44,12 +45,13 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 	
 	@Override
 	public void stateAttached(AppStateManager stateManager) {
-		if (isInitialized()) {
+		if (!isInitialized()) {
 			return;
 		}
 		super.stateAttached(stateManager);
 		mainGeometryNode = new Node("static");
 		List<Geometry> staticObjects = model.getStaticGeometry();
+		
 		for (Geometry g : staticObjects) {
 			mainGeometryNode.attachChild(g);
 		}
@@ -58,6 +60,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		//init camera
 		app.getFlyByCamera().setEnabled(true);
 		
+		//TODO: put this stuff in controller
 		app.getInputManager().addMapping("select", new KeyTrigger(MouseInput.BUTTON_LEFT));
 		app.getInputManager().addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
 		app.getInputManager().addListener(this, new String[] { "zoom", "select"});

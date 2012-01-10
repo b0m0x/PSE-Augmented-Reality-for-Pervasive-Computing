@@ -1,12 +1,15 @@
 package vision.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Collection;
 
 import javax.xml.bind.JAXBException;
 
+import com.jme3.material.Material;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Cylinder;
 
 import vision.view.Plugin;
 import vision.view.View;
@@ -26,10 +29,7 @@ public class Model {
 		loadPlugins();
 		getAllSensors();
 		this.gp = vision.model.Groundplan.load();
-		/**
-		 * provides a facade for all objects belonging to the model
-		 * 
-		 */
+		this.view = view;
 
 	}
 
@@ -275,7 +275,16 @@ public class Model {
 
 	public List<Geometry> getStaticGeometry() {
 		// TODO Auto-generated method stub
-		return Collections.EMPTY_LIST;
+		List<Geometry> l = new ArrayList<Geometry>();
+		
+		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+		m.setTexture("ColorMap", view.getAssetManager().loadTexture("Textures/ColoredTex/Monkey.png"));
+		
+		Geometry g = new Geometry("a");
+		g.setMesh(new Cylinder(20, 20, 5, 5, true));
+		g.setMaterial(m);
+		l.add(g);
+		return l;
 	}
 
 }
