@@ -1,7 +1,5 @@
 package vision.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,15 +7,50 @@ import java.util.List;
  * 
  */
 public class Sensor {
-	
-	public Sensor() {
-		this.setMesswert();
-	}
 
 	/**
 	 * @uml.property name="id"
 	 */
 	private String id;
+
+	/**
+	 * @uml.property name="tags"
+	 */
+	private List<String> tags;
+
+	/**
+	 * @uml.property name="Description"
+	 */
+	private String description;
+
+	/**
+	 * @uml.property name="update"
+	 */
+	private long update;
+
+	/**
+	 * @uml.property name="registered"
+	 */
+	private long registered;
+
+	/**
+	 * @uml.property name="messwert"
+	 * @uml.associationEnd inverse="sensor:vision.model.Sample"
+	 */
+	private List<Sample> messwerte;
+
+	/**
+	 * @uml.property name="position"
+	 * @uml.associationEnd inverse="sensor:vision.model.Position"
+	 */
+	private Position position;
+
+	public Sensor(String id, String description, long registered, List<Sample> messwerte) {
+		setId(id);
+		setDescription(description);
+		setRegistered(registered);
+		setMesswerte(messwerte);
+	}
 
 	/**
 	 * Getter of the property <tt>id</tt>
@@ -41,11 +74,6 @@ public class Sensor {
 	}
 
 	/**
-	 * @uml.property name="tags"
-	 */
-	private List<String> tags;
-
-	/**
 	 * Getter of the property <tt>tags</tt>
 	 * 
 	 * @return Returns the tags.
@@ -65,11 +93,6 @@ public class Sensor {
 	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
-
-	/**
-	 * @uml.property name="Description"
-	 */
-	private String description;
 
 	/**
 	 * Getter of the property <tt>Description</tt>
@@ -93,11 +116,6 @@ public class Sensor {
 	}
 
 	/**
-	 * @uml.property name="update"
-	 */
-	private long update;
-
-	/**
 	 * Getter of the property <tt>update</tt>
 	 * 
 	 * @return Returns the update.
@@ -119,17 +137,12 @@ public class Sensor {
 	}
 
 	/**
-	 * @uml.property name="registered"
-	 */
-	private boolean registered;
-
-	/**
 	 * Getter of the property <tt>registered</tt>
 	 * 
 	 * @return Returns the registered.
 	 * @uml.property name="registered"
 	 */
-	public boolean isRegistered() {
+	public long registeredTime() {
 		return registered;
 	}
 
@@ -140,48 +153,28 @@ public class Sensor {
 	 *            The registered to set.
 	 * @uml.property name="registered"
 	 */
-	public void setRegistered(boolean registered) {
+	public void setRegistered(long registered) {
 		this.registered = registered;
 	}
 
 	/**
-	 * @uml.property name="messwert"
-	 * @uml.associationEnd inverse="sensor:vision.model.Sample"
-	 */
-	private List<Sample> messwert;
-
-	/**
-	 * Getter of the property <tt>messwert</tt>
+	 * Getter of the property <tt>messwerte</tt>
 	 * 
-	 * @return Returns the messwert.
-	 * @uml.property name="messwert"
+	 * @return Returns the messwerte.
+	 * @uml.property name="messwerte"
 	 */
-	public List<Sample> getMesswert() {
-		return messwert;
-	}
-	
-	private void setMesswert() {
-		this.messwert = new ArrayList<Sample>();
-	}
-	
-	public void addToList(Sample s) {
-		this.messwert.add(s);
+	public List<Sample> getMesswerte() {
+		return messwerte;
 	}
 
 	/**
-	 * Setter of the property <tt>messwert</tt>
+	 * sets List of Samples
 	 * 
-	 * @param messwert
-	 *            The messwert to set.
-	 * @uml.property name="messwert"
+	 * @param messwerte
 	 */
-
-
-	/**
-	 * @uml.property name="position"
-	 * @uml.associationEnd inverse="sensor:vision.model.Position"
-	 */
-	private Position position;
+	public void setMesswerte(List<Sample> messwerte) {
+		this.messwerte = messwerte;
+	}
 
 	/**
 	 * Getter of the property <tt>position</tt>

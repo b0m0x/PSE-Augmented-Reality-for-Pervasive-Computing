@@ -5,8 +5,6 @@ package vision.view;
 
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-
 import vision.controller.Controller;
 import vision.model.Model;
 

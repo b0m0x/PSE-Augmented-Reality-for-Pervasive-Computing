@@ -3,6 +3,7 @@ package vision.view;
 import java.util.List;
 
 import vision.controller.HeaterController;
+import vision.model.Model;
 
 import com.jme3.app.Application;
 import com.jme3.scene.Geometry;
@@ -24,7 +25,8 @@ public class HeaterPlugin extends Plugin {
 			
 			/**
 			 */
-			public HeaterPlugin(){
+			public HeaterPlugin(Model model){
+				super(model);
 			}
 
 

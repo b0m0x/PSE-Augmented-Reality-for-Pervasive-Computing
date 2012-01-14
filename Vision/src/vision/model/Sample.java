@@ -109,42 +109,4 @@ public class Sample {
 	public void setUpdate(long l) {
 		this.update = l;
 	}
-
-	/**
-		 */
-	public void getMesswert() {
-	}
-
-	/**
-			 */
-	public void setMesswert() {
-	}
-
-	/**
-	 * @uml.property name="sensor"
-	 * @uml.associationEnd inverse="messwert:vision.model.Sensor"
-	 */
-	private Sensor sensor;
-
-	/**
-	 * Getter of the property <tt>sensor</tt>
-	 * 
-	 * @return Returns the sensor.
-	 * @uml.property name="sensor"
-	 */
-	public Sensor getSensor() {
-		return sensor;
-	}
-
-	/**
-	 * Setter of the property <tt>sensor</tt>
-	 * 
-	 * @param sensor
-	 *            The sensor to set.
-	 * @uml.property name="sensor"
-	 */
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
-	}
-
 }
