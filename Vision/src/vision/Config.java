@@ -13,4 +13,9 @@ public class Config {
 	 * defines how often the sensor data is refreshed
 	 */
 	public static final int updateIntervall = 13;
+	
+	/**
+	 * 
+	 */
+	public static final String pluginpath = "plugins/";
 }
