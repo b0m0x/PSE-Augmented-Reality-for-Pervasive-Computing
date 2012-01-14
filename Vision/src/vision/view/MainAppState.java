@@ -14,6 +14,9 @@ import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import com.jme3.texture.Texture;
+import com.jme3.util.SkyFactory;
 
 import java.util.Collection;
 import java.util.List;
@@ -57,6 +60,16 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		}
 		app.getRootNode().attachChild(mainGeometryNode);
 		
+		//load skybox
+		Texture up = app.getAssetManager().loadTexture("Texture/Skybox/CementaryUP.tga");
+		Texture dn = app.getAssetManager().loadTexture("Texture/Skybox/CementaryDN.tga");
+		Texture lt = app.getAssetManager().loadTexture("Texture/Skybox/CementaryLT.tga");
+		Texture rt = app.getAssetManager().loadTexture("Texture/Skybox/CementaryRT.tga");
+		Texture ft = app.getAssetManager().loadTexture("Texture/Skybox/CementaryFT.tga");
+		Texture bk = app.getAssetManager().loadTexture("Texture/Skybox/CementaryBK.tga");
+		Spatial sb = SkyFactory.createSky(app.getAssetManager(), ft, bk, lt, rt, up, dn);
+		
+		app.getRootNode().attachChild(sb);
 		//init camera
 		app.getFlyByCamera().setEnabled(true);
 		
@@ -100,9 +113,14 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 	public void onAction(String name, boolean keyPressed, float tpf) {
 		if (!overviewCam && name.equals("zoom")) {
 			Vector3f oldCamloc = app.getCamera().getLocation();
-			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, 50)));
+			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, 1f)));
 			app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
 			overviewCam = true;
+		} else if (overviewCam && name.equals("zoom")) {
+			Vector3f oldCamloc = app.getCamera().getLocation();
+			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, -1f)));
+			//app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
+			overviewCam = false;
 		} else if (overviewCam && name.equals("select")) {
 	        CollisionResults results = new CollisionResults();
 	        Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera().getDirection());

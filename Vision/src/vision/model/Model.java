@@ -280,7 +280,7 @@ public class Model {
 		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
 		m.setTexture("ColorMap", view.getAssetManager().loadTexture("Textures/ColoredTex/Monkey.png"));
 		
-		Geometry g = new Geometry("a");
+		Geometry g = new Geometry("floor");
 		g.setMesh(new Cylinder(20, 20, 5, 5, true));
 		g.setMaterial(m);
 		l.add(g);
