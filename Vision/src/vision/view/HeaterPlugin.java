@@ -4,54 +4,88 @@ import java.util.List;
 
 import vision.controller.HeaterController;
 import vision.model.Model;
+import vision.model.Sample;
+import vision.model.Sensor;
 
 import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
-
+import com.jme3.scene.Spatial;
 
 /**
- * @author idle
- *	This class represents the plugins of the heater
+ * @author idle This class represents the plugins of the heater
  */
 public class HeaterPlugin extends Plugin {
 
 	/**
-	 * updates the client 
-		 */
-		protected void clientUpdate(Application application){
-			return;
+	 * @uml.property name="heaters"
+	 */
+	private List<Geometry> heaters;
+	private Geometry heater;
+	/**
+	 * 
+	 */
+	public HeaterPlugin(Model model, View v) {
+		super(model);
+	}
+
+	@Override
+	public void initialize(AppStateManager stateManager, Application app) {
+		super.initialize(stateManager, app);
+		heater = (Geometry) app.getAssetManager()
+				.loadModel("Models/heater.j3o");
+		initHeaters(app);
+	}
+	
+	void initHeaters(Application app) {
+		for (Sensor s : getSensors()) {
+			float temperature = 0;
+			for (Sample sp : s.getMesswerte()) {
+				if (sp.getTyp().equals("Temperatur")) {
+					temperature = sp.getValue();
+					break;
+				}
+			}
+			Material m = new Material(app.getAssetManager(),
+					"Common/MatDefs/Misc/Unshaded.j3md");
+			m.setColor("Color", new ColorRGBA(temperature / 50f, 0,
+					1 - temperature / 50f, 1));
+			heater.setMaterial(m);
+			heater.setLocalTranslation(s.getPosition().getX(), s.getPosition()
+					.getY(), s.getPosition().getZ());
+			heater.setUserData("sid", s.getId());
+			heaters.add(heater.clone());
 		}
-
-			
-			/**
-			 */
-			public HeaterPlugin(Model model){
-				super(model);
+	}
+	
+	void updateHeaters() {
+		for (Geometry g : heaters) {
+			String sid = g.getUserData("sid");
+			for (Sensor s : getSensors()) {
+				if (!s.getId().equals(sid)) {
+					continue;
+				}
+				for (Sample sp : s.getMesswerte()) {
+					if (sp.getTyp().equals("Temperatur")) {
+						float temperature = sp.getValue();
+						g.getMaterial().setColor("Color", new ColorRGBA(temperature / 50f, 0,
+								1 - temperature / 50f, 1));
+					}
+				}
 			}
+		}
+	}
 
-
-			/**
-			 * Getter of the property <tt>heaters</tt>
-			 * @return  Returns the heaters1.
-			 * @uml.property  name="heaters"
-			 */
-			public List<Geometry> getHeaters() {
-				return heaters;
-			}	
-
-
-			/**
-			 * @uml.property  name="heaters"
-			 */
-			private List<Geometry> heaters;
-
-			/** 
-			 * Setter of the property <tt>Heizungen</tt>
-			 * @param Heizungen  The heizungen to set.
-			 * @uml.property  name="heaters"
-			 */
-			public void setHeaters(List<Geometry> heaters) {
-				this.heaters = heaters;
-			}
+	/**
+	 * updates the client
+	 */
+	protected void clientUpdate(Application application, boolean changed) {
+		if (changed) {
+			updateHeaters();
+		}
+		return;
+	}
 
 }

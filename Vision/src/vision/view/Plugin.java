@@ -41,6 +41,8 @@ public abstract class Plugin extends AbstractAppState {
 	 */
 	private PluginController pluginController;
 
+	private int lastSensorHashCode;
+
 	/**
 	 * Getter of the property <tt>sensors</tt>
 	 * 
@@ -80,23 +82,14 @@ public abstract class Plugin extends AbstractAppState {
 	 */
 	public Plugin(Model model) {
 		setDaten(model);
-		ArrayList<Sensor> sensors = new ArrayList<Sensor>();
-		for (Sensor s : daten.getSensor()) {
-			for (int j = 0; j < tags.length; j++) {
-				for (int i = 0; i < s.getTags().size(); i++) {
-					if (getTag(j) == s.getTags().get(i)) {
-						if (!sensors.contains(s))
-							sensors.add(s);
-					}
-				}
-			}
-		}
-		setSensors(sensors);
+		updateSensors();
 	}
 
 	/**
 	 */
-	protected void clientUpdate(Application application) {
+	protected abstract void clientUpdate(Application application, boolean changed);
+	
+	private void updateSensors() {
 		ArrayList<Sensor> sensors = new ArrayList<Sensor>();
 		for (Sensor s : daten.getSensor()) {
 			for (int j = 0; j < tags.length; j++) {
@@ -109,10 +102,19 @@ public abstract class Plugin extends AbstractAppState {
 			}
 		}
 		setSensors(sensors);
+		lastSensorHashCode = daten.getSensor().hashCode();
 	}
 
 	public void update(Application application) {
-		clientUpdate(application);
+		boolean changed = sensorsChanged();
+		if (changed) {
+			updateSensors();
+		}
+		clientUpdate(application, changed);
+	}
+
+	private boolean sensorsChanged() {
+		return daten.getSensor().hashCode() == lastSensorHashCode;
 	}
 
 	/**
