@@ -39,7 +39,9 @@ public class CustomMeshCreator {
 			for (Hole hole : wall.getHoles()) {
 				HoleAdapter h = new HoleAdapter(hole);
 				//fill gaps between holes and base rect
-				addWallPlane(new Position(h.getPosition().getX(), h.getPosition().getY(), (minHole + (h.getPosition().getZ() - h.getSize().getZ() / 2f)) / 2f), new Size3D(wall.getWidth(), wall.getDepth(), (h.getPosition().getZ() - h.getSize().getZ() / 2f) - minHole));
+				if (Math.abs(h.getPosition().getZ() - h.getSize().getZ() / 2f - minHole) > 0.002f) {
+					addWallPlane(new Position(h.getPosition().getX(), h.getPosition().getY(), (minHole + (h.getPosition().getZ() - h.getSize().getZ() / 2f)) / 2f), new Size3D(wall.getWidth(), wall.getDepth(), (h.getPosition().getZ() - h.getSize().getZ() / 2f) - minHole));
+				}
 				
 				//fill gaps between holes and top of wall
 				float upperHoleBound = h.getPosition().getZ() + h.getSize().getZ() / 2f;
@@ -61,7 +63,11 @@ public class CustomMeshCreator {
 				if (prevH == null) {
 					addWallPlane(new Position(leftBoundH / 2, 0, (wall.getHeight() + minHole) / 2f), new Size3D(leftBoundH, wall.getDepth() ,wall.getHeight() - minHole));
 				}
-				float rightBoundPrevH = prevH.getPosition().getX() + prevH.getSize().getX() / 2f;
+				
+				float rightBoundPrevH = -wall.getWidth()/2f;
+				if (prevH != null) {
+					rightBoundPrevH = prevH.getPosition().getX() + prevH.getSize().getX() / 2f;
+				}
 				addWallPlane(new Position((leftBoundH + rightBoundPrevH) / 2, 0, (wall.getHeight() + minHole) / 2f), new Size3D(leftBoundH - rightBoundPrevH, wall.getDepth() ,wall.getHeight() - minHole));
 				prevH = h;
 			}
