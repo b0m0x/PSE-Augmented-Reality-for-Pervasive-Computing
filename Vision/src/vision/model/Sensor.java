@@ -174,6 +174,15 @@ public class Sensor {
 	public void setMesswerte(List<Sample> messwerte) {
 		this.messwerte = messwerte;
 	}
+	
+	/**
+	 * adds Sample to List of samples
+	 * 
+	 * @param sample
+	 */
+	public void addSample(Sample sample) {
+		this.messwerte.add(sample);
+	}
 
 	/**
 	 * Getter of the property <tt>position</tt>
