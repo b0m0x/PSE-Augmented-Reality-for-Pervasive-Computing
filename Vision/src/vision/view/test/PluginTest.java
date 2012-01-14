@@ -33,8 +33,8 @@ public class PluginTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Sensor sensor1 = new Sensor(null, null, 0, null);
-		HeaterPlugin p = new HeaterPlugin(m);
+		Sensor sensor1 = new Sensor(null, 0, null);
+		HeaterPlugin p = new HeaterPlugin(m, null);
 		p.update(app);
 	}
 
