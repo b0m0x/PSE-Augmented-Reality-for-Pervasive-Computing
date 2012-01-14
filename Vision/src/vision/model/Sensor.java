@@ -45,10 +45,9 @@ public class Sensor {
 	 */
 	private Position position;
 
-	public Sensor(String id, String description, long registered, List<Sample> messwerte) {
+	public Sensor(String id, long update, List<Sample> messwerte) {
 		setId(id);
-		setDescription(description);
-		setRegistered(registered);
+		setUpdate(update);
 		setMesswerte(messwerte);
 	}
 
