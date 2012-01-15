@@ -2,6 +2,11 @@ package vision.view.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import javax.xml.bind.JAXBException;
 
 
@@ -36,6 +41,15 @@ public class PluginTest {
 		Sensor sensor1 = new Sensor(null, 0, null);
 		HeaterPlugin p = new HeaterPlugin(m, null);
 		p.update(app);
+		
+		List<Sensor> sl = new ArrayList<Sensor>();
+		sl.add(new Sensor("test", 100, Collections.EMPTY_LIST));
+		
+		m.setSensor(sl);
+		
+		p.update(app);
+		
+		assertEquals(1, 1);
 	}
 
 }
