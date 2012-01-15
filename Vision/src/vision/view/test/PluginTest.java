@@ -2,6 +2,8 @@ package vision.view.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.xml.bind.JAXBException;
 
 
@@ -10,6 +12,7 @@ import org.junit.Test;
 import com.jme3.app.SimpleApplication;
 
 import vision.model.Model;
+import vision.model.Sample;
 import vision.model.Sensor;
 import vision.view.HeaterPlugin;
 import vision.view.View;
@@ -33,7 +36,14 @@ public class PluginTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Sensor sensor1 = new Sensor(null, 0, null);
+		Sample sensor1Sample = new Sample("Temperatur", "Celsius", 20, 1);
+		List<Sample> sensor1Messwerte = null;
+		sensor1Messwerte.add(sensor1Sample);
+		Sample sensor2Sample = new Sample("Temperatur", "Celsius", 22, 2);
+		List<Sample> sensor2Messwerte = null;
+		sensor2Messwerte.add(sensor2Sample);
+		Sensor sensor1 = new Sensor("0001", 0, sensor1Messwerte);
+		Sensor sensor2 = new Sensor("0002", 0, sensor2Messwerte);
 		HeaterPlugin p = new HeaterPlugin(m, null);
 		p.update(app);
 	}
