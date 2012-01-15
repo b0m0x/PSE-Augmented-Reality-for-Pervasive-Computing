@@ -109,4 +109,13 @@ public class Sample {
 	public void setUpdate(long l) {
 		this.update = l;
 	}
+
+	public Sample(String typ, String unit, float value, long update) {
+		this.typ = typ;
+		this.unit = unit;
+		this.value = value;
+		this.update = update;
+	}
+	
+	
 }
