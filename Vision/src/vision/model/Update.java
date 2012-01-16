@@ -112,7 +112,9 @@ public class Update {
 		sensorlist = jsonConverter.getSensorList();
 
 		for (int i = 0; i < sensorlist.size(); i++) {
-			for (int j = 0; j < sensorlist.get(i).getMesswert().size(); j++) {
+			for (int j = 0; j < sensorlist
+			.get(i).
+			getMesswert().size(); j++) {
 				database.updateSensors(sensorlist.get(i).getId(), time,
 						sensorlist.get(i).getMesswert().get(j));
 			}

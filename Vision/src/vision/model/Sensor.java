@@ -1,5 +1,6 @@
 package vision.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,14 +8,11 @@ import java.util.List;
  * 
  */
 public class Sensor {
-<<<<<<< HEAD
 
 	public Sensor() {
 		this.setMesswert();
 		this.setTags();
 	}
-=======
->>>>>>> 2fcfa292b90a7fb2fa48ed3ef3a69c974be8bbe1
 
 	/**
 	 * @uml.property name="id"
@@ -40,24 +38,6 @@ public class Sensor {
 	 * @uml.property name="registered"
 	 */
 	private long registered;
-
-	/**
-	 * @uml.property name="messwert"
-	 * @uml.associationEnd inverse="sensor:vision.model.Sample"
-	 */
-	private List<Sample> messwerte;
-
-	/**
-	 * @uml.property name="position"
-	 * @uml.associationEnd inverse="sensor:vision.model.Position"
-	 */
-	private Position position;
-
-	public Sensor(String id, long update, List<Sample> messwerte) {
-		setId(id);
-		setUpdate(update);
-		setMesswerte(messwerte);
-	}
 
 	/**
 	 * Getter of the property <tt>id</tt>
@@ -170,19 +150,11 @@ public class Sensor {
 	 * @return Returns the messwerte.
 	 * @uml.property name="messwerte"
 	 */
-	public List<Sample> getMesswerte() {
-		return messwerte;
+	public List<Sample> getMesswert() {
+		return messwert;
 	}
 
-	/**
-	 * sets List of Samples
-	 * 
-	 * @param messwerte
-	 */
-	public void setMesswerte(List<Sample> messwerte) {
-		this.messwerte = messwerte;
-	}
-<<<<<<< HEAD
+	private List<Sample> messwert;
 
 	private void setMesswert() {
 		this.messwert = new ArrayList<Sample>();
@@ -196,26 +168,17 @@ public class Sensor {
 		this.tags.add(s);
 	}
 
-=======
-	
->>>>>>> 2fcfa292b90a7fb2fa48ed3ef3a69c974be8bbe1
 	/**
 	 * adds Sample to List of samples
 	 * 
 	 * @param sample
 	 */
-<<<<<<< HEAD
 
 	/**
 	 * @uml.property name="position"
 	 * @uml.associationEnd inverse="sensor:vision.model.Position"
 	 */
 	private Position position;
-=======
-	public void addSample(Sample sample) {
-		this.messwerte.add(sample);
-	}
->>>>>>> 2fcfa292b90a7fb2fa48ed3ef3a69c974be8bbe1
 
 	/**
 	 * Getter of the property <tt>position</tt>
@@ -226,7 +189,6 @@ public class Sensor {
 	public Position getPosition() {
 		return position;
 	}
-
 
 	/**
 	 * Setter of the property <tt>position</tt>
