@@ -208,5 +208,10 @@ public class Wall {
         }
         return this.hole;
     }
+    
+    
+    public void setHole(List<Hole> holes) {
+        hole = holes;
+    }
 
 }

@@ -109,6 +109,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		this.wallMesh = wallMesh;
 	}
 
+	//TODO: refactor, put in controller
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {
 		if (!overviewCam && name.equals("zoom")) {

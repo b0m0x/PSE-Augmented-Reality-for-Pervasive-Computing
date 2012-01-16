@@ -13,15 +13,15 @@ public class WallAdapter {
 	}
 	
 	public Position getPosition() {
-		return new Position((wall.positionX1 + wall.positionX2) / 2, (wall.positionY1 + wall.positionY2)/2, 0);
+		return new Position((wall.getPositionX1() + wall.getPositionX2()) / 2, (wall.getPositionY1() + wall.getPositionY2())/2, 0);
 	}
 	
 	public Position getStart() {
-		return new Position(wall.positionX1, wall.positionY1, 0);
+		return new Position(wall.getPositionX1(), wall.getPositionY1(), 0);
 	}
 	
 	public Position getEnd() {
-		return new Position(wall.positionX2, wall.positionY2, 0);
+		return new Position(wall.getPositionX2(), wall.getPositionY2(), 0);
 	}
 	
 	public Size3D getSize() {		
@@ -29,15 +29,11 @@ public class WallAdapter {
 	}
 	
 	public List<Hole> getHoles() {
-		List<Hole> l = new ArrayList<Hole>();
-		if (wall.getHole() != null) {
-			l.add(wall.getHole());
-		}
-		return l;
+		return wall.getHole();
 	}
 
 	public float getWidth() {
-		Vector3f d = new Vector3f(wall.positionX2 - wall.positionX1, wall.positionY2 - wall.positionY1, 0);
+		Vector3f d = new Vector3f(wall.getPositionX2() - wall.getPositionX1(), wall.getPositionY2() - wall.getPositionY1(), 0);
 		return d.length();
 	}
 
