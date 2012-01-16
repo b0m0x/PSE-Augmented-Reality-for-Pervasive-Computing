@@ -29,7 +29,11 @@ public class WallAdapter {
 	}
 	
 	public List<Hole> getHoles() {
-		return new ArrayList<Hole>();
+		List<Hole> l = new ArrayList<Hole>();
+		if (wall.getHole() != null) {
+			l.add(wall.getHole());
+		}
+		return l;
 	}
 
 	public float getWidth() {

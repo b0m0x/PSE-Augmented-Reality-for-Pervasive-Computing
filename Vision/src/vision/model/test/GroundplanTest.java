@@ -16,7 +16,7 @@ public class GroundplanTest {
 	
 	@Before
 	public void setUp() throws JAXBException {
-		gp = vision.model.Groundplan.load();
+		gp = new vision.model.Groundplan().load();
 		}
 
 	@Test

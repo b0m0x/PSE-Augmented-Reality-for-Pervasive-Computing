@@ -84,7 +84,7 @@ public class Controller implements ScreenController {
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 *                     inverse="controller:vision.model.Model"
 	 */
-	private Model model = new vision.model.Model();
+	private Model model;
 
 	/**
 	 * Getter of the property <tt>model</tt>

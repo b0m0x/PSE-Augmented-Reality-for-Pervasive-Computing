@@ -17,7 +17,7 @@
         <xs:element ref="positionY2"/>
         <xs:element ref="height"/>
         <xs:element ref="wide"/>
-        <xs:element ref="hole"/>
+        <xs:element maxOccurs="unbounded" ref="hole"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -27,6 +27,7 @@
   <xs:element name="hole">
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="holeNumber"/>
         <xs:element ref="positionX1"/>
         <xs:element ref="positionY1"/>
         <xs:element ref="positionX2"/>
@@ -36,6 +37,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="holeNumber" type="xs:integer"/>
   <xs:element name="heightGround" type="xs:float"/>
   <xs:element name="heightWindow" type="xs:float"/>
   <xs:element name="positionX1" type="xs:float"/>

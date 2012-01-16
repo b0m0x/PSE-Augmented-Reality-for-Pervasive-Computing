@@ -54,9 +54,8 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		daten = new vision.model.Model(this);
 		controller = new vision.controller.Controller(this, daten);
-		guiAppState = new vision.view.GuiAppState();
+		//guiAppState = new vision.view.GuiAppState();
 		mainAppState = new vision.view.MainAppState(daten);
 		List<Plugin> plugins = daten.getPluginList();
 		for(int i = 0; i < plugins.size(); i++) 
@@ -64,8 +63,9 @@ public class View extends SimpleApplication {
 			plugins.get(i).initialize(stateManager, this);
 			stateManager.attach(plugins.get(i));
 		}
+		mainAppState.initialize(stateManager, this);
 		stateManager.attach(mainAppState);
-		stateManager.attach(guiAppState);
+		//stateManager.attach(guiAppState);
 		
 	}
 

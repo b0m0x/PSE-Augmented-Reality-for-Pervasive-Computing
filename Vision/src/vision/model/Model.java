@@ -1,11 +1,15 @@
 package vision.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Collection;
 
 import javax.xml.bind.JAXBException;
 
+import com.jme3.material.Material;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Cylinder;
 
 import vision.view.Plugin;
 import vision.view.View;
@@ -16,30 +20,25 @@ import vision.view.View;
  */
 public class Model {
 
-	private Groundplan gp;
-	private List<Plugin> plugins;
-	private List<Sample> sampleList;
 
 	public Model(View view) throws JAXBException {
 
 		loadPlugins();
 		getAllSensors();
-		this.gp = vision.model.Groundplan.load();
-		/**
-		 * provides a facade for all objects belonging to the model
-		 * 
-		 */
+		this.groundplan = new vision.model.Groundplan().load();
+		this.view = new vision.view.View();
+		this.datenbank = new vision.model.Database();
 
 	}
 
 	private void loadPlugins() {
-		plugins = pluginLoader.loadPlugins();
+		pluginList = pluginLoader.loadPlugins();
 	}
 
 	/**
 					 */
-	public void getSensordata(String id, int time) {
-		sampleList = datenbank.getSensordata(id, time); //Datenbank fehler?
+	public Sample getSensordata(String id, int time) {
+		return datenbank.getSensordata(id, time);
 	}
 
 	/**
@@ -145,7 +144,7 @@ public class Model {
 	/**
 	 * @uml.property name="pluginList"
 	 */
-	private List<Plugin> pluginList;
+	private List<Plugin> pluginList = Collections.EMPTY_LIST;
 
 	/**
 	 * Getter of the property <tt>pluginList</tt>
@@ -207,7 +206,7 @@ public class Model {
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 *                     inverse="model:vision.model.Groundplan"
 	 */
-	private Groundplan groundplan = new vision.model.Groundplan();
+	private Groundplan groundplan;
 
 	/**
 	 * Getter of the property <tt>groundplan</tt>
@@ -274,7 +273,16 @@ public class Model {
 
 	public List<Geometry> getStaticGeometry() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Geometry> l = new ArrayList<Geometry>();
+		
+		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+		m.setTexture("ColorMap", view.getAssetManager().loadTexture("Textures/ColoredTex/Monkey.png"));
+		
+		Geometry g = new Geometry("floor");
+		g.setMesh(new Cylinder(20, 20, 5, 5, true));
+		g.setMaterial(m);
+		l.add(g);
+		return l;
 	}
 
 }

@@ -1,5 +1,7 @@
 package vision.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -24,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{}positionY2"/>
  *         &lt;element ref="{}height"/>
  *         &lt;element ref="{}wide"/>
- *         &lt;element ref="{}hole"/>
+ *         &lt;element ref="{}hole" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -56,7 +58,7 @@ public class Wall {
     protected float height;
     protected float wide;
     @XmlElement(required = true)
-    protected Hole hole;
+    protected List<Hole> hole;
 
     /**
      * Gets the value of the wallNumber property.
@@ -181,25 +183,30 @@ public class Wall {
     /**
      * Gets the value of the hole property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Hole }
-     *     
-     */
-    public Hole getHole() {
-        return hole;
-    }
-
-    /**
-     * Sets the value of the hole property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the hole property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Hole }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getHole().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Hole }
+     * 
+     * 
      */
-    public void setHole(Hole value) {
-        this.hole = value;
+    public List<Hole> getHole() {
+        if (hole == null) {
+            hole = new ArrayList<Hole>();
+        }
+        return this.hole;
     }
 
 }

@@ -27,6 +27,7 @@ public class ObjectFactory {
     private final static QName _Height_QNAME = new QName("", "height");
     private final static QName _WallNumber_QNAME = new QName("", "wallNumber");
     private final static QName _HeightWindow_QNAME = new QName("", "heightWindow");
+    private final static QName _HoleNumber_QNAME = new QName("", "holeNumber");
     private final static QName _Wide_QNAME = new QName("", "wide");
     private final static QName _PositionX2_QNAME = new QName("", "positionX2");
     private final static QName _PositionY1_QNAME = new QName("", "positionY1");
@@ -75,7 +76,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link int }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "", name = "wallNumber")
@@ -90,6 +91,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "heightWindow")
     public JAXBElement<Float> createHeightWindow(Float value) {
         return new JAXBElement<Float>(_HeightWindow_QNAME, Float.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link int }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "holeNumber")
+    public JAXBElement<Integer> createHoleNumber(int value) {
+        return new JAXBElement<Integer>(_HoleNumber_QNAME, int.class, null, value);
     }
 
     /**

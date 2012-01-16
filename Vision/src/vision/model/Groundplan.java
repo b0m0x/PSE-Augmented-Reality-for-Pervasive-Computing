@@ -43,7 +43,7 @@ public class Groundplan {
 	/**
 	 * @throws MalformedURLException
 	 */
-	public static Groundplan load() throws JAXBException {
+	public Groundplan load() throws JAXBException {
 		JAXBContext jc = JAXBContext.newInstance("vision.model");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		return (Groundplan) unmarshaller.unmarshal(new File(
