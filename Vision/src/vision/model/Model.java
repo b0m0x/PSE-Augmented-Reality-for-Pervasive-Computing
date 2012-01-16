@@ -37,7 +37,7 @@ public class Model {
 
 	/**
 					 */
-	public Sample getSensordata(String id, int time) {
+	public List<Sample> getSensordata(String id, int time) {
 		return datenbank.getSensordata(id, time);
 	}
 

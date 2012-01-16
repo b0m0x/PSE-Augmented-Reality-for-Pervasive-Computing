@@ -1,7 +1,5 @@
 package vision.model;
 
-
-
 /**
  * holds a sensor measurement and the time it was taken
  * 
@@ -111,6 +109,12 @@ public class Sample {
 	public void setUpdate(long l) {
 		this.update = l;
 	}
+	
+	private Sensor sensor;
+	
+	public void setSensor(Sensor s) {
+		this.sensor = s;
+	}
 
 	public Sample(String typ, String unit, float value, long update) {
 		this.typ = typ;
@@ -119,9 +123,7 @@ public class Sample {
 		this.update = update;
 	}
 	
-<<<<<<< HEAD
-
-=======
+	public Sample() {
 	
->>>>>>> 2fcfa292b90a7fb2fa48ed3ef3a69c974be8bbe1
+	}
 }
