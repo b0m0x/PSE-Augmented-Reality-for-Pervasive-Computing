@@ -1,5 +1,7 @@
 package vision.model;
 
+
+
 /**
  * holds a sensor measurement and the time it was taken
  * 
@@ -146,5 +148,6 @@ public class Sample {
 	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
 	}
+	
 
 }

@@ -1,5 +1,6 @@
 package vision.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
@@ -9,7 +10,10 @@ import java.sql.*;
  */
 public class Update {
 
-	
+	public Update() {
+		this.database = new Database();
+		this.jsonConverter = new JSONConverter();
+	}
 
 	/**
 	 * @uml.property name="daten"
@@ -86,10 +90,6 @@ public class Update {
 		return database;
 	}
 
-
-
-
-
 	/**
 	 * Setter of the property <tt>database</tt>
 	 * 
@@ -102,13 +102,23 @@ public class Update {
 	}
 
 	public void store(int time) {
-		
+
+		jsonConverter.convert();
+		List<Sensor> sensorlist = new ArrayList<Sensor>();
+		sensorlist = jsonConverter.getSensorList();
+
+		for (int i = 0; i < sensorlist.size(); i++) {
+			for (int j = 0; j < sensorlist.get(i).getMesswert().size(); j++) {
+				database.updateSensors(sensorlist.get(i).getId(), time,
+						sensorlist.get(i).getMesswert().get(j));
+			}
+		}
 	}
 
 	/**
 		 */
 	public void getAllData() {
-		jsonConverter.convert(); 
+		jsonConverter.convert();
 	}
 
 }

@@ -9,9 +9,10 @@ import java.util.List;
  * 
  */
 public class Sensor {
-	
+
 	public Sensor() {
 		this.setMesswert();
+		this.setTags();
 	}
 
 	/**
@@ -62,8 +63,8 @@ public class Sensor {
 	 *            The tags to set.
 	 * @uml.property name="tags"
 	 */
-	public void setTags(List<String> tags) {
-		this.tags = tags;
+	public void setTags() {
+		this.tags = new ArrayList<String>();
 	}
 
 	/**
@@ -159,13 +160,17 @@ public class Sensor {
 	public List<Sample> getMesswert() {
 		return messwert;
 	}
-	
+
 	private void setMesswert() {
 		this.messwert = new ArrayList<Sample>();
 	}
-	
-	public void addToList(Sample s) {
+
+	public void addToSamples(Sample s) {
 		this.messwert.add(s);
+	}
+
+	public void addToTags(String s) {
+		this.tags.add(s);
 	}
 
 	/**
@@ -175,7 +180,6 @@ public class Sensor {
 	 *            The messwert to set.
 	 * @uml.property name="messwert"
 	 */
-
 
 	/**
 	 * @uml.property name="position"
@@ -192,6 +196,7 @@ public class Sensor {
 	public Position getPosition() {
 		return position;
 	}
+
 
 	/**
 	 * Setter of the property <tt>position</tt>
