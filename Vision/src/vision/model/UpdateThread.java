@@ -8,8 +8,11 @@ import vision.Config;
  */
 public class UpdateThread extends Thread {
 	
+	public UpdateThread() {
+		update = new Update();
+	}
+	
 	public void run() {
-		this.update = new Update();
 		update.getDaten();
 		try {
 			wait(Config.updateIntervall);

@@ -1,7 +1,7 @@
 package vision.model;
 
 import java.sql.*;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,12 +13,14 @@ public class Database {
 
 	private Connection conn;
 
-	private boolean tableExists(String tableName) {
+	private boolean tableExists(String tableName, Connection conn) {
 		try {
 			DatabaseMetaData dbm = conn.getMetaData();
 			ResultSet rs = dbm.getTables(null, null, tableName, null);
 			if (rs.next()) {
 				return true;
+			} else {
+				return false;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -30,49 +32,66 @@ public class Database {
 	/**
 	 * saves a sensor object in the database
 	 */
-	public void updateSensors(String id, int zeitpunkt, Sample messwerte) {
-		Statement st;
-		if (tableExists("Samples")) {
-			try {
-				st = conn.createStatement();
-				st.executeUpdate("INSERT INTO Samples " + "VALUES ( " + id
-						+ ", " + zeitpunkt + ", " + messwerte + ")");
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} else {
-			try {
-				st = conn.createStatement();
-				st.execute("create table Samples (" + "id INTEGER, "
-						+ "Zeitpunkt INTEGER " + "Sample Sample)");
-				st.executeUpdate("INSERT INTO Samples " + "VALUES ( " + id
-						+ ", " + zeitpunkt + ", " + messwerte + ")");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void updateSensors(String id, long zeitpunkt, Sample messwerte) {
 
+		try {
+			String insert = "INSERT INTO SAMPLES VALUES(?, ?, ?, ?, ?, ?)";
+			PreparedStatement pst;
+			Statement st = conn.createStatement();
+
+			if (tableExists("SAMPLES", conn)) {
+				pst = conn.prepareStatement(insert);
+				pst.setString(1, id);
+				pst.setLong(2, zeitpunkt);
+				pst.setString(3, messwerte.getTyp());
+				pst.setString(4, messwerte.getUnit());
+				pst.setLong(5, messwerte.getUpdate());
+				pst.setFloat(6, messwerte.getValue());
+				pst.executeUpdate();
+				System.out.println("Stored: " + id);
+			} else {
+				st.execute("create table Samples (" + "id VARCHAR(30), "
+						+ "Zeitpunkt LONG, " + "Type VARCHAR(30), "
+						+ "Unit VARCHAR(30), " + "Updated LONG, "
+						+ "Value FLOAT)");
+				pst = conn.prepareStatement(insert);
+				pst.setString(1, id);
+				pst.setLong(2, zeitpunkt);
+				pst.setString(3, messwerte.getTyp());
+				pst.setString(4, messwerte.getUnit());
+				pst.setLong(5, messwerte.getUpdate());
+				pst.setFloat(6, messwerte.getValue());
+				pst.executeUpdate();
+				System.out.println("Database created and stored: " + id);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+
 	}
 
 	/**
 	 * fetches the sensor samples collected
 	 */
-	public List<Sample> getSensordata(int id, int zeitpunkt) {
-		List<Sample> sampleList = Collections.emptyList();
+	public List<Sample> getSensordata(String id, long zeitpunkt) {
+		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from Samples");
 			while (rs.next()) {
-				if (rs.getInt("id") == id
+				if (rs.getString("id").equals(id)
 						&& rs.getInt("zeitpunkt") == zeitpunkt) {
-					Sample sample = (Sample) rs.getObject("Sample");
-					sampleList.add(sample);
+					Sample sample = new Sample();
+					sample.setTyp(rs.getString("Type"));
+					sample.setUnit(rs.getString("Unit"));
+					sample.setUpdate(rs.getLong("Updated"));
+					sample.setValue(rs.getFloat("Value"));
+					samples.add(sample);
 				}
 			}
 
-			return sampleList;
+			return samples;
 
 		} catch (SQLException e) {
 			System.out.println("Error getting Sensor Data!");
@@ -88,14 +107,18 @@ public class Database {
 	 *            id of the sensor
 	 * @return a list of all sensor samples belonging to the given sensor
 	 */
-	public List<Sample> getAllSensorData(int id) {
-		List<Sample> samples = Collections.emptyList();
+	public List<Sample> getAllSensorData(String id) {
+		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from Samples");
 			while (rs.next()) {
-				if (rs.getInt("id") == id) {
-					Sample sample = (Sample) rs.getObject("Sample");
+				if (rs.getString("id").equals(id)) {
+					Sample sample = new Sample();
+					sample.setTyp(rs.getString("Type"));
+					sample.setUnit(rs.getString("Unit"));
+					sample.setUpdate(rs.getLong("Updated"));
+					sample.setValue(rs.getFloat("Value"));
 					samples.add(sample);
 				}
 			}
@@ -120,15 +143,20 @@ public class Database {
 	 *            timestamp of the end of the interval
 	 * @return a list of all sensor samples belonging to the given sensor
 	 */
-	public List<Sample> getSensorDataInterval(int id, long from, long to) {
-		List<Sample> samples = Collections.emptyList();
+	public List<Sample> getSensorDataInterval(String id, long from, long to) {
+		List<Sample> samples = new ArrayList();
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from Samples");
 			while (rs.next()) {
-				if (rs.getInt("id") == id && rs.getInt("zeitpunkt") >= from
+				if (rs.getString("id").equals(id)
+						&& rs.getInt("zeitpunkt") >= from
 						&& rs.getInt("zeitpunkt") <= to) {
-					Sample sample = (Sample) rs.getObject("Sample");
+					Sample sample = new Sample();
+					sample.setTyp(rs.getString("Type"));
+					sample.setUnit(rs.getString("Unit"));
+					sample.setUpdate(rs.getLong("Updated"));
+					sample.setValue(rs.getFloat("Value"));
 					samples.add(sample);
 				}
 			}
@@ -141,10 +169,48 @@ public class Database {
 		}
 	}
 
+	public int size() {
+
+		int i = 0;
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("select * from Samples");
+			while (rs.next()) {
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	public String getIDs(int index) {
+		String s = "";
+		Statement st;
+		int i = 0;
+		try {
+			st = conn.createStatement();
+			ResultSet rs = st.executeQuery("Select * from Samples");
+			while (rs.next()) {
+				i++;
+				if(index == i) {
+					s = rs.getString("id");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return s;
+	}
+
 	public void connect() {
 		try {
 			Class.forName("org.h2.Driver");
-			conn = DriverManager.getConnection("jdbc:h2:db", "user", "pw");
+			conn = DriverManager.getConnection("jdbc:h2:database/db", "user",
+					"pw");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
