@@ -75,19 +75,23 @@ public class Database {
 	 * fetches the sensor samples collected
 	 */
 	public List<Sample> getSensordata(String id, long zeitpunkt) {
-		List<Sample> sampleList = new ArrayList<Sample>();
+		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from Samples");
 			while (rs.next()) {
 				if (rs.getString("id").equals(id)
 						&& rs.getInt("zeitpunkt") == zeitpunkt) {
-					Sample sample = (Sample) rs.getObject("Sample");
-					sampleList.add(sample);
+					Sample sample = new Sample();
+					sample.setTyp(rs.getString("Type"));
+					sample.setUnit(rs.getString("Unit"));
+					sample.setUpdate(rs.getLong("Updated"));
+					sample.setValue(rs.getFloat("Value"));
+					samples.add(sample);
 				}
 			}
 
-			return sampleList;
+			return samples;
 
 		} catch (SQLException e) {
 			System.out.println("Error getting Sensor Data!");
@@ -145,7 +149,8 @@ public class Database {
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from Samples");
 			while (rs.next()) {
-				if (rs.getString("id").equals(id) && rs.getInt("zeitpunkt") >= from
+				if (rs.getString("id").equals(id)
+						&& rs.getInt("zeitpunkt") >= from
 						&& rs.getInt("zeitpunkt") <= to) {
 					Sample sample = new Sample();
 					sample.setTyp(rs.getString("Type"));
@@ -162,6 +167,43 @@ public class Database {
 			System.exit(0);
 			return null;
 		}
+	}
+
+	public int size() {
+
+		int i = 0;
+		try {
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("select * from Samples");
+			while (rs.next()) {
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	public String getIDs(int index) {
+		String s = "";
+		Statement st;
+		int i = 0;
+		try {
+			st = conn.createStatement();
+			ResultSet rs = st.executeQuery("Select * from Samples");
+			while (rs.next()) {
+				i++;
+				if(index == i) {
+					s = rs.getString("id");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return s;
 	}
 
 	public void connect() {

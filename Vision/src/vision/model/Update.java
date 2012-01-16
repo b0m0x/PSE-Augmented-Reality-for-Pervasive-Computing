@@ -101,6 +101,10 @@ public class Update {
 		this.database = database;
 	}
 
+	/**
+	 * stores all the Data from the JSON-Stream into the database
+	 * @param time the current time of when the data was stored
+	 */
 	public void store(int time) {
 
 		jsonConverter.convert();
