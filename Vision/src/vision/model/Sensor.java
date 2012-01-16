@@ -13,6 +13,11 @@ public class Sensor {
 		this.setMesswert();
 		this.setTags();
 	}
+	
+	public Sensor(String id, int time, List<Sample> samples) {
+		this.id = id;
+		samples = new ArrayList<Sample>();
+	}
 
 	/**
 	 * @uml.property name="id"
@@ -77,7 +82,7 @@ public class Sensor {
 	 *            The tags to set.
 	 * @uml.property name="tags"
 	 */
-	public void setTags() {
+	public void setTags(List<String> tags) {
 		this.tags = new ArrayList<String>();
 	}
 
