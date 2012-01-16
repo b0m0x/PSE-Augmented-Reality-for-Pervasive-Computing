@@ -20,27 +20,25 @@ import vision.view.View;
  */
 public class Model {
 
-	private Groundplan gp;
-	private List<Plugin> plugins;
-	private List<Sample> sampleList;
 
 	public Model(View view) throws JAXBException {
 
 		loadPlugins();
 		getAllSensors();
-		this.gp = vision.model.Groundplan.load();
-		this.view = view;
+		this.groundplan = new vision.model.Groundplan().load();
+		this.view = new vision.view.View();
+		this.datenbank = new vision.model.Database();
 
 	}
 
 	private void loadPlugins() {
-		plugins = pluginLoader.loadPlugins();
+		pluginList = pluginLoader.loadPlugins();
 	}
 
 	/**
 					 */
-	public void getSensordata(String id, int time) {
-		//sampleList = datenbank.getSensordata(id, time); //Datenbank fehler?
+	public Sample getSensordata(String id, int time) {
+		return datenbank.getSensordata(id, time);
 	}
 
 	/**
@@ -208,7 +206,7 @@ public class Model {
 	 * @uml.associationEnd multiplicity="(1 1)"
 	 *                     inverse="model:vision.model.Groundplan"
 	 */
-	private Groundplan groundplan = new vision.model.Groundplan();
+	private Groundplan groundplan;
 
 	/**
 	 * Getter of the property <tt>groundplan</tt>
