@@ -48,8 +48,8 @@ public class PluginLoader {
 				Plugin instance = (Plugin) cons.newInstance(model, view);
 				
 				Constructor consController = null;
-				consController = clazzController.getConstructor(Model.class, View.class);
-				PluginController instanceController = (PluginController) cons.newInstance(model, view);
+				consController = clazzController.getConstructor(Model.class, Plugin.class);
+				PluginController instanceController = (PluginController) cons.newInstance(model, instance);
 							
 				plugins.add(instance);
 				pluginController.add(instanceController);
