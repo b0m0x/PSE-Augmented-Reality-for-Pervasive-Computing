@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -63,13 +64,12 @@ public class PluginLoader {
 	}
 
 	public List<String> getPluginPaths() {
-		List<String> pathlist = null;
-		File jarFile = new File(Config.pluginpath);
+		List<String> pathlist = new ArrayList<String>();
+		File pluginFolder = new File(Config.pluginpath);
 
-		// Alle Verzeichnis im Root listen...
-		String[] rootDirectories = jarFile.list();
-		for (int i = 0; i < rootDirectories.length; i++) {
-			pathlist.add(rootDirectories[i]);
+		// Alle dateien im Root listen...
+		for (String file : pluginFolder.list()) {
+			pathlist.add(file);
 		}
 
 		return pathlist;
