@@ -129,7 +129,7 @@ public class CustomMeshCreatorTest {
 
 		Hole h2 = new Hole();
 		h2.setPositionX1(3f);
-		h2.setPositionY1(1f);
+		h2.setPositionY1(1.5f);
 		h2.setPositionX2(3f);
 		h2.setPositionY2(2f);
 		holes.add(h2);
@@ -139,7 +139,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 		
-		assertEquals(144, g.getMesh().getIndexBuffer().size());
+		assertEquals(168, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI/2 + Math.PI/4, g.getLocalRotation().toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
