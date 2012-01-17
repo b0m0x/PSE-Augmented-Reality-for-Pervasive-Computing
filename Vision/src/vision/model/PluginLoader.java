@@ -5,7 +5,6 @@ import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,10 +38,7 @@ public class PluginLoader {
 				// get Jar-Url
 				url = fJar.toURL();
 				URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
-				String strPackage = "plugin."
-						+ pluginpaths.get(i)
-								.substring(pluginpaths.lastIndexOf('/'))
-								.substring(0, pluginpaths.indexOf('.')); // Package/Class-Name
+				String strPackage = "vision.view." + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf('.')); // Package/Class-Name
 				Class clazz = Class.forName(strPackage, true, urlcl);
 
 				// load Constructor (string, string)
