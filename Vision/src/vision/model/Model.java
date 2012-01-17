@@ -167,33 +167,6 @@ public class Model {
 		this.pluginList = pluginList;
 	}
 
-	/**
-	 * @uml.property name="plugin"
-	 * @uml.associationEnd multiplicity="(0 -1)"
-	 *                     inverse="daten:vision.view.Plugin"
-	 */
-	private Collection<vision.view.Plugin> plugin;
-
-	/**
-	 * Getter of the property <tt>plugin</tt>
-	 * 
-	 * @return Returns the plugin.
-	 * @uml.property name="plugin"
-	 */
-	public Collection<vision.view.Plugin> getPlugin() {
-		return plugin;
-	}
-
-	/**
-	 * Setter of the property <tt>plugin</tt>
-	 * 
-	 * @param plugin
-	 *            The plugin to set.
-	 * @uml.property name="plugin"
-	 */
-	public void setPlugin(Collection<vision.view.Plugin> plugin) {
-		this.plugin = plugin;
-	}
 
 	/**
 		 */
