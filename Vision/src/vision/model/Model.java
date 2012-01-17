@@ -23,10 +23,10 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 
-		loadPlugins();
+		//loadPlugins();
 		getAllSensors();
 		this.groundplan = new vision.model.Groundplan().load();
-		this.view = new vision.view.View();
+		this.view = view;
 		this.datenbank = new vision.model.Database();
 
 	}
@@ -274,7 +274,6 @@ public class Model {
 	public List<Geometry> getStaticGeometry() {
 		// TODO Auto-generated method stub
 		List<Geometry> l = new ArrayList<Geometry>();
-		
 		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
 		m.setTexture("ColorMap", view.getAssetManager().loadTexture("Textures/ColoredTex/Monkey.png"));
 		

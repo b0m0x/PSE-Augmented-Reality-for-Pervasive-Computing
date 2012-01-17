@@ -54,7 +54,6 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		controller = new vision.controller.Controller(this, daten);
 		//guiAppState = new vision.view.GuiAppState();
 		mainAppState = new vision.view.MainAppState(daten);
 		List<Plugin> plugins = daten.getPluginList();

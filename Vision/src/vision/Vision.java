@@ -26,6 +26,7 @@ public class Vision {
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 		Controller mainController = new Controller(mainView, mainModel);
 		mainView.setController(mainController);
