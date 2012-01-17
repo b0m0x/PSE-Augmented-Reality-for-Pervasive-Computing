@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import vision.Config;
-import vision.controller.Controller;
+import vision.controller.PluginController;
 import vision.view.Plugin;
 import vision.view.View;
 
@@ -19,9 +19,9 @@ import vision.view.View;
 public class PluginLoader {
 
 	private List<Plugin> plugins = new ArrayList<Plugin>();
-	private List<Controller> pluginController = new ArrayList<Controller>();
+	private List<PluginController> pluginController = new ArrayList<PluginController>();
 	
-	public List<Controller> getController() {
+	public List<PluginController> getController() {
 		return pluginController;
 	}
 
@@ -38,7 +38,7 @@ public class PluginLoader {
 				url = fJar.toURL();
 				URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
 				String strPackage = "vision.view." + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf('.'));
-				String strPackageController = "vision.controller" + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf('.')) + "Controller"; 
+				String strPackageController = "vision.controller." + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf("Plugin")) + "Controller"; 
 				Class clazz = Class.forName(strPackage, true, urlcl);
 				Class clazzController = Class.forName(strPackageController, true, urlcl);
 
@@ -49,7 +49,7 @@ public class PluginLoader {
 				
 				Constructor consController = null;
 				consController = clazz.getConstructor(Model.class, View.class);
-				Controller instanceController = (Controller) cons.newInstance(model, view);
+				PluginController instanceController = (PluginController) cons.newInstance(model, view);
 							
 				plugins.add(instance);
 				pluginController.add(instanceController);
