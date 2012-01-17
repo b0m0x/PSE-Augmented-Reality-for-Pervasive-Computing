@@ -23,7 +23,7 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 
-		//loadPlugins();
+		loadPlugins();
 		getAllSensors();
 		this.groundplan = new vision.model.Groundplan().load();
 		this.view = view;

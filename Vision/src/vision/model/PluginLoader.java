@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import vision.Config;
@@ -28,31 +30,36 @@ public class PluginLoader {
 
 		List<String> pluginpaths = getPluginPaths();
 
-		for (int i = 0; i < pluginpaths.size(); i++) {
+		if (!(pluginpaths == null)) {
 
-			File fJar = new File(pluginpaths.get(i)); // Path of jar file
-			URL url = null;
-			try {
-				// get Jar-Url
-				url = fJar.toURL();
-				URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
-				String strPackage = "plugin."
-						+ pluginpaths.get(i)
-								.substring(pluginpaths.lastIndexOf('/'))
-								.substring(0, pluginpaths.indexOf('.')); // Package/Class-Name
-				Class clazz = Class.forName(strPackage, true, urlcl);
+			for (int i = 0; i < pluginpaths.size(); i++) {
 
-				// load Constructor (string, string)
-				Constructor cons = null;
-				cons = clazz.getConstructor(String.class, String.class);
-				Object instance = cons.newInstance("", ""); // call constructor
-				plugins.add((Plugin) instance);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				return null;
+				File fJar = new File(pluginpaths.get(i)); // Path of jar file
+				URL url = null;
+				try {
+					// get Jar-Url
+					url = fJar.toURL();
+					URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
+					String strPackage = "plugin."
+							+ pluginpaths.get(i)
+									.substring(pluginpaths.lastIndexOf('/'))
+									.substring(0, pluginpaths.indexOf('.')); // Package/Class-Name
+					Class clazz = Class.forName(strPackage, true, urlcl);
+
+					// load Constructor (string, string)
+					Constructor cons = null;
+					cons = clazz.getConstructor(String.class, String.class);
+					Object instance = cons.newInstance("", ""); // call
+																// constructor
+					plugins.add((Plugin) instance);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					return null;
+				}
 			}
-		}
-		return plugins;
+			return plugins;
+		} else
+			return plugins = Collections.EMPTY_LIST;
 	}
 
 	public List<String> getPluginPaths() {
