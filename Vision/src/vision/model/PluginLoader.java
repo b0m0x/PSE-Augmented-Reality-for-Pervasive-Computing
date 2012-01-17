@@ -17,7 +17,7 @@ import vision.view.Plugin;
  */
 public class PluginLoader {
 
-	private List<Plugin> plugins;
+	private List<Plugin> plugins = new ArrayList<Plugin>();
 
 	public void setPlugins(List<Plugin> plugins) {
 		this.plugins = plugins;
@@ -55,12 +55,12 @@ public class PluginLoader {
 					plugins.add((Plugin) instance);
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					return null;
+					return Collections.EMPTY_LIST;
 				}
 			}
 			return plugins;
 		} else
-			return plugins = Collections.EMPTY_LIST;
+			return Collections.EMPTY_LIST;
 	}
 
 	public List<String> getPluginPaths() {

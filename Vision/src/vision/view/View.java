@@ -56,11 +56,10 @@ public class View extends SimpleApplication {
 	public void simpleInitApp() {
 		//guiAppState = new vision.view.GuiAppState();
 		mainAppState = new vision.view.MainAppState(daten);
-		List<Plugin> plugins = daten.getPluginList();
-		for(int i = 0; i < plugins.size(); i++) 
+		for(Plugin p : daten.getPluginList()) 
 		{
-			plugins.get(i).initialize(stateManager, this);
-			stateManager.attach(plugins.get(i));
+			p.initialize(stateManager, this);
+			stateManager.attach(p);
 		}
 		mainAppState.initialize(stateManager, this);
 		stateManager.attach(mainAppState);
