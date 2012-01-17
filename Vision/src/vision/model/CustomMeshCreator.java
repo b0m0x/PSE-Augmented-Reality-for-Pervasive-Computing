@@ -23,14 +23,13 @@ public class CustomMeshCreator {
 	 */
 	public Geometry convert(Wall w) {
 			WallAdapter wall = new WallAdapter(w);
-			CustomMesh wallMesh = new CustomMesh();
 			
 			//build first orthogonal, then transform
 			float minHole = wall.getHeight();
 			
 			for (Hole hole : wall.getHoles()) {
 				HoleAdapter h = new HoleAdapter(hole);
-				minHole = Math.min(h.getPosition().getZ() - h.getSize().getZ() / 2f, minHole);
+				minHole = Math.min(h.getPosition().getY() - h.getSize().getY() / 2f, minHole);
 			}
 			
 			//add base rectangle
@@ -39,7 +38,7 @@ public class CustomMeshCreator {
 			for (Hole hole : wall.getHoles()) {
 				HoleAdapter h = new HoleAdapter(hole);
 				//fill gaps between holes and base rect
-				if (Math.abs(h.getPosition().getZ() - h.getSize().getZ() / 2f - minHole) > 0.002f) {
+				if (Math.abs(h.getPosition().getY() - h.getSize().getY() / 2f - minHole) > 0.002f) {
 					addWallPlane(new Position(h.getPosition().getX(), h.getPosition().getY(), (minHole + (h.getPosition().getZ() - h.getSize().getZ() / 2f)) / 2f), new Size3D(wall.getWidth(), wall.getDepth(), (h.getPosition().getZ() - h.getSize().getZ() / 2f) - minHole));
 				}
 				
