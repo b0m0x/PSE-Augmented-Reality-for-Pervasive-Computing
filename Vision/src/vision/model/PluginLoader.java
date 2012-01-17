@@ -10,6 +10,7 @@ import java.util.List;
 
 import vision.Config;
 import vision.view.Plugin;
+import vision.view.View;
 
 /**
  * loads all plugins from a configured subdirectory
@@ -18,15 +19,7 @@ public class PluginLoader {
 
 	private List<Plugin> plugins = new ArrayList<Plugin>();
 
-	public void setPlugins(List<Plugin> plugins) {
-		this.plugins = plugins;
-	}
-
-	public List<Plugin> getPlugins() {
-		return this.plugins;
-	}
-
-	public List<Plugin> loadPlugins() {
+	public List<Plugin> loadPlugins(Model model, View view) {
 
 		List<String> pluginpaths = getPluginPaths();
 
@@ -43,8 +36,8 @@ public class PluginLoader {
 
 				// load Constructor (string, string)
 				Constructor cons = null;
-				cons = clazz.getConstructor(String.class, String.class);
-				Object instance = cons.newInstance("", ""); // call
+				cons = clazz.getConstructor(Model.class, View.class);
+				Object instance = cons.newInstance(model, view); // call
 															// constructor
 				plugins.add((Plugin) instance);
 			} catch (Exception ex) {

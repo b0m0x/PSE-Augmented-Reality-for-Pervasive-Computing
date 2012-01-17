@@ -32,7 +32,7 @@ public class Model {
 	}
 
 	private void loadPlugins() {
-		pluginList = pluginLoader.loadPlugins();
+		pluginList = pluginLoader.loadPlugins(this, view);
 	}
 
 	/**
