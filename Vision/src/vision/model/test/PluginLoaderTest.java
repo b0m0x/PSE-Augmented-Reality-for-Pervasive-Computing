@@ -28,7 +28,7 @@ public class PluginLoaderTest {
 			e.printStackTrace();
 		}
 		
-		assertEquals(1, plugins.size());
+		assertEquals(false, plugins.isEmpty());
 		assertArrayEquals(new String[] {"heater"}, plugins.get(0).getTags());
 		
 	}
