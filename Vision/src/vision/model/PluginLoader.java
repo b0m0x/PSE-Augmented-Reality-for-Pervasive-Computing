@@ -66,6 +66,10 @@ public class PluginLoader {
 	public List<String> getPluginPaths() {
 		List<String> pathlist = new ArrayList<String>();
 		File pluginFolder = new File(Config.pluginpath);
+		
+		if (!pluginFolder.isDirectory()) {
+			return Collections.emptyList();
+		}
 
 		// Alle dateien im Root listen...
 		for (String file : pluginFolder.list()) {
