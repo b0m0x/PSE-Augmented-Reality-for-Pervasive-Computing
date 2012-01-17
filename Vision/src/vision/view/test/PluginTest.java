@@ -33,8 +33,9 @@ public class PluginTest {
 			}
 		};
 		Model m = null;
+		View v = null;
 		try {
-			m = new Model(new View());
+			m = new Model(v = new View());
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
