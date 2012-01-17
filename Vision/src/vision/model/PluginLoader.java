@@ -31,42 +31,38 @@ public class PluginLoader {
 
 		List<String> pluginpaths = getPluginPaths();
 
-		if (!(pluginpaths == null)) {
+		for (int i = 0; i < pluginpaths.size(); i++) {
 
-			for (int i = 0; i < pluginpaths.size(); i++) {
+			File fJar = new File(pluginpaths.get(i)); // Path of jar file
+			URL url = null;
+			try {
+				// get Jar-Url
+				url = fJar.toURL();
+				URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
+				String strPackage = "plugin."
+						+ pluginpaths.get(i)
+								.substring(pluginpaths.lastIndexOf('/'))
+								.substring(0, pluginpaths.indexOf('.')); // Package/Class-Name
+				Class clazz = Class.forName(strPackage, true, urlcl);
 
-				File fJar = new File(pluginpaths.get(i)); // Path of jar file
-				URL url = null;
-				try {
-					// get Jar-Url
-					url = fJar.toURL();
-					URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
-					String strPackage = "plugin."
-							+ pluginpaths.get(i)
-									.substring(pluginpaths.lastIndexOf('/'))
-									.substring(0, pluginpaths.indexOf('.')); // Package/Class-Name
-					Class clazz = Class.forName(strPackage, true, urlcl);
-
-					// load Constructor (string, string)
-					Constructor cons = null;
-					cons = clazz.getConstructor(String.class, String.class);
-					Object instance = cons.newInstance("", ""); // call
-																// constructor
-					plugins.add((Plugin) instance);
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					return Collections.EMPTY_LIST;
-				}
+				// load Constructor (string, string)
+				Constructor cons = null;
+				cons = clazz.getConstructor(String.class, String.class);
+				Object instance = cons.newInstance("", ""); // call
+															// constructor
+				plugins.add((Plugin) instance);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				return Collections.EMPTY_LIST;
 			}
-			return plugins;
-		} else
-			return Collections.EMPTY_LIST;
+		}
+		return plugins;
 	}
 
 	public List<String> getPluginPaths() {
 		List<String> pathlist = new ArrayList<String>();
 		File pluginFolder = new File(Config.pluginpath);
-		
+
 		if (!pluginFolder.isDirectory()) {
 			return Collections.emptyList();
 		}
