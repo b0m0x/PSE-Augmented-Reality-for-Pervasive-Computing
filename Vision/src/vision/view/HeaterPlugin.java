@@ -42,7 +42,7 @@ public class HeaterPlugin extends Plugin {
 	void initHeaters(Application app) {
 		for (Sensor s : getSensors()) {
 			float temperature = 0;
-			for (Sample sp : s.getMesswerte()) {
+			for (Sample sp : s.getMesswert()) {
 				if (sp.getTyp().equals("Temperatur")) {
 					temperature = sp.getValue();
 					break;
@@ -67,7 +67,7 @@ public class HeaterPlugin extends Plugin {
 				if (!s.getId().equals(sid)) {
 					continue;
 				}
-				for (Sample sp : s.getMesswerte()) {
+				for (Sample sp : s.getMesswert()) {
 					if (sp.getTyp().equals("Temperatur")) {
 						float temperature = sp.getValue();
 						g.getMaterial().setColor("Color", new ColorRGBA(temperature / 50f, 0,
