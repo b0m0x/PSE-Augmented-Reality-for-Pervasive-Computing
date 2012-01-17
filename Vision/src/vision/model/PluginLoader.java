@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import vision.Config;
+import vision.controller.Controller;
 import vision.view.Plugin;
 import vision.view.View;
 
@@ -18,6 +19,11 @@ import vision.view.View;
 public class PluginLoader {
 
 	private List<Plugin> plugins = new ArrayList<Plugin>();
+	private List<Controller> pluginController = new ArrayList<Controller>();
+	
+	public List<Controller> getController() {
+		return pluginController;
+	}
 
 	public List<Plugin> loadPlugins(Model model, View view) {
 
@@ -31,15 +37,22 @@ public class PluginLoader {
 				// get Jar-Url
 				url = fJar.toURL();
 				URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
-				String strPackage = "vision.view." + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf('.')); // Package/Class-Name
+				String strPackage = "vision.view." + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf('.'));
+				String strPackageController = "vision.controller" + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf('.')) + "Controller"; 
 				Class clazz = Class.forName(strPackage, true, urlcl);
+				Class clazzController = Class.forName(strPackageController, true, urlcl);
 
-				// load Constructor (string, string)
+				// load Constructor 
 				Constructor cons = null;
 				cons = clazz.getConstructor(Model.class, View.class);
-				Plugin instance = (Plugin) cons.newInstance(model, view); // call
+				Plugin instance = (Plugin) cons.newInstance(model, view);
+				
+				Constructor consController = null;
+				consController = clazz.getConstructor(Model.class, View.class);
+				Controller instanceController = (Controller) cons.newInstance(model, view);
 							
 				plugins.add(instance);
+				pluginController.add(instanceController);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				return Collections.EMPTY_LIST;
