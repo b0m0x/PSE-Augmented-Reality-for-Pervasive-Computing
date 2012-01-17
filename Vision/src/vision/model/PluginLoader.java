@@ -37,9 +37,9 @@ public class PluginLoader {
 				// load Constructor (string, string)
 				Constructor cons = null;
 				cons = clazz.getConstructor(Model.class, View.class);
-				Object instance = cons.newInstance(model, view); // call
-															// constructor
-				plugins.add((Plugin) instance);
+				Plugin instance = (Plugin) cons.newInstance(model, view); // call
+							
+				plugins.add(instance);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				return Collections.EMPTY_LIST;

@@ -57,7 +57,7 @@ public class Model {
 	 * @uml.associationEnd multiplicity="(0 -1)"
 	 *                     inverse="daten:vision.model.Sensor"
 	 */
-	private Collection<Sensor> sensor;
+	private Collection<Sensor> sensor = new ArrayList<Sensor>();
 
 	/**
 	 * Getter of the property <tt>sensor</tt>

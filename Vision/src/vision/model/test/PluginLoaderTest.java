@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
+
 import org.junit.Test;
 
 import vision.model.Model;
@@ -18,7 +20,16 @@ public class PluginLoaderTest {
 	@Test
 	public void test() {
 		PluginLoader loader = new PluginLoader();
-		loader.loadPlugins(null, null);
+		List<Plugin> plugins = null;
+		try {
+			plugins = loader.loadPlugins(new Model(null), null);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals(1, plugins.size());
+		assertArrayEquals(new String[] {"heater"}, plugins.get(0).getTags());
 		
 	}
 

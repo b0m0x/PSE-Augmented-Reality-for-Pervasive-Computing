@@ -29,6 +29,7 @@ public class HeaterPlugin extends Plugin {
 	 */
 	public HeaterPlugin(Model model, View v) {
 		super(model);
+		setTags(new String[] { "heater" });
 	}
 
 	@Override
