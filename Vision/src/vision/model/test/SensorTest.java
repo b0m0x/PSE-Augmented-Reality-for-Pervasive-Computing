@@ -22,18 +22,18 @@ public class SensorTest {
 		s.setUpdate(10000);
 		l.add(new Sample());
 		Sensor sensor = new Sensor("Sensor1", 500, l);
-		
+
 		List<String> tags = new ArrayList<String>();
 		tags.add("heizung");
 		tags.add("toll");
 		sensor.setTags(tags);
-		
+
 		sensor.setPosition(new Position(1, 2, 3));
-		
+
 		assertEquals(500, sensor.getUpdate());
 		assertEquals("Sensor1", sensor.getId());
 		assertEquals(l, sensor.getMesswert());
-		
+
 	}
 
 }

@@ -48,7 +48,7 @@ public class WindowPlugin extends Plugin {
 	@Override
 	protected void clientUpdate(Application application, boolean changed) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

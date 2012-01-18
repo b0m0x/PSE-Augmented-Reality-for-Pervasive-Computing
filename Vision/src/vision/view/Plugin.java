@@ -87,8 +87,9 @@ public abstract class Plugin extends AbstractAppState {
 
 	/**
 	 */
-	protected abstract void clientUpdate(Application application, boolean changed);
-	
+	protected abstract void clientUpdate(Application application,
+			boolean changed);
+
 	private void updateSensors() {
 		ArrayList<Sensor> sensors = new ArrayList<Sensor>();
 		for (Sensor s : daten.getSensor()) {

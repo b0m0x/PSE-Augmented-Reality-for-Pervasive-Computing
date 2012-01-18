@@ -32,10 +32,11 @@ public class Database {
 	/**
 	 * saves a sensor object in the database
 	 */
-	public void updateSensors(String id, long zeitpunkt, Sample messwerte) {
+	public void updateSensors(String id, long zeitpunkt, Sample messwerte,
+			List<String> tags) {
 
 		try {
-			String insert = "INSERT INTO SAMPLES VALUES(?, ?, ?, ?, ?, ?)";
+			String insert = "INSERT INTO SAMPLES VALUES(?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pst;
 			Statement st = conn.createStatement();
 
@@ -47,13 +48,14 @@ public class Database {
 				pst.setString(4, messwerte.getUnit());
 				pst.setLong(5, messwerte.getUpdate());
 				pst.setFloat(6, messwerte.getValue());
+				pst.setObject(7, tags);
 				pst.executeUpdate();
 				System.out.println("Stored: " + id);
 			} else {
 				st.execute("create table Samples (" + "id VARCHAR(30), "
 						+ "Zeitpunkt LONG, " + "Type VARCHAR(30), "
 						+ "Unit VARCHAR(30), " + "Updated LONG, "
-						+ "Value FLOAT)");
+						+ "Value FLOAT, " + "Tags OBJECT)");
 				pst = conn.prepareStatement(insert);
 				pst.setString(1, id);
 				pst.setLong(2, zeitpunkt);
@@ -61,6 +63,7 @@ public class Database {
 				pst.setString(4, messwerte.getUnit());
 				pst.setLong(5, messwerte.getUpdate());
 				pst.setFloat(6, messwerte.getValue());
+				pst.setObject(7, tags);
 				pst.executeUpdate();
 				System.out.println("Database created and stored: " + id);
 			}
@@ -193,10 +196,10 @@ public class Database {
 			st = conn.createStatement();
 			ResultSet rs = st.executeQuery("Select * from Samples");
 			while (rs.next()) {
-				i++;
-				if(index == i) {
+				if (index == i) {
 					s = rs.getString("id");
 				}
+				i++;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -204,6 +207,26 @@ public class Database {
 
 		}
 		return s;
+	}
+
+	public List<String> getTags(int index) {
+		List<String> tags = new ArrayList<String>();
+		Statement st;
+		int i = 0;
+		try {
+			st = conn.createStatement();
+			ResultSet rs = st.executeQuery("Select * from Samples");
+			while (rs.next()) {
+				if (i == index) {
+					tags = (List<String>) rs.getObject("Tags");
+				}
+				i++;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tags;
 	}
 
 	public void connect() {

@@ -14,23 +14,32 @@ public class DatabaseTest extends TestCase {
 
 	Database db = new Database();
 
-	public void testUpdate() {
-		Update update = new Update();
-		update.getDatabase().connect();
-		update.getJSONConverter().convert();
-		update.store(30);
-		update.getDatabase().disconnect();
-	}
+	// public void testUpdate() {
+	// Update update = new Update();
+	// update.getDatabase().connect();
+	// update.getJSONConverter().convert();
+	// update.store(30);
+	// update.getDatabase().disconnect();
+	// }
 
 	public void testGetSensorData() {
 		Update update = new Update();
 		update.getDatabase().connect();
 		List<Sample> samples = new ArrayList<Sample>();
-		for (int i = 0; i < update.getJSONConverter().getSensorList().size(); i++) {
-			Sensor sensor = update.getJSONConverter().getSensorList().get(i);
-			System.out.println("ID: " + sensor.getId());
+		for (int i = 0; i < update.getDatabase().size(); i++) {
+			String id = update.getDatabase().getIDs(i);
+			System.out.println("ID: " + id);
 			System.out.println("Database ID: " + i + "\n");
-			samples = update.getDatabase().getSensordata(sensor.getId(), 30);
+			System.out.println("Tags: ");
+			for (int k = 0; k < update.getDatabase().getTags(i).size(); k++) {
+				System.out.print(update.getDatabase().getTags(i).get(k));
+				if (k != update.getDatabase().getTags(i).size() - 1) {
+					System.out.print(", ");
+				} else {
+					System.out.println();
+				}
+			}
+			samples = update.getDatabase().getSensordata(id, 30);
 			for (int j = 0; j < samples.size(); j++) {
 				Sample sample = samples.get(j);
 				System.out.println("Sample: " + j);
@@ -43,16 +52,10 @@ public class DatabaseTest extends TestCase {
 					.println("----------------------------------------------------------------------------");
 		}
 
+		System.out.println("IDs in Database: " + update.getDatabase().size());
+
 		update.getDatabase().disconnect();
 	}
-
-	// public void testSize() {
-	// Database db = new Database();
-	// db.connect();
-	// System.out.println(db.size());
-	// System.out.println();
-	// db.disconnect();
-	// }
 
 	// public void testGetSensorData() {
 	// Update update = new Update();
@@ -81,29 +84,29 @@ public class DatabaseTest extends TestCase {
 	// update.getDatabase().disconnect();
 	// }
 
-	public void testGetAllSensorData() {
-		Update update = new Update();
-		update.getDatabase().connect();
-		update.getAllData();
-		List<Sample> samples = new ArrayList<Sample>();
-		for (int i = 0; i < update.getDatabase().size(); i++) {
-			System.out.println("ID: " + update.getDatabase().getIDs(i));
-			System.out.println("Database ID: " + i);
-			samples = update.getDatabase().getAllSensorData(
-					update.getDatabase().getIDs(i));
-			for (int j = 0; j < samples.size(); j++) {
-				Sample sample = samples.get(j);
-				System.out.println("Sample: " + j);
-				System.out.println("Type: " + sample.getTyp());
-				System.out.println("Unit: " + sample.getUnit());
-				System.out.println("Last updated: " + sample.getUpdate());
-				System.out.println("Value: " + sample.getValue() + "\n");
-			}
-		}
-
-		update.getDatabase().disconnect();
-
-	}
+	// public void testGetAllSensorData() {
+	// Update update = new Update();
+	// update.getDatabase().connect();
+	// update.getAllData();
+	// List<Sample> samples = new ArrayList<Sample>();
+	// for (int i = 0; i < update.getDatabase().size(); i++) {
+	// System.out.println("ID: " + update.getDatabase().getIDs(i));
+	// System.out.println("Database ID: " + i);
+	// samples = update.getDatabase().getAllSensorData(
+	// update.getDatabase().getIDs(i));
+	// for (int j = 0; j < samples.size(); j++) {
+	// Sample sample = samples.get(j);
+	// System.out.println("Sample: " + j);
+	// System.out.println("Type: " + sample.getTyp());
+	// System.out.println("Unit: " + sample.getUnit());
+	// System.out.println("Last updated: " + sample.getUpdate());
+	// System.out.println("Value: " + sample.getValue() + "\n");
+	// }
+	// }
+	//
+	// update.getDatabase().disconnect();
+	//
+	// }
 
 	// public void testGetAllSensorDataInterval() {
 	// Update update = new Update();

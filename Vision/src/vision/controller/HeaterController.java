@@ -14,5 +14,5 @@ public class HeaterController extends PluginController {
 		super(model, plugin);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }

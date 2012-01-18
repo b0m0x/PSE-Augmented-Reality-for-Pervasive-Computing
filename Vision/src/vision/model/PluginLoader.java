@@ -20,7 +20,7 @@ public class PluginLoader {
 
 	private List<Plugin> plugins = new ArrayList<Plugin>();
 	private List<PluginController> pluginController = new ArrayList<PluginController>();
-	
+
 	public List<PluginController> getController() {
 		return pluginController;
 	}
@@ -37,20 +37,28 @@ public class PluginLoader {
 				// get Jar-Url
 				url = fJar.toURL();
 				URLClassLoader urlcl = new URLClassLoader(new URL[] { url });
-				String strPackage = "vision.view." + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf('.'));
-				String strPackageController = "vision.controller." + pluginpaths.get(i).substring(0, pluginpaths.get(i).indexOf("Plugin")) + "Controller"; 
+				String strPackage = "vision.view."
+						+ pluginpaths.get(i).substring(0,
+								pluginpaths.get(i).indexOf('.'));
+				String strPackageController = "vision.controller."
+						+ pluginpaths.get(i).substring(0,
+								pluginpaths.get(i).indexOf("Plugin"))
+						+ "Controller";
 				Class clazz = Class.forName(strPackage, true, urlcl);
-				Class clazzController = Class.forName(strPackageController, true, urlcl);
+				Class clazzController = Class.forName(strPackageController,
+						true, urlcl);
 
-				// load Constructor 
+				// load Constructor
 				Constructor cons = null;
 				cons = clazz.getConstructor(Model.class, View.class);
 				Plugin instance = (Plugin) cons.newInstance(model, view);
-				
+
 				Constructor consController = null;
-				consController = clazzController.getConstructor(Model.class, Plugin.class);
-				PluginController instanceController = (PluginController) consController.newInstance(model, instance);
-							
+				consController = clazzController.getConstructor(Model.class,
+						Plugin.class);
+				PluginController instanceController = (PluginController) consController
+						.newInstance(model, instance);
+
 				plugins.add(instance);
 				pluginController.add(instanceController);
 			} catch (Exception ex) {

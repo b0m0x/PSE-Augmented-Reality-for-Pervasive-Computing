@@ -103,7 +103,9 @@ public class Update {
 
 	/**
 	 * stores all the Data from the JSON-Stream into the database
-	 * @param time the current time of when the data was stored
+	 * 
+	 * @param time
+	 *            the current time of when the data was stored
 	 */
 	public void store(int time) {
 
@@ -112,11 +114,10 @@ public class Update {
 		sensorlist = jsonConverter.getSensorList();
 
 		for (int i = 0; i < sensorlist.size(); i++) {
-			for (int j = 0; j < sensorlist
-			.get(i).
-			getMesswert().size(); j++) {
+			for (int j = 0; j < sensorlist.get(i).getMesswert().size(); j++) {
 				database.updateSensors(sensorlist.get(i).getId(), time,
-						sensorlist.get(i).getMesswert().get(j));
+						sensorlist.get(i).getMesswert().get(j), sensorlist.get(
+								i).getTags());
 			}
 		}
 	}

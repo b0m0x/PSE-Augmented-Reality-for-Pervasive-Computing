@@ -24,6 +24,7 @@ public class HeaterPlugin extends Plugin {
 	 */
 	private List<Geometry> heaters;
 	private Geometry heater;
+
 	/**
 	 * 
 	 */
@@ -39,7 +40,7 @@ public class HeaterPlugin extends Plugin {
 				.loadModel("Models/heater.j3o");
 		initHeaters(app);
 	}
-	
+
 	void initHeaters(Application app) {
 		for (Sensor s : getSensors()) {
 			float temperature = 0;
@@ -60,7 +61,7 @@ public class HeaterPlugin extends Plugin {
 			heaters.add(heater.clone());
 		}
 	}
-	
+
 	void updateHeaters() {
 		for (Geometry g : heaters) {
 			String sid = g.getUserData("sid");
@@ -71,8 +72,10 @@ public class HeaterPlugin extends Plugin {
 				for (Sample sp : s.getMesswert()) {
 					if (sp.getTyp().equals("Temperatur")) {
 						float temperature = sp.getValue();
-						g.getMaterial().setColor("Color", new ColorRGBA(temperature / 50f, 0,
-								1 - temperature / 50f, 1));
+						g.getMaterial().setColor(
+								"Color",
+								new ColorRGBA(temperature / 50f, 0,
+										1 - temperature / 50f, 1));
 					}
 				}
 			}

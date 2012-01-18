@@ -9,16 +9,13 @@ import vision.model.Model;
 import vision.view.View;
 
 /**
- * Main class
- * starts up the whole software 
- *
+ * Main class starts up the whole software
+ * 
  */
 public class Vision {
-	
-		
 
 	public static void main(String[] args) {
-		
+
 		View mainView = new View();
 		Model mainModel = null;
 		try {
@@ -33,7 +30,5 @@ public class Vision {
 		mainView.setDaten(mainModel);
 		mainView.start();
 	}
-	
-	
-	
+
 }

@@ -42,7 +42,7 @@ public class JSONConverter {
 	public JSONObject getJson() {
 		return this.json;
 	}
-	
+
 	public String offlineStream() {
 		File file = new File("offlinestream");
 		try {
@@ -56,7 +56,7 @@ public class JSONConverter {
 			e.printStackTrace();
 		}
 		return "Error.";
-		
+
 	}
 
 	public String getJSONStream() {
@@ -75,8 +75,6 @@ public class JSONConverter {
 			System.out.println("Connection Error.");
 			return offlineStream();
 		}
-		
-		
 
 	}
 

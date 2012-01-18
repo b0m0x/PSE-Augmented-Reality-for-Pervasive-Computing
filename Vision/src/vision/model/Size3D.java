@@ -4,7 +4,7 @@ public class Size3D {
 	private float x;
 	private float y;
 	private float z;
-	
+
 	public Size3D(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
@@ -26,12 +26,12 @@ public class Size3D {
 	public void setY(float y) {
 		this.y = y;
 	}
-	
+
 	public float getZ() {
 		return y;
 	}
 
 	public void setZ(float z) {
-		this.z = z;		
+		this.z = z;
 	}
 }

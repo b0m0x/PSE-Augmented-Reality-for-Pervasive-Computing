@@ -29,12 +29,12 @@ public class PluginLoaderTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		assertEquals(false, plugins.isEmpty());
-		assertArrayEquals(new String[] {"heater"}, plugins.get(0).getTags());
-		
+		assertArrayEquals(new String[] { "heater" }, plugins.get(0).getTags());
+
 		List<PluginController> controller = loader.getController();
-		
+
 	}
 
 }

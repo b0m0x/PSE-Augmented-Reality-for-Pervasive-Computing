@@ -22,13 +22,14 @@ import vision.view.View;
  * 
  */
 public class Controller implements ScreenController {
-	
+
 	public Controller(View view, Model model) {
 		this.view = view;
 		this.model = model;
 	}
-	
+
 	private Element managePluginsPopup;
+
 	/**
 	 * binds the nifty instance to this controller
 	 */
@@ -155,37 +156,42 @@ public class Controller implements ScreenController {
 
 	/**
 	 * gets called by nifty if a button in the GUI wass pressed
-	 * @param id id of the clicked button
+	 * 
+	 * @param id
+	 *            id of the clicked button
 	 */
 	@NiftyEventSubscriber(pattern = "*button*")
 	public void buttonClick(String id, ButtonClickedEvent bce) {
 
 	}
-	
+
 	/**
 	 * called if the user picked an object
-	 * @param obj the picked geometry object
+	 * 
+	 * @param obj
+	 *            the picked geometry object
 	 */
 	public void userPick(Geometry obj) {
-		
+
 	}
-	
+
 	/**
 	 * gets called if the user pressed the activate/deactivate button
 	 */
-	@NiftyEventSubscriber(id="btn_manageplugins")
+	@NiftyEventSubscriber(id = "btn_manageplugins")
 	public void createManagePluginsPopupMenu() {
-		
+
 	}
 
-		
-		/**
-		 * gets called if a user checked or unchecked a non-plugin defined checkbox
-		 * @param id the id of the checkbox that was pressed
-		 */
-		@NiftyEventSubscriber(pattern="checkbox*")
-		public void checkboxPressed(String id){
-			
-		}
+	/**
+	 * gets called if a user checked or unchecked a non-plugin defined checkbox
+	 * 
+	 * @param id
+	 *            the id of the checkbox that was pressed
+	 */
+	@NiftyEventSubscriber(pattern = "checkbox*")
+	public void checkboxPressed(String id) {
+
+	}
 
 }

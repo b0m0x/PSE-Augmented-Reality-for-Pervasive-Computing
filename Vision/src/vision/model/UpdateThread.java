@@ -7,11 +7,11 @@ import vision.Config;
  * 
  */
 public class UpdateThread extends Thread {
-	
+
 	public UpdateThread() {
 		update = new Update();
 	}
-	
+
 	public void run() {
 		update.getDaten();
 		try {
@@ -20,19 +20,20 @@ public class UpdateThread extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
-	 * @uml.property  name="update"
-	 * @uml.associationEnd  inverse="updateThread:vision.model.Update"
+	 * @uml.property name="update"
+	 * @uml.associationEnd inverse="updateThread:vision.model.Update"
 	 */
 	private Update update;
 
 	/**
 	 * Getter of the property <tt>update</tt>
-	 * @return  Returns the update.
-	 * @uml.property  name="update"
+	 * 
+	 * @return Returns the update.
+	 * @uml.property name="update"
 	 */
 	public Update getUpdate() {
 		return update;
@@ -40,8 +41,10 @@ public class UpdateThread extends Thread {
 
 	/**
 	 * Setter of the property <tt>update</tt>
-	 * @param update  The update to set.
-	 * @uml.property  name="update"
+	 * 
+	 * @param update
+	 *            The update to set.
+	 * @uml.property name="update"
 	 */
 	public void setUpdate(Update update) {
 		this.update = update;

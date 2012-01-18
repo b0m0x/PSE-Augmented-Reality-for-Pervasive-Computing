@@ -29,15 +29,16 @@ public class CustomMeshCreatorTest {
 
 		wall.setPositionX2(0f);
 		wall.setPositionY2(0f);
-		
+
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
-		
+
 		assertEquals(24, g.getMesh().getIndexBuffer().size());
-		assertEquals(Math.PI/4, g.getLocalRotation().toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
+		assertEquals(Math.PI / 4, g.getLocalRotation().toAngleAxis(
+				new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(0.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
-		
+
 	@Test
 	public void testConvertWall2() {
 		Wall wall = new Wall();
@@ -46,12 +47,13 @@ public class CustomMeshCreatorTest {
 
 		wall.setPositionX2(0f);
 		wall.setPositionY2(0f);
-		
+
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
-		
+
 		assertEquals(24, g.getMesh().getIndexBuffer().size());
-		assertEquals(Math.PI/2 + Math.PI/4, g.getLocalRotation().toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
+		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
+				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(-0.5f, -0.5f, 0f), g.getLocalTranslation());
 	}
 
@@ -66,15 +68,16 @@ public class CustomMeshCreatorTest {
 
 		wall.setPositionX2(2f);
 		wall.setPositionY2(1f);
-		
+
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
-		
+
 		assertEquals(24, g.getMesh().getIndexBuffer().size());
-		assertEquals(Math.PI/2 + Math.PI/4, g.getLocalRotation().toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
+		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
+				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
-	
+
 	/**
 	 * Same as Test 3, but with 1 hole
 	 */
@@ -86,26 +89,27 @@ public class CustomMeshCreatorTest {
 
 		wall.setPositionX2(2f);
 		wall.setPositionY2(1f);
-		
+
 		List<Hole> holes = new ArrayList<Hole>();
-		
+
 		Hole h1 = new Hole();
 		h1.setPositionX1(1f);
 		h1.setPositionY1(1f);
 		h1.setPositionX2(2f);
 		h1.setPositionY2(2f);
 		holes.add(h1);
-		
+
 		wall.setHole(holes);
-		
+
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
-		
+
 		assertEquals(96, g.getMesh().getIndexBuffer().size());
-		assertEquals(Math.PI/2 + Math.PI/4, g.getLocalRotation().toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
+		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
+				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
-	
+
 	/**
 	 * Same as Test 4, but with 2 Holes
 	 */
@@ -117,9 +121,9 @@ public class CustomMeshCreatorTest {
 
 		wall.setPositionX2(2f);
 		wall.setPositionY2(1f);
-		
+
 		List<Hole> holes = new ArrayList<Hole>();
-		
+
 		Hole h1 = new Hole();
 		h1.setPositionX1(1f);
 		h1.setPositionY1(1f);
@@ -133,18 +137,16 @@ public class CustomMeshCreatorTest {
 		h2.setPositionX2(3f);
 		h2.setPositionY2(2f);
 		holes.add(h2);
-		
+
 		wall.setHole(holes);
-		
+
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
-		
+
 		assertEquals(168, g.getMesh().getIndexBuffer().size());
-		assertEquals(Math.PI/2 + Math.PI/4, g.getLocalRotation().toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
+		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
+				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
-	
-	
-
 
 }

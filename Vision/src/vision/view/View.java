@@ -36,7 +36,7 @@ public class View extends SimpleApplication {
 	 *                     inverse="view:vision.view.GuiAppState"
 	 */
 	private GuiAppState guiAppState;
-	
+
 	/**
 	 * @uml.property name="mainAppState"
 	 * @uml.associationEnd multiplicity="(1 1)"
@@ -54,17 +54,16 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		//guiAppState = new vision.view.GuiAppState();
+		// guiAppState = new vision.view.GuiAppState();
 		mainAppState = new vision.view.MainAppState(daten);
-		for(Plugin p : daten.getPluginList()) 
-		{
+		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
 			stateManager.attach(p);
 		}
 		mainAppState.initialize(stateManager, this);
 		stateManager.attach(mainAppState);
-		//stateManager.attach(guiAppState);
-		
+		// stateManager.attach(guiAppState);
+
 	}
 
 	/**
@@ -76,7 +75,6 @@ public class View extends SimpleApplication {
 	public Model getDaten() {
 		return daten;
 	}
-
 
 	/**
 	 * Setter of the property <tt>daten</tt>
@@ -152,7 +150,6 @@ public class View extends SimpleApplication {
 		this.guiAppState = guiAppState;
 	}
 
-
 	/**
 	 * enables a plugin
 	 * 
@@ -163,7 +160,6 @@ public class View extends SimpleApplication {
 		stateManager.attach(p);
 	}
 
-
 	/**
 	 * disables a plugin
 	 * 
@@ -173,6 +169,5 @@ public class View extends SimpleApplication {
 	public void disablePlugin(Plugin p) {
 		stateManager.detach(p);
 	}
-
 
 }

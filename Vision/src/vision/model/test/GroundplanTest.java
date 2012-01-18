@@ -13,11 +13,11 @@ import vision.model.Wall;
 public class GroundplanTest {
 
 	private Groundplan gp;
-	
+
 	@Before
 	public void setUp() throws JAXBException {
 		gp = new vision.model.Groundplan().load();
-		}
+	}
 
 	@Test
 	public void testGroundplan() {

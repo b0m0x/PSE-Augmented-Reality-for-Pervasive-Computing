@@ -109,9 +109,9 @@ public class Sample {
 	public void setUpdate(long l) {
 		this.update = l;
 	}
-	
+
 	private Sensor sensor;
-	
+
 	public void setSensor(Sensor s) {
 		this.sensor = s;
 	}
@@ -122,8 +122,8 @@ public class Sample {
 		this.value = value;
 		this.update = update;
 	}
-	
+
 	public Sample() {
-	
+
 	}
 }
