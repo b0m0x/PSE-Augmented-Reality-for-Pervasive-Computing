@@ -3,7 +3,6 @@ package vision.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Collection;
 
 import javax.xml.bind.JAXBException;
 
@@ -20,13 +19,11 @@ import vision.view.View;
  */
 public class Model {
 
-
 	public Model(View view) throws JAXBException {
-
-		loadPlugins();
-		getAllSensors();
-		this.groundplan = new vision.model.Groundplan().load();
 		this.view = view;
+		loadPlugins();
+		this.sensor = getAllSensors();
+		this.groundplan = new vision.model.Groundplan().load();
 		this.datenbank = new vision.model.Database();
 
 	}
@@ -43,7 +40,14 @@ public class Model {
 
 	/**
 						 */
-	public void getTaggedSensors(List<String> tags) {
+	public List<Sensor> getTaggedSensors(List<String> tags) {
+		List<Sensor> tagged = new ArrayList<Sensor>();
+		for (int i = 0; i < sensor.size(); i++) {
+			if (sensor.get(i).getTags().equals(tags)) {
+				tagged.add(sensor.get(i));
+			}
+		}
+		return tagged;
 	}
 
 	/**
@@ -57,7 +61,7 @@ public class Model {
 	 * @uml.associationEnd multiplicity="(0 -1)"
 	 *                     inverse="daten:vision.model.Sensor"
 	 */
-	private Collection<Sensor> sensor = new ArrayList<Sensor>();
+	private List<Sensor> sensor = new ArrayList<Sensor>();
 
 	/**
 	 * Getter of the property <tt>sensor</tt>
@@ -65,7 +69,7 @@ public class Model {
 	 * @return Returns the sensor.
 	 * @uml.property name="sensor"
 	 */
-	public Collection<Sensor> getSensor() {
+	public List<Sensor> getSensor() {
 		return sensor;
 	}
 
@@ -130,7 +134,7 @@ public class Model {
 	 *            The sensor to set.
 	 * @uml.property name="sensor"
 	 */
-	public void setSensor(Collection<Sensor> sensor) {
+	public void setSensor(List<Sensor> sensor) {
 		this.sensor = sensor;
 	}
 
@@ -167,11 +171,10 @@ public class Model {
 		this.pluginList = pluginList;
 	}
 
-
 	/**
 		 */
-	private int getAllSensors() {
-		return 0;
+	private List<Sensor> getAllSensors() {
+		return new vision.model.JSONConverter().getSensorList();
 	}
 
 	/**
@@ -247,9 +250,13 @@ public class Model {
 	public List<Geometry> getStaticGeometry() {
 		// TODO Auto-generated method stub
 		List<Geometry> l = new ArrayList<Geometry>();
-		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
-		m.setTexture("ColorMap", view.getAssetManager().loadTexture("Textures/ColoredTex/Monkey.png"));
-		
+		Material m = new Material(view.getAssetManager(),
+				"Common/MatDefs/Misc/Unshaded.j3md");
+		m.setTexture(
+				"ColorMap",
+				view.getAssetManager().loadTexture(
+						"Textures/ColoredTex/Monkey.png"));
+
 		Geometry g = new Geometry("floor");
 		g.setMesh(new Cylinder(20, 20, 5, 5, true));
 		g.setMaterial(m);
