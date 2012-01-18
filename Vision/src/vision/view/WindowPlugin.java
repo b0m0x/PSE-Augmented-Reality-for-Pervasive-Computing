@@ -3,6 +3,7 @@ package vision.view;
 import java.util.List;
 
 import vision.controller.WindowController;
+import vision.model.Model;
 
 import com.jme3.app.Application;
 import com.jme3.scene.Geometry;
@@ -42,7 +43,8 @@ public class WindowPlugin extends Plugin {
 
 	/**
 			 */
-	public WindowPlugin() {
+	public WindowPlugin(Model model, View view) {
+		super(model);
 	}
 
 	@Override
