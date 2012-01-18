@@ -21,7 +21,7 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 		this.view = view;
-		loadPlugins();
+		//loadPlugins();
 		this.sensor = getAllSensors();
 		this.groundplan = new vision.model.Groundplan().load();
 		this.datenbank = new vision.model.Database();
@@ -253,10 +253,10 @@ public class Model {
 		Material m = new Material(view.getAssetManager(),
 				"Common/MatDefs/Misc/Unshaded.j3md");
 		m.setTexture("ColorMap", view.getAssetManager().loadTexture(
-				"Textures/ColoredTex/Monkey.png"));
+				"Interface/Logo/Monkey.jpg"));
 
 		Geometry g = new Geometry("floor");
-		g.setMesh(new Cylinder(20, 20, 5, 5, true));
+		g.setMesh(new Cylinder(10, 200, 2, 1, true));
 		g.setMaterial(m);
 		l.add(g);
 		return l;
