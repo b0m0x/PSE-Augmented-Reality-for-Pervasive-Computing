@@ -9,6 +9,8 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
+import vision.controller.Controller;
+import vision.controller.PluginController;
 import vision.model.Model;
 import vision.model.PluginLoader;
 import vision.view.HeaterPlugin;
@@ -30,6 +32,8 @@ public class PluginLoaderTest {
 		
 		assertEquals(false, plugins.isEmpty());
 		assertArrayEquals(new String[] {"heater"}, plugins.get(0).getTags());
+		
+		List<PluginController> controller = loader.getController();
 		
 	}
 
