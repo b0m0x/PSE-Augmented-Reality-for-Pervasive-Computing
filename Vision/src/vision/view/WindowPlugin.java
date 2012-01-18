@@ -62,7 +62,6 @@ public class WindowPlugin extends Plugin {
 		if(changed) {
 			updateWindows();
 		}
-
 	}
 	
 	private void updateWindows() {
