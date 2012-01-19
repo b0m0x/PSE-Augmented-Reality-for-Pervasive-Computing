@@ -3,13 +3,16 @@ package vision.view;
 import java.util.List;
 
 import vision.controller.WindowController;
+import vision.model.Hole;
 import vision.model.Model;
 import vision.model.Sample;
 import vision.model.Sensor;
+import vision.model.Wall;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.material.Material;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 
 public class WindowPlugin extends Plugin {
@@ -21,11 +24,13 @@ public class WindowPlugin extends Plugin {
 	private Geometry windowopened;
 	private Geometry windowclosed;
 	private Geometry window;
+	private Model model;
 
 	/**
 	 */
 	public WindowPlugin(Model model, View view) {
 		super(model);
+		this.model = model;
 		setTags(new String[] { "window" });
 	}
 
@@ -58,6 +63,7 @@ public class WindowPlugin extends Plugin {
 			window.setMaterial(m);
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
 					.getPosition().getY(), sensor.getPosition().getZ());
+			window = fitInHole(window);
 			window.setUserData("sid", sensor.getId());
 			windows.add(window.clone());
 		}
@@ -88,6 +94,25 @@ public class WindowPlugin extends Plugin {
 				}
 			}
 		}
+	}
+	
+	private Geometry fitInHole(Geometry window) {
+		List<Wall> walls = model.getGroundplan().getWall();
+		for(Wall w: walls) {
+			List<Hole> holes = w.getHole();
+			for(Hole h: holes) {
+				float top = h.getHeightWindow() + h.getHeightGround();
+				float bottom = h.getHeightGround();
+				float startX = h.getPositionX1();
+				float startY = h.getPositionY1();
+				float endX = h.getPositionX2();
+				float endY = h.getPositionY2();
+				Vector3f vecStart = new Vector3f(startX, startY, bottom);
+				Vector3f vecEnd = new Vector3f(endX, endY, top);
+				float distance = vecStart.distance(vecEnd);
+			}
+		}
+		return window;
 	}
 
 }
