@@ -93,7 +93,8 @@ public class CustomMeshCreator {
 			prevH = h;
 		}
 		CustomMesh m = assembleMesh();
-		return transformCoordinates(m, wall);
+		return new Geometry("a", m);
+		//return transformCoordinates(m, wall);
 	}
 
 	private Geometry transformCoordinates(CustomMesh wallMesh, WallAdapter wall) {
@@ -150,21 +151,21 @@ public class CustomMeshCreator {
 		addvertices[11] = pos.getZ() + dim.getZ() / 2;
 
 		// lower left back
-		addvertices[0] = pos.getX() - dim.getX() / 2;
-		addvertices[1] = pos.getY() + dim.getY() / 2;
-		addvertices[2] = pos.getZ() - dim.getZ() / 2;
+		addvertices[12] = pos.getX() - dim.getX() / 2;
+		addvertices[13] = pos.getY() + dim.getY() / 2;
+		addvertices[14] = pos.getZ() - dim.getZ() / 2;
 		// lower right back
-		addvertices[3] = pos.getX() + dim.getX() / 2;
-		addvertices[4] = pos.getY() + dim.getY() / 2;
-		addvertices[5] = pos.getZ() - dim.getZ() / 2;
+		addvertices[15] = pos.getX() + dim.getX() / 2;
+		addvertices[16] = pos.getY() + dim.getY() / 2;
+		addvertices[17] = pos.getZ() - dim.getZ() / 2;
 		// upper right back
-		addvertices[6] = pos.getX() + dim.getX() / 2;
-		addvertices[7] = pos.getY() + dim.getY() / 2;
-		addvertices[8] = pos.getZ() + dim.getZ() / 2;
+		addvertices[18] = pos.getX() + dim.getX() / 2;
+		addvertices[19] = pos.getY() + dim.getY() / 2;
+		addvertices[20] = pos.getZ() + dim.getZ() / 2;
 		// upper left back
-		addvertices[9] = pos.getX() - dim.getX() / 2;
-		addvertices[10] = pos.getY() + dim.getY() / 2;
-		addvertices[11] = pos.getZ() + dim.getZ() / 2;
+		addvertices[21] = pos.getX() - dim.getX() / 2;
+		addvertices[22] = pos.getY() + dim.getY() / 2;
+		addvertices[23] = pos.getZ() + dim.getZ() / 2;
 
 		int[] addindices = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 4, 5, 6,
 				7, 2, 4, 3, 7, 4, 0, 1, 5, 6, 2 };

@@ -2,6 +2,7 @@ package vision.model.test;
 
 import static org.junit.Assert.*;
 
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,14 @@ import org.junit.Test;
 
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Mesh;
+import com.jme3.scene.VertexBuffer.Type;
+import com.jme3.util.BufferUtils;
 
 import vision.model.CustomMeshCreator;
 import vision.model.Hole;
+import vision.model.Position;
+import vision.model.Size3D;
 import vision.model.Wall;
 
 public class CustomMeshCreatorTest {
@@ -147,6 +153,27 @@ public class CustomMeshCreatorTest {
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
+	}
+	
+	@Test
+	public void testBoxGenerator() {
+		Wall w = new Wall();
+		w.setPositionX1(0);
+		w.setPositionY1(0);
+		w.setPositionX2(1);
+		w.setPositionY2(0);
+		w.setWide(1);
+		w.setHeight(1);
+		CustomMeshCreator c = new CustomMeshCreator();
+		Mesh m = c.convert(w).getMesh();
+		FloatBuffer positions = (FloatBuffer) m.getBuffer(Type.Position).getData();
+		
+		float[] actual = new float[24];
+		positions.get(actual);
+		
+		float[] expect = new float[] {-0.5f,-0.5f,-0.5f, 0.5f,-0.5f,0.5f, 0.5f,-0.5f,0.5f, -0.5f,-0.5f,0.5f, -0.5f,0.5f,-0.5f, 0.5f,0.5f,-0.5f, 0.5f,0.5f,0.5f, -0.5f,0.5f,0.5f};
+		assertArrayEquals(expect, actual, 0.0002f);
+		
 	}
 
 }
