@@ -162,7 +162,7 @@ public class Controller implements ScreenController {
 	 */
 	@NiftyEventSubscriber(pattern = "*button*")
 	public void buttonClick(String id, ButtonClickedEvent bce) {
-
+		
 	}
 
 	/**
