@@ -8,7 +8,6 @@ import javax.xml.bind.JAXBException;
 
 import com.jme3.material.Material;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Cylinder;
 
 import vision.view.Plugin;
 import vision.view.View;
@@ -21,7 +20,7 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 		this.view = view;
-		//loadPlugins();
+		// loadPlugins();
 		this.sensor = getAllSensors();
 		this.groundplan = new vision.model.Groundplan().load();
 		this.datenbank = new vision.model.Database();
@@ -248,17 +247,18 @@ public class Model {
 	}
 
 	public List<Geometry> getStaticGeometry() {
-		// TODO Auto-generated method stub
 		List<Geometry> l = new ArrayList<Geometry>();
 		Material m = new Material(view.getAssetManager(),
 				"Common/MatDefs/Misc/Unshaded.j3md");
-		m.setTexture("ColorMap", view.getAssetManager().loadTexture(
-				"Interface/Logo/Monkey.jpg"));
+		m.setTexture("ColorMap",
+				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
 
-		Geometry g = new Geometry("floor");
-		g.setMesh(new Cylinder(10, 200, 2, 1, true));
-		g.setMaterial(m);
-		l.add(g);
+		for (int i = 0; i < groundplan.getWall().size(); i++) {
+			Geometry g = new Geometry();
+			g = new CustomMeshCreator().convert(groundplan.getWall().get(i));
+			g.setMaterial(m);
+			l.add(g);
+		}
 		return l;
 	}
 
