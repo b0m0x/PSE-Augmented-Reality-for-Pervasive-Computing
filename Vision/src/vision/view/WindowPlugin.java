@@ -18,6 +18,8 @@ public class WindowPlugin extends Plugin {
 	 * @uml.property name="windows"
 	 */
 	private List<Geometry> windows;
+	private Geometry windowopened;
+	private Geometry windowclosed;
 	private Geometry window;
 
 	/**
@@ -30,28 +32,31 @@ public class WindowPlugin extends Plugin {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		window = (Geometry) app.getAssetManager()
-				.loadModel("Models/window.j3o");
+		windowopened = (Geometry) app.getAssetManager().loadModel(
+				"Models/windowopened.j3o");
+		windowclosed = (Geometry) app.getAssetManager().loadModel(
+				"Models/windowclosed.j3o");
 		initWindows(app);
 	}
 
 	private void initWindows(Application app) {
 		for (Sensor sensor : getSensors()) {
-			boolean open = false;
+			float status = 0.0f;
 			for (Sample sample : sensor.getMesswert()) {
-				if (sample.getTyp().equals("offen")) {
-					open = true;
+				if (sample.getTyp().equals("window")) {
+					status = sample.getValue();
 					break;
 				}
 			}
 			Material m = new Material(app.getAssetManager(),
 					"Common/MatDefs/Misc/Unshaded.j3md");
-			if (open) {
-				window.open();
+			if (status > 0.0f) {
+				window.setMesh(windowopened.getMesh());
 			} else {
-				window.close();
+				window.setMesh(windowclosed.getMesh());
 			}
-			window.setLocalScale(sensor.getPosition().getX(), sensor
+			window.setMaterial(m);
+			window.setLocalTranslation(sensor.getPosition().getX(), sensor
 					.getPosition().getY(), sensor.getPosition().getZ());
 			window.setUserData("sid", sensor.getId());
 			windows.add(window.clone());
@@ -59,28 +64,30 @@ public class WindowPlugin extends Plugin {
 	}
 
 	protected void clientUpdate(Application application, boolean changed) {
-		if(changed) {
+		if (changed) {
 			updateWindows();
 		}
 	}
-	
+
 	private void updateWindows() {
 		for (Geometry g : windows) {
 			String sid = g.getUserData("sid");
-			for(Sensor sensor: getSensors()) {
-				if(!sensor.getId().equals(sid)) {
+			for (Sensor sensor : getSensors()) {
+				if (!sensor.getId().equals(sid)) {
 					continue;
 				}
-				for(Sample sample: sensor.getMesswert()) {
-					if(sample.getTyp().equals("zu")) {
-						window.close();
-					} else {
-						window.open();
+				for (Sample sample : sensor.getMesswert()) {
+					if (sample.getTyp().equals("window")) {
+						float status = sample.getValue();
+						if(status > 0.0f) {
+							g.setMesh(windowopened.getMesh());
+						} else {
+							g.setMesh(windowclosed.getMesh());
+						}
 					}
 				}
 			}
 		}
 	}
-	
 
 }
