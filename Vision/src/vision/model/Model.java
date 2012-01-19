@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Box;
 
 import vision.view.Plugin;
 import vision.view.View;
@@ -256,12 +257,17 @@ public class Model {
 		m.getAdditionalRenderState().setWireframe(true);
 		m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
 		for (int i = 0; i < groundplan.getWall().size(); i++) {
-			Geometry g = new Geometry();
-			g = new CustomMeshCreator().convert(groundplan.getWall().get(i));
+			Geometry g = new Geometry("floor");
+			g.setMesh(new Box(Math.abs(groundplan.getWall().get(i)
+					.getPositionX1()
+					- groundplan.getWall().get(i).getPositionX2()), Math
+					.abs(groundplan.getWall().get(i).getPositionY1()
+							- groundplan.getWall().get(i).getPositionY2()),
+					groundplan.getWall().get(i).getWide()));
+			// g = new CustomMeshCreator().convert(groundplan.getWall().get(i));
 			g.setMaterial(m);
 			l.add(g);
 		}
 		return l;
 	}
-
 }
