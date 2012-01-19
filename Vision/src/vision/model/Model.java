@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import com.jme3.material.Material;
+import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.scene.Geometry;
 
 import vision.view.Plugin;
@@ -252,7 +253,8 @@ public class Model {
 				"Common/MatDefs/Misc/Unshaded.j3md");
 		m.setTexture("ColorMap",
 				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
-
+		m.getAdditionalRenderState().setWireframe(true);
+		m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
 		for (int i = 0; i < groundplan.getWall().size(); i++) {
 			Geometry g = new Geometry();
 			g = new CustomMeshCreator().convert(groundplan.getWall().get(i));

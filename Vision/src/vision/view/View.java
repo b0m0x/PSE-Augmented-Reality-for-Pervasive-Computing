@@ -9,6 +9,7 @@ import vision.controller.Controller;
 import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.scene.Spatial.CullHint;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -55,6 +56,7 @@ public class View extends SimpleApplication {
 	 */
 	public void simpleInitApp() {
 		// guiAppState = new vision.view.GuiAppState();
+		rootNode.setCullHint(CullHint.Never);
 		mainAppState = new vision.view.MainAppState(daten);
 		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
