@@ -7,8 +7,9 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import com.jme3.material.Material;
+import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Cylinder;
+import com.jme3.scene.shape.Box;
 
 import vision.view.Plugin;
 import vision.view.View;
@@ -21,7 +22,7 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 		this.view = view;
-		//loadPlugins();
+		// loadPlugins();
 		this.sensor = getAllSensors();
 		this.groundplan = new vision.model.Groundplan().load();
 		this.datenbank = new vision.model.Database();
@@ -248,18 +249,25 @@ public class Model {
 	}
 
 	public List<Geometry> getStaticGeometry() {
-		// TODO Auto-generated method stub
 		List<Geometry> l = new ArrayList<Geometry>();
 		Material m = new Material(view.getAssetManager(),
 				"Common/MatDefs/Misc/Unshaded.j3md");
-		m.setTexture("ColorMap", view.getAssetManager().loadTexture(
-				"Interface/Logo/Monkey.jpg"));
-
-		Geometry g = new Geometry("floor");
-		g.setMesh(new Cylinder(10, 200, 2, 1, true));
-		g.setMaterial(m);
-		l.add(g);
+		m.setTexture("ColorMap",
+				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
+		m.getAdditionalRenderState().setWireframe(true);
+		m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
+		for (int i = 0; i < groundplan.getWall().size(); i++) {
+			Geometry g = new Geometry("floor");
+			g.setMesh(new Box(Math.abs(groundplan.getWall().get(i)
+					.getPositionX1()
+					- groundplan.getWall().get(i).getPositionX2()), Math
+					.abs(groundplan.getWall().get(i).getPositionY1()
+							- groundplan.getWall().get(i).getPositionY2()),
+					groundplan.getWall().get(i).getWide()));
+			// g = new CustomMeshCreator().convert(groundplan.getWall().get(i));
+			g.setMaterial(m);
+			l.add(g);
+		}
 		return l;
 	}
-
 }

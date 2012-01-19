@@ -7,7 +7,9 @@ import java.util.UUID;
 import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
+import com.jme3.util.BufferUtils;
 
 /**
  * converts a Wall object to a renderable Mesh
@@ -113,8 +115,9 @@ public class CustomMeshCreator {
 
 	private CustomMesh assembleMesh() {
 		CustomMesh wallMesh = new CustomMesh();
-		wallMesh.setBuffer(Type.Position, 3, vertices);
-		wallMesh.setBuffer(Type.Index, 4, indices);
+		wallMesh.setMode(Mesh.Mode.TriangleStrip);
+		wallMesh.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
+		wallMesh.setBuffer(Type.Index, 1, BufferUtils.createIntBuffer(indices));
 		return wallMesh;
 	}
 

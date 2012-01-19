@@ -1,6 +1,8 @@
 package vision.view;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 
 import vision.controller.HeaterController;
 import vision.model.Model;
@@ -15,7 +17,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 
 /**
- * @author idle This class represents the plugins of the heater
+ * This class represents the plugins of the heater
  */
 public class HeaterPlugin extends Plugin {
 
@@ -24,12 +26,15 @@ public class HeaterPlugin extends Plugin {
 	 */
 	private List<Geometry> heaters;
 	private Geometry heater;
+	private Model model;
+	private Logger log = Logger.getLogger(HeaterPlugin.class.getName());
 
 	/**
 	 * 
 	 */
 	public HeaterPlugin(Model model, View v) {
 		super(model);
+		this.model = model;
 		setTags(new String[] { "heater" });
 	}
 
@@ -40,8 +45,17 @@ public class HeaterPlugin extends Plugin {
 				.loadModel("Models/heater.j3o");
 		initHeaters(app);
 	}
+	
+	/**
+	 * align the heaters along walls
+	 */
+	private void alignHeaters() {
+		for (Geometry g : heaters) {
+			//TODO do it
+		}
+	}
 
-	void initHeaters(Application app) {
+	private void initHeaters(Application app) {
 		for (Sensor s : getSensors()) {
 			float temperature = 0;
 			for (Sample sp : s.getMesswert()) {
@@ -57,12 +71,13 @@ public class HeaterPlugin extends Plugin {
 			heater.setMaterial(m);
 			heater.setLocalTranslation(s.getPosition().getX(), s.getPosition()
 					.getY(), s.getPosition().getZ());
+			
 			heater.setUserData("sid", s.getId());
 			heaters.add(heater.clone());
 		}
 	}
 
-	void updateHeaters() {
+	private void updateHeaters() {
 		for (Geometry g : heaters) {
 			String sid = g.getUserData("sid");
 			for (Sensor s : getSensors()) {
