@@ -39,7 +39,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(24, g.getMesh().getIndexBuffer().size());
+		assertEquals(36, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 4, g.getLocalRotation().toAngleAxis(
 				new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(0.5f, 0.5f, 0f), g.getLocalTranslation());
@@ -57,7 +57,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(24, g.getMesh().getIndexBuffer().size());
+		assertEquals(36, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(-0.5f, -0.5f, 0f), g.getLocalTranslation());
@@ -78,7 +78,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(24, g.getMesh().getIndexBuffer().size());
+		assertEquals(36, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
@@ -110,7 +110,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(96, g.getMesh().getIndexBuffer().size());
+		assertEquals(144, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
@@ -149,31 +149,12 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(168, g.getMesh().getIndexBuffer().size());
+		assertEquals(252, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
 	
-	@Test
-	public void testBoxGenerator() {
-		Wall w = new Wall();
-		w.setPositionX1(0);
-		w.setPositionY1(0);
-		w.setPositionX2(1);
-		w.setPositionY2(0);
-		w.setWide(1);
-		w.setHeight(1);
-		CustomMeshCreator c = new CustomMeshCreator();
-		Mesh m = c.convert(w).getMesh();
-		FloatBuffer positions = (FloatBuffer) m.getBuffer(Type.Position).getData();
-		
-		float[] actual = new float[24];
-		positions.get(actual);
-		
-		float[] expect = new float[] {-0.5f,-0.5f,-0.5f, 0.5f,-0.5f,0.5f, 0.5f,-0.5f,0.5f, -0.5f,-0.5f,0.5f, -0.5f,0.5f,-0.5f, 0.5f,0.5f,-0.5f, 0.5f,0.5f,0.5f, -0.5f,0.5f,0.5f};
-		assertArrayEquals(expect, actual, 0.0002f);
-		
-	}
+
 
 }

@@ -93,8 +93,8 @@ public class CustomMeshCreator {
 			prevH = h;
 		}
 		CustomMesh m = assembleMesh();
-		return new Geometry("a", m);
-		//return transformCoordinates(m, wall);
+		//return new Geometry("a", m);
+		return transformCoordinates(m, wall);
 	}
 
 	private Geometry transformCoordinates(CustomMesh wallMesh, WallAdapter wall) {
@@ -116,7 +116,7 @@ public class CustomMeshCreator {
 
 	private CustomMesh assembleMesh() {
 		CustomMesh wallMesh = new CustomMesh();
-		wallMesh.setMode(Mesh.Mode.TriangleStrip);
+		wallMesh.setMode(Mesh.Mode.Triangles);
 		wallMesh.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
 		wallMesh.setBuffer(Type.Index, 1, BufferUtils.createIntBuffer(indices));
 		return wallMesh;
@@ -167,8 +167,18 @@ public class CustomMeshCreator {
 		addvertices[22] = pos.getY() + dim.getY() / 2;
 		addvertices[23] = pos.getZ() + dim.getZ() / 2;
 
-		int[] addindices = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 4, 5, 6,
-				7, 2, 4, 3, 7, 4, 0, 1, 5, 6, 2 };
+		int[] addindices = new int[] { 0, 1, 2, // front 
+									   2, 3, 0, // front
+									   4, 5, 6, // back
+									   6, 7, 4, // back
+									   0, 1, 4, // down
+									   4, 1, 5, // down
+									   6, 7, 2, // top
+									   2, 3, 7, // top - ?
+									   3, 7, 4, // left
+									   4, 0, 3, // left
+									   1, 5, 6, // right
+									   6, 2, 1 }; // right
 
 		float[] newvertices = new float[vertices.length + addvertices.length];
 		int[] newindices = new int[indices.length + addindices.length];

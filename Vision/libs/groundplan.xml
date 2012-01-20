@@ -6,9 +6,10 @@
 	<positionY1>12.374903487847</positionY1>
 	<positionX2>23.422332333316</positionX2>
 	<positionY2>32.821344374763</positionY2>
-	<height>2.435644</height>
+	<height>7.435644</height>
 	<wide>3.4123432</wide>
-	<!--	<hole>
+	<!-- 
+		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>23.422332333316</positionX1>
 			<positionY1>18.374903487847</positionY1>
@@ -25,7 +26,7 @@
 			<positionY2>12.821344374763</positionY2>
 			<heightGround>0.834455</heightGround>
 			<heightWindow>1.100012</heightWindow>
-		</hole> !-->
+		</hole>  -->
     </wall>
     
     <!-- 
