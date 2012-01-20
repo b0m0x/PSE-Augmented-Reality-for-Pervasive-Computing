@@ -9,7 +9,10 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.PointLight;
 import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
@@ -77,6 +80,20 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 				rt, up, dn);
 
 		app.getRootNode().attachChild(sb);
+		
+		
+		//add light
+		PointLight lamp_light = new PointLight();
+		lamp_light.setColor(ColorRGBA.Yellow);
+		lamp_light.setRadius(40f);
+		lamp_light.setPosition(new Vector3f(0, 0, 5));
+		app.getRootNode().addLight(lamp_light);
+		
+		
+		AmbientLight al = new AmbientLight();
+		al.setColor(ColorRGBA.White.mult(1.3f));
+		app.getRootNode().addLight(al);
+		
 		// init camera
 		app.getFlyByCamera().setEnabled(true);
 

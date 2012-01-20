@@ -16,8 +16,9 @@ import com.jme3.util.BufferUtils;
  */
 public class CustomMeshCreator {
 
-	float[] vertices = new float[] {};
-	int[] indices = new int[] {};
+	private float[] vertices = new float[] {};
+	private int[] indices = new int[] {};
+	private float[] normals = new float[] {};
 
 	/**
 	 * creates a mesh off of a wall object. builds in holes for windows if
@@ -93,7 +94,6 @@ public class CustomMeshCreator {
 			prevH = h;
 		}
 		CustomMesh m = assembleMesh();
-		//return new Geometry("a", m);
 		return transformCoordinates(m, wall);
 	}
 
@@ -119,6 +119,7 @@ public class CustomMeshCreator {
 		wallMesh.setMode(Mesh.Mode.Triangles);
 		wallMesh.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
 		wallMesh.setBuffer(Type.Index, 1, BufferUtils.createIntBuffer(indices));
+		wallMesh.setBuffer(Type.Normal, 3, BufferUtils.createFloatBuffer(normals));
 		return wallMesh;
 	}
 
@@ -174,14 +175,17 @@ public class CustomMeshCreator {
 									   0, 1, 4, // down
 									   4, 1, 5, // down
 									   6, 7, 2, // top
-									   2, 3, 7, // top - ?
+									   2, 3, 7, // top 
 									   3, 7, 4, // left
 									   4, 0, 3, // left
 									   1, 5, 6, // right
 									   6, 2, 1 }; // right
+		
+		float[] addnormals = new float[] {0,0,1, 0,0,1, 0,0,1, 0,0,1};
 
 		float[] newvertices = new float[vertices.length + addvertices.length];
 		int[] newindices = new int[indices.length + addindices.length];
+		float[] newnormals = new float[normals.length + addnormals.length];
 
 		// add to indices list
 		for (int i = 0; i < indices.length; i++) {
@@ -200,5 +204,17 @@ public class CustomMeshCreator {
 			newvertices[i + vertices.length] = addvertices[i];
 		}
 		vertices = newvertices;
+		
+		
+		// add to normal list
+		for (int i = 0; i < normals.length; i++) {
+			newnormals[i] = normals[i];
+		}
+		for (int i = 0; i < addnormals.length; i++) {
+			newnormals[i + normals.length] = addnormals[i];
+		}
+		normals  = newnormals;
+		
+		
 	}
 }
