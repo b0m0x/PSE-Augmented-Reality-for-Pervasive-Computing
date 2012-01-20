@@ -120,6 +120,7 @@ public class CustomMeshCreator {
 		wallMesh.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
 		wallMesh.setBuffer(Type.Index, 1, BufferUtils.createIntBuffer(indices));
 		wallMesh.setBuffer(Type.Normal, 3, BufferUtils.createFloatBuffer(normals));
+		wallMesh.updateBound();
 		return wallMesh;
 	}
 

@@ -260,16 +260,17 @@ public class Model {
 
 	private void createGeometry() {
 		staticGeometries = new ArrayList<Geometry>();
-		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
-		m.setBoolean("m_UseMaterialColors", true);
-		m.setColor("m_Ambient",  ColorRGBA.Orange);
-		m.setColor("m_Diffuse",  ColorRGBA.Orange);
-		m.setColor("m_Specular", ColorRGBA.White);
-		m.setFloat("m_Shininess", 12);
-		//m.setTexture("ColorMap",
-		//		view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
-		//m.getAdditionalRenderState().setWireframe(true);
-		//m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
+//		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
+//		m.setBoolean("m_UseMaterialColors", true);
+//		m.setColor("m_Ambient",  ColorRGBA.Orange);
+//		m.setColor("m_Diffuse",  ColorRGBA.Orange);
+//		m.setColor("m_Specular", ColorRGBA.White);
+//		m.setFloat("m_Shininess", 12);
+		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+		m.setTexture("ColorMap",
+				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
+		m.getAdditionalRenderState().setWireframe(true);
+		m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
 		
 		
 		for (Wall w : groundplan.getWall()) {
