@@ -2,10 +2,10 @@
 <groundplan>
     <wall>
 	<wallNumber>1</wallNumber>
-    <positionX1>1.422332333316</positionX1>
-	<positionY1>0.374903487847</positionY1>
-	<positionX2>10.422332333316</positionX2>
-	<positionY2>3.821344374763</positionY2>
+    <positionX1>0</positionX1>
+	<positionY1>0</positionY1>
+	<positionX2>10</positionX2>
+	<positionY2>0</positionY2>
 	<height>3.435644</height>
 	<wide>0.4123432</wide>
 	
@@ -33,10 +33,10 @@
     
     <wall>
         <wallNumber>2</wallNumber>
-        <positionX1>5.422332333316</positionX1>
-		<positionY1>1.374903487847</positionY1>
-		<positionX2>5.932532783242</positionX2>
-		<positionY2>12.374903487847</positionY2>
+        <positionX1>0</positionX1>
+		<positionY1>0</positionY1>
+		<positionX2>2</positionX2>
+		<positionY2>10</positionY2>
 	<height>3.435644</height>
 	<wide>0.4123432</wide>
 		<hole>

@@ -87,12 +87,12 @@ public class CustomMeshCreator {
 				+ wall.getEnd().getX(), wall.getStart().getY()
 				+ wall.getEnd().getY());
 		a = wallDir.angleBetween(new Vector2f(1f, 0f));
-		wallGeometry = wallGeometry.move(wall.getPosition().getX(),
-				0, wall.getPosition().getY());
+		wallGeometry = wallGeometry.rotate(0, a, 0);
 		wallGeometry.setMaterial(new Material()); // TODO: set unshaded
 													// material. requires
 													// reference to an asset
 													// manager
-		return wallGeometry.rotate(0, a, 0);
+		return wallGeometry.move(wall.getPosition().getX(),
+				0, wall.getPosition().getY());
 	}
 }
