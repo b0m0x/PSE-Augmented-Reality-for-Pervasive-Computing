@@ -5,7 +5,7 @@
    <useControls filename="nifty-default-controls.xml" />
    <useStyles filename="nifty-default-styles.xml" />
        
-  <screen id="start">
+  <screen id="start" controller="vision.controller.Controller">
     	
     <layer id="foreground" backgroundColor="#0000" childLayout="vertical">
    	  <panel id="panel_top" height="25%" width="100%" align="center" childLayout="horizontal"> 
