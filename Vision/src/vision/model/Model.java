@@ -10,6 +10,7 @@ import com.jme3.material.Material;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 
 import vision.view.Plugin;
@@ -186,7 +187,7 @@ public class Model {
 	 */
 	private Groundplan groundplan;
 
-	private List<Geometry> staticGeometries;
+	private List<Spatial> staticGeometries;
 
 	/**
 	 * Getter of the property <tt>groundplan</tt>
@@ -251,7 +252,7 @@ public class Model {
 		this.pluginLoader = pluginLoader;
 	}
 
-	public List<Geometry> getStaticGeometry() {
+	public List<Spatial> getStaticGeometry() {
 		if (staticGeometries == null) {
 			createGeometry();
 		}
@@ -259,22 +260,22 @@ public class Model {
 	}
 
 	private void createGeometry() {
-		staticGeometries = new ArrayList<Geometry>();
-//		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
-//		m.setBoolean("m_UseMaterialColors", true);
-//		m.setColor("m_Ambient",  ColorRGBA.Orange);
-//		m.setColor("m_Diffuse",  ColorRGBA.Orange);
-//		m.setColor("m_Specular", ColorRGBA.White);
-//		m.setFloat("m_Shininess", 12);
-		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
-		m.setTexture("ColorMap",
-				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
-		m.getAdditionalRenderState().setWireframe(true);
-		m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
+		staticGeometries = new ArrayList<Spatial>();
+		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
+		m.setBoolean("m_UseMaterialColors", true);
+		m.setColor("m_Ambient",  ColorRGBA.Orange);
+		m.setColor("m_Diffuse",  ColorRGBA.Orange);
+		m.setColor("m_Specular", ColorRGBA.White);
+		m.setFloat("m_Shininess", 12);
+//		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+//		m.setTexture("ColorMap",
+//				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
+//		m.getAdditionalRenderState().setWireframe(true);
+//		m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
 		
 		
 		for (Wall w : groundplan.getWall()) {
-			Geometry g = new CustomMeshCreator().convert(w);
+			Spatial g = new CustomMeshCreator().convert(w);
 			g.setMaterial(m);
 			staticGeometries.add(g);
 		}

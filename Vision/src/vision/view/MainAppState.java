@@ -56,9 +56,9 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		}
 		super.stateAttached(stateManager);
 		mainGeometryNode = new Node("static");
-		List<Geometry> staticObjects = model.getStaticGeometry();
+		List<Spatial> staticObjects = model.getStaticGeometry();
 
-		for (Geometry g : staticObjects) {
+		for (Spatial g : staticObjects) {
 			mainGeometryNode.attachChild(g);
 		}
 		app.getRootNode().attachChild(mainGeometryNode);

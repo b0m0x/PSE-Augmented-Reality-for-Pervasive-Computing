@@ -1,5 +1,6 @@
 package vision.model;
 
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
 public class HoleAdapter {
@@ -16,21 +17,19 @@ public class HoleAdapter {
 	 *         to the lower left corner of the wall, in x, y coordinates, z is
 	 *         set to 0
 	 */
-	public Vector3f getPosition() {
-		return new Vector3f((hole.getPositionX1() + hole.getPositionX2()) / 2,
-				(hole.getPositionY1() + hole.getPositionY2()) / 2, 0);
+	public Vector2f getPosition() {
+		return new Vector2f((hole.getPositionX1() + hole.getPositionX2()) / 2,
+				(hole.getPositionY1() + hole.getPositionY2()) / 2);
 	}
 
 	/**
 	 * returns the size of the hole
 	 * 
-	 * @return the size of the hole. x and y are local coordinates, z is set to
-	 *         0
+	 * @return the size of the hole. x and y are local coordinates
 	 */
-	public Vector3f getSize() {
-		return new Vector3f(hole.getPositionX2() - hole.getPositionX1(), hole
-				.getPositionY2()
-				- hole.getPositionY1(), 0);
+	public Vector2f getSize() {
+		return new Vector2f(hole.getPositionX2() - hole.getPositionX1(), hole
+				.getPositionY2() - hole.getPositionY1());
 	}
 
 }
