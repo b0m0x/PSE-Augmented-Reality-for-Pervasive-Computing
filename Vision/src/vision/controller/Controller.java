@@ -1,6 +1,7 @@
 package vision.controller;
 
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
@@ -10,6 +11,7 @@ import de.lessvoid.nifty.screen.ScreenController;
 
 import java.awt.peer.CheckboxPeer;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 import com.jme3.scene.Geometry;
 
@@ -22,7 +24,10 @@ import vision.view.View;
  * 
  */
 public class Controller implements ScreenController {
-
+	
+	private Nifty nifty;
+	private Screen screen;
+	
 	public Controller(View view, Model model) {
 		this.view = view;
 		this.model = model;
@@ -34,8 +39,9 @@ public class Controller implements ScreenController {
 	 * binds the nifty instance to this controller
 	 */
 	@Override
-	public void bind(Nifty arg0, Screen arg1) {
-		// TODO Auto-generated method stub
+	public void bind(Nifty nifty, Screen screen) {
+		this.nifty = nifty;
+		this.screen = screen;
 
 	}
 
@@ -140,8 +146,8 @@ public class Controller implements ScreenController {
 	 * pluginButton gets called by nifty if a button of a plugin was pressed and
 	 * forwards it to the respective plugin controller
 	 */
-	@NiftyEventSubscriber(pattern = "*button*")
-	public void pluginButton(String id) {
+	//@NiftyEventSubscriber(pattern = ".*button.*")
+	public void pluginButton(String id, Object o) {
 
 	}
 
@@ -149,8 +155,8 @@ public class Controller implements ScreenController {
 	 * gets called by nifty if a checkbox of a plugin was pressed and forwards
 	 * it to the respective plugin controller
 	 */
-	@NiftyEventSubscriber(pattern = "*checkbox*")
-	public void pluginCheckbox(String id) {
+	//@NiftyEventSubscriber(pattern = ".*checkbox.*")
+	public void pluginCheckbox(String id, Object o) {
 
 	}
 
@@ -160,9 +166,10 @@ public class Controller implements ScreenController {
 	 * @param id
 	 *            id of the clicked button
 	 */
-	@NiftyEventSubscriber(pattern = "*button*")
+	//@NiftyEventSubscriber(pattern = ".*button.*")
 	public void buttonClick(String id, ButtonClickedEvent bce) {
-		
+		Logger l= Logger.getLogger("buttonclick");
+		l.info("Button was pressed.");
 	}
 
 	/**
@@ -179,8 +186,9 @@ public class Controller implements ScreenController {
 	 * gets called if the user pressed the activate/deactivate button
 	 */
 	@NiftyEventSubscriber(id = "btn_manageplugins")
-	public void createManagePluginsPopupMenu() {
-
+	public void createManagePluginsPopupMenu(String id, Object o) {
+		Logger l= Logger.getLogger("buttonclick");
+		l.info("Button was pressed.");
 	}
 
 	/**
@@ -189,8 +197,8 @@ public class Controller implements ScreenController {
 	 * @param id
 	 *            the id of the checkbox that was pressed
 	 */
-	@NiftyEventSubscriber(pattern = "checkbox*")
-	public void checkboxPressed(String id) {
+	//@NiftyEventSubscriber(pattern = "checkbox.*")
+	public void checkboxPressed(String id, Object o) {
 
 	}
 

@@ -55,7 +55,7 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		guiAppState = new vision.view.GuiAppState();
+		guiAppState = new vision.view.GuiAppState(controller);
 		rootNode.setCullHint(CullHint.Never);
 		mainAppState = new vision.view.MainAppState(daten);
 		for (Plugin p : daten.getPluginList()) {

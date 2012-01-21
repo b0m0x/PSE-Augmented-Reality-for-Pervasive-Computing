@@ -12,19 +12,24 @@
 			        <panel id="panel_top_left" height="100%" width="79%" valign="center" childLayout="vertical" >  
 			             <control name="label" color="#000" text="" width="100%" height="10%" />
 			             <panel id="oben_menue" align="left" width="100%" childLayout="horizontal"> 
-			             	<control name="button" label="Enable Plugins" id="EnablePlugins" valign="center"> 
+			             	<control name="button" label="Enable Plugins" id="btn_manageplugins" valign="center"
+			             	visibleToMouse="true"> 
+			             	
 		          			</control>
 		        		
-		          			<control name="button" label="Settings" id="Settings"  valign="center"> 
+		          			<control name="button" label="Settings" id="Settings"  valign="center" 
+		          			visibleToMouse="true"> 
 		          			</control>
 		          			
-		          			<control name="button" label="Overview" id="Overview"  valign="center"> 
+		          			<control name="button" label="Overview" id="Overview"  valign="center"
+		          			visibleToMouse="true"> 
 		          			</control>
 		          			        	
-		          			<control name="button" label="Load Room" id="Load Room"  valign="center"> 
+		          			<control name="button" label="Load Room" id="LoadRoom"  valign="center"
+		          			visibleToMouse="true"> 
 		          			</control>    
 		          			
-		          			<control name="button" label="Help" id="Help"  valign="center"> 
+		          			<control name="button" label="Help" id="Help"  valign="center" visibleToMouse="true"> 
 		          			</control> 
 			             
 			             </panel>
