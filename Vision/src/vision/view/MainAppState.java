@@ -18,6 +18,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.Spatial.CullHint;
 import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
 
@@ -88,7 +89,9 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		lamp_light.setRadius(40f);
 		lamp_light.setPosition(new Vector3f(0, 0, 5));
 		app.getRootNode().addLight(lamp_light);
-		
+
+
+		app.getRootNode().setCullHint(CullHint.Never);
 		
 		AmbientLight al = new AmbientLight();
 		al.setColor(ColorRGBA.White.mult(1.3f));
