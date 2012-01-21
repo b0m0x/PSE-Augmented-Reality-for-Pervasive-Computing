@@ -9,6 +9,7 @@ import vision.controller.Controller;
 import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.bullet.BulletAppState;
 import com.jme3.scene.Spatial.CullHint;
 
 /**
@@ -44,6 +45,8 @@ public class View extends SimpleApplication {
 	 *                     inverse="view:vision.view.MainAppState"
 	 */
 	private MainAppState mainAppState;
+	
+	private BulletAppState bulletAppState;
 
 	/**
 	 * is called every frame by jmonkey
@@ -55,9 +58,9 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		guiAppState = new vision.view.GuiAppState();
-		rootNode.setCullHint(CullHint.Never);
-		mainAppState = new vision.view.MainAppState(daten);
+		guiAppState = new GuiAppState();
+		bulletAppState = new BulletAppState();
+		mainAppState = new MainAppState(daten);
 		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
 			stateManager.attach(p);
@@ -66,6 +69,7 @@ public class View extends SimpleApplication {
 		mainAppState.initialize(stateManager, this);
 		stateManager.attach(mainAppState);
 		stateManager.attach(guiAppState);
+		stateManager.attach(bulletAppState);
 		
 
 	}

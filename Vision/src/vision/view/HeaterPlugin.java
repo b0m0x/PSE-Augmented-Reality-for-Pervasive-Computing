@@ -64,11 +64,12 @@ public class HeaterPlugin extends Plugin {
 					break;
 				}
 			}
+			/* 
 			Material m = new Material(app.getAssetManager(),
 					"Common/MatDefs/Misc/Unshaded.j3md");
 			m.setColor("Color", new ColorRGBA(temperature / 50f, 0,
 					1 - temperature / 50f, 1));
-			heater.setMaterial(m);
+			heater.setMaterial(m);*/
 			heater.setLocalTranslation(s.getPosition().getX(), s.getPosition()
 					.getY(), s.getPosition().getZ());
 			
