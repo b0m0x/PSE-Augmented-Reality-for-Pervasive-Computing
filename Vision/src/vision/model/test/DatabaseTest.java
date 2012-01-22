@@ -1,13 +1,6 @@
 package vision.model.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import vision.model.Database;
-import vision.model.JSONConverter;
-import vision.model.Sample;
-import vision.model.Sensor;
-import vision.model.Update;
 import junit.framework.TestCase;
 
 public class DatabaseTest extends TestCase {

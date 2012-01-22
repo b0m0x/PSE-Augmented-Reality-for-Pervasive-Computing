@@ -3,14 +3,12 @@
  */
 package vision.view;
 
-import java.util.List;
 
 import vision.controller.Controller;
 import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
-import com.jme3.scene.Spatial.CullHint;
 
 /**
  * main class of the view package. contains the main update loop and calls the

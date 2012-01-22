@@ -1,9 +1,6 @@
 package vision.controller;
 
 import java.util.Map;
-
-import de.lessvoid.nifty.NiftyEventSubscriber;
-
 import vision.model.Model;
 import vision.view.Plugin;
 
@@ -87,11 +84,6 @@ public abstract class PluginController {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @uml.property name="plugin1"
-	 * @uml.associationEnd inverse="pluginController:vision.view.Plugin"
-	 */
-	private Plugin plugin1;
 
 	/**
 	 * Getter of the property <tt>plugin1</tt>
@@ -99,8 +91,8 @@ public abstract class PluginController {
 	 * @return Returns the plugin1.
 	 * @uml.property name="plugin1"
 	 */
-	public Plugin getPlugin1() {
-		return plugin1;
+	public Plugin getPlugin() {
+		return plugin;
 	}
 
 	/**
@@ -110,8 +102,8 @@ public abstract class PluginController {
 	 *            The plugin1 to set.
 	 * @uml.property name="plugin1"
 	 */
-	public void setPlugin1(Plugin plugin1) {
-		this.plugin1 = plugin1;
+	public void setPlugin(Plugin plugin) {
+		this.plugin = plugin;
 	}
 
 }

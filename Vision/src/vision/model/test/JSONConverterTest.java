@@ -1,16 +1,7 @@
 package vision.model.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.HTTP;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import vision.model.JSONConverter;
-import vision.model.Sensor;
 
 import junit.framework.TestCase;
 

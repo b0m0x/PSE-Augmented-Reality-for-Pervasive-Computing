@@ -1,12 +1,10 @@
 package vision.controller;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.Menu;
-import de.lessvoid.nifty.controls.MenuItemActivatedEvent;
 import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
@@ -16,10 +14,7 @@ import de.lessvoid.nifty.tools.SizeValue;
 import java.util.Collection;
 import java.util.logging.Logger;
 
-import com.jme3.collision.CollisionResults;
 import com.jme3.input.controls.ActionListener;
-import com.jme3.math.Ray;
-import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 
 import vision.model.Model;

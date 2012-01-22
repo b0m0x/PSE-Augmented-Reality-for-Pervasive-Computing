@@ -9,11 +9,6 @@ import com.jme3.niftygui.NiftyJmeDisplay;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.spi.input.InputSystem;
-import de.lessvoid.nifty.spi.render.RenderDevice;
-import de.lessvoid.nifty.spi.sound.SoundDevice;
-import de.lessvoid.nifty.tools.TimeProvider;
 
 /**
  * renders the user interface

@@ -44,16 +44,16 @@ public class PluginLoader {
 						+ pluginpaths.get(i).substring(0,
 								pluginpaths.get(i).indexOf("Plugin"))
 						+ "Controller";
-				Class clazz = Class.forName(strPackage, true, urlcl);
-				Class clazzController = Class.forName(strPackageController,
+				Class<?> clazz = Class.forName(strPackage, true, urlcl);
+				Class<?> clazzController = Class.forName(strPackageController,
 						true, urlcl);
 
 				// load Constructor
-				Constructor cons = null;
+				Constructor<?> cons = null;
 				cons = clazz.getConstructor(Model.class, View.class);
 				Plugin instance = (Plugin) cons.newInstance(model, view);
 
-				Constructor consController = null;
+				Constructor<?> consController = null;
 				consController = clazzController.getConstructor(Model.class,
 						Plugin.class);
 				PluginController instanceController = (PluginController) consController
@@ -63,7 +63,7 @@ public class PluginLoader {
 				pluginController.add(instanceController);
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 		}
 		return plugins;

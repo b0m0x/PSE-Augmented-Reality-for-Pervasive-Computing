@@ -1,7 +1,6 @@
 package vision.controller;
 
 import vision.model.Model;
-import vision.view.HeaterPlugin;
 import vision.view.Plugin;
 
 /**

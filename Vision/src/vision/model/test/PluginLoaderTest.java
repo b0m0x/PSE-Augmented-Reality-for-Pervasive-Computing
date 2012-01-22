@@ -2,20 +2,16 @@ package vision.model.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
-import vision.controller.Controller;
 import vision.controller.PluginController;
 import vision.model.Model;
 import vision.model.PluginLoader;
-import vision.view.HeaterPlugin;
 import vision.view.Plugin;
-import vision.view.View;
 
 public class PluginLoaderTest {
 

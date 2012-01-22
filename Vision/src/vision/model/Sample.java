@@ -110,11 +110,6 @@ public class Sample {
 		this.update = l;
 	}
 
-	private Sensor sensor;
-
-	public void setSensor(Sensor s) {
-		this.sensor = s;
-	}
 
 	public Sample(String typ, String unit, float value, long update) {
 		this.typ = typ;

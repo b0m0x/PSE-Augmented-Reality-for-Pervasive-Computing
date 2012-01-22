@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-import vision.controller.HeaterController;
 import vision.model.Model;
 import vision.model.Sample;
 import vision.model.Sensor;
@@ -13,10 +12,8 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
-import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
 
 /**
  * This class represents the plugins of the heater

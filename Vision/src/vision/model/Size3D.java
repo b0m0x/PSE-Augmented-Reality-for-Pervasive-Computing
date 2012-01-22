@@ -28,7 +28,7 @@ public class Size3D {
 	}
 
 	public float getZ() {
-		return y;
+		return z;
 	}
 
 	public void setZ(float z) {

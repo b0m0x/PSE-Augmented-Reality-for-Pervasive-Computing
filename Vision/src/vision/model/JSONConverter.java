@@ -1,27 +1,20 @@
 package vision.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.json.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import vision.Config;
 
@@ -86,24 +79,24 @@ public class JSONConverter {
 			jo = new JSONObject(stream);
 			for (int sensorid = 0; sensorid < jo.length(); sensorid++) {
 
-				JSONObject lvl1 = jo.getJSONObject(jo.getNames(jo)[sensorid]);
+				JSONObject lvl1 = jo.getJSONObject(JSONObject.getNames(jo)[sensorid]);
 				sensor = new Sensor();
 
 				for (int type = 0; type < jo.getJSONObject(
-						jo.getNames(jo)[sensorid]).getJSONObject("data")
+						JSONObject.getNames(jo)[sensorid]).getJSONObject("data")
 						.length(); type++) {
 
 					JSONObject lvl2 = lvl1.getJSONObject("data");
 					JSONObject temp = jo.getJSONObject(
-							jo.getNames(jo)[sensorid]).getJSONObject("data");
+							JSONObject.getNames(jo)[sensorid]).getJSONObject("data");
 					Sample sample = new Sample();
 
 					JSONObject lvl3 = lvl2
-							.getJSONObject(lvl2.getNames(lvl2)[type]);
+							.getJSONObject(JSONObject.getNames(lvl2)[type]);
 
 					sample.setSensor(sensor);
 
-					sample.setTyp(lvl2.getNames(lvl2)[type]);
+					sample.setTyp(JSONObject.getNames(lvl2)[type]);
 					sample.setUnit(lvl3.getString("unit"));
 					sample.setUpdate(Long.parseLong(lvl3.getString("updated")));
 					sample.setValue(Float.parseFloat(lvl3.getString("value")));
@@ -118,7 +111,7 @@ public class JSONConverter {
 				sensor.setUpdate(Long.parseLong(lvl1.getString("updated")));
 				sensor.setDescription(lvl1.getString("description"));
 				sensor.setPosition(new Position(0, 0, 0));
-				sensor.setId(jo.getNames(jo)[sensorid]);
+				sensor.setId(JSONObject.getNames(jo)[sensorid]);
 
 				this.addSensorToList();
 

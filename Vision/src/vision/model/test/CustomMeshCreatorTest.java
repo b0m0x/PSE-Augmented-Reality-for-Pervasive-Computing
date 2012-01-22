@@ -2,7 +2,6 @@ package vision.model.test;
 
 import static org.junit.Assert.*;
 
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,19 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.VertexBuffer.Type;
-import com.jme3.util.BufferUtils;
 
 import vision.model.CustomMeshCreator;
 import vision.model.Hole;
-import vision.model.Position;
-import vision.model.Size3D;
 import vision.model.Wall;
 import com.jme3.bullet.control.RigidBodyControl;
-import com.jme3.bullet.control.RigidBodyControl;
+
 public class CustomMeshCreatorTest {
 
 	@Before

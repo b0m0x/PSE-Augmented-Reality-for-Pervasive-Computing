@@ -1,6 +1,5 @@
 package vision.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.jme3.math.Vector2f;
