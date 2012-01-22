@@ -189,4 +189,8 @@ public class View extends SimpleApplication {
 		mainAppState.userSelect();
 	}
 
+	public void userMoveAction(String name, boolean keyPressed) {
+		mainAppState.userMoveAction(name, keyPressed);		
+	}
+
 }

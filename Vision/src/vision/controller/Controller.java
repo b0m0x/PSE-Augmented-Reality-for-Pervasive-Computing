@@ -252,14 +252,7 @@ public class Controller implements ScreenController, ActionListener  {
 	  myMenu.addMenuItem("Click me!", cBox);
 	 
 	}
-	
-	
 
-	
-	
-	
-	
-	
 	
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {
@@ -267,6 +260,8 @@ public class Controller implements ScreenController, ActionListener  {
 			view.toggleOverviewCam();
 		} else if (name.equals("select")) {
 			view.userSelect();
+		} else if (name.equals("Left") || name.equals("Right") || name.equals("Up") || name.equals("Down") || name.equals("Jump")) {
+			view.userMoveAction(name, keyPressed);
 		}
 
 	}

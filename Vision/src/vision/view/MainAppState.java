@@ -9,6 +9,7 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.control.CharacterControl;
 import com.jme3.collision.CollisionResults;
+import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.ActionListener;
@@ -19,6 +20,7 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -46,6 +48,13 @@ public class MainAppState extends AbstractAppState {
 	private boolean overviewCam;
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	private CharacterControl player;
+	
+	private boolean moveLeft;
+	private boolean moveRight;
+	private boolean moveForward;
+	private boolean moveBack;
+	private boolean moveJump;
+
 	
 	public MainAppState(Model model, Controller contoller) {
 		this.model = model;
@@ -87,6 +96,7 @@ public class MainAppState extends AbstractAppState {
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(5f);
 		player.setGravity(30f);
+		player.setJumpSpeed(50);
 		player.setPhysicsLocation(new Vector3f(0,50,0));
 		pSpace.add(player);
 		
@@ -115,20 +125,42 @@ public class MainAppState extends AbstractAppState {
 		
 		// init camera
 		app.getFlyByCamera().setEnabled(true);
+		
+		setUpKeys();
 
 		// TODO: put this stuff in controller
-		app.getInputManager().addMapping("select",
-				new KeyTrigger(MouseInput.BUTTON_LEFT));
-		app.getInputManager()
-				.addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
-		app.getInputManager().addListener(controller,
-				new String[] { "zoom", "select" });
+		
 	}
 
+	void setUpKeys() {
+		InputManager inputManager = app.getInputManager();
+		inputManager.addMapping("select", new KeyTrigger(MouseInput.BUTTON_LEFT));
+		inputManager.addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
+		inputManager.addListener(controller, new String[] { "zoom", "select" });
+		inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
+	    inputManager.addMapping("Right", new KeyTrigger(KeyInput.KEY_D));
+	    inputManager.addMapping("Up", new KeyTrigger(KeyInput.KEY_W));
+	    inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_S));
+	    inputManager.addMapping("Jump", new KeyTrigger(KeyInput.KEY_SPACE));
+	    inputManager.addListener(controller, "Left");
+	    inputManager.addListener(controller, "Right");
+	    inputManager.addListener(controller, "Up");
+	    inputManager.addListener(controller, "Down");
+	    inputManager.addListener(controller, "Jump");
+	}
 	
 	@Override
 	public void update(float tpf) {
 		super.update(tpf);
+		Camera cam = app.getCamera();
+	    Vector3f camDir = cam.getDirection().clone().multLocal(0.6f);
+	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.4f);
+	    Vector3f walkDirection = new Vector3f(0, 0, 0);
+	    if (moveLeft)  { walkDirection.addLocal(camLeft); }
+	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }
+	    if (moveForward)    { walkDirection.addLocal(camDir); }
+	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }
+	    player.setWalkDirection(walkDirection);
 		app.getCamera().setLocation(player.getPhysicsLocation());
 	}
 	
@@ -155,33 +187,6 @@ public class MainAppState extends AbstractAppState {
 				rt, up, dn);
 	}
 
-	/**
-	 * @uml.property name="wallMesh"
-	 * @uml.associationEnd multiplicity="(0 -1)"
-	 *                     inverse="mainAppState:vision.model.CustomMesh"
-	 */
-	private Collection<CustomMesh> wallMesh;
-
-	/**
-	 * Getter of the property <tt>wallMesh</tt>
-	 * 
-	 * @return Returns the wallMesh.
-	 * @uml.property name="wallMesh"
-	 */
-	public Collection<CustomMesh> getWallMesh() {
-		return wallMesh;
-	}
-
-	/**
-	 * Setter of the property <tt>wallMesh</tt>
-	 * 
-	 * @param wallMesh
-	 *            The wallMesh to set.
-	 * @uml.property name="wallMesh"
-	 */
-	public void setWallMesh(Collection<CustomMesh> wallMesh) {
-		this.wallMesh = wallMesh;
-	}
 
 	public void toggleOverviewCam() {
 		if (!overviewCam) {
@@ -198,6 +203,7 @@ public class MainAppState extends AbstractAppState {
 		}
 	}
 
+	
 	public void userSelect() {
 		CollisionResults results = new CollisionResults();
 		Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera()
@@ -212,6 +218,25 @@ public class MainAppState extends AbstractAppState {
 				overviewCam = false;
 			}
 		}		
+	}
+
+	/**
+	 * gets called if the user presses or releases a button to move
+	 * @param name
+	 * @param keyPressed
+	 */
+	public void userMoveAction(String name, boolean keyPressed) {
+		if (name.equals("Left")) {
+			moveLeft = keyPressed;
+		} else if (name.equals("Right")) {
+			moveRight = keyPressed;
+		} else if (name.equals("Up")) {
+			moveForward = keyPressed;
+		} else if (name.equals("Down")) {
+ 			moveBack = keyPressed;
+		} else if (name.equals("Jump")) {
+			moveJump = keyPressed;
+		}
 	}
 	
 	
