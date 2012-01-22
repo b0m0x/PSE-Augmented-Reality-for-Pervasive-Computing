@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import vision.Config;
+
 /**
  * <p>
  * Java class for anonymous complex type.
@@ -47,7 +49,7 @@ public class Groundplan {
 		JAXBContext jc = JAXBContext.newInstance("vision.model");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		return (Groundplan) unmarshaller.unmarshal(new File(
-				"libs//groundplan.xml"));
+				Config.groundplanPath));
 
 	}
 

@@ -1,5 +1,8 @@
 package vision.model;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import vision.Config;
 
 /**
@@ -8,19 +11,39 @@ import vision.Config;
  */
 public class UpdateThread extends Thread {
 
+	protected boolean running;
+
 	public UpdateThread() {
 		update = new Update();
 	}
 
 	public void run() {
-		update.getDaten();
-		try {
-			wait(Config.updateIntervall);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		running = true;
+		update.getDatabase().connect();
 
+		final Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				update.store(System.currentTimeMillis());
+				if (!running) {
+					System.out
+							.println("Thread terminated. Closing connection...");
+					update.getDatabase().disconnect();
+					timer.cancel();
+				}
+			}
+		}, 0, Config.updateIntervall);
+
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
 
 	/**

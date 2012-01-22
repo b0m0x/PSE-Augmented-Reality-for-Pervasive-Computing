@@ -11,6 +11,8 @@ import vision.model.Sensor;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.bullet.collision.shapes.BoxCollisionShape;
+import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
@@ -64,12 +66,16 @@ public class HeaterPlugin extends Plugin {
 					break;
 				}
 			}
+			
+			
 			/* 
 			Material m = new Material(app.getAssetManager(),
 					"Common/MatDefs/Misc/Unshaded.j3md");
 			m.setColor("Color", new ColorRGBA(temperature / 50f, 0,
 					1 - temperature / 50f, 1));
 			heater.setMaterial(m);*/
+			heater.addControl(new RigidBodyControl(new BoxCollisionShape()));
+			
 			heater.setLocalTranslation(s.getPosition().getX(), s.getPosition()
 					.getY(), s.getPosition().getZ());
 			

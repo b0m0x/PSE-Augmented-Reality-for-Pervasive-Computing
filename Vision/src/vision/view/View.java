@@ -58,22 +58,23 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		guiAppState = new vision.view.GuiAppState(controller);
-		rootNode.setCullHint(CullHint.Never);
-		mainAppState = new vision.view.MainAppState(daten);
+
+		guiAppState = new GuiAppState(controller);
 		bulletAppState = new BulletAppState();
+		
+		mainAppState = new MainAppState(daten);
+
 		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
 			stateManager.attach(p);
 		}
 		guiAppState.initialize(stateManager, this);
 		mainAppState.initialize(stateManager, this);
-		stateManager.attach(mainAppState);
+		
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
-		inputManager.setCursorVisible(true);
-		
-
+		stateManager.attach(mainAppState);
+		//inputManager.setCursorVisible(true);
 	}
 
 	/**
