@@ -3,6 +3,7 @@ package vision.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
 public class WallAdapter {
@@ -45,5 +46,12 @@ public class WallAdapter {
 
 	public float getDepth() {
 		return wall.getWide();
+	}
+	
+	public float getRotation() {
+		Vector2f wallDir = new Vector2f(getStart().getX()
+				+ getEnd().getX(), getStart().getY()
+				+ getEnd().getY());
+		return wallDir.angleBetween(new Vector2f(1f, 0f));
 	}
 }

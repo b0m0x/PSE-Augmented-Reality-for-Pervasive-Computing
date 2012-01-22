@@ -95,11 +95,8 @@ public class CustomMeshCreator {
 
 	private void transformCoordinates(Spatial wallGeometry, WallAdapter wall) {
 		RigidBodyControl ctrl = (RigidBodyControl) wallGeometry.getControl(0);
-		float a = 0;
-		Vector2f wallDir = new Vector2f(wall.getStart().getX()
-				+ wall.getEnd().getX(), wall.getStart().getY()
-				+ wall.getEnd().getY());
-		a = wallDir.angleBetween(new Vector2f(1f, 0f));
+		float a = wall.getRotation();
+		
 		//wallGeometry = wallGeometry.rotate(0, a, 0);
 		Quat4f rot = new Quat4f();
 		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0), a);
