@@ -2,29 +2,19 @@ package vision.model;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.UUID;
-
 import javax.vecmath.Quat4f;
 
 
-import com.bulletphysics.linearmath.MatrixUtil;
 import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
-import com.jme3.bullet.control.PhysicsControl;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
-import com.jme3.math.Matrix3f;
-import com.jme3.math.Quaternion;
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.scene.shape.Box;
-import com.jme3.util.BufferUtils;
 
 /**
  * converts a Wall object to a renderable Mesh

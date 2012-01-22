@@ -234,14 +234,9 @@ public class Controller implements ScreenController, ActionListener  {
 		  createMyPopupMenu();
 		  // call the popup to screen of your choice:
 		  nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null); 
-		}
+	}
 	
 
-	
-	
-	
-	
-	
 	
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {
@@ -249,6 +244,8 @@ public class Controller implements ScreenController, ActionListener  {
 			view.toggleOverviewCam();
 		} else if (name.equals("select")) {
 			view.userSelect();
+		} else if (name.equals("Left") || name.equals("Right") || name.equals("Up") || name.equals("Down")) {
+			view.userMoveAction(name, keyPressed);
 		}
 
 	}
