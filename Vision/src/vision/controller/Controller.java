@@ -184,18 +184,19 @@ public class Controller implements ScreenController, ActionListener  {
 	public void userPick(Geometry obj) {
 
 	}
-	
+	int i = 0;
 	
 
 	/**
 	 * gets called if the user pressed the activate/deactivate button
 	 */
 	@NiftyEventSubscriber(id = "btn_manageplugins")
-	public void createManagePluginsPopupMenu(String id, Object o) {
+	public void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
+	
 		Logger l= Logger.getLogger("buttonclick");
-		l.info("Button was pressed.");
+		l.info("Button was pressed " + i++ + " times");
 		createMyPopupMenu();
-		nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null); 
+		nifty.showPopup(nifty.getCurrentScreen(), managePluginsPopup.getId(), null); 
 	}
 	
 	/**
@@ -234,17 +235,12 @@ public class Controller implements ScreenController, ActionListener  {
 
 	}
 
-	
-	private Element popup;
-	
-	@SuppressWarnings("deprecation")
-	CheckBox cBox = new CheckboxControl();
 
 	public void createMyPopupMenu(){
-	  popup = nifty.createPopup("niftyPopupMenu");
-	  Menu myMenu = popup.findNiftyControl("#menu", Menu.class);
+	  managePluginsPopup = nifty.createPopup("niftyPopupMenu");
+	  Menu myMenu = managePluginsPopup.findNiftyControl("#menu", Menu.class);
 	  myMenu.setWidth(new SizeValue("100px")); // must be set
-	  myMenu.addMenuItem("Click me!", cBox);
+	  myMenu.addMenuItem("Click me!", new CheckboxControl());
 	 
 	}
 
@@ -257,6 +253,8 @@ public class Controller implements ScreenController, ActionListener  {
 			view.userSelect();
 		} else if (name.equals("Left") || name.equals("Right") || name.equals("Up") || name.equals("Down") || name.equals("Jump")) {
 			view.userMoveAction(name, keyPressed);
+		} else if (name.equals("toggleMouse") && !keyPressed) {
+			view.toggleMouse();
 		}
 
 	}

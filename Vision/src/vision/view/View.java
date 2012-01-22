@@ -9,6 +9,7 @@ import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
+import com.jme3.input.FlyByCamera;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -46,6 +47,8 @@ public class View extends SimpleApplication {
 	
 	private BulletAppState bulletAppState;
 
+	private boolean showMouse;
+
 	/**
 	 * is called every frame by jmonkey
 	 */
@@ -72,7 +75,6 @@ public class View extends SimpleApplication {
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
 		stateManager.attach(mainAppState);
-		inputManager.setCursorVisible(true);
 	}
 
 	/**
@@ -189,6 +191,12 @@ public class View extends SimpleApplication {
 
 	public void userMoveAction(String name, boolean keyPressed) {
 		mainAppState.userMoveAction(name, keyPressed);		
+	}
+
+	public void toggleMouse() {
+		showMouse = !showMouse;
+		inputManager.setCursorVisible(showMouse);
+		flyCam.setEnabled(!showMouse);		
 	}
 
 }

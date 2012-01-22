@@ -55,10 +55,13 @@
         		
       </panel>
       
-       	<popup id="niftyPopupMenu" childLayout="absolute"
-		       controller="vision.controller.Controller" width="10%" >
+      <popup id="pluginsPopupMenu" childLayout="absolute"
+		        width="10%" >
 		       
 		<control id="#menu" name="niftyMenu" />
+		<control name="button" label="hooo" id="btn_tst"  valign="center" 
+		          			visibleToMouse="true"> 
+		          			</control>
 			
 	</popup>
    	

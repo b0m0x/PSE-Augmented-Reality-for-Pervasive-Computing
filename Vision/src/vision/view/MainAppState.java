@@ -122,9 +122,6 @@ public class MainAppState extends AbstractAppState {
 		app.getFlyByCamera().setEnabled(true);
 		
 		setUpKeys();
-
-		// TODO: put this stuff in controller
-		
 	}
 
 	void setUpKeys() {
@@ -137,11 +134,13 @@ public class MainAppState extends AbstractAppState {
 	    inputManager.addMapping("Up", new KeyTrigger(KeyInput.KEY_W));
 	    inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_S));
 	    inputManager.addMapping("Jump", new KeyTrigger(KeyInput.KEY_SPACE));
+	    inputManager.addMapping("toggleMouse", new KeyTrigger(KeyInput.KEY_M));
 	    inputManager.addListener(controller, "Left");
 	    inputManager.addListener(controller, "Right");
 	    inputManager.addListener(controller, "Up");
 	    inputManager.addListener(controller, "Down");
 	    inputManager.addListener(controller, "Jump");
+	    inputManager.addListener(controller, "toggleMouse");
 	}
 	
 	@Override
