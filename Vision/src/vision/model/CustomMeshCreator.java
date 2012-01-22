@@ -4,61 +4,69 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
+import javax.vecmath.Quat4f;
+
+
+import com.bulletphysics.linearmath.MatrixUtil;
+import com.bulletphysics.linearmath.QuaternionUtil;
+import com.jme3.bullet.collision.shapes.BoxCollisionShape;
+import com.jme3.bullet.control.PhysicsControl;
+import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
+import com.jme3.math.Matrix3f;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Mesh;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.VertexBuffer.Type;
+import com.jme3.scene.shape.Box;
+import com.jme3.util.BufferUtils;
 
 /**
  * converts a Wall object to a renderable Mesh
  */
 public class CustomMeshCreator {
 
-	float[] vertices = new float[] {};
-	int[] indices = new int[] {};
+	private float[] vertices = new float[] {};
+	private int[] indices = new int[] {};
+	private float[] normals = new float[] {};
 
 	/**
 	 * creates a mesh off of a wall object. builds in holes for windows if
 	 * necessary.
 	 */
-	public Geometry convert(Wall w) {
+	public Spatial convert(Wall w) {
 		WallAdapter wall = new WallAdapter(w);
-
-		// build first orthogonal, then transform
-		float minHole = wall.getHeight();
-
+		assert(wall.getDepth() != 0);
+		
+		Node wallMesh = new Node("Wall");
+		RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(new Vector3f(wall.getWidth() / 2f, wall.getHeight() / 2f, wall.getDepth() /2f)), 0f);
+		ctrl.setKinematic(false);
+		wallMesh.addControl(ctrl);
+		
+		
 		for (Hole hole : wall.getHoles()) {
 			HoleAdapter h = new HoleAdapter(hole);
-			minHole = Math.min(
-					h.getPosition().getY() - h.getSize().getY() / 2f, minHole);
+			// plane under hole
+			Geometry plane = new Geometry("wallplane");
+			plane.setMesh(new Box(h.getSize().getX() / 2,  h.getPosition().getY() / 2 - h.getSize().getY() / 4, wall.getDepth() /2));
+			plane.setLocalTranslation(h.getPosition().getX() - wall.getWidth() / 2, - wall.getHeight()/2 + (h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0);
+			
+			wallMesh.attachChild(plane);
+			
+			//plane over hole
+			plane = new Geometry("wallplane2");
+			plane.setMesh(new Box(h.getSize().getX() / 2, (w.getHeight() - (h.getPosition().getY() + h.getSize().getY() / 2)) /2 , wall.getDepth() / 2));
+			plane.setLocalTranslation(h.getPosition().getX() - wall.getWidth() / 2,  wall.getHeight()/2 - (w.getHeight() - h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0);
+			
+
+			wallMesh.attachChild(plane);
 		}
-
-		// add base rectangle
-		addWallPlane(new Position(0f, 0f, 0f), new Size3D(wall.getWidth(), wall
-				.getDepth(), minHole));
-
-		for (Hole hole : wall.getHoles()) {
-			HoleAdapter h = new HoleAdapter(hole);
-			// fill gaps between holes and base rect
-			if (Math.abs(h.getPosition().getY() - h.getSize().getY() / 2f
-					- minHole) > 0.002f) {
-				addWallPlane(new Position(h.getPosition().getX(), h
-						.getPosition().getY(), (minHole + (h.getPosition()
-						.getZ() - h.getSize().getZ() / 2f)) / 2f), new Size3D(
-						wall.getWidth(), wall.getDepth(), (h.getPosition()
-								.getZ() - h.getSize().getZ() / 2f)
-								- minHole));
-			}
-
-			// fill gaps between holes and top of wall
-			float upperHoleBound = h.getPosition().getZ() + h.getSize().getZ()
-					/ 2f;
-			addWallPlane(new Position(h.getPosition().getX(), h.getPosition()
-					.getY(), (wall.getHeight() + upperHoleBound) / 2f),
-					new Size3D(wall.getWidth(), wall.getDepth(), (wall
-							.getHeight() - upperHoleBound)));
-		}
-
+		
 		Collections.sort(wall.getHoles(), new Comparator<Hole>() {
 
 			@Override
@@ -66,125 +74,50 @@ public class CustomMeshCreator {
 				return (int) Math.signum(a.getPositionX1() - b.getPositionX1());
 			}
 		});
-
-		HoleAdapter prevH = null;
+		
+		//fill horizontal gaps between holes
+		int numHoles = wall.getHoles().size();
+		
+		float lastHRightBound = 0;
 		for (Hole hole : wall.getHoles()) {
 			HoleAdapter h = new HoleAdapter(hole);
-			float leftBoundH = h.getPosition().getX() - h.getSize().getX() / 2f;
-			if (prevH == null) {
-				addWallPlane(new Position(leftBoundH / 2, 0,
-						(wall.getHeight() + minHole) / 2f),
-						new Size3D(leftBoundH, wall.getDepth(), wall
-								.getHeight()
-								- minHole));
-			}
-
-			float rightBoundPrevH = -wall.getWidth() / 2f;
-			if (prevH != null) {
-				rightBoundPrevH = prevH.getPosition().getX()
-						+ prevH.getSize().getX() / 2f;
-			}
-			addWallPlane(new Position((leftBoundH + rightBoundPrevH) / 2, 0,
-					(wall.getHeight() + minHole) / 2f), new Size3D(leftBoundH
-					- rightBoundPrevH, wall.getDepth(), wall.getHeight()
-					- minHole));
-			prevH = h;
+			float hLeftBound = h.getPosition().getX() - h.getSize().getX() / 2;
+			Geometry plane = new Geometry("wallplane");
+			plane.setMesh(new Box((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
+			plane.setLocalTranslation((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0);			
+			wallMesh.attachChild(plane);
+			lastHRightBound = hLeftBound + h.getSize().getX();
 		}
-		CustomMesh m = assembleMesh();
-		return transformCoordinates(m, wall);
+		
+		float hLeftBound = wall.getWidth();
+		Geometry plane = new Geometry("wallplane");
+		plane.setMesh(new Box((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
+		plane.setLocalTranslation((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0);			
+		wallMesh.attachChild(plane);
+
+		transformCoordinates(wallMesh, wall);
+		
+		return wallMesh;
 	}
 
-	private Geometry transformCoordinates(CustomMesh wallMesh, WallAdapter wall) {
-		Geometry wallGeometry = new Geometry("Static Wall " + UUID.randomUUID());
-		wallGeometry.setMesh(wallMesh);
+	private void transformCoordinates(Spatial wallGeometry, WallAdapter wall) {
+		RigidBodyControl ctrl = (RigidBodyControl) wallGeometry.getControl(0);
 		float a = 0;
 		Vector2f wallDir = new Vector2f(wall.getStart().getX()
-				- wall.getEnd().getX(), wall.getStart().getY()
-				- wall.getEnd().getY());
+				+ wall.getEnd().getX(), wall.getStart().getY()
+				+ wall.getEnd().getY());
 		a = wallDir.angleBetween(new Vector2f(1f, 0f));
-		wallGeometry = (Geometry) wallGeometry.move(wall.getPosition().getX(),
-				wall.getPosition().getY(), 0);
+		//wallGeometry = wallGeometry.rotate(0, a, 0);
+		Quat4f rot = new Quat4f();
+		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0), a);
+		
+		ctrl.setPhysicsRotation(Converter.convert(rot));
 		wallGeometry.setMaterial(new Material()); // TODO: set unshaded
 													// material. requires
 													// reference to an asset
 													// manager
-		return (Geometry) wallGeometry.rotate(0, 0, a);
-	}
 
-	private CustomMesh assembleMesh() {
-		CustomMesh wallMesh = new CustomMesh();
-		wallMesh.setBuffer(Type.Position, 3, vertices);
-		wallMesh.setBuffer(Type.Index, 4, indices);
-		return wallMesh;
-	}
-
-	/**
-	 * adds a 3D-Rectangle to the Mesh.
-	 * 
-	 * @param pos
-	 *            the position of the rectangle, in center coordinates
-	 * @param dim
-	 *            dimension (x,y,z) of the rectangle
-	 */
-	private void addWallPlane(Position pos, Size3D dim) {
-		float[] addvertices = new float[3 * 8];
-
-		// lower left front
-		addvertices[0] = pos.getX() - dim.getX() / 2;
-		addvertices[1] = pos.getY() - dim.getY() / 2;
-		addvertices[2] = pos.getZ() - dim.getZ() / 2;
-		// lower right front
-		addvertices[3] = pos.getX() + dim.getX() / 2;
-		addvertices[4] = pos.getY() - dim.getY() / 2;
-		addvertices[5] = pos.getZ() - dim.getZ() / 2;
-		// upper right front
-		addvertices[6] = pos.getX() + dim.getX() / 2;
-		addvertices[7] = pos.getY() - dim.getY() / 2;
-		addvertices[8] = pos.getZ() + dim.getZ() / 2;
-		// upper left front
-		addvertices[9] = pos.getX() - dim.getX() / 2;
-		addvertices[10] = pos.getY() - dim.getY() / 2;
-		addvertices[11] = pos.getZ() + dim.getZ() / 2;
-
-		// lower left back
-		addvertices[0] = pos.getX() - dim.getX() / 2;
-		addvertices[1] = pos.getY() + dim.getY() / 2;
-		addvertices[2] = pos.getZ() - dim.getZ() / 2;
-		// lower right back
-		addvertices[3] = pos.getX() + dim.getX() / 2;
-		addvertices[4] = pos.getY() + dim.getY() / 2;
-		addvertices[5] = pos.getZ() - dim.getZ() / 2;
-		// upper right back
-		addvertices[6] = pos.getX() + dim.getX() / 2;
-		addvertices[7] = pos.getY() + dim.getY() / 2;
-		addvertices[8] = pos.getZ() + dim.getZ() / 2;
-		// upper left back
-		addvertices[9] = pos.getX() - dim.getX() / 2;
-		addvertices[10] = pos.getY() + dim.getY() / 2;
-		addvertices[11] = pos.getZ() + dim.getZ() / 2;
-
-		int[] addindices = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 4, 5, 6,
-				7, 2, 4, 3, 7, 4, 0, 1, 5, 6, 2 };
-
-		float[] newvertices = new float[vertices.length + addvertices.length];
-		int[] newindices = new int[indices.length + addindices.length];
-
-		// add to indices list
-		for (int i = 0; i < indices.length; i++) {
-			newindices[i] = indices[i];
-		}
-		for (int i = 0; i < addindices.length; i++) {
-			newindices[i + indices.length] = addindices[i] + vertices.length;
-		}
-		indices = newindices;
-
-		// add to vertices list
-		for (int i = 0; i < vertices.length; i++) {
-			newvertices[i] = vertices[i];
-		}
-		for (int i = 0; i < addvertices.length; i++) {
-			newvertices[i + vertices.length] = addvertices[i];
-		}
-		vertices = newvertices;
+		ctrl.setPhysicsLocation(new Vector3f(wall.getPosition().getX(),
+				0, wall.getPosition().getY()));
 	}
 }

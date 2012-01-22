@@ -26,7 +26,7 @@ public class WallAdapter {
 	}
 
 	public Size3D getSize() {
-		return new Size3D(getWidth(), getDepth(), getHeight());
+		return new Size3D(getWidth(), getHeight(), getDepth());
 	}
 
 	public List<Hole> getHoles() {
@@ -39,10 +39,8 @@ public class WallAdapter {
 		return d.length();
 	}
 
-	// TODO: STUB!
 	public float getHeight() {
-		return 1f;
-		// throw new UnsupportedOperationException();
+		return wall.getHeight();
 	}
 
 	public float getDepth() {

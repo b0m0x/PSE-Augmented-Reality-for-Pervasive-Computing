@@ -9,6 +9,8 @@ import vision.controller.Controller;
 import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.bullet.BulletAppState;
+import com.jme3.scene.Spatial.CullHint;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -43,6 +45,8 @@ public class View extends SimpleApplication {
 	 *                     inverse="view:vision.view.MainAppState"
 	 */
 	private MainAppState mainAppState;
+	
+	private BulletAppState bulletAppState;
 
 	/**
 	 * is called every frame by jmonkey
@@ -54,16 +58,23 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		// guiAppState = new vision.view.GuiAppState();
-		mainAppState = new vision.view.MainAppState(daten);
+
+		guiAppState = new GuiAppState(controller);
+		bulletAppState = new BulletAppState();
+		
+		mainAppState = new MainAppState(daten);
+
 		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
 			stateManager.attach(p);
 		}
+		guiAppState.initialize(stateManager, this);
 		mainAppState.initialize(stateManager, this);
+		
+		stateManager.attach(guiAppState);
+		stateManager.attach(bulletAppState);
 		stateManager.attach(mainAppState);
-		// stateManager.attach(guiAppState);
-
+		//inputManager.setCursorVisible(true);
 	}
 
 	/**

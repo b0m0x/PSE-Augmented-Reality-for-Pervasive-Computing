@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groundplan>
+    <wall>
+	<wallNumber>1</wallNumber>
+    <positionX1>0</positionX1>
+	<positionY1>0</positionY1>
+	<positionX2>10</positionX2>
+	<positionY2>0</positionY2>
+	<height>3.435644</height>
+	<wide>0.4123432</wide>
+	
+		<hole>
+			<holeNumber>1</holeNumber>
+			<positionX1>1.422332333316</positionX1>
+			<positionY1>1.374903487847</positionY1>
+			<positionX2>2.422332333316</positionX2>
+			<positionY2>2.821344374763</positionY2>
+			<heightGround>0.834455</heightGround>
+			<heightWindow>1.100012</heightWindow>
+		</hole>
+		<hole>
+			<holeNumber>2</holeNumber>
+			<positionX1>3.422332333316</positionX1>
+			<positionY1>1.374903487847</positionY1>
+			<positionX2>4.422332333316</positionX2>
+			<positionY2>2.821344374763</positionY2>
+			<heightGround>0.834455</heightGround>
+			<heightWindow>1.100012</heightWindow>
+		</hole>  
+		    
+    </wall>
+
+    
+    <wall>
+        <wallNumber>2</wallNumber>
+        <positionX1>0</positionX1>
+		<positionY1>0</positionY1>
+		<positionX2>2</positionX2>
+		<positionY2>10</positionY2>
+	<height>3.435644</height>
+	<wide>0.4123432</wide>
+		<hole>
+			<holeNumber>1</holeNumber>
+			<positionX1>2.422332333316</positionX1>
+			<positionY1>1.374903487847</positionY1>
+			<positionX2>3.422332333316</positionX2>
+			<positionY2>2.821344374763</positionY2>
+			<heightGround>0.834455</heightGround>
+			<heightWindow>1.100012</heightWindow>
+		</hole>
+		<hole>
+			<holeNumber>2</holeNumber>
+			<positionX1>5.422332333316</positionX1>
+			<positionY1>1.374903487847</positionY1>
+			<positionX2>6.422332333316</positionX2>
+			<positionY2>2.821344374763</positionY2>
+			<heightGround>0.834455</heightGround>
+			<heightWindow>1.100012</heightWindow>
+		</hole>
+		
+		<hole>
+			<holeNumber>3</holeNumber>
+			<positionX1>7.422332333316</positionX1>
+			<positionY1>1.374903487847</positionY1>
+			<positionX2>10.422332333316</positionX2>
+			<positionY2>2.821344374763</positionY2>
+			<heightGround>0.834455</heightGround>
+			<heightWindow>1.100012</heightWindow>
+		</hole>
+    </wall>
+     
+</groundplan>
+

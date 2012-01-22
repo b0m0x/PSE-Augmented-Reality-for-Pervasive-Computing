@@ -2,6 +2,7 @@ package vision.model.test;
 
 import static org.junit.Assert.*;
 
+import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,14 @@ import org.junit.Test;
 
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Mesh;
+import com.jme3.scene.VertexBuffer.Type;
+import com.jme3.util.BufferUtils;
 
 import vision.model.CustomMeshCreator;
 import vision.model.Hole;
+import vision.model.Position;
+import vision.model.Size3D;
 import vision.model.Wall;
 
 public class CustomMeshCreatorTest {
@@ -33,7 +39,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(24, g.getMesh().getIndexBuffer().size());
+		assertEquals(36, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 4, g.getLocalRotation().toAngleAxis(
 				new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(0.5f, 0.5f, 0f), g.getLocalTranslation());
@@ -51,7 +57,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(24, g.getMesh().getIndexBuffer().size());
+		assertEquals(36, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(-0.5f, -0.5f, 0f), g.getLocalTranslation());
@@ -72,7 +78,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(24, g.getMesh().getIndexBuffer().size());
+		assertEquals(36, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
@@ -104,7 +110,7 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(96, g.getMesh().getIndexBuffer().size());
+		assertEquals(144, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
@@ -143,10 +149,12 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Geometry g = c.convert(wall);
 
-		assertEquals(168, g.getMesh().getIndexBuffer().size());
+		assertEquals(252, g.getMesh().getIndexBuffer().size());
 		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
 				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
 		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
 	}
+	
+
 
 }
