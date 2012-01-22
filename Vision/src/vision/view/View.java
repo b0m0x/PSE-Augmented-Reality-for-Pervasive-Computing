@@ -62,7 +62,7 @@ public class View extends SimpleApplication {
 		guiAppState = new GuiAppState(controller);
 		bulletAppState = new BulletAppState();
 		
-		mainAppState = new MainAppState(daten);
+		mainAppState = new MainAppState(daten, controller);
 
 		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
@@ -179,6 +179,14 @@ public class View extends SimpleApplication {
 	 */
 	public void disablePlugin(Plugin p) {
 		stateManager.detach(p);
+	}
+
+	public void toggleOverviewCam() {
+		mainAppState.toggleOverviewCam();		
+	}
+
+	public void userSelect() {
+		mainAppState.userSelect();
 	}
 
 }

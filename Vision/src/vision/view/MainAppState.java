@@ -183,5 +183,38 @@ public class MainAppState extends AbstractAppState {
 		this.wallMesh = wallMesh;
 	}
 
+	public void toggleOverviewCam() {
+		if (!overviewCam) {
+			Vector3f oldCamloc = app.getCamera().getLocation();
+			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, 1f)));
+			app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
+			overviewCam = true;		
+		} else {
+			Vector3f oldCamloc = app.getCamera().getLocation();
+			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, -1f)));
+			// app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
+			overviewCam = false;
+	
+		}
+	}
+
+	public void userSelect() {
+		CollisionResults results = new CollisionResults();
+		Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera()
+				.getDirection());
+		mainGeometryNode.collideWith(ray, results);
+		for (int i = 0; i < results.size(); i++) {
+			Vector3f pt = results.getCollision(i).getContactPoint();
+			String hit = results.getCollision(i).getGeometry().getName();
+			if (hit.equals("floor")) {
+				app.getCamera().setLocation(
+						pt.add(new Vector3f(0f, 0f, 1f)));
+				overviewCam = false;
+			}
+		}		
+	}
+	
+	
+
 
 }
