@@ -18,4 +18,6 @@ public class Config {
 	 * 
 	 */
 	public static final String pluginpath = "plugins/";
+	
+	public static final String groundplanPath = "assets/groundplan.xml";
 }
