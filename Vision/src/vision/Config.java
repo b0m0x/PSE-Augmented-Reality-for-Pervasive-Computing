@@ -12,10 +12,12 @@ public class Config {
 	/**
 	 * defines how often the sensor data is refreshed
 	 */
-	public static final int updateIntervall = 13;
+	public static final int updateIntervall = 13000;
 
 	/**
 	 * 
 	 */
 	public static final String pluginpath = "plugins/";
+	
+	public static final String groundplanPath = "assets/groundplan.xml";
 }

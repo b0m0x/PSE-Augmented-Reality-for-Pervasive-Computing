@@ -27,8 +27,7 @@ public class WindowPlugin extends Plugin {
 	private Geometry window;
 	private Model model;
 
-	/**
-	 */
+
 	public WindowPlugin(Model model, View view) {
 		super(model);
 		this.model = model;
