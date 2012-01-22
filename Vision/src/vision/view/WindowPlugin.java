@@ -3,16 +3,24 @@ package vision.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.vecmath.Quat4f;
+
 import vision.controller.WindowController;
 import vision.model.Hole;
+import vision.model.HoleAdapter;
 import vision.model.Model;
+import vision.model.Position;
 import vision.model.Sample;
 import vision.model.Sensor;
 import vision.model.Wall;
+import vision.model.WallAdapter;
 
+import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 
@@ -22,11 +30,8 @@ public class WindowPlugin extends Plugin {
 	 * @uml.property name="windows"
 	 */
 	private List<Geometry> windows;
-	private Geometry windowopened;
-	private Geometry windowclosed;
 	private Geometry window;
 	private Model model;
-
 
 	public WindowPlugin(Model model, View view) {
 		super(model);
@@ -37,10 +42,8 @@ public class WindowPlugin extends Plugin {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		windowopened = (Geometry) app.getAssetManager().loadModel(
-				"Models/windowopened.j3o");
-		windowclosed = (Geometry) app.getAssetManager().loadModel(
-				"Models/windowclosed.j3o");
+		window = (Geometry) app.getAssetManager()
+				.loadModel("Models/window.j3o");
 		initWindows(app);
 	}
 
@@ -56,9 +59,9 @@ public class WindowPlugin extends Plugin {
 			Material m = new Material(app.getAssetManager(),
 					"Common/MatDefs/Misc/Unshaded.j3md");
 			if (status > 0.0f) {
-				window.setMesh(windowopened.getMesh());
+				window.openanimation();
 			} else {
-				window.setMesh(windowclosed.getMesh());
+				window.closeanimation();
 			}
 			window.setMaterial(m);
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
@@ -85,36 +88,57 @@ public class WindowPlugin extends Plugin {
 				for (Sample sample : sensor.getMesswert()) {
 					if (sample.getTyp().equals("window")) {
 						float status = sample.getValue();
-						if(status > 0.0f) {
-							g.setMesh(windowopened.getMesh());
+						if (status > 0.0f) {
+							g.openanimation();
 						} else {
-							g.setMesh(windowclosed.getMesh());
+							g.closeanimation();
 						}
 					}
 				}
 			}
 		}
 	}
-	
+
 	private Geometry fitInHole(Geometry window) {
 		List<Wall> walls = model.getGroundplan().getWall();
 		Vector3f windowpos = window.getLocalTranslation();
-		for(Wall w: walls) {
+		Hole smallestHole = walls.get(0).getHole().get(0);
+		Wall smallestWall = walls.get(0);
+		float distance = 10000000.00f;
+		for (Wall w : walls) {
 			List<Hole> holes = w.getHole();
-			for(Hole h: holes) {
-				float top = h.getHeightWindow() + h.getHeightGround();
-				float bottom = h.getHeightGround();
-				float startX = h.getPositionX1();
-				float startY = h.getPositionY1();
-				float endX = h.getPositionX2();
-				float endY = h.getPositionY2();
-				Vector3f vecStart = new Vector3f(startX, startY, bottom);
-				Vector3f vecEnd = new Vector3f(endX, endY, top);
-				float distanceStart = vecStart.distance(windowpos);
-				float distanceEnd = vecEnd.distance(windowpos);
+			for (Hole h : holes) {
+				HoleAdapter holeAdapter = new HoleAdapter(h);
+				Vector2f holevec2 = holeAdapter.getPosition();
+				WallAdapter wallAdapter = new WallAdapter(w);
+				float rotation = wallAdapter.getRotation();
+				float newX = (float) (holevec2.getX() * Math.sin(rotation));
+				float newY = (float) (holevec2.getX() * Math.cos(rotation));
+				Vector3f HoleVec3 = new Vector3f(newX
+						+ wallAdapter.getPosition().getX(), wallAdapter
+						.getPosition().getY() + newY, holevec2.getY());
+				if (HoleVec3.distance(windowpos) < distance) {
+					smallestHole = h;
+					smallestWall = w;
+				}
 			}
 		}
+		HoleAdapter holeAdapter = new HoleAdapter(smallestHole);
+		Vector2f holevec2 = holeAdapter.getPosition();
+		WallAdapter wallAdapter = new WallAdapter(smallestWall);
+		float rotation = wallAdapter.getRotation();
+		float newX = (float) (holevec2.getX() * Math.sin(rotation));
+		float newY = (float) (holevec2.getY() * Math.cos(rotation));
+		Vector3f HoleVec3f = new Vector3f(newX
+				+ wallAdapter.getPosition().getX(), wallAdapter.getPosition()
+				.getY() + newY, holevec2.getY());
+		window.setLocalTranslation(HoleVec3f);
+		Quat4f rot = new Quat4f();
+		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0),
+				rotation);
+		window.setLocalRotation(Converter.convert(rot));
+		window.setLocalScale(holeAdapter.getSize().getX(), holeAdapter
+				.getSize().getY(), wallAdapter.getDepth());
 		return window;
 	}
-
 }
