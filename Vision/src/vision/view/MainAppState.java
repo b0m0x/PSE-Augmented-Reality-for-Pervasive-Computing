@@ -30,14 +30,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+import vision.controller.Controller;
 import vision.model.CustomMesh;
 import vision.model.Model;
 
 /**
  * Renders all static objects and rooms
  */
-public class MainAppState extends AbstractAppState implements ActionListener {
+public class MainAppState extends AbstractAppState {
 	private AppStateManager stateManager;
+	private Controller controller;
 	private SimpleApplication app;
 	private Model model;
 	private Node mainGeometryNode = new Node("static");
@@ -45,9 +47,10 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	private CharacterControl player;
 	
-	public MainAppState(Model model) {
+	public MainAppState(Model model, Controller contoller) {
 		this.model = model;
 		this.overviewCam = false;
+		this.controller = contoller;
 	}
 
 	@Override
@@ -118,7 +121,7 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 				new KeyTrigger(MouseInput.BUTTON_LEFT));
 		app.getInputManager()
 				.addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
-		app.getInputManager().addListener(this,
+		app.getInputManager().addListener(controller,
 				new String[] { "zoom", "select" });
 	}
 
@@ -180,34 +183,5 @@ public class MainAppState extends AbstractAppState implements ActionListener {
 		this.wallMesh = wallMesh;
 	}
 
-	// TODO: refactor, put in controller
-	@Override
-	public void onAction(String name, boolean keyPressed, float tpf) {
-		if (!overviewCam && name.equals("zoom")) {
-			Vector3f oldCamloc = app.getCamera().getLocation();
-			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, 1f)));
-			app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
-			overviewCam = true;
-		} else if (overviewCam && name.equals("zoom")) {
-			Vector3f oldCamloc = app.getCamera().getLocation();
-			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, -1f)));
-			// app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
-			overviewCam = false;
-		} else if (overviewCam && name.equals("select")) {
-			CollisionResults results = new CollisionResults();
-			Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera()
-					.getDirection());
-			mainGeometryNode.collideWith(ray, results);
-			for (int i = 0; i < results.size(); i++) {
-				Vector3f pt = results.getCollision(i).getContactPoint();
-				String hit = results.getCollision(i).getGeometry().getName();
-				if (hit.equals("floor")) {
-					app.getCamera().setLocation(
-							pt.add(new Vector3f(0f, 0f, 1f)));
-					overviewCam = false;
-				}
-			}
-		}
 
-	}
 }

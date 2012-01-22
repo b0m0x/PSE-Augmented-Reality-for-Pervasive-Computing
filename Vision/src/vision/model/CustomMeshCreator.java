@@ -31,10 +31,6 @@ import com.jme3.util.BufferUtils;
  */
 public class CustomMeshCreator {
 
-	private float[] vertices = new float[] {};
-	private int[] indices = new int[] {};
-	private float[] normals = new float[] {};
-
 	/**
 	 * creates a mesh off of a wall object. builds in holes for windows if
 	 * necessary.
@@ -74,9 +70,6 @@ public class CustomMeshCreator {
 				return (int) Math.signum(a.getPositionX1() - b.getPositionX1());
 			}
 		});
-		
-		//fill horizontal gaps between holes
-		int numHoles = wall.getHoles().size();
 		
 		float lastHRightBound = 0;
 		for (Hole hole : wall.getHoles()) {
