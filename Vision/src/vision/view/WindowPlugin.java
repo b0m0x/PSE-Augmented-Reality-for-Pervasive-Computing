@@ -1,5 +1,6 @@
 package vision.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vision.controller.WindowController;
@@ -97,6 +98,7 @@ public class WindowPlugin extends Plugin {
 	
 	private Geometry fitInHole(Geometry window) {
 		List<Wall> walls = model.getGroundplan().getWall();
+		Vector3f windowpos = window.getLocalTranslation();
 		for(Wall w: walls) {
 			List<Hole> holes = w.getHole();
 			for(Hole h: holes) {
@@ -108,7 +110,8 @@ public class WindowPlugin extends Plugin {
 				float endY = h.getPositionY2();
 				Vector3f vecStart = new Vector3f(startX, startY, bottom);
 				Vector3f vecEnd = new Vector3f(endX, endY, top);
-				float distance = vecStart.distance(vecEnd);
+				float distanceStart = vecStart.distance(windowpos);
+				float distanceEnd = vecEnd.distance(windowpos);
 			}
 		}
 		return window;
