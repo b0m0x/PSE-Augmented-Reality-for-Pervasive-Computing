@@ -161,7 +161,7 @@ public class Controller implements ScreenController {
 	}
 
 	/**
-	 * gets called by nifty if a button in the GUI wass pressed
+	 * gets called by nifty if a button in the GUI was pressed
 	 * 
 	 * @param id
 	 *            id of the clicked button
