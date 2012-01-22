@@ -43,6 +43,7 @@ public class WindowPlugin extends Plugin {
 	/**
 			 */
 	public WindowPlugin() {
+		
 	}
 
 	@Override

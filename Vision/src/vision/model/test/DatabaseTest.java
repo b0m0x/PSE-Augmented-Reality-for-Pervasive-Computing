@@ -14,6 +14,12 @@ public class DatabaseTest extends TestCase {
 
 	Database db = new Database();
 
+
+
+	// public void testCurrentTime() {
+	// System.out.println(System.currentTimeMillis());
+	// }
+
 	// public void testUpdate() {
 	// Update update = new Update();
 	// update.getDatabase().connect();
@@ -22,40 +28,40 @@ public class DatabaseTest extends TestCase {
 	// update.getDatabase().disconnect();
 	// }
 
-	public void testGetSensorData() {
-		Update update = new Update();
-		update.getDatabase().connect();
-		List<Sample> samples = new ArrayList<Sample>();
-		for (int i = 0; i < update.getDatabase().size(); i++) {
-			String id = update.getDatabase().getIDs(i);
-			System.out.println("ID: " + id);
-			System.out.println("Database ID: " + i + "\n");
-			System.out.println("Tags: ");
-			for (int k = 0; k < update.getDatabase().getTags(i).size(); k++) {
-				System.out.print(update.getDatabase().getTags(i).get(k));
-				if (k != update.getDatabase().getTags(i).size() - 1) {
-					System.out.print(", ");
-				} else {
-					System.out.println();
-				}
-			}
-			samples = update.getDatabase().getSensordata(id, 30);
-			for (int j = 0; j < samples.size(); j++) {
-				Sample sample = samples.get(j);
-				System.out.println("Sample: " + j);
-				System.out.println("Type: " + sample.getTyp());
-				System.out.println("Unit: " + sample.getUnit());
-				System.out.println("Last updated: " + sample.getUpdate());
-				System.out.println("Value: " + sample.getValue() + "\n");
-			}
-			System.out
-					.println("----------------------------------------------------------------------------");
-		}
-
-		System.out.println("IDs in Database: " + update.getDatabase().size());
-
-		update.getDatabase().disconnect();
-	}
+	// public void testGetSensorData() {
+	// Update update = new Update();
+	// update.getDatabase().connect();
+	// List<Sample> samples = new ArrayList<Sample>();
+	// for (int i = 0; i < update.getDatabase().size(); i++) {
+	// String id = update.getDatabase().getIDs(i);
+	// System.out.println("ID: " + id);
+	// System.out.println("Database ID: " + i + "\n");
+	// System.out.println("Tags: ");
+	// for (int k = 0; k < update.getDatabase().getTags(i).size(); k++) {
+	// System.out.print(update.getDatabase().getTags(i).get(k));
+	// if (k != update.getDatabase().getTags(i).size() - 1) {
+	// System.out.print(", ");
+	// } else {
+	// System.out.println();
+	// }
+	// }
+	// samples = update.getDatabase().getSensordata(id, 30);
+	// for (int j = 0; j < samples.size(); j++) {
+	// Sample sample = samples.get(j);
+	// System.out.println("Sample: " + j);
+	// System.out.println("Type: " + sample.getTyp());
+	// System.out.println("Unit: " + sample.getUnit());
+	// System.out.println("Last updated: " + sample.getUpdate());
+	// System.out.println("Value: " + sample.getValue() + "\n");
+	// }
+	// System.out
+	// .println("----------------------------------------------------------------------------");
+	// }
+	//
+	// System.out.println("IDs in Database: " + update.getDatabase().size());
+	//
+	// update.getDatabase().disconnect();
+	// }
 
 	// public void testGetSensorData() {
 	// Update update = new Update();
