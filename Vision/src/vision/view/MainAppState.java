@@ -96,6 +96,7 @@ public class MainAppState extends AbstractAppState {
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(5f);
 		player.setGravity(30f);
+		player.setJumpSpeed(50);
 		player.setPhysicsLocation(new Vector3f(0,50,0));
 		pSpace.add(player);
 		
@@ -124,6 +125,8 @@ public class MainAppState extends AbstractAppState {
 		
 		// init camera
 		app.getFlyByCamera().setEnabled(true);
+		
+		setUpKeys();
 
 		// TODO: put this stuff in controller
 		
