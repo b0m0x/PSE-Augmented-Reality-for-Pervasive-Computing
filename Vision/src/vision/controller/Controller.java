@@ -13,6 +13,10 @@ import java.awt.peer.CheckboxPeer;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+import com.jme3.collision.CollisionResults;
+import com.jme3.input.controls.ActionListener;
+import com.jme3.math.Ray;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 
 import vision.model.Model;
@@ -23,7 +27,7 @@ import vision.view.View;
  * subcontrollers and the model
  * 
  */
-public class Controller implements ScreenController {
+public class Controller implements ScreenController, ActionListener  {
 	
 	private Nifty nifty;
 	private Screen screen;
@@ -120,6 +124,7 @@ public class Controller implements ScreenController {
 	 *                     inverse="controller:vision.view.View"
 	 */
 	private View view = new vision.view.View();
+	private boolean overviewCam;
 
 	/**
 	 * Getter of the property <tt>view</tt>
@@ -199,6 +204,36 @@ public class Controller implements ScreenController {
 	 */
 	//@NiftyEventSubscriber(pattern = "checkbox.*")
 	public void checkboxPressed(String id, Object o) {
+
+	}
+
+	@Override
+	public void onAction(String name, boolean keyPressed, float tpf) {
+		if (!overviewCam && name.equals("zoom")) {
+			Vector3f oldCamloc = app.getCamera().getLocation();
+			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, 1f)));
+			app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
+			overviewCam = true;
+		} else if (overviewCam && name.equals("zoom")) {
+			Vector3f oldCamloc = app.getCamera().getLocation();
+			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, -1f)));
+			// app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
+			overviewCam = false;
+		} else if (overviewCam && name.equals("select")) {
+			CollisionResults results = new CollisionResults();
+			Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera()
+					.getDirection());
+			mainGeometryNode.collideWith(ray, results);
+			for (int i = 0; i < results.size(); i++) {
+				Vector3f pt = results.getCollision(i).getContactPoint();
+				String hit = results.getCollision(i).getGeometry().getName();
+				if (hit.equals("floor")) {
+					view.getCamera().setLocation(
+							pt.add(new Vector3f(0f, 0f, 1f)));
+					overviewCam = false;
+				}
+			}
+		}
 
 	}
 	
