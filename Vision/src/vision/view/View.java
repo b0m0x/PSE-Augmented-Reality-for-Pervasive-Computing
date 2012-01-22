@@ -74,7 +74,7 @@ public class View extends SimpleApplication {
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
 		stateManager.attach(mainAppState);
-		//inputManager.setCursorVisible(true);
+		inputManager.setCursorVisible(true);
 	}
 
 	/**

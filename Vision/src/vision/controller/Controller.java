@@ -13,7 +13,6 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
 
-import java.awt.peer.CheckboxPeer;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -200,8 +199,32 @@ public class Controller implements ScreenController, ActionListener  {
 	public void createManagePluginsPopupMenu(String id, Object o) {
 		Logger l= Logger.getLogger("buttonclick");
 		l.info("Button was pressed.");
+		createMyPopupMenu();
+		nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null); 
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param o
+	 */
+	@NiftyEventSubscriber(id = "btn_Help")
+	public void help(String id, Object o) {
+		Logger l= Logger.getLogger("buttonclick");
+		l.info("Button was pressed.");
+	}
+	
+	
+	/**
+	 * 
+	 * @param id
+	 * @param o
+	 */
+	@NiftyEventSubscriber(id = "btn_LoadRoom")
+	public void loadRoom(String id, Object o) {
+		Logger l= Logger.getLogger("buttonclick");
+		l.info("Button was pressed.");
+	}
 	
 	
 
@@ -218,23 +241,18 @@ public class Controller implements ScreenController, ActionListener  {
 
 	
 	private Element popup;
-	CheckBox cBox;
+	
+	@SuppressWarnings("deprecation")
+	CheckBox cBox = new CheckboxControl();
 
 	public void createMyPopupMenu(){
 	  popup = nifty.createPopup("niftyPopupMenu");
 	  Menu myMenu = popup.findNiftyControl("#menu", Menu.class);
 	  myMenu.setWidth(new SizeValue("100px")); // must be set
 	  myMenu.addMenuItem("Click me!", cBox);
-	  
+	 
 	}
 	
-	public void showMenu() { // the method to trigger the menu
-		  // If this is a menu that is going to be used many times, then
-		  // call this in your constructor rather than here   
-		  createMyPopupMenu();
-		  // call the popup to screen of your choice:
-		  nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null); 
-		}
 	
 
 	

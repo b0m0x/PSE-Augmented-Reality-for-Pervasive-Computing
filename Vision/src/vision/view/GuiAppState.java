@@ -38,7 +38,7 @@ public class GuiAppState extends AbstractAppState  {
                 app.getAudioRenderer(),
                 app.getGuiViewPort());
         nifty = niftyDisplay.getNifty();
-		nifty.fromXml("gui.xml", "start");
+		nifty.fromXml("gui.xml", "start",controller);
 		app.getGuiViewPort().addProcessor(niftyDisplay);
 		NiftyEventAnnotationProcessor.process(controller);
 
