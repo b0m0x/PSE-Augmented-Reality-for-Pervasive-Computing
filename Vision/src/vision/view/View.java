@@ -58,10 +58,12 @@ public class View extends SimpleApplication {
 	 * initializes the view
 	 */
 	public void simpleInitApp() {
-		guiAppState = new GuiAppState();
+
+		guiAppState = new GuiAppState(controller);
 		bulletAppState = new BulletAppState();
 		
 		mainAppState = new MainAppState(daten);
+
 		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
 			stateManager.attach(p);
