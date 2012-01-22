@@ -60,6 +60,7 @@ public class View extends SimpleApplication {
 	public void simpleInitApp() {
 		guiAppState = new GuiAppState();
 		bulletAppState = new BulletAppState();
+		
 		mainAppState = new MainAppState(daten);
 		for (Plugin p : daten.getPluginList()) {
 			p.initialize(stateManager, this);
@@ -67,12 +68,11 @@ public class View extends SimpleApplication {
 		}
 		guiAppState.initialize(stateManager, this);
 		mainAppState.initialize(stateManager, this);
-		stateManager.attach(mainAppState);
+		
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
-		inputManager.setCursorVisible(true);
-		
-
+		stateManager.attach(mainAppState);
+		//inputManager.setCursorVisible(true);
 	}
 
 	/**
