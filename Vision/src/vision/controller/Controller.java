@@ -4,10 +4,14 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
+import de.lessvoid.nifty.controls.CheckBox;
+import de.lessvoid.nifty.controls.Menu;
+import de.lessvoid.nifty.controls.MenuItemActivatedEvent;
 import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
+import de.lessvoid.nifty.tools.SizeValue;
 
 import java.awt.peer.CheckboxPeer;
 import java.util.Collection;
@@ -166,7 +170,7 @@ public class Controller implements ScreenController, ActionListener  {
 	}
 
 	/**
-	 * gets called by nifty if a button in the GUI wass pressed
+	 * gets called by nifty if a button in the GUI was pressed
 	 * 
 	 * @param id
 	 *            id of the clicked button
@@ -186,6 +190,8 @@ public class Controller implements ScreenController, ActionListener  {
 	public void userPick(Geometry obj) {
 
 	}
+	
+	
 
 	/**
 	 * gets called if the user pressed the activate/deactivate button
@@ -195,6 +201,9 @@ public class Controller implements ScreenController, ActionListener  {
 		Logger l= Logger.getLogger("buttonclick");
 		l.info("Button was pressed.");
 	}
+	
+	
+	
 
 	/**
 	 * gets called if a user checked or unchecked a non-plugin defined checkbox
@@ -207,6 +216,33 @@ public class Controller implements ScreenController, ActionListener  {
 
 	}
 
+	
+	private Element popup;
+	CheckBox cBox;
+
+	public void createMyPopupMenu(){
+	  popup = nifty.createPopup("niftyPopupMenu");
+	  Menu myMenu = popup.findNiftyControl("#menu", Menu.class);
+	  myMenu.setWidth(new SizeValue("100px")); // must be set
+	  myMenu.addMenuItem("Click me!", cBox);
+	  
+	}
+	
+	public void showMenu() { // the method to trigger the menu
+		  // If this is a menu that is going to be used many times, then
+		  // call this in your constructor rather than here   
+		  createMyPopupMenu();
+		  // call the popup to screen of your choice:
+		  nifty.showPopup(nifty.getCurrentScreen(), popup.getId(), null); 
+		}
+	
+
+	
+	
+	
+	
+	
+	
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {
 		if (name.equals("zoom")) {

@@ -17,19 +17,19 @@
 			             	
 		          			</control>
 		        		
-		          			<control name="button" label="Settings" id="Settings"  valign="center" 
+		          			<control name="button" label="Settings" id="btn_Settings"  valign="center" 
 		          			visibleToMouse="true"> 
 		          			</control>
 		          			
-		          			<control name="button" label="Overview" id="Overview"  valign="center"
+		          			<control name="button" label="Overview" id="btn_Overview"  valign="center"
 		          			visibleToMouse="true"> 
 		          			</control>
 		          			        	
-		          			<control name="button" label="Load Room" id="LoadRoom"  valign="center"
+		          			<control name="button" label="Load Room" id="btn_LoadRoom"  valign="center"
 		          			visibleToMouse="true"> 
 		          			</control>    
 		          			
-		          			<control name="button" label="Help" id="Help"  valign="center" visibleToMouse="true"> 
+		          			<control name="button" label="Help" id="btn_Help"  valign="center" visibleToMouse="true"> 
 		          			</control> 
 			             
 			             </panel>
@@ -53,6 +53,12 @@
              backgroundColor="#00f8">  
         		
       </panel>
+      
+		<popup id="niftyPopupMenu" childLayout="absolute"
+		       controller="ControllerOfYourChoice" width="10%">
+			<interact onClick="closePopup()"/>
+		<control id="#menu" name="niftyMenu" />
+		</popup>
    	</layer>
   </screen>
   
