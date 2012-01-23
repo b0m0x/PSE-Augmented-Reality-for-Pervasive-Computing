@@ -204,7 +204,7 @@ public class Controller implements ScreenController, ActionListener  {
 	 * @param o
 	 */
 	@NiftyEventSubscriber(id = "btn_Help")
-	public void help(String id, ButtonClickedEvent o) {
+	public void help(String id, ButtonClickedEvent bce) {
 		Logger l= Logger.getLogger("buttonclick");
 		l.info("Button was pressed.");
 	}
@@ -216,7 +216,7 @@ public class Controller implements ScreenController, ActionListener  {
 	 * @param o
 	 */
 	@NiftyEventSubscriber(id = "btn_LoadRoom")
-	public void loadRoom(String id, ButtonClickedEvent o) {
+	public void loadRoom(String id, ButtonClickedEvent bce) {
 		Logger l= Logger.getLogger("buttonclick");
 		l.info("Button was pressed.");
 	}
@@ -229,9 +229,10 @@ public class Controller implements ScreenController, ActionListener  {
 	 * @param o
 	 */
 	@NiftyEventSubscriber(id = "btn_Settings")
-	public void settings(String id, ButtonClickedEvent o) {
+	public void settings(String id, ButtonClickedEvent bce) {
 		nifty.gotoScreen("options");
 	}
+	
 	
 	/**
 	 * 
@@ -241,6 +242,11 @@ public class Controller implements ScreenController, ActionListener  {
 	@NiftyEventSubscriber(id = "btn_Overview")
 	public void toggleOverview(String id, ButtonClickedEvent o) {
 		view.toggleOverviewCam();
+
+	@NiftyEventSubscriber(id = "btn_back")
+	public void backToMainScreen(String id, ButtonClickedEvent bce) {
+		nifty.gotoScreen("start");
+		
 	}
 	
 
