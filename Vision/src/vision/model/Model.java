@@ -27,15 +27,20 @@ import vision.view.View;
  * 
  */
 public class Model {
+	
+	UpdateThread updater;
 
 	public Model(View view) throws JAXBException {
+
+		sensor = createTestSensors();
 		this.view = view;
-		// loadPlugins();
-		this.sensor = getAllSensors();
+		loadPlugins();
 		this.groundplan = new vision.model.Groundplan().load();
 		this.datenbank = new vision.model.Database();
-		UpdateThread updater = new UpdateThread(this);
+		/*
+		updater = new UpdateThread(this);
 		updater.start();
+		*/
 		
 		Logger.getLogger("").setLevel(Config.logLevel);
 		
@@ -53,6 +58,7 @@ public class Model {
 
 	/**
 						 */
+	//TODO fix
 	public List<Sensor> getTaggedSensors(List<String> tags) {
 		List<Sensor> tagged = new ArrayList<Sensor>();
 		for (int i = 0; i < sensor.size(); i++) {
@@ -74,7 +80,7 @@ public class Model {
 	 * @uml.associationEnd multiplicity="(0 -1)"
 	 *                     inverse="daten:vision.model.Sensor"
 	 */
-	private List<Sensor> sensor = new ArrayList<Sensor>();
+	private List<Sensor> sensor;
 
 	/**
 	 * Getter of the property <tt>sensor</tt>
@@ -113,32 +119,8 @@ public class Model {
 		this.datenbank = datenbank;
 	}
 
-	/**
-	 * @uml.property name="update"
-	 * @uml.associationEnd inverse="daten:vision.model.Update"
-	 */
-	private Update update;
 
-	/**
-	 * Getter of the property <tt>update</tt>
-	 * 
-	 * @return Returns the update.
-	 * @uml.property name="update"
-	 */
-	public Update getUpdate() {
-		return update;
-	}
 
-	/**
-	 * Setter of the property <tt>update</tt>
-	 * 
-	 * @param update
-	 *            The update to set.
-	 * @uml.property name="update"
-	 */
-	public void setUpdate(Update update) {
-		this.update = update;
-	}
 
 	/**
 	 * Setter of the property <tt>sensor</tt>
@@ -297,5 +279,19 @@ public class Model {
 		floor.addControl(new RigidBodyControl(0));
 		
 		staticGeometries.add(floor);
+	}
+	
+	protected List<Sensor> createTestSensors() {
+		List<Sensor> sensors = new ArrayList<Sensor>();
+		Sensor s = new Sensor();
+		s.addToTags("heater");
+		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System.currentTimeMillis()));
+		s.setPosition(new Position(1,1,1));
+		sensors.add(s);
+		return sensors;
+	}
+	
+	protected void close() {
+		updater.setRunning(false);
 	}
 }

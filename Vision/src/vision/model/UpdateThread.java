@@ -15,10 +15,10 @@ public class UpdateThread extends Thread {
 
 	public UpdateThread(Model model) {
 		update = new Update(model);
+		running = true;
 	}
 
 	public void run() {
-		running = true;
 		update.getDatabase().connect();
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
