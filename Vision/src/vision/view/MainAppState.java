@@ -87,7 +87,7 @@ public class MainAppState extends AbstractAppState {
 			//add physics control
 			pSpace.add(g.getControl(0));
 		}
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 1.5f, 1);
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 1.7f, 1);
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
 		player.setGravity(20f);
@@ -147,8 +147,8 @@ public class MainAppState extends AbstractAppState {
 	public void update(float tpf) {
 		super.update(tpf);
 		Camera cam = app.getCamera();
-	    Vector3f camDir = cam.getDirection().clone().multLocal(0.6f);
-	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.4f);
+	    Vector3f camDir = cam.getDirection().clone().multLocal(0.2f);
+	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.11f);
 	    Vector3f walkDirection = new Vector3f(0, 0, 0);
 	    if (moveLeft)  { walkDirection.addLocal(camLeft); }
 	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }
