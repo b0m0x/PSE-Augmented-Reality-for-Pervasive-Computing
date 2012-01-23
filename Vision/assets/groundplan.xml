@@ -68,6 +68,24 @@
 			<heightWindow>1.100012</heightWindow>
 		</hole>
     </wall>
+    <reference>
+		<x>0.0</x>
+		<y>0.0</y>
+  		<lat>7.84552</lat>
+ 		<lon>48.56745</lon>
+	</reference>
+	<staticGeometry>
+		<x>30.0</x>
+		<y>20.0</y>
+		<angle>3.1415</angle>
+		<path>Models/meinObjektt.j3o</path>
+	</staticGeometry>
+	<staticGeometry>
+		<x>40.0</x>
+		<y>70.0</y>
+		<angle>7.1415</angle>
+		<path>Models/meinObjeckt.j3o</path>
+	</staticGeometry>
      
 </groundplan>
 
