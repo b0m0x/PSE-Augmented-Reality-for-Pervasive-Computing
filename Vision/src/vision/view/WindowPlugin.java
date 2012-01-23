@@ -1,6 +1,5 @@
 package vision.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Quat4f;
@@ -9,7 +8,6 @@ import vision.controller.WindowController;
 import vision.model.Hole;
 import vision.model.HoleAdapter;
 import vision.model.Model;
-import vision.model.Position;
 import vision.model.Sample;
 import vision.model.Sensor;
 import vision.model.Wall;
@@ -26,8 +24,6 @@ import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 
 public class WindowPlugin extends Plugin {
 
@@ -69,9 +65,9 @@ public class WindowPlugin extends Plugin {
 			windowControl = window.getControl(AnimControl.class);
 			windowChannel = windowControl.createChannel();
 			if (status > 0.0f) {
-				windowChannel.setAnim("open");
+				windowChannel.setAnim("opened");
 			} else {
-				windowChannel.setAnim("close");
+				windowChannel.setAnim("closed");
 			}
 			window.setMaterial(m);
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
@@ -103,7 +99,7 @@ public class WindowPlugin extends Plugin {
 						if (status > 0.0f) {
 							windowChannel.setAnim("open");
 						} else {
-							windowChannel.setAnim("claose");
+							windowChannel.setAnim("close");
 						}
 					}
 				}
