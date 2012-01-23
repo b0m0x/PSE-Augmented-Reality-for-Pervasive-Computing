@@ -272,11 +272,11 @@ public class Model {
 	private void createGeometry() {
 		staticGeometries = new ArrayList<Spatial>();
 		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
-		m.setBoolean("m_UseMaterialColors", true);
-		m.setColor("m_Ambient",  ColorRGBA.Gray);
-		m.setColor("m_Diffuse",  ColorRGBA.Gray);
-		m.setColor("m_Specular", ColorRGBA.White);
-		m.setFloat("m_Shininess", 3);
+		m.setBoolean("UseMaterialColors", true);
+		m.setColor("Ambient",  ColorRGBA.Gray);
+		m.setColor("Diffuse",  ColorRGBA.Gray);
+		m.setColor("Specular", ColorRGBA.White);
+		m.setFloat("Shininess", 3);
 //		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
 //		m.setTexture("ColorMap",
 //				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
@@ -291,7 +291,7 @@ public class Model {
 		}
 		
 		//add hardcoded floor
-		Geometry floor = new Geometry("floor", new Box(20f, 0.1f, 20f));
+		Geometry floor = new Geometry("floor", new Box(20f, 0.1f, 50f));
 		floor.setLocalTranslation(0, -1.7f, 0);
 		floor.setMaterial(m);
 		floor.addControl(new RigidBodyControl(0));
