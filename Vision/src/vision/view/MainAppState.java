@@ -114,9 +114,9 @@ public class MainAppState extends AbstractAppState {
 	void setUpLights() {
 		//add light
 		PointLight lamp_light = new PointLight();
-		lamp_light.setColor(ColorRGBA.Cyan);
-		lamp_light.setRadius(30f);
-		lamp_light.setPosition(new Vector3f(0, 1, 5));
+		lamp_light.setColor(ColorRGBA.Yellow);
+		lamp_light.setRadius(50f);
+		lamp_light.setPosition(new Vector3f(0, 1, 1));
 		app.getRootNode().addLight(lamp_light);
 		
 		AmbientLight al = new AmbientLight();
