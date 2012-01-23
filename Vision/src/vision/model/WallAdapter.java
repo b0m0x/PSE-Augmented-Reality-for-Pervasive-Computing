@@ -49,8 +49,9 @@ public class WallAdapter {
 	
 	public float getRotation() {
 		Vector2f wallDir = new Vector2f(getStart().getX()
-				+ getEnd().getX(), getStart().getY()
-				+ getEnd().getY());
+				- getEnd().getX(), getStart().getY()
+				- getEnd().getY());
+		
 		return wallDir.angleBetween(new Vector2f(1f, 0f));
 	}
 }

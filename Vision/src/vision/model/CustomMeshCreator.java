@@ -10,6 +10,7 @@ import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -87,11 +88,7 @@ public class CustomMeshCreator {
 		RigidBodyControl ctrl = (RigidBodyControl) wallGeometry.getControl(0);
 		float a = wall.getRotation();
 		
-		//wallGeometry = wallGeometry.rotate(0, a, 0);
-		Quat4f rot = new Quat4f();
-		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0), a);
-		
-		ctrl.setPhysicsRotation(Converter.convert(rot));
+		ctrl.setPhysicsRotation(new Quaternion(new float[] {0, a, 0}));
 		wallGeometry.setMaterial(new Material()); // TODO: set unshaded
 													// material. requires
 													// reference to an asset
