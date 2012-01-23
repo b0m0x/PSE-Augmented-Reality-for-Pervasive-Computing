@@ -6,9 +6,13 @@ import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
+import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
+
 
 import vision.view.Plugin;
 import vision.view.View;
@@ -260,10 +264,10 @@ public class Model {
 		staticGeometries = new ArrayList<Spatial>();
 		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("m_UseMaterialColors", true);
-		m.setColor("m_Ambient",  ColorRGBA.Orange);
-		m.setColor("m_Diffuse",  ColorRGBA.Orange);
+		m.setColor("m_Ambient",  ColorRGBA.Gray);
+		m.setColor("m_Diffuse",  ColorRGBA.Gray);
 		m.setColor("m_Specular", ColorRGBA.White);
-		m.setFloat("m_Shininess", 12);
+		m.setFloat("m_Shininess", 3);
 //		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
 //		m.setTexture("ColorMap",
 //				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
@@ -277,5 +281,12 @@ public class Model {
 			staticGeometries.add(g);
 		}
 		
+		//add hardcoded floor
+		Geometry floor = new Geometry("floor", new Box(20f, 0.1f, 20f));
+		floor.setLocalTranslation(0, -1.7f, 0);
+		floor.setMaterial(m);
+		floor.addControl(new RigidBodyControl(0));
+		
+		staticGeometries.add(floor);
 	}
 }

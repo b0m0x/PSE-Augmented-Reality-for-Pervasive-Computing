@@ -94,7 +94,7 @@ public class JSONConverter {
 					JSONObject lvl3 = lvl2
 							.getJSONObject(JSONObject.getNames(lvl2)[type]);
 
-					sample.setSensor(sensor);
+					//sample.setSensor(sensor);
 
 					sample.setTyp(JSONObject.getNames(lvl2)[type]);
 					sample.setUnit(lvl3.getString("unit"));

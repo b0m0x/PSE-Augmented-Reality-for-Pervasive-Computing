@@ -44,7 +44,6 @@ public class Controller implements ScreenController, ActionListener  {
 	public void bind(Nifty nifty, Screen screen) {
 		this.nifty = nifty;
 		this.screen = screen;
-
 	}
 
 	@Override

@@ -87,7 +87,7 @@ public class MainAppState extends AbstractAppState {
 			//add physics control
 			pSpace.add(g.getControl(0));
 		}
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(1.5f, 6f, 1);
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(1.5f, 2f, 1);
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(5f);
 		player.setGravity(30f);
@@ -193,7 +193,6 @@ public class MainAppState extends AbstractAppState {
 			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, -1f)));
 			// app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
 			overviewCam = false;
-	
 		}
 	}
 
@@ -229,7 +228,7 @@ public class MainAppState extends AbstractAppState {
 		} else if (name.equals("Down")) {
  			moveBack = keyPressed;
 		} else if (name.equals("Jump")) {
-			moveJump = keyPressed;
+			player.jump();
 		}
 	}
 	
