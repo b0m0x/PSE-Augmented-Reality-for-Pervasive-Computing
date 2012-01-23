@@ -224,6 +224,19 @@ public class Controller implements ScreenController, ActionListener  {
 	
 
 	/**
+	 * 
+	 * @param id
+	 * @param o
+	 */
+	@NiftyEventSubscriber(id = "btn_Settings")
+	public void settings(String id, Object o) {
+		nifty.gotoScreen("options");
+	}
+	
+	
+	
+
+	/**
 	 * gets called if a user checked or unchecked a non-plugin defined checkbox
 	 * 
 	 * @param id
