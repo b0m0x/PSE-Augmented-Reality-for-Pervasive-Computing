@@ -5,7 +5,6 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="wall"/>
         <xs:element maxOccurs="unbounded" ref="reference"/>
-        <xs:element maxOccurs="unbounded" ref="staticGeometry"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -52,24 +51,12 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="x" type="xs:float"/>
+  <xs:element name="y" type="xs:float"/>
   <xs:element name="lat" type="xs:float"/>
   <xs:element name="lon" type="xs:float"/>
-  <xs:element name="staticGeometry">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="x"/>
-        <xs:element ref="y"/>
-        <xs:element ref="angle"/>
-        <xs:element ref="path"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="angle" type="xs:float"/>
-  <xs:element name="path" type="xs:string"/>
   <xs:element name="positionX1" type="xs:float"/>
   <xs:element name="positionY1" type="xs:float"/>
   <xs:element name="positionX2" type="xs:float"/>
   <xs:element name="positionY2" type="xs:float"/>
-  <xs:element name="x" type="xs:float"/>
-  <xs:element name="y" type="xs:float"/>
 </xs:schema>
