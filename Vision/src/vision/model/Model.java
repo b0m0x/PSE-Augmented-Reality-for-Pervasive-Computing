@@ -18,6 +18,7 @@ import com.jme3.scene.shape.Box;
 
 import java.util.Date;
 
+import vision.Config;
 import vision.view.Plugin;
 import vision.view.View;
 
@@ -33,26 +34,10 @@ public class Model {
 		this.sensor = getAllSensors();
 		this.groundplan = new vision.model.Groundplan().load();
 		this.datenbank = new vision.model.Database();
-		class DaemonThread extends Thread {
-			DaemonThread() {
-				setDaemon(true);
-			}
-
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						TimeUnit.SECONDS.sleep(13);
-						sensor = getAllSensors();
-					} catch (InterruptedException e) {
-					}
-				}
-
-			
-			};}
-			new DaemonThread().start();
+		UpdateThread updater = new UpdateThread(this);
+		updater.start();
 		
-		Logger.getLogger("").setLevel(Level.SEVERE);
+		Logger.getLogger("").setLevel(Config.logLevel);
 		
 	}
 
@@ -162,7 +147,7 @@ public class Model {
 	 *            The sensor to set.
 	 * @uml.property name="sensor"
 	 */
-	public void setSensor(List<Sensor> sensor) {
+	public synchronized void setSensor(List<Sensor> sensor) {
 		this.sensor = sensor;
 	}
 
@@ -202,7 +187,7 @@ public class Model {
 	/**
 		 */
 	private List<Sensor> getAllSensors() {
-		return new vision.model.JSONConverter().getSensorList();
+		return getSensor();
 	}
 
 	/**

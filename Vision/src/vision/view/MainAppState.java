@@ -87,7 +87,7 @@ public class MainAppState extends AbstractAppState {
 			//add physics control
 			pSpace.add(g.getControl(0));
 		}
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(1.5f, 2f, 1);
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 1.7f, 1);
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
 		player.setGravity(20f);
@@ -114,9 +114,9 @@ public class MainAppState extends AbstractAppState {
 	void setUpLights() {
 		//add light
 		PointLight lamp_light = new PointLight();
-		lamp_light.setColor(ColorRGBA.Cyan);
-		lamp_light.setRadius(10f);
-		lamp_light.setPosition(new Vector3f(0, 1, 5));
+		lamp_light.setColor(ColorRGBA.Yellow);
+		lamp_light.setRadius(50f);
+		lamp_light.setPosition(new Vector3f(0, 1, 1));
 		app.getRootNode().addLight(lamp_light);
 		
 		AmbientLight al = new AmbientLight();
@@ -147,8 +147,8 @@ public class MainAppState extends AbstractAppState {
 	public void update(float tpf) {
 		super.update(tpf);
 		Camera cam = app.getCamera();
-	    Vector3f camDir = cam.getDirection().clone().multLocal(0.6f);
-	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.4f);
+	    Vector3f camDir = cam.getDirection().clone().multLocal(0.2f);
+	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.11f);
 	    Vector3f walkDirection = new Vector3f(0, 0, 0);
 	    if (moveLeft)  { walkDirection.addLocal(camLeft); }
 	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }
