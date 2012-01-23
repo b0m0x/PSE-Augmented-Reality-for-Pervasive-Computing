@@ -1,5 +1,6 @@
 package vision.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,7 +28,7 @@ public class HeaterPlugin extends Plugin {
 	/**
 	 * @uml.property name="heaters"
 	 */
-	private List<Spatial> heaters;
+	private List<Spatial> heaters = new ArrayList<Spatial>();
 	private Spatial heater;
 	private Model model;
 	private Logger log = Logger.getLogger(HeaterPlugin.class.getName());
@@ -84,8 +85,8 @@ public class HeaterPlugin extends Plugin {
 			Logger.getLogger(this.getClass().getName()).warning("Added foo at " + s.getPosition().getX() + s.getPosition()
 					.getY() + s.getPosition().getZ());
 			
-			heater.setUserData("sid", s.getId());
-			heaters.add(heater.clone());
+			//heater.setUserData("sid", s.getId());
+			heaters.add(heater);
 			
 			app.getStateManager().getState(BulletAppState.class).getPhysicsSpace().add(r);
 		}

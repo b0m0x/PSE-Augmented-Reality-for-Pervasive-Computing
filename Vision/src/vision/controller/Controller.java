@@ -242,6 +242,7 @@ public class Controller implements ScreenController, ActionListener  {
 	@NiftyEventSubscriber(id = "btn_Overview")
 	public void toggleOverview(String id, ButtonClickedEvent o) {
 		view.toggleOverviewCam();
+	}
 
 	@NiftyEventSubscriber(id = "btn_back")
 	public void backToMainScreen(String id, ButtonClickedEvent bce) {
