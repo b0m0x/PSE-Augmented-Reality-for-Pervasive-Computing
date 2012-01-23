@@ -16,6 +16,8 @@ import vision.model.Wall;
 import vision.model.WallAdapter;
 
 import com.bulletphysics.linearmath.QuaternionUtil;
+import com.jme3.animation.AnimChannel;
+import com.jme3.animation.AnimControl;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.asset.BlenderKey;
@@ -24,6 +26,8 @@ import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 
 public class WindowPlugin extends Plugin {
 
@@ -33,6 +37,8 @@ public class WindowPlugin extends Plugin {
 	private List<Geometry> windows;
 	private Geometry window;
 	private Model model;
+	private AnimChannel windowChannel;
+	private AnimControl windowControl;
 
 	public WindowPlugin(Model model, View view) {
 		super(model);
@@ -60,10 +66,12 @@ public class WindowPlugin extends Plugin {
 			}
 			Material m = new Material(app.getAssetManager(),
 					"Common/MatDefs/Misc/Unshaded.j3md");
+			windowControl = window.getControl(AnimControl.class);
+			windowChannel = windowControl.createChannel();
 			if (status > 0.0f) {
-				window.openanimation();
+				windowChannel.setAnim("open");
 			} else {
-				window.closeanimation();
+				windowChannel.setAnim("close");
 			}
 			window.setMaterial(m);
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
@@ -90,17 +98,19 @@ public class WindowPlugin extends Plugin {
 				for (Sample sample : sensor.getMesswert()) {
 					if (sample.getTyp().equals("window")) {
 						float status = sample.getValue();
+						windowControl = g.getControl(AnimControl.class);
+						windowChannel = windowControl.createChannel();
 						if (status > 0.0f) {
-							g.openanimation();
+							windowChannel.setAnim("open");
 						} else {
-							g.closeanimation();
+							windowChannel.setAnim("claose");
 						}
 					}
 				}
 			}
 		}
 	}
-
+	
 	private Geometry fitInHole(Geometry window) {
 		List<Wall> walls = model.getGroundplan().getWall();
 		Vector3f windowpos = window.getLocalTranslation();
