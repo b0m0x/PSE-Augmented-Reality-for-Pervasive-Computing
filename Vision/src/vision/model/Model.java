@@ -3,6 +3,7 @@ package vision.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 
+import java.util.Date;
 
 import vision.view.Plugin;
 import vision.view.View;
@@ -31,6 +33,24 @@ public class Model {
 		this.sensor = getAllSensors();
 		this.groundplan = new vision.model.Groundplan().load();
 		this.datenbank = new vision.model.Database();
+		class DaemonThread extends Thread {
+			DaemonThread() {
+				setDaemon(true);
+			}
+
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						TimeUnit.SECONDS.sleep(13);
+						sensor = getAllSensors();
+					} catch (InterruptedException e) {
+					}
+				}
+
+			
+			};}
+			new DaemonThread().start();
 		
 		Logger.getLogger("").setLevel(Level.SEVERE);
 		
