@@ -8,9 +8,10 @@ import java.util.List;
  */
 public class Update {
 
-	public Update() {
+	public Update(Model model) {
 		this.database = new Database();
 		this.jsonConverter = new JSONConverter();
+		this.daten = model;
 	}
 
 	/**
@@ -110,7 +111,7 @@ public class Update {
 		jsonConverter.convert();
 		List<Sensor> sensorlist = new ArrayList<Sensor>();
 		sensorlist = jsonConverter.getSensorList();
-
+		daten.setSensor(sensorlist);
 		for (int i = 0; i < sensorlist.size(); i++) {
 			for (int j = 0; j < sensorlist.get(i).getMesswert().size(); j++) {
 				database.updateSensors(sensorlist.get(i).getId(), l,
