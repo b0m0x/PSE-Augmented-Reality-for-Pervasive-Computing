@@ -246,7 +246,7 @@ public class Controller implements ScreenController, ActionListener  {
 	
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {
-		if (name.equals("zoom")) {
+		if (name.equals("zoom") && keyPressed) {
 			view.toggleOverviewCam();
 		} else if (name.equals("select")) {
 			view.userSelect();

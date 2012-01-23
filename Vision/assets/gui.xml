@@ -54,16 +54,7 @@
              backgroundColor="#00f8">  
         		
       </panel>
-      
-      <popup id="pluginsPopupMenu" childLayout="absolute"
-		        width="10%" >
-		       
-		<control id="#menu" name="niftyMenu" />
-		<control name="button" label="hooo" id="btn_tst"  valign="center" 
-		          			visibleToMouse="true"> 
-		          			</control>
-			
-	</popup>
+    
    	
       
       
