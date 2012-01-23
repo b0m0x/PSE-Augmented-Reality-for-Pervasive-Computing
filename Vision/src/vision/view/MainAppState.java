@@ -37,7 +37,7 @@ import vision.model.Model;
 public class MainAppState extends AbstractAppState {
 	private AppStateManager stateManager;
 	private Controller controller;
-	private SimpleApplication app;
+	private View app;
 	private Model model;
 	private Node mainGeometryNode = new Node("static");
 	private boolean overviewCam;
@@ -48,7 +48,6 @@ public class MainAppState extends AbstractAppState {
 	private boolean moveRight;
 	private boolean moveForward;
 	private boolean moveBack;
-	private boolean moveJump;
 
 	
 	public MainAppState(Model model, Controller contoller) {
@@ -61,12 +60,13 @@ public class MainAppState extends AbstractAppState {
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
 		this.stateManager = stateManager;
-		this.app = (SimpleApplication) app;
+		this.app = (View) app;
 	}
 
 	@Override
 	public void stateAttached(AppStateManager stateManager) {
 		if (!isInitialized()) {
+			log.severe("Not initialized ");
 			return;
 		}
 		super.stateAttached(stateManager);
@@ -89,13 +89,12 @@ public class MainAppState extends AbstractAppState {
 		}
 		CapsuleCollisionShape pcs = new CapsuleCollisionShape(1.5f, 2f, 1);
 		player = new CharacterControl(pcs, 0.02f);
-		player.setFallSpeed(5f);
-		player.setGravity(30f);
-		player.setJumpSpeed(50);
+		player.setFallSpeed(20f);
+		player.setGravity(20f);
+		player.setJumpSpeed(20);
 		player.setPhysicsLocation(new Vector3f(0,50,0));
 		pSpace.add(player);
-		
-		
+				
 		app.getRootNode().attachChild(mainGeometryNode);
 
 		// load skybox
@@ -103,25 +102,26 @@ public class MainAppState extends AbstractAppState {
 
 		app.getRootNode().attachChild(sb);
 		
+		app.getRootNode().setCullHint(CullHint.Dynamic);
+	
+		// init camera
+		app.getFlyByCamera().setEnabled(true);
 		
+		setUpLights();
+		setUpKeys();
+	}
+	
+	void setUpLights() {
 		//add light
 		PointLight lamp_light = new PointLight();
-		lamp_light.setColor(ColorRGBA.Yellow);
-		lamp_light.setRadius(40f);
-		lamp_light.setPosition(new Vector3f(0, 0, 5));
+		lamp_light.setColor(ColorRGBA.Cyan);
+		lamp_light.setRadius(10f);
+		lamp_light.setPosition(new Vector3f(0, 1, 5));
 		app.getRootNode().addLight(lamp_light);
-
-
-		app.getRootNode().setCullHint(CullHint.Never);
 		
 		AmbientLight al = new AmbientLight();
 		al.setColor(ColorRGBA.White.mult(1.3f));
 		app.getRootNode().addLight(al);
-		
-		// init camera
-		app.getFlyByCamera().setEnabled(true);
-		
-		setUpKeys();
 	}
 
 	void setUpKeys() {
@@ -183,17 +183,17 @@ public class MainAppState extends AbstractAppState {
 
 
 	public void toggleOverviewCam() {
+		overviewCam = !overviewCam;
 		if (!overviewCam) {
-			Vector3f oldCamloc = app.getCamera().getLocation();
-			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, 1f)));
-			app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
-			overviewCam = true;		
+			player.setPhysicsLocation(new Vector3f(0, 10, 0f));
+			app.getCamera().lookAt(new Vector3f(1,1,1), new Vector3f(0, 1, 0));
 		} else {
-			Vector3f oldCamloc = app.getCamera().getLocation();
-			app.getCamera().setLocation(oldCamloc.add(new Vector3f(0, 0, -1f)));
-			// app.getCamera().lookAt(oldCamloc, new Vector3f(0, 0, 1));
-			overviewCam = false;
+			player.setPhysicsLocation(new Vector3f(0, 50, 0));
+			app.getCamera().lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
 		}
+		player.setEnabled(!overviewCam);
+		app.setMouseEnabled(overviewCam);
+		
 	}
 
 	
