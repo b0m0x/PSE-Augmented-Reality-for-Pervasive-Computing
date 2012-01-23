@@ -1,5 +1,7 @@
 package vision;
 
+import java.util.logging.Level;
+
 /**
  * Holds global configuration variables
  */
@@ -20,4 +22,6 @@ public class Config {
 	public static final String pluginpath = "plugins/";
 	
 	public static final String groundplanPath = "assets/groundplan.xml";
+	
+	public static final Level logLevel = Level.FINE;
 }

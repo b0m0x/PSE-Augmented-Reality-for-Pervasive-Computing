@@ -18,6 +18,7 @@ import com.jme3.scene.shape.Box;
 
 import java.util.Date;
 
+import vision.Config;
 import vision.view.Plugin;
 import vision.view.View;
 
@@ -52,7 +53,7 @@ public class Model {
 			};}
 			new DaemonThread().start();
 		
-		Logger.getLogger("").setLevel(Level.SEVERE);
+		Logger.getLogger("").setLevel(Config.logLevel);
 		
 	}
 

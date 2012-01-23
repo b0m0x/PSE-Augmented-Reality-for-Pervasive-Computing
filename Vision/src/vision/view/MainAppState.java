@@ -87,7 +87,7 @@ public class MainAppState extends AbstractAppState {
 			//add physics control
 			pSpace.add(g.getControl(0));
 		}
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(1.5f, 2f, 1);
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 1.5f, 1);
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
 		player.setGravity(20f);
@@ -115,7 +115,7 @@ public class MainAppState extends AbstractAppState {
 		//add light
 		PointLight lamp_light = new PointLight();
 		lamp_light.setColor(ColorRGBA.Cyan);
-		lamp_light.setRadius(10f);
+		lamp_light.setRadius(30f);
 		lamp_light.setPosition(new Vector3f(0, 1, 5));
 		app.getRootNode().addLight(lamp_light);
 		
