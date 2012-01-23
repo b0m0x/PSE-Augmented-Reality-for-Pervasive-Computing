@@ -102,7 +102,7 @@ public class MainAppState extends AbstractAppState {
 
 		app.getRootNode().attachChild(sb);
 		
-		app.getRootNode().setCullHint(CullHint.Never);
+		app.getRootNode().setCullHint(CullHint.Dynamic);
 	
 		// init camera
 		app.getFlyByCamera().setEnabled(true);
@@ -114,9 +114,9 @@ public class MainAppState extends AbstractAppState {
 	void setUpLights() {
 		//add light
 		PointLight lamp_light = new PointLight();
-		lamp_light.setColor(ColorRGBA.Yellow);
-		lamp_light.setRadius(40f);
-		lamp_light.setPosition(new Vector3f(0, 0, 5));
+		lamp_light.setColor(ColorRGBA.Cyan);
+		lamp_light.setRadius(10f);
+		lamp_light.setPosition(new Vector3f(0, 1, 5));
 		app.getRootNode().addLight(lamp_light);
 		
 		AmbientLight al = new AmbientLight();

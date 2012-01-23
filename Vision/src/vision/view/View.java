@@ -198,6 +198,7 @@ public class View extends SimpleApplication {
 		setMouseEnabled(showMouse);
 	}
 	
+	
 	public void setMouseEnabled(boolean enabled) {
 		inputManager.setCursorVisible(enabled);
 		flyCam.setEnabled(!enabled);
