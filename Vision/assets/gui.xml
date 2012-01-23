@@ -61,27 +61,19 @@
     
     
     <screen id="options" controller="vision.controller.Controller">
-        <layer id="layer" backgroundColor="#000f" childLayout="center">
-            <panel id="panel" height="75%" width="50%" align="center" valign="center" backgroundColor="#000f" childLayout="vertical" visibleToMouse="true">
-                <panel id="headingPanel" childLayout="center" align="center" valign="center" color="000f" height="25%" width="100%" >
-                    <text id="optionsText" color="#88000088" text="Options" align="center" valign="center" size="24" width="100%" height="100%"/>
-                </panel>
-                <panel id="fullScreenPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="12%" width="100%">
-                    <text id="fullScreenText"  color="#c6e2ff88" text="Full Screen" align="center" valign="center" size="24" width="100%" height="100%" />
-                    <control name="checkbox" id="fullScreenCheckbox" checked="true" align="center" valign="center" ></control>
-                </panel>
-                <panel id="vsyncPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="12%" width="100%">
-                    <text id="vsycText"  color="#c6e2ffff" text="V Sync" align="center" valign="center" size="24" width="100%" height="100%" />
-                    <control name="checkbox" id="vsyncCheckbox" checked="true" align="center" valign="center" ></control>
-                </panel>
+        <layer id="layer" backgroundColor="#0000" childLayout="center">
+            <panel id="panel" height="75%" width="50%" align="center" valign="center" backgroundColor="#ff149388" childLayout="vertical" visibleToMouse="true">
+                
+               <panel id="panel_oben" childLayout="center" align="center" backgroundColor="#32cd32ff" height="25%" width="100%">
+               		<text font="aurulent-sans-16.fnt" color="#f00f" text="Hello World!"
+            				align="center" valign="center" />
+                    
+               </panel>
                
                                   
             </panel>
         </layer>
     </screen>
-    
-    
-    
     
     
     
