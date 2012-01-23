@@ -37,7 +37,7 @@ public class WindowPlugin extends Plugin {
 	private AnimControl windowControl;
 
 	public WindowPlugin(Model model, View view) {
-		super(model);
+		super(model, new String[] { "window" });
 		this.model = model;
 		setTags(new String[] { "window" });
 	}
