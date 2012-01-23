@@ -18,6 +18,7 @@ import vision.model.WallAdapter;
 import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.BlenderKey;
 import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
@@ -42,8 +43,9 @@ public class WindowPlugin extends Plugin {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
+		BlenderKey blenderWindow = new BlenderKey("Models/window.blend");
 		window = (Geometry) app.getAssetManager()
-				.loadModel("Models/window.j3o");
+				.loadModel(blenderWindow);
 		initWindows(app);
 	}
 
