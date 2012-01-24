@@ -287,7 +287,7 @@ ei						 */
 		s.setId("testSensor");
 		s.addToTags("heater");
 		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System.currentTimeMillis()));
-		s.setPosition(new Position(2,0,1));
+		s.setPosition(new Position(2,-0.5f,1));
 		sensors.add(s);
 //		Sensor b = new Sensor();
 //		b.setId("testWindow");

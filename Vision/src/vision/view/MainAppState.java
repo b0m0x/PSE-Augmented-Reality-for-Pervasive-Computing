@@ -92,7 +92,7 @@ public class MainAppState extends AbstractAppState {
 		player.setFallSpeed(20f);
 		player.setGravity(20f);
 		player.setJumpSpeed(20);
-		player.setPhysicsLocation(new Vector3f(0,50,0));
+		player.setPhysicsLocation(new Vector3f(4,1,5));
 		pSpace.add(player);
 				
 		app.getRootNode().attachChild(mainGeometryNode);
@@ -118,6 +118,13 @@ public class MainAppState extends AbstractAppState {
 		lamp_light.setRadius(50f);
 		lamp_light.setPosition(new Vector3f(0, 1, 1));
 		app.getRootNode().addLight(lamp_light);
+		
+		//add light
+		PointLight lamp_light2 = new PointLight();
+		lamp_light2.setColor(ColorRGBA.Green);
+		lamp_light2.setRadius(50f);
+		lamp_light2.setPosition(new Vector3f(5, 10, 3));
+		app.getRootNode().addLight(lamp_light2);
 		
 		AmbientLight al = new AmbientLight();
 		al.setColor(ColorRGBA.White.mult(1.3f));
@@ -185,15 +192,16 @@ public class MainAppState extends AbstractAppState {
 	public void toggleOverviewCam() {
 		overviewCam = !overviewCam;
 		if (!overviewCam) {
-			player.setPhysicsLocation(new Vector3f(0, 10, 0f));
+			player.setPhysicsLocation(new Vector3f(4, 10, 4f));
+			app.getCamera().setLocation(new Vector3f(4,10,4));
 			app.getCamera().lookAt(new Vector3f(1,1,1), new Vector3f(0, 1, 0));
 		} else {
 			player.setPhysicsLocation(new Vector3f(0, 50, 0));
+			app.getCamera().setLocation(new Vector3f(0, 50, 0));
 			app.getCamera().lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
 		}
 		player.setEnabled(!overviewCam);
 		app.setMouseEnabled(overviewCam);
-		
 	}
 
 	

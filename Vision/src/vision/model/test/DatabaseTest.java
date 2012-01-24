@@ -19,7 +19,6 @@ public class DatabaseTest extends TestCase {
 	public void testUpdate() {
 		Update update = new Update();
 		update.getDatabase().connect();
-		update.getJSONConverter().convert();
 		update.store(30);
 		update.getDatabase().disconnect();
 	}

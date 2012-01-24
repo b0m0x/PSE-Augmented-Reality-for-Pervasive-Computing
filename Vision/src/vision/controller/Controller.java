@@ -207,16 +207,6 @@ public class Controller implements ScreenController, ActionListener  {
 	}
 	
 	
-	/**
-	 * 
-	 * @param id
-	 * @param o
-	 */
-	@NiftyEventSubscriber(id = "btn_LoadRoom")
-	public void loadRoom(String id, ButtonClickedEvent bce) {
-		Logger l= Logger.getLogger("buttonclick");
-		l.info("Button was pressed.");
-	}
 	
 	
 
