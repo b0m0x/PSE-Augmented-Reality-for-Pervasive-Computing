@@ -1,5 +1,6 @@
 package vision.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Quat4f;
@@ -24,14 +25,15 @@ import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 
 public class WindowPlugin extends Plugin {
 
 	/**
 	 * @uml.property name="windows"
 	 */
-	private List<Geometry> windows;
-	private Geometry window;
+	private List<Spatial> windows = new ArrayList<Spatial>();
+	private Spatial window;
 	private Model model;
 	private AnimChannel windowChannel;
 	private AnimControl windowControl;
@@ -46,7 +48,7 @@ public class WindowPlugin extends Plugin {
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
 		BlenderKey blenderWindow = new BlenderKey("Models/window.blend");
-		window = (Geometry) app.getAssetManager()
+		window = (Spatial) app.getAssetManager()
 				.loadModel(blenderWindow);
 		initWindows(app);
 	}
@@ -62,13 +64,13 @@ public class WindowPlugin extends Plugin {
 			}
 			Material m = new Material(app.getAssetManager(),
 					"Common/MatDefs/Misc/Unshaded.j3md");
-			windowControl = window.getControl(AnimControl.class);
-			windowChannel = windowControl.createChannel();
-			if (status > 0.0f) {
-				windowChannel.setAnim("opened");
-			} else {
-				windowChannel.setAnim("closed");
-			}
+//			windowControl = window.getControl(AnimControl.class);
+//			windowChannel = windowControl.createChannel();
+//			if (status > 0.0f) {
+//				windowChannel.setAnim("opened");
+//			} else {
+//				windowChannel.setAnim("closed");
+//			}
 			window.setMaterial(m);
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
 					.getPosition().getY(), sensor.getPosition().getZ());
@@ -79,13 +81,16 @@ public class WindowPlugin extends Plugin {
 	}
 
 	protected void clientUpdate(Application application, boolean changed) {
+		if(windows == null) {
+			initWindows(application);
+		}
 		if (changed) {
 			updateWindows();
 		}
 	}
 
 	private void updateWindows() {
-		for (Geometry g : windows) {
+		for (Spatial g : windows) {
 			String sid = g.getUserData("sid");
 			for (Sensor sensor : getSensors()) {
 				if (!sensor.getId().equals(sid)) {
@@ -107,7 +112,7 @@ public class WindowPlugin extends Plugin {
 		}
 	}
 	
-	private Geometry fitInHole(Geometry window) {
+	private Spatial fitInHole(Spatial window) {
 		List<Wall> walls = model.getGroundplan().getWall();
 		Vector3f windowpos = window.getLocalTranslation();
 		Hole smallestHole = walls.get(0).getHole().get(0);
