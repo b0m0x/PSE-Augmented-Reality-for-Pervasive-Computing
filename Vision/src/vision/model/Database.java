@@ -50,7 +50,7 @@ public class Database {
 				pst.setFloat(6, messwerte.getValue());
 				pst.setObject(7, tags);
 				pst.executeUpdate();
-				System.out.println("Stored: " + id);
+				System.out.print("Stored: " + id + " ");
 			} else {
 				st.execute("create table Samples (" + "id VARCHAR(30), "
 						+ "Zeitpunkt LONG, " + "Type VARCHAR(30), "
@@ -65,7 +65,7 @@ public class Database {
 				pst.setFloat(6, messwerte.getValue());
 				pst.setObject(7, tags);
 				pst.executeUpdate();
-				System.out.println("Database created and stored: " + id);
+				System.out.print("Database created and stored: " + id + " ");
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

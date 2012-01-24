@@ -117,17 +117,23 @@ public class Update {
 		jsonConverter.convert();
 		List<Sensor> sensorlist = new ArrayList<Sensor>();
 		sensorlist = jsonConverter.getSensorList();
-		int counter = 1;
-//		daten.setSensor(sensorlist);
+
+		// daten.setSensor(sensorlist);
+
+		int sensorcounter = 1;
+		int samplecounter = 1;
+
 		for (int i = 0; i < sensorlist.size(); i++) {
 			for (int j = 0; j < sensorlist.get(i).getMesswert().size(); j++) {
 				database.updateSensors(sensorlist.get(i).getId(), l, sensorlist
 						.get(i).getMesswert().get(j), sensorlist.get(i)
 						.getTags());
+				System.out.println("Sample " + (j + 1));
+				samplecounter++;
 			}
-			counter++;
 		}
-		System.out.println("\nStored " + counter + " Sensor Samples.");
+		System.out.println("Sensors stored: " + (sensorlist.size() + 1)
+				+ "; Samples stored: " + samplecounter);
 	}
 
 	/**
