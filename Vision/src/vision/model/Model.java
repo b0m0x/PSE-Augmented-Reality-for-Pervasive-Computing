@@ -297,12 +297,18 @@ ei						 */
 		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System.currentTimeMillis()));
 		s.setPosition(new Position(2,-0.5f,1));
 		sensors.add(s);
-//		Sensor b = new Sensor();
-//		b.setId("testWindow");
-//		b.addToTags("window");
-//		b.addToSamples(new Sample("status", "boolean", 0.0f, System.currentTimeMillis()));
-//		b.setPosition(new Position(0, 0, 5));
-//		sensors.add(b);
+		Sensor b = new Sensor();
+		b.setId("testWindow");
+		b.addToTags("window");
+		b.addToSamples(new Sample("window", "bool", 0.0f, System.currentTimeMillis()));
+		b.setPosition(new Position(0, 0, 0));
+		sensors.add(b);
+		Sensor c = new Sensor();
+		c.setId("testWindow");
+		c.addToTags("window");
+		c.addToSamples(new Sample("window", "bool", 0.0f, System.currentTimeMillis()));
+		c.setPosition(new Position(10, 20, 10));
+		sensors.add(c);
 		return sensors;
 	}
 	
