@@ -16,9 +16,11 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.PointLight;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
+import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Spatial.CullHint;
@@ -35,11 +37,13 @@ import vision.model.Model;
  * Renders all static objects and rooms
  */
 public class MainAppState extends AbstractAppState {
-	private AppStateManager stateManager;
+	
+	private Camera miniMapCam;
+	private ViewPort miniMapViewPort;
 	private Controller controller;
 	private View app;
 	private Model model;
-	private Node mainGeometryNode = new Node("static");
+	private Node mainGeometryNode;
 	private boolean overviewCam;
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	private CharacterControl player;
@@ -48,6 +52,7 @@ public class MainAppState extends AbstractAppState {
 	private boolean moveRight;
 	private boolean moveForward;
 	private boolean moveBack;
+	private Node miniMapNode = new Node("Minimap");
 
 	
 	public MainAppState(Model model, Controller contoller) {
@@ -59,17 +64,8 @@ public class MainAppState extends AbstractAppState {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
-		this.stateManager = stateManager;
 		this.app = (View) app;
-	}
-
-	@Override
-	public void stateAttached(AppStateManager stateManager) {
-		if (!isInitialized()) {
-			log.severe("Not initialized ");
-			return;
-		}
-		super.stateAttached(stateManager);
+		
 		BulletAppState bas = stateManager.getState(BulletAppState.class);
 		PhysicsSpace pSpace = new PhysicsSpace();
 		if (bas == null) {
@@ -79,6 +75,7 @@ public class MainAppState extends AbstractAppState {
 		}
 		
 		mainGeometryNode = new Node("static");
+		miniMapNode = new Node("minimap");
 		List<Spatial> staticObjects = model.getStaticGeometry();
 
 		for (Spatial g : staticObjects) {
@@ -86,8 +83,14 @@ public class MainAppState extends AbstractAppState {
 			
 			//add physics control
 			pSpace.add(g.getControl(0));
+			
+			//we dont want the ceiling in our minimap
+			if (!g.getName().equals("ceiling") && !g.getName().equals("floor")) {
+				miniMapNode.attachChild(g);
+			}
 		}
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 3f, 1);
+				
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 3f, 1);		
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
 		player.setGravity(20f);
@@ -95,20 +98,41 @@ public class MainAppState extends AbstractAppState {
 		player.setPhysicsLocation(new Vector3f(4,1,5));
 		pSpace.add(player);
 				
-		app.getRootNode().attachChild(mainGeometryNode);
-
+		this.app.getRootNode().attachChild(mainGeometryNode);
+		this.app.getRootNode().attachChild(miniMapNode);
+		
 		// load skybox
 		Spatial sb = loadSkyBox();
 
-		app.getRootNode().attachChild(sb);
+		this.app.getRootNode().attachChild(sb);
 		
-		app.getRootNode().setCullHint(CullHint.Dynamic);
+		this.app.getRootNode().setCullHint(CullHint.Dynamic);
 	
 		// init camera
-		app.getFlyByCamera().setEnabled(true);
+		this.app.getFlyByCamera().setEnabled(true);
 		
 		setUpLights();
 		setUpKeys();
+		
+		initMiniMap();
+	}
+
+	@Override
+	public void stateAttached(AppStateManager stateManager) {
+		super.stateAttached(stateManager);
+		
+	}
+	
+	private void initMiniMap() {
+
+		miniMapCam = app.getCamera().clone();
+		miniMapCam.setViewPort(0.8f, 1.0f, 0.8f, 1.0f);
+		miniMapViewPort = app.getRenderManager().createMainView("minimap", miniMapCam);
+		miniMapViewPort.setClearFlags(true, true, true);
+		miniMapViewPort.attachScene(miniMapNode);
+		
+		miniMapCam.setLocation(getPlayerPosition().add(new Vector3f(0, 50, 0)));
+		miniMapCam.lookAt(getPlayerPosition(), new Vector3f(0, 1, 0));
 	}
 	
 	void setUpLights() {
@@ -125,10 +149,13 @@ public class MainAppState extends AbstractAppState {
 		lamp_light2.setRadius(50f);
 		lamp_light2.setPosition(new Vector3f(5, 10, 3));
 		app.getRootNode().addLight(lamp_light2);
+		miniMapNode.addLight(lamp_light2);
 		
 		AmbientLight al = new AmbientLight();
 		al.setColor(ColorRGBA.White.mult(1.3f));
 		app.getRootNode().addLight(al);
+		
+		
 	}
 
 	void setUpKeys() {
@@ -163,6 +190,15 @@ public class MainAppState extends AbstractAppState {
 	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }
 	    player.setWalkDirection(walkDirection);
 		app.getCamera().setLocation(player.getPhysicsLocation());
+		
+		updateMiniMap();
+	}
+	
+	private void updateMiniMap() {
+		miniMapCam.setLocation(player.getPhysicsLocation().add(new Vector3f(0, 50, 0)));
+		float[] rot = app.getCamera().getRotation().toAngles(null);
+		Quaternion q = new Quaternion().fromAngles(new float[] {(float) (Math.PI / 2), rot[1], 0});
+		miniMapCam.setRotation(q);
 	}
 	
 	@Override

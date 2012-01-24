@@ -25,7 +25,7 @@ import com.jme3.renderer.ViewPort;
  * 
  */
 public class View extends SimpleApplication {
-	Camera miniMapCam;
+	
 	/**
 	 * @uml.property name="daten"
 	 * @uml.associationEnd inverse="view:vision.model.Model"
@@ -56,17 +56,13 @@ public class View extends SimpleApplication {
 	private BulletAppState bulletAppState;
 
 	private boolean showMouse;
-	private ViewPort miniMapViewPort;
 
 	/**
 	 * is called every frame by jmonkey
 	 */
 	@Override
 	public void simpleUpdate(float tpf) {
-		miniMapCam.setLocation(mainAppState.getPlayerPosition().add(new Vector3f(0, 50, 0)));
-		float[] rot = cam.getRotation().toAngles(null);
-		Quaternion q = new Quaternion().fromAngles(new float[] {(float) (Math.PI / 2), rot[1], 0});
-		miniMapCam.setRotation(q);
+		
 	}
 
 	/**
@@ -79,8 +75,7 @@ public class View extends SimpleApplication {
 		mainAppState = new MainAppState(daten, controller);
 		
 
-		guiAppState.initialize(stateManager, this);
-		mainAppState.initialize(stateManager, this);
+		//guiAppState.initialize(stateManager, this);
 	
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
@@ -91,20 +86,9 @@ public class View extends SimpleApplication {
 			stateManager.attach(p);
 		}
 		
-		initMiniMap();
 	}
 	
-	private void initMiniMap() {
-		miniMapCam = cam.clone();
-		miniMapCam.setViewPort(0.8f, 1.0f, 0.8f, 1.0f);
-		miniMapViewPort = renderManager.createMainView("minimap", miniMapCam);
-		miniMapViewPort.setClearFlags(true, true, true);
-		miniMapViewPort.attachScene(rootNode);
-		
-		
-		miniMapCam.setLocation(mainAppState.getPlayerPosition().add(new Vector3f(0, 50, 0)));
-		miniMapCam.lookAt(mainAppState.getPlayerPosition(), new Vector3f(0, 1, 0));
-	}
+	
 
 	/**
 	 * Getter of the property <tt>daten</tt>
@@ -234,8 +218,4 @@ public class View extends SimpleApplication {
 		showMouse = enabled;
 	}
 	
-	private void updateMiniMap() {
-		
-	}
-
 }
