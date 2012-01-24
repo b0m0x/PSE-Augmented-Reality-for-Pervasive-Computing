@@ -51,8 +51,7 @@ public class HeaterPlugin extends Plugin {
 			return;
 		}
 		super.initialize(stateManager, app);
-		heater = app.getAssetManager()
-				.loadModel("Models/heater1.blend");
+		
 		//initHeaters(app);
 	}
 	
@@ -66,6 +65,8 @@ public class HeaterPlugin extends Plugin {
 	}
 
 	private void initHeaters(Application app) {
+		heater = app.getAssetManager()
+				.loadModel("Models/heater1.blend");
 		for (Sensor s : getSensors()) {
 			float temperature = 0;
 			for (Sample sp : s.getMesswert()) {
