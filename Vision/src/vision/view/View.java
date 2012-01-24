@@ -67,7 +67,6 @@ public class View extends SimpleApplication {
 		float[] rot = cam.getRotation().toAngles(null);
 		Quaternion q = new Quaternion().fromAngles(new float[] {(float) (Math.PI / 2), rot[1], 0});
 		miniMapCam.setRotation(q);
-		
 	}
 
 	/**
@@ -212,7 +211,7 @@ public class View extends SimpleApplication {
 	}
 
 	public void toggleOverviewCam() {
-		mainAppState.toggleOverviewCam();		
+		mainAppState.toggleOverviewCam();
 	}
 
 	public void userSelect() {

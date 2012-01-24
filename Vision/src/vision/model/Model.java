@@ -278,7 +278,15 @@ ei						 */
 		floor.setMaterial(m);
 		floor.addControl(new RigidBodyControl(0));
 		
+		
+		Geometry ceiling = new Geometry("ceiling", new Box(20f, 0.1f, 50f));
+		ceiling.setLocalTranslation(0, 1.7f, 0);
+		ceiling.setMaterial(m);
+		ceiling.addControl(new RigidBodyControl(0));
+		
+		
 		staticGeometries.add(floor);
+		staticGeometries.add(ceiling);
 	}
 	
 	protected List<Sensor> createTestSensors() {

@@ -199,6 +199,8 @@ public class MainAppState extends AbstractAppState {
 			player.setPhysicsLocation(new Vector3f(0, 50, 0));
 			app.getCamera().setLocation(new Vector3f(0, 50, 0));
 			app.getCamera().lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 1, 0));
+
+			//app.getRootNode().getChild("static").detachChildNamed("ceiling");
 		}
 		player.setEnabled(!overviewCam);
 		app.setMouseEnabled(overviewCam);
