@@ -26,9 +26,6 @@
 		          			visibleToMouse="true"> 
 		          			</control>
 		          			        	
-		          			<control name="button" label="Load Room" id="btn_LoadRoom"  valign="center"
-		          			visibleToMouse="true"> 
-		          			</control>    
 		          			
 		          			<control name="button" label="Help" id="btn_Help"  valign="center" visibleToMouse="true"> 
 		          			</control> 
