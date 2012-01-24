@@ -4,12 +4,20 @@
 package vision.view;
 
 
+
+import java.util.logging.Logger;
+
 import vision.controller.Controller;
 import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.input.FlyByCamera;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
+import com.jme3.renderer.Renderer;
+import com.jme3.renderer.ViewPort;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -17,7 +25,7 @@ import com.jme3.input.FlyByCamera;
  * 
  */
 public class View extends SimpleApplication {
-
+	Camera miniMapCam;
 	/**
 	 * @uml.property name="daten"
 	 * @uml.associationEnd inverse="view:vision.model.Model"
@@ -48,11 +56,18 @@ public class View extends SimpleApplication {
 	private BulletAppState bulletAppState;
 
 	private boolean showMouse;
+	private ViewPort miniMapViewPort;
 
 	/**
 	 * is called every frame by jmonkey
 	 */
-	public void simpleUpdate() {
+	@Override
+	public void simpleUpdate(float tpf) {
+		miniMapCam.setLocation(mainAppState.getPlayerPosition().add(new Vector3f(0, 50, 0)));
+		float[] rot = cam.getRotation().toAngles(null);
+		Quaternion q = new Quaternion().fromAngles(new float[] {(float) (Math.PI / 2), rot[1], 0});
+		miniMapCam.setRotation(q);
+		
 	}
 
 	/**
@@ -76,7 +91,20 @@ public class View extends SimpleApplication {
 		for (Plugin p : daten.getPluginList()) {
 			stateManager.attach(p);
 		}
-				
+		
+		initMiniMap();
+	}
+	
+	private void initMiniMap() {
+		miniMapCam = cam.clone();
+		miniMapCam.setViewPort(0.8f, 1.0f, 0.8f, 1.0f);
+		miniMapViewPort = renderManager.createMainView("minimap", miniMapCam);
+		miniMapViewPort.setClearFlags(true, true, true);
+		miniMapViewPort.attachScene(rootNode);
+		
+		
+		miniMapCam.setLocation(mainAppState.getPlayerPosition().add(new Vector3f(0, 50, 0)));
+		miniMapCam.lookAt(mainAppState.getPlayerPosition(), new Vector3f(0, 1, 0));
 	}
 
 	/**
@@ -205,6 +233,10 @@ public class View extends SimpleApplication {
 		inputManager.setCursorVisible(enabled);
 		flyCam.setEnabled(!enabled);
 		showMouse = enabled;
+	}
+	
+	private void updateMiniMap() {
+		
 	}
 
 }

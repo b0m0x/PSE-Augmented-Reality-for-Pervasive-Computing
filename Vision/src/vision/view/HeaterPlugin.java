@@ -99,6 +99,13 @@ public class HeaterPlugin extends Plugin {
 	}
 
 	private void updateHeaters() {
+		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
+		m.setBoolean("UseMaterialColors", true);
+		m.setColor("Ambient",  ColorRGBA.Gray);
+		m.setColor("Diffuse",  ColorRGBA.Gray);
+		m.setColor("Specular", ColorRGBA.White);
+		m.setFloat("Shininess", 3);
+		
 		for (Spatial g : heaters) {
 			String sid = g.getUserData("sensorid");
 			for (Sensor s : getSensors()) {
@@ -108,18 +115,15 @@ public class HeaterPlugin extends Plugin {
 				for (Sample sp : s.getMesswert()) {
 					if (sp.getTyp().equals("Temperatur")) {
 						final float temperature = sp.getValue(); 
-//						g.depthFirstTraversal(new SceneGraphVisitor() {
-//							
-//							@Override
-//							public void visit(Spatial s) {
-//								if (s instanceof Geometry)
-//									((Geometry)s ).getMaterial().setColor(
-//										"Color",
-//										new ColorRGBA(temperature / 50f, 0,
-//												1 - temperature / 50f, 1));
-//								
-//							}
-//						});
+						g.depthFirstTraversal(new SceneGraphVisitor() {
+							
+							@Override
+							public void visit(Spatial s) {
+								if (s instanceof Geometry)
+									((Geometry)s ).setMaterial(m);
+								
+							}
+						});
 						
 					}
 				}
@@ -137,30 +141,6 @@ public class HeaterPlugin extends Plugin {
 		if (changed) {
 			updateHeaters();
 		}
-		
-		ColorRGBA color = new ColorRGBA((float) Math.abs(Math.sin(System.currentTimeMillis() %10000 / 10000.f)), 0f,
-				1f - (float) Math.abs(Math.sin(System.currentTimeMillis() %10000 / 10000.f)), 0.8f);
-		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
-		m.setBoolean("UseMaterialColors", true);
-		m.setColor("Ambient",  ColorRGBA.Gray);
-		m.setColor("Diffuse",  color);
-		m.setColor("Specular", color);
-		m.setFloat("Shininess", 3);
-		
-		for (Spatial g : heaters) {			
-			
-			g.depthFirstTraversal(new SceneGraphVisitor() {
-				
-				@Override
-				public void visit(Spatial s) {
-					if (s instanceof Geometry) {
-						((Geometry)s ).setMaterial(m);
-					}						
-					
-				}
-			});
-		}
 		return;
 	}
-
 }
