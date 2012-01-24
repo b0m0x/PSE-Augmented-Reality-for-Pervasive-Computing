@@ -258,6 +258,7 @@ ei						 */
 		m.setColor("Ambient",  ColorRGBA.Gray);
 		m.setColor("Diffuse",  ColorRGBA.Gray);
 		m.setColor("Specular", ColorRGBA.White);
+		m.setTexture("DiffuseMap", view.getAssetManager().loadTexture("Texture/walltexture.jpg"));
 		m.setFloat("Shininess", 3);
 //		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
 //		m.setTexture("ColorMap",

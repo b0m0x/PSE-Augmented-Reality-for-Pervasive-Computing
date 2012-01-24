@@ -158,7 +158,7 @@ public class MainAppState extends AbstractAppState {
 		
 	}
 
-	void setUpKeys() {
+	private void setUpKeys() {
 		InputManager inputManager = app.getInputManager();
 		inputManager.addMapping("select", new KeyTrigger(MouseInput.BUTTON_LEFT));
 		inputManager.addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
