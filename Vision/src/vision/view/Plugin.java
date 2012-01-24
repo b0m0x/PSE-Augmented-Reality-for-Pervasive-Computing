@@ -106,6 +106,12 @@ public abstract class Plugin extends AbstractAppState {
 		setSensors(sensors);
 		lastSensorHashCode = daten.getSensor().hashCode();
 	}
+	
+	@Override
+	public void update(float tpf) {
+		super.update(tpf);
+		update(app);
+	}
 
 	public void update(Application application) {
 		boolean changed = sensorsChanged();

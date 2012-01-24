@@ -284,9 +284,10 @@ ei						 */
 	protected List<Sensor> createTestSensors() {
 		List<Sensor> sensors = new ArrayList<Sensor>();
 		Sensor s = new Sensor();
+		s.setId("testSensor");
 		s.addToTags("heater");
 		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System.currentTimeMillis()));
-		s.setPosition(new Position(1,1,1));
+		s.setPosition(new Position(2,0,1));
 		sensors.add(s);
 		return sensors;
 	}
