@@ -55,6 +55,7 @@ public class JSONConverter {
 	public String getJSONStream() {
 		try {
 			URL url = new URL(getUrl());
+			System.out.println("Connecting to " + Config.serverUrl + "...");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
@@ -62,10 +63,12 @@ public class JSONConverter {
 			String content = br.readLine();
 			return content;
 		} catch (MalformedURLException e) {
-			System.out.println("Connection Error.");
+			System.out
+					.println("Connection Error(1). Using offlinestream instead...");
 			return offlineStream();
 		} catch (IOException e) {
-			System.out.println("Connection Error.");
+			System.out
+					.println("Connection Error(2). Using offlinestream instead...");
 			return offlineStream();
 		}
 
@@ -79,22 +82,24 @@ public class JSONConverter {
 			jo = new JSONObject(stream);
 			for (int sensorid = 0; sensorid < jo.length(); sensorid++) {
 
-				JSONObject lvl1 = jo.getJSONObject(JSONObject.getNames(jo)[sensorid]);
+				JSONObject lvl1 = jo
+						.getJSONObject(JSONObject.getNames(jo)[sensorid]);
 				sensor = new Sensor();
 
 				for (int type = 0; type < jo.getJSONObject(
-						JSONObject.getNames(jo)[sensorid]).getJSONObject("data")
-						.length(); type++) {
+						JSONObject.getNames(jo)[sensorid])
+						.getJSONObject("data").length(); type++) {
 
 					JSONObject lvl2 = lvl1.getJSONObject("data");
 					JSONObject temp = jo.getJSONObject(
-							JSONObject.getNames(jo)[sensorid]).getJSONObject("data");
+							JSONObject.getNames(jo)[sensorid]).getJSONObject(
+							"data");
 					Sample sample = new Sample();
 
-					JSONObject lvl3 = lvl2
-							.getJSONObject(JSONObject.getNames(lvl2)[type]);
+					JSONObject lvl3 = lvl2.getJSONObject(JSONObject
+							.getNames(lvl2)[type]);
 
-					//sample.setSensor(sensor);
+					// sample.setSensor(sensor);
 
 					sample.setTyp(JSONObject.getNames(lvl2)[type]);
 					sample.setUnit(lvl3.getString("unit"));

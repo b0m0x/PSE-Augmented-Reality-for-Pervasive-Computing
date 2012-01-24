@@ -2,6 +2,7 @@ package vision.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * manages the server connection and fetches the sensor data
  * 
@@ -12,6 +13,11 @@ public class Update {
 		this.database = new Database();
 		this.jsonConverter = new JSONConverter();
 		this.daten = model;
+	}
+
+	public Update() {
+		this.database = new Database();
+		this.jsonConverter = new JSONConverter();
 	}
 
 	/**
@@ -111,14 +117,17 @@ public class Update {
 		jsonConverter.convert();
 		List<Sensor> sensorlist = new ArrayList<Sensor>();
 		sensorlist = jsonConverter.getSensorList();
-		daten.setSensor(sensorlist);
+		int counter = 1;
+//		daten.setSensor(sensorlist);
 		for (int i = 0; i < sensorlist.size(); i++) {
 			for (int j = 0; j < sensorlist.get(i).getMesswert().size(); j++) {
-				database.updateSensors(sensorlist.get(i).getId(), l,
-						sensorlist.get(i).getMesswert().get(j), sensorlist.get(
-								i).getTags());
+				database.updateSensors(sensorlist.get(i).getId(), l, sensorlist
+						.get(i).getMesswert().get(j), sensorlist.get(i)
+						.getTags());
 			}
+			counter++;
 		}
+		System.out.println("\nStored " + counter + " Sensor Samples.");
 	}
 
 	/**
