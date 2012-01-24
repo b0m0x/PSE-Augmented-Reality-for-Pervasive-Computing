@@ -75,8 +75,6 @@ public class HeaterPlugin extends Plugin {
 					break;
 				}
 			}
-			Exception e = new UnsupportedAudioFileException();
-			e.printStackTrace();
 			
 			/* 
 			Material m = new Material(app.getAssetManager(),
