@@ -15,6 +15,8 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
+import com.jme3.texture.Texture;
+import com.jme3.texture.Texture.WrapMode;
 
 import java.util.Date;
 
@@ -258,13 +260,11 @@ ei						 */
 		m.setColor("Ambient",  ColorRGBA.Gray);
 		m.setColor("Diffuse",  ColorRGBA.Gray);
 		m.setColor("Specular", ColorRGBA.White);
-		m.setTexture("DiffuseMap", view.getAssetManager().loadTexture("Texture/walltexture.jpg"));
+		
+		Texture tex = view.getAssetManager().loadTexture("Texture/walltexture.jpg");
+		tex.setWrap(WrapMode.Repeat);
+		m.setTexture("DiffuseMap", tex);
 		m.setFloat("Shininess", 3);
-//		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
-//		m.setTexture("ColorMap",
-//				view.getAssetManager().loadTexture("Interface/Logo/Monkey.jpg"));
-//		m.getAdditionalRenderState().setWireframe(true);
-//		m.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
 		
 		
 		for (Wall w : groundplan.getWall()) {

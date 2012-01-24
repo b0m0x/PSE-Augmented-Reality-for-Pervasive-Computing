@@ -1,5 +1,6 @@
 package vision.model;
 
+import java.nio.FloatBuffer;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.vecmath.Quat4f;
@@ -15,12 +16,33 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.scene.shape.Box;
 
 /**
  * converts a Wall object to a renderable Mesh
  */
 public class CustomMeshCreator {
+	
+	private static float TEXTURE_SIZE = 2f;
+	
+	private void setTexCoords(Box box, float textureSize) {
+		float x = box.xExtent / textureSize;
+        float y = box.yExtent / textureSize;
+        float z = box.zExtent / textureSize;
+        
+        float[] texCoordinates = { x, 0, 0, 0, 0, y, x, y, // back
+                z, 0, 0, 0, 0, y, z, y, // right
+                x, 0, 0, 0, 0, y, x, y, // front
+                z, 0, 0, 0, 0, y, z, y, // left
+                z, 0, 0, 0, 0, x, z, x, // top
+                z, 0, 0, 0, 0, x, z, x // bottom
+     
+          };
+        FloatBuffer buffer = box.getFloatBuffer(Type.TexCoord);
+        buffer.rewind();
+        buffer.put(texCoordinates);
+	}
 
 	/**
 	 * creates a mesh off of a wall object. builds in holes for windows if
@@ -38,20 +60,19 @@ public class CustomMeshCreator {
 		
 		for (Hole hole : wall.getHoles()) {
 			HoleAdapter h = new HoleAdapter(hole);
-			// plane under hole
-			Geometry plane = new Geometry("wallplane");
-			plane.setMesh(new Box(h.getSize().getX() / 2,  h.getPosition().getY() / 2 - h.getSize().getY() / 4, wall.getDepth() /2));
-			plane.setLocalTranslation(h.getPosition().getX() - wall.getWidth() / 2, - wall.getHeight()/2 + (h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0);
+			float width = h.getSize().getX() / 2;
+			float lowerHeight = h.getPosition().getY() - h.getSize().getY() / 2;
+			float upperHeight = (w.getHeight() - (h.getPosition().getY() + h.getSize().getY() / 2));
 			
-			wallMesh.attachChild(plane);
+			 
+			// plane under hole
+			addWallBlock(wallMesh, new Vector3f(h.getPosition().getX() - wall.getWidth() / 2, - wall.getHeight()/2 + (h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0), 
+					new Vector3f(width, lowerHeight / 2, wall.getDepth() / 2));
 			
 			//plane over hole
-			plane = new Geometry("wallplane2");
-			plane.setMesh(new Box(h.getSize().getX() / 2, (w.getHeight() - (h.getPosition().getY() + h.getSize().getY() / 2)) /2 , wall.getDepth() / 2));
-			plane.setLocalTranslation(h.getPosition().getX() - wall.getWidth() / 2,  wall.getHeight()/2 - (w.getHeight() - h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0);
+			addWallBlock(wallMesh, new Vector3f(h.getPosition().getX() - wall.getWidth() / 2,  wall.getHeight()/2 - (w.getHeight() - h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0), 
+					new Vector3f(width, upperHeight /2 , wall.getDepth() / 2));
 			
-
-			wallMesh.attachChild(plane);
 		}
 		
 		Collections.sort(wall.getHoles(), new Comparator<Hole>() {
@@ -66,22 +87,28 @@ public class CustomMeshCreator {
 		for (Hole hole : wall.getHoles()) {
 			HoleAdapter h = new HoleAdapter(hole);
 			float hLeftBound = h.getPosition().getX() - h.getSize().getX() / 2;
-			Geometry plane = new Geometry("wallplane");
-			plane.setMesh(new Box((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
-			plane.setLocalTranslation((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0);			
-			wallMesh.attachChild(plane);
+			Vector3f position = new Vector3f((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0);
+
+			addWallBlock(wallMesh, position, new Vector3f((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
 			lastHRightBound = hLeftBound + h.getSize().getX();
 		}
 		
 		float hLeftBound = wall.getWidth();
-		Geometry plane = new Geometry("wallplane");
-		plane.setMesh(new Box((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
-		plane.setLocalTranslation((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0);			
-		wallMesh.attachChild(plane);
+		
+		addWallBlock(wallMesh, new Vector3f((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0), new Vector3f((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
 
 		transformCoordinates(wallMesh, wall);
 		
 		return wallMesh;
+	}
+	
+	private void addWallBlock(Node node, Vector3f position, Vector3f halfExtends) {
+		Geometry g = new Geometry("wallblock");
+		Box box = new Box(position, halfExtends.getX(), halfExtends.getY(), halfExtends.getZ());
+		setTexCoords(box, TEXTURE_SIZE);
+		g.setMesh(box);
+		node.attachChild(g);
+		
 	}
 
 	private void transformCoordinates(Spatial wallGeometry, WallAdapter wall) {

@@ -18,6 +18,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.Renderer;
 import com.jme3.renderer.ViewPort;
+import com.jme3.texture.Texture;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -75,8 +76,6 @@ public class View extends SimpleApplication {
 		mainAppState = new MainAppState(daten, controller);
 		
 
-		//guiAppState.initialize(stateManager, this);
-	
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
 		stateManager.attach(mainAppState);
@@ -86,9 +85,11 @@ public class View extends SimpleApplication {
 			stateManager.attach(p);
 		}
 		
+		
 	}
 	
 	
+
 
 	/**
 	 * Getter of the property <tt>daten</tt>
