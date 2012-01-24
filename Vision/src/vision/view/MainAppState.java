@@ -87,7 +87,7 @@ public class MainAppState extends AbstractAppState {
 			//add physics control
 			pSpace.add(g.getControl(0));
 		}
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 1.7f, 1);
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 3f, 1);
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
 		player.setGravity(20f);
