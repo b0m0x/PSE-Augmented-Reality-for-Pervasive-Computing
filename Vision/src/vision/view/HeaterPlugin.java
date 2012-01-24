@@ -45,6 +45,9 @@ public class HeaterPlugin extends Plugin {
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
+		if (isInitialized()) {
+			return;
+		}
 		super.initialize(stateManager, app);
 		heater = app.getAssetManager()
 				.loadModel("Models/heater1.blend");
@@ -131,6 +134,7 @@ public class HeaterPlugin extends Plugin {
 		}
 		ColorRGBA color = new ColorRGBA((float) Math.abs(Math.sin(System.currentTimeMillis() / 800f)), 0f,
 				1f - (float) Math.abs(Math.sin(System.currentTimeMillis() / 800f)), 0.5f);
+		log.warning("Color: " +  color.r + " " + color.g + " " + color.b);
 		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
 		m.setColor("Ambient",  ColorRGBA.Gray);
