@@ -239,8 +239,9 @@ public class MainAppState extends AbstractAppState {
 			player.jump();
 		}
 	}
-	
-	
 
-
+	public Vector3f getPlayerPosition() {
+		return player.getPhysicsLocation();
+	}
+	
 }
