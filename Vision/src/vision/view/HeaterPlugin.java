@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.logging.Logger;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 import vision.model.Model;
 import vision.model.Sample;
@@ -51,7 +53,7 @@ public class HeaterPlugin extends Plugin {
 		super.initialize(stateManager, app);
 		heater = app.getAssetManager()
 				.loadModel("Models/heater1.blend");
-		initHeaters(app);
+		//initHeaters(app);
 	}
 	
 	/**
@@ -72,7 +74,8 @@ public class HeaterPlugin extends Plugin {
 					break;
 				}
 			}
-			
+			Exception e = new UnsupportedAudioFileException();
+			e.printStackTrace();
 			
 			/* 
 			Material m = new Material(app.getAssetManager(),
@@ -129,12 +132,15 @@ public class HeaterPlugin extends Plugin {
 	 * updates the client
 	 */
 	protected void clientUpdate(Application application, boolean changed) {
+		if (heater == null) {
+			initHeaters(application);
+		}
 		if (changed) {
 			updateHeaters();
 		}
-		ColorRGBA color = new ColorRGBA((float) Math.abs(Math.sin(System.currentTimeMillis() / 800f)), 0f,
-				1f - (float) Math.abs(Math.sin(System.currentTimeMillis() / 800f)), 0.5f);
-		log.warning("Color: " +  color.r + " " + color.g + " " + color.b);
+		
+		ColorRGBA color = new ColorRGBA((float) Math.abs(Math.sin(System.currentTimeMillis() %10000 / 10000.f)), 0f,
+				1f - (float) Math.abs(Math.sin(System.currentTimeMillis() %10000 / 10000.f)), 0.8f);
 		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
 		m.setColor("Ambient",  ColorRGBA.Gray);
