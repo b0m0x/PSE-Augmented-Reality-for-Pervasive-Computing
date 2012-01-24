@@ -192,10 +192,7 @@ public class Controller implements ScreenController, ActionListener  {
 	@NiftyEventSubscriber(id = "btn_manageplugins")
 	public void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
 	
-		Logger l= Logger.getLogger("buttonclick");
-		l.info("Button was pressed " + i++ + " times");
-		createMyPopupMenu();
-		nifty.showPopup(nifty.getCurrentScreen(), managePluginsPopup.getId(), null); 
+		nifty.gotoScreen("managePlugins");
 	}
 	
 	/**
@@ -263,14 +260,7 @@ public class Controller implements ScreenController, ActionListener  {
 	}
 
 
-	public void createMyPopupMenu(){
-	  managePluginsPopup = nifty.createPopup("niftyPopupMenu");
-	  Menu myMenu = managePluginsPopup.findNiftyControl("#menu", Menu.class);
-	  myMenu.setWidth(new SizeValue("100px")); // must be set
-	  myMenu.addMenuItem("Click me!", new CheckboxControl());
-	 
-	}
-
+	
 	
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {

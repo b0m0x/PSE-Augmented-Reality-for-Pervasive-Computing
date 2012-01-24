@@ -61,22 +61,23 @@
     
     
     <screen id="options" controller="vision.controller.Controller">
-        <layer id="layer" backgroundColor="#0000" childLayout="center">
-            <panel id="panel" height="75%" width="50%" align="center" valign="center" backgroundColor="#ff149388" childLayout="vertical" visibleToMouse="true">
+        <layer id="settingsLayer" backgroundColor="#0000" childLayout="center">
+            <panel id="panel" height="75%" width="50%" align="center" valign="center" backgroundColor="#e0ffff88" childLayout="vertical" visibleToMouse="true">
                 
-               <panel id="panel_oben" childLayout="center" align="center" backgroundColor="#32cd32ff" height="25%" width="100%">
-               		<text id="settings" font="aurulent-sans-16.fnt" color="#f00f" text="Settings"
-            				align="center" valign="center" />
+               <panel id="panel_oben" childLayout="center" align="center" height="25%" width="100%">
+               		<text id="settings" font="aurulent-sans-16.fnt" text="Settings" size="32"
+            				align="center" valign="center" color="#0000ffff"/>
                     
                </panel>
                
                <panel id="WaendetransparenzPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="15%" width="100%">
-                    <text id="Waendetransparenz" font="aurulent-sans-16.fnt" text="Wände transparent machen"  size="24" width="100%" height="100%" />
+                    <text id="Waendetransparenz" font="aurulent-sans-16.fnt" text="Wände transparent machen"  size="24" width="75%" height="100%"
+                    color="#0000ffff" />
                     <control name="checkbox" id="WaendeCheckbox" checked="true" align="center" valign="center" ></control>
                 </panel>
                 
                 <panel id="iwasPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="15%" width="100%">
-                    <text id="iwasText" font="aurulent-sans-16.fnt" text="irgendetwas machen"  size="24" width="100%" height="100%" />
+                    <text id="iwasText" font="aurulent-sans-16.fnt" text="irgendetwas machen"  size="24" width="75%" height="100%" color="#0000ffff"/>
                     <control name="checkbox" id="iwasCheckbox" checked="true" align="center" valign="center" ></control>
                 </panel> 
                 
@@ -84,7 +85,7 @@
                <panel id="panel_unten" childLayout="center" align="center"  height="25%" width="100%">
                		
                		<control name="button" label="Back to main screen" id="btn_back" align="center"
-			             	visibleToMouse="true" width="100%"> 
+			             	visibleToMouse="true" width="80%"> 
 			             	
 		          			</control>
                     
@@ -94,6 +95,45 @@
             </panel>
         </layer>
     </screen>
+    
+    
+     
+    <screen id="managePlugins" controller="vision.controller.Controller">
+    		<layer id="manageLayer" backgroundColor="#0000" childLayout="center" align="center" valign="center">
+    			<panel id="managePlugin" childLayout="vertical" height="75%" width="50%" backgroundColor="#e0ffff88" align="center" valign="center">
+    			
+    				<panel id="o" width="100%" height="25%" childLayout="vertical">
+    				    	<text id="otext" font="aurulent-sans-16.fnt" text="Enable Plugins" 
+    				    	color="#0000ffff" size="32" width="75%" height="100%" />
+    				</panel>
+    			
+    				<panel id="x"  width="100%" height="25%" childLayout="horizontal">
+    					<text id="WindowPlugin" font="aurulent-sans-16.fnt" text="Window" 
+    					color="#0000ffff" size="24" width="75%" height="100%" />
+                    <control name="checkbox" id="WindowCheckbox" checked="true" align="center" valign="center" ></control>
+    				</panel>
+    				
+    				
+    				<panel id="Heizungspluginpanel"  width="100%" height="25%" childLayout="horizontal" align="center" valign="center">
+    						<text id="HeizungsText" font="aurulent-sans-16.fnt" text="Heizungsplugin" 
+    						color="#0000ffff" size="24" width="75%" height="100%" />
+                    		<control name="checkbox" id="HeizungCheckbox" checked="true" align="center" valign="center" ></control>
+    				</panel>
+    			
+    			<panel id="panel_down" childLayout="center" align="center"  height="25%" width="100%">
+               		
+               		<control name="button" label="Back to main screen" id="btn_back" align="center"
+			             	visibleToMouse="true" width="80%"> 
+			             	
+		          			</control>
+                    
+               </panel>
+    			
+    			
+    			</panel>
+    		</layer>
+    </screen>
+    
     
     
     
