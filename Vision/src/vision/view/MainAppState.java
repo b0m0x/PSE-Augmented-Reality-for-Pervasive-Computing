@@ -13,6 +13,7 @@ import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.MouseInput;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.PointLight;
 import com.jme3.math.ColorRGBA;
@@ -169,6 +170,9 @@ public class MainAppState extends AbstractAppState {
 	    inputManager.addMapping("Down", new KeyTrigger(KeyInput.KEY_S));
 	    inputManager.addMapping("Jump", new KeyTrigger(KeyInput.KEY_SPACE));
 	    inputManager.addMapping("toggleMouse", new KeyTrigger(KeyInput.KEY_M));
+	    inputManager.addMapping("userPick", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
+	    
+	    inputManager.addListener(controller, "userPick");
 	    inputManager.addListener(controller, "Left");
 	    inputManager.addListener(controller, "Right");
 	    inputManager.addListener(controller, "Up");
@@ -282,6 +286,19 @@ public class MainAppState extends AbstractAppState {
 
 	public Vector3f getPlayerPosition() {
 		return player.getPhysicsLocation();
+	}
+
+	public boolean isInOverview() {
+		return overviewCam;		
+	}
+
+	/**
+	 * gets called if the user selected a position from overview perspective
+	 * @param contactPoint the point in global coords
+	 */
+	public void overviewSelect(Vector3f contactPoint) {
+		toggleOverviewCam();
+		player.setPhysicsLocation(contactPoint.addLocal(0, 1, 0));		
 	}
 	
 }
