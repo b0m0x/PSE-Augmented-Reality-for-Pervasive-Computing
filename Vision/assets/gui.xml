@@ -120,7 +120,7 @@
     			<panel id="panel_down" childLayout="center" align="center"  height="25%" width="100%">
                		
                		<control name="button" label="Back to main screen" id="btn_back" align="center"
-			             	visibleToMouse="true" width="80%"> 
+			             	visibleToMouse="true" width="80%" > 
 			             	
 		          			</control>
                     

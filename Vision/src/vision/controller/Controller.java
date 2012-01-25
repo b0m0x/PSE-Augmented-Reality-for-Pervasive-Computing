@@ -18,6 +18,7 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.scene.Geometry;
 
 import vision.model.Model;
+import vision.view.Plugin;
 import vision.view.View;
 
 /**
@@ -35,7 +36,6 @@ public class Controller implements ScreenController, ActionListener  {
 		this.model = model;
 	}
 
-	private Element managePluginsPopup;
 
 	/**
 	 * binds the nifty instance to this controller
@@ -121,7 +121,6 @@ public class Controller implements ScreenController, ActionListener  {
 	 *                     inverse="controller:vision.view.View"
 	 */
 	private View view = new vision.view.View();
-	private boolean overviewCam;
 
 	/**
 	 * Getter of the property <tt>view</tt>
@@ -193,6 +192,11 @@ public class Controller implements ScreenController, ActionListener  {
 	public void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
 	
 		nifty.gotoScreen("managePlugins");
+		for(Plugin p: model.getPluginList()) {
+			if (view.getStateManager().hasState(p) == false) {
+				CheckBox ch = new CheckboxControl();
+			}
+		}
 	}
 	
 	/**
