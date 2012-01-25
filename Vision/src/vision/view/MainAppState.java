@@ -219,19 +219,19 @@ public class MainAppState extends AbstractAppState {
 	
 	private Spatial loadSkyBox() {
 		Texture up = app.getAssetManager().loadTexture(
-				"Texture/Skybox/CementaryUP.tga");
+				"Texture/Skybox/up.bmp");
 		Texture dn = app.getAssetManager().loadTexture(
-				"Texture/Skybox/CementaryDN.tga");
+				"Texture/Skybox/down.bmp");
 		Texture lt = app.getAssetManager().loadTexture(
-				"Texture/Skybox/CementaryLT.tga");
+				"Texture/Skybox/left.bmp");
 		Texture rt = app.getAssetManager().loadTexture(
-				"Texture/Skybox/CementaryRT.tga");
+				"Texture/Skybox/right.bmp");
 		Texture ft = app.getAssetManager().loadTexture(
-				"Texture/Skybox/CementaryFT.tga");
+				"Texture/Skybox/front.bmp");
 		Texture bk = app.getAssetManager().loadTexture(
-				"Texture/Skybox/CementaryBK.tga");
-		return SkyFactory.createSky(app.getAssetManager(), ft, bk, lt,
-				rt, up, dn);
+				"Texture/Skybox/back.bmp");
+		return SkyFactory.createSky(app.getAssetManager(), bk, ft, rt,
+				lt, up, dn);
 	}
 
 

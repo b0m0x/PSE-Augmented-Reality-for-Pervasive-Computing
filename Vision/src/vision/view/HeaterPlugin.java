@@ -56,7 +56,7 @@ public class HeaterPlugin extends Plugin {
 	 */
 	private void alignHeaters() {
 		for (Spatial g : heaters) {
-			//TODO do it
+			g.
 		}
 	}
 
