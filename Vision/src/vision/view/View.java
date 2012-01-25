@@ -90,11 +90,16 @@ public class View extends SimpleApplication {
 			stateManager.attach(p);
 		}
 		
+		setUpCam();
 		
 	}
 	
 	
 
+
+	private void setUpCam() {
+		cam.setFrustumPerspective(45f, (float) cam.getWidth() / cam.getHeight(), 0.01f, 1000f);
+	}
 
 	/**
 	 * Getter of the property <tt>daten</tt>
