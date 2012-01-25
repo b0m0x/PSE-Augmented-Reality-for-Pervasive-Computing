@@ -2,11 +2,15 @@ package vision.controller;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.CheckBox;
 import de.lessvoid.nifty.controls.Menu;
 import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
+import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
+import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
@@ -194,10 +198,36 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	public void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
 	
 		nifty.gotoScreen("managePlugins");
+		Element niftyElement = nifty.getCurrentScreen().findElementByName("x");
 		for(Plugin p: model.getPluginList()) {
-			if (view.getStateManager().hasState(p) == false) {
-				CheckBox ch = new CheckboxControl();
-			}
+			
+			PanelBuilder pb = new PanelBuilder() {{
+				 alignCenter();
+		            valignCenter();
+		            width("100%");
+		            height("25%");
+			}};
+			pb.childLayoutHorizontal();
+			Element panel = pb.build(nifty, screen, niftyElement);
+			
+			
+			
+			
+			LabelBuilder lb= new LabelBuilder(){{
+	            alignLeft();
+	            width("75%");
+	            color("#ff0000");
+			}};
+			lb.text(p.getClass().getSimpleName());
+			Element el = lb.build(nifty, screen, panel);
+			
+			
+			CheckboxBuilder chb= new CheckboxBuilder();
+			chb.id("#id");
+			chb.checked(view.getStateManager().hasState(p));
+			Element b = chb.build(nifty, screen, panel);
+			
+			
 		}
 	}
 	
