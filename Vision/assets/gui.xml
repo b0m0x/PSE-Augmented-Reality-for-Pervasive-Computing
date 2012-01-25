@@ -32,18 +32,12 @@
 			             
 			             </panel>
 			        </panel>
-			        <!-- <panel id="panel_top_right" height="100%" width="21%" valign="center" childLayout="center"
-			             backgroundColor="#88f8">  
-			        </panel> -->
-              
       </panel>
       
       
       
-      <panel id="panel_mid_left" height="50%" width="20%" align="left" childLayout="vertical"
-             backgroundColor="#00fa9a88"> 
-             <control name="label" color="#000" text="Menü" width="100%" height="15%" align="right"/>
-              
+      <panel id="panel_mid">
+             
       </panel>
       
       
@@ -84,7 +78,7 @@
                		<control name="button" label="Back to main screen" id="btn_back" align="center"
 			             	visibleToMouse="true" width="80%"> 
 			             	
-		          			</control>
+		          	</control>
                     
                </panel>
                
@@ -100,7 +94,7 @@
     			<panel id="managePlugin" childLayout="vertical" height="75%" width="50%" backgroundColor="#69696995" align="center" valign="center">
     			
     				<panel id="o" width="100%" height="25%" childLayout="vertical">
-    				    	<text id="otext" font="console.fnt" text="Enable Plugins" 
+    				    	<text id="otext" font="aurulent-sans-16.fnt" text="Enable Plugins" 
     				    	color="#ff0000ff" size="128" width="75%" height="100%" />
     				</panel>
     			

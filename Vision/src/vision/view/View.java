@@ -75,7 +75,8 @@ public class View extends SimpleApplication {
 	 */
 	public void simpleInitApp() {
 
-		guiAppState = new GuiAppState(controller);
+		
+		guiAppState = new GuiAppState(controller, daten);
 		bulletAppState = new BulletAppState();
 		mainAppState = new MainAppState(daten, controller);
 		

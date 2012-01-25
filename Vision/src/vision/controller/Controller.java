@@ -5,6 +5,7 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.CheckBox;
+import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Menu;
 import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
 import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
@@ -158,14 +159,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 
 	}
 
-	/**
-	 * gets called by nifty if a checkbox of a plugin was pressed and forwards
-	 * it to the respective plugin controller
-	 */
-	//@NiftyEventSubscriber(pattern = ".*checkbox.*")
-	public void pluginCheckbox(String id, Object o) {
-
-	}
+	
 
 	/**
 	 * gets called by nifty if a button in the GUI was pressed
@@ -179,17 +173,8 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 		l.info("Button was pressed.");
 	}
 
-	/**
-	 * called if the user picked an object
-	 * 
-	 * @param obj
-	 *            the picked geometry object
-	 */
-	public void userPick(Geometry obj) {
-
-	}
-	int i = 0;
 	
+		
 	private boolean loaded;
 	
 	/**
@@ -198,43 +183,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	@NiftyEventSubscriber(id = "btn_manageplugins")
 	public void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
 	
-		nifty.gotoScreen("managePlugins");
-		Element niftyElement = nifty.getCurrentScreen().findElementByName("x");
-		
-		if(loaded == false) {
-			
-		
-		for(Plugin p: model.getPluginList()) {
-			
-			PanelBuilder pb = new PanelBuilder() {{
-				 alignCenter();
-		            valignCenter();
-		            width("100%");
-		            height("25%");
-			}};
-			pb.childLayoutHorizontal();
-			Element panel = pb.build(nifty, screen, niftyElement);
-			
-			
-			
-			
-			LabelBuilder lb= new LabelBuilder(){{
-	            alignLeft();
-	            width("75%");
-	            color("#ff0000");
-			}};
-			lb.text(p.getClass().getSimpleName());
-			Element el = lb.build(nifty, screen, panel);
-			
-			
-			CheckboxBuilder chb= new CheckboxBuilder();
-			chb.id("#id");
-			chb.checked(view.getStateManager().hasState(p));
-			Element b = chb.build(nifty, screen, panel);
-			
-			loaded = true;
-		}
-	}
+		view.getGuiAppState().managePluginsPopupMenu();
 	}
 	
 	/**
@@ -287,8 +236,9 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 * @param id
 	 *            the id of the checkbox that was pressed
 	 */
-	//@NiftyEventSubscriber(pattern = "checkbox.*")
-	public void checkboxPressed(String id, Object o) {
+	//@NiftyEventSubscriber(pattern = "Pluginchecbox_.*")
+	public void plugincheckboxPressed(String id, CheckBoxStateChangedEvent cbsce) {
+		//string holen und trennen
 
 	}
 
