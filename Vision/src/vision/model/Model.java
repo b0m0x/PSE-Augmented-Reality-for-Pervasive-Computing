@@ -12,11 +12,15 @@ import javax.xml.bind.JAXBException;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.WrapMode;
+
+import de.lessvoid.nifty.builder.HoverEffectBuilder;
 
 import java.util.Date;
 
@@ -34,10 +38,11 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 
+		this.groundplan = new vision.model.Groundplan().load();
 		sensor = createTestSensors();
 		this.view = view;
 		loadPlugins();
-		this.groundplan = new vision.model.Groundplan().load();
+		
 		this.datenbank = new vision.model.Database();
 		/*
 		updater = new UpdateThread(this);
@@ -298,18 +303,28 @@ ei						 */
 		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System.currentTimeMillis()));
 		s.setPosition(new Position(2,-0.5f,1));
 		sensors.add(s);
-		Sensor b = new Sensor();
-		b.setId("testWindow");
-		b.addToTags("window");
-		b.addToSamples(new Sample("window", "bool", 0.0f, System.currentTimeMillis()));
-		b.setPosition(new Position(0, 0, 0));
-		sensors.add(b);
-		Sensor c = new Sensor();
-		c.setId("testWindow");
-		c.addToTags("window");
-		c.addToSamples(new Sample("window", "bool", 0.0f, System.currentTimeMillis()));
-		c.setPosition(new Position(10, 20, 10));
-		sensors.add(c);
+		
+		List<Wall> walls = groundplan.getWall();
+		int i = 0;
+		for(Wall w: walls) {
+			List<Hole> holes = w.getHole();
+			WallAdapter wAdapter = new WallAdapter(w);
+			for(Hole h : holes) {
+				Sensor sensor = new Sensor();
+				sensor.addToTags("window");
+				sensor.addToSamples(new Sample("window", "bool", 0.0f, System.currentTimeMillis()));
+				HoleAdapter holeAdapter = new HoleAdapter(h);
+				Vector2f holevec2 = holeAdapter.getPosition();
+				sensor.setId("SensorNr:" + i);
+				float rotation = wAdapter.getRotation();
+				float newX = (float) (holevec2.getX() * Math.cos(rotation) + wAdapter.getStart().getX());
+				float newY = (float) (holeAdapter.getPosition().getY() - wAdapter.getHeight() / 2);
+				float newZ = (float) (holevec2.getX() * Math.sin(rotation) + wAdapter.getStart().getY());
+				Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
+				sensor.setPosition(new Position(HoleVec3f.getX(), HoleVec3f.getY(), HoleVec3f.getZ()));
+				sensors.add(sensor);
+			}
+		}
 		return sensors;
 	}
 	
