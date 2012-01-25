@@ -8,7 +8,9 @@ import javax.vecmath.Quat4f;
 
 import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
+import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.bullet.util.CollisionShapeFactory;
 import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
 import com.jme3.math.Quaternion;
@@ -71,11 +73,13 @@ public class CustomMeshCreator {
 		assert(wall.getDepth() != 0);
 		
 		Node wallMesh = new Node("Wall");
-		RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(new Vector3f(wall.getWidth() / 2f, wall.getHeight() / 2f, wall.getDepth() /2f)), 0f);
-		ctrl.setKinematic(false);
-		wallMesh.addControl(ctrl);
+		
+		boolean hasDoor = false;
 		
 		for (Hole hole : wall.getHoles()) {
+			if (hole.getPositionY1() == 0) {
+				hasDoor = true;
+			}
 			HoleAdapter h = new HoleAdapter(hole);
 			float width = h.getSize().getX() / 2;
 			float lowerHeight = h.getPosition().getY() - h.getSize().getY() / 2;
@@ -114,6 +118,18 @@ public class CustomMeshCreator {
 		
 		addWallBlock(wallMesh, new Vector3f((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0), new Vector3f((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
 
+		
+		if (!hasDoor) {
+			RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(new Vector3f(wall.getWidth() / 2f, wall.getHeight() / 2f, wall.getDepth() /2f)), 0f);
+			ctrl.setKinematic(false);
+			wallMesh.addControl(ctrl);
+		} else {
+			CollisionShape sceneShape = CollisionShapeFactory.createMeshShape(wallMesh);
+			RigidBodyControl ctrl = new RigidBodyControl(sceneShape, 0);
+			ctrl.setKinematic(false);
+			wallMesh.addControl(ctrl);
+		}
+		
 		transformCoordinates(wallMesh, wall);
 		
 		return wallMesh;
