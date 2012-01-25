@@ -47,12 +47,8 @@ public class HeaterPlugin extends Plugin {
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
-		if (isInitialized()) {
-			return;
-		}
-		super.initialize(stateManager, app);
-		
-		//initHeaters(app);
+		super.initialize(stateManager, app);		
+		initHeaters(app);
 	}
 	
 	/**
@@ -67,6 +63,7 @@ public class HeaterPlugin extends Plugin {
 	private void initHeaters(Application app) {
 		heater = app.getAssetManager()
 				.loadModel("Models/heater1.blend");
+		
 		for (Sensor s : getSensors()) {
 			float temperature = 0;
 			for (Sample sp : s.getMesswert()) {
@@ -76,14 +73,9 @@ public class HeaterPlugin extends Plugin {
 				}
 			}
 			
-			/* 
-			Material m = new Material(app.getAssetManager(),
-					"Common/MatDefs/Misc/Unshaded.j3md");
-			m.setColor("Color", new ColorRGBA(temperature / 50f, 0,
-					1 - temperature / 50f, 1));
-			heater.setMaterial(m);*/
 			RigidBodyControl r = new RigidBodyControl(new BoxCollisionShape(new Vector3f(0.2f, 0.5f, 0.5f)), 0);
 			r.setKinematic(false);
+			
 			heater.addControl(r);
 			
 			r.setPhysicsLocation(new Vector3f(s.getPosition().getX(), s.getPosition()
@@ -92,8 +84,9 @@ public class HeaterPlugin extends Plugin {
 			Logger.getLogger(this.getClass().getName()).warning("Added foo at " + s.getPosition().getX() + s.getPosition()
 					.getY() + s.getPosition().getZ());
 			heater.setUserData("sensorid", s.getId());
-			heaters.add(heater);
+			heaters.add(heater.clone());
 			((View)app).getRootNode().attachChild(heater);
+			
 			app.getStateManager().getState(BulletAppState.class).getPhysicsSpace().add(r);
 		}
 	}
@@ -101,6 +94,7 @@ public class HeaterPlugin extends Plugin {
 	private void updateHeaters() {
 		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
+		
 		m.setColor("Ambient",  ColorRGBA.Gray);
 		m.setColor("Diffuse",  ColorRGBA.Gray);
 		m.setColor("Specular", ColorRGBA.White);
@@ -135,9 +129,6 @@ public class HeaterPlugin extends Plugin {
 	 * updates the client
 	 */
 	protected void clientUpdate(Application application, boolean changed) {
-		if (heater == null) {
-			initHeaters(application);
-		}
 		if (changed) {
 			updateHeaters();
 		}
