@@ -132,9 +132,9 @@ public class WindowPlugin extends Plugin {
 				Vector2f holevec2 = holeAdapter.getPosition();
 				WallAdapter wallAdapter = new WallAdapter(w);
 				float rotation = wallAdapter.getRotation();
-				float newX = (float) (holevec2.getX() * Math.cos(rotation) + wallAdapter.getStart().getX());
+				float newX = (float) (wallAdapter.getStart().getX() + holevec2.getX() * Math.cos(rotation));
 				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter.getHeight() / 2);
-				float newZ = (float) (holevec2.getX() * Math.sin(rotation) + wallAdapter.getStart().getY());
+				float newZ = (float) (wallAdapter.getStart().getY() + holevec2.getX() * Math.sin(rotation));
 				Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
 				if (HoleVec3.distance(windowpos) < distance) {
 					smallestHole = h;
@@ -147,9 +147,9 @@ public class WindowPlugin extends Plugin {
 		Vector2f holevec2 = holeAdapter.getPosition();
 		WallAdapter wallAdapter = new WallAdapter(smallestWall);
 		float rotation = wallAdapter.getRotation();
-		float newX = (float) (holevec2.getX() * Math.cos(rotation) + wallAdapter.getStart().getX());
+		float newX = (float) (wallAdapter.getEnd().getX() + holevec2.getX() * Math.cos(rotation));
 		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter.getHeight() / 2);
-		float newZ = (float) (holevec2.getX() * Math.sin(rotation) + wallAdapter.getStart().getY());
+		float newZ = (float) (wallAdapter.getEnd().getY() + holevec2.getX() * Math.sin(rotation - Math.PI ));
 		Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
 		window.setLocalTranslation(HoleVec3f);
 		Quat4f rot = new Quat4f();
