@@ -32,9 +32,9 @@
 			             
 			             </panel>
 			        </panel>
-			        <panel id="panel_top_right" height="100%" width="21%" valign="center" childLayout="center"
+			        <!-- <panel id="panel_top_right" height="100%" width="21%" valign="center" childLayout="center"
 			             backgroundColor="#88f8">  
-			        </panel>
+			        </panel> -->
               
       </panel>
       

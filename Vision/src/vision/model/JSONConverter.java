@@ -57,6 +57,7 @@ public class JSONConverter {
 			URL url = new URL(getUrl());
 			System.out.println("Connecting to " + Config.serverUrl + "...");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			System.out.println("Connection successful.");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
 
