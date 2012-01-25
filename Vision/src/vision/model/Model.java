@@ -33,7 +33,7 @@ import vision.view.View;
  * 
  */
 public class Model {
-	
+
 	UpdateThread updater;
 
 	public Model(View view) throws JAXBException {
@@ -42,15 +42,14 @@ public class Model {
 		sensor = createTestSensors();
 		this.view = view;
 		loadPlugins();
-		
+
 		this.datenbank = new vision.model.Database();
 		/*
-		updater = new UpdateThread(this);
-		updater.start();
-		*/
-		
+		 * updater = new UpdateThread(this); updater.start();
+		 */
+
 		Logger.getLogger("").setLevel(Config.logLevel);
-		
+
 	}
 
 	private void loadPlugins() {
@@ -64,8 +63,9 @@ public class Model {
 	}
 
 	/**
-ei						 */
-	//TODO fix
+	 * ei
+	 */
+	// TODO fix
 	public List<Sensor> getTaggedSensors(List<String> tags) {
 		List<Sensor> tagged = new ArrayList<Sensor>();
 		for (int i = 0; i < sensor.size(); i++) {
@@ -125,9 +125,6 @@ ei						 */
 	public void setDatenbank(Database datenbank) {
 		this.datenbank = datenbank;
 	}
-
-
-
 
 	/**
 	 * Setter of the property <tt>sensor</tt>
@@ -260,72 +257,78 @@ ei						 */
 
 	private void createGeometry() {
 		staticGeometries = new ArrayList<Spatial>();
-		Material m = new Material(view.getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
+		Material m = new Material(view.getAssetManager(),
+				"Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
-		m.setColor("Ambient",  ColorRGBA.Gray);
-		m.setColor("Diffuse",  ColorRGBA.Gray);
+		m.setColor("Ambient", ColorRGBA.Gray);
+		m.setColor("Diffuse", ColorRGBA.Gray);
 		m.setColor("Specular", ColorRGBA.White);
-		
-		Texture tex = view.getAssetManager().loadTexture("Texture/walltexture.jpg");
+
+		Texture tex = view.getAssetManager().loadTexture(
+				"Texture/walltexture.jpg");
 		tex.setWrap(WrapMode.Repeat);
 		m.setTexture("DiffuseMap", tex);
 		m.setFloat("Shininess", 3);
 		
 		CustomMeshCreator meshCreator = new CustomMeshCreator();
-		
-		
+	
 		for (Wall w : groundplan.getWall()) {
 			Spatial g = meshCreator.convert(w);
 			g.setMaterial(m);
 			staticGeometries.add(g);
 		}
-		
 		//add hardcoded floor
 		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(0, -1.7f, 0), new Vector3f(20f, 0.1f, 50f));
 		floor.setMaterial(m);
 		
-		
 		Geometry ceiling =  (Geometry) meshCreator.createCeiling(new Vector3f(0, 1.7f, 0), new Vector3f(20f, 0.1f, 50f));
 		ceiling.setMaterial(m);
-		
-		
+
 		staticGeometries.add(floor);
 		staticGeometries.add(ceiling);
 	}
-	
+
 	protected List<Sensor> createTestSensors() {
 		List<Sensor> sensors = new ArrayList<Sensor>();
 		Sensor s = new Sensor();
 		s.setId("testSensor");
 		s.addToTags("heater");
-		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System.currentTimeMillis()));
-		s.setPosition(new Position(2,-0.5f,1));
+		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System
+				.currentTimeMillis()));
+		s.setPosition(new Position(2, -0.5f, 1));
 		sensors.add(s);
-		
+
 		List<Wall> walls = groundplan.getWall();
 		int i = 0;
-		for(Wall w: walls) {
+		for (Wall w : walls) {
 			List<Hole> holes = w.getHole();
 			WallAdapter wAdapter = new WallAdapter(w);
-			for(Hole h : holes) {
-				Sensor sensor = new Sensor();
-				sensor.addToTags("window");
-				sensor.addToSamples(new Sample("window", "bool", 0.0f, System.currentTimeMillis()));
-				HoleAdapter holeAdapter = new HoleAdapter(h);
-				Vector2f holevec2 = holeAdapter.getPosition();
-				sensor.setId("SensorNr:" + i);
-				float rotation = wAdapter.getRotation();
-				float newX = (float) (holevec2.getX() * Math.cos(rotation) + wAdapter.getStart().getX());
-				float newY = (float) (holeAdapter.getPosition().getY() - wAdapter.getHeight() / 2);
-				float newZ = (float) (holevec2.getX() * Math.sin(rotation) + wAdapter.getStart().getY());
-				Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
-				sensor.setPosition(new Position(HoleVec3f.getX(), HoleVec3f.getY(), HoleVec3f.getZ()));
-				sensors.add(sensor);
+			for (Hole h : holes) {
+				if (h.getPositionY1() > 0) {
+					Sensor sensor = new Sensor();
+					sensor.addToTags("window");
+					sensor.addToSamples(new Sample("window", "bool", 0.0f,
+							System.currentTimeMillis()));
+					HoleAdapter holeAdapter = new HoleAdapter(h);
+					Vector2f holevec2 = holeAdapter.getPosition();
+					sensor.setId("SensorNr:" + i);
+					float rotation = wAdapter.getRotation();
+					float newX = (float) (holevec2.getX() * Math.cos(rotation) + wAdapter
+							.getStart().getX());
+					float newY = (float) (holeAdapter.getPosition().getY() - wAdapter
+							.getHeight() / 2);
+					float newZ = (float) (holevec2.getX() * Math.sin(rotation) + wAdapter
+							.getStart().getY());
+					Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
+					sensor.setPosition(new Position(HoleVec3f.getX(), HoleVec3f
+							.getY(), HoleVec3f.getZ()));
+					sensors.add(sensor);
+				}
 			}
 		}
 		return sensors;
 	}
-	
+
 	protected void close() {
 		updater.setRunning(false);
 	}
