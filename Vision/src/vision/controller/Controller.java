@@ -190,7 +190,8 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	}
 	int i = 0;
 	
-
+	private boolean loaded;
+	
 	/**
 	 * gets called if the user pressed the activate/deactivate button
 	 */
@@ -199,6 +200,10 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	
 		nifty.gotoScreen("managePlugins");
 		Element niftyElement = nifty.getCurrentScreen().findElementByName("x");
+		
+		if(loaded == false) {
+			
+		
 		for(Plugin p: model.getPluginList()) {
 			
 			PanelBuilder pb = new PanelBuilder() {{
@@ -227,8 +232,9 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 			chb.checked(view.getStateManager().hasState(p));
 			Element b = chb.build(nifty, screen, panel);
 			
-			
+			loaded = true;
 		}
+	}
 	}
 	
 	/**

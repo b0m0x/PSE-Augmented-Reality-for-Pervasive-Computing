@@ -100,8 +100,8 @@
     			<panel id="managePlugin" childLayout="vertical" height="75%" width="50%" backgroundColor="#69696995" align="center" valign="center">
     			
     				<panel id="o" width="100%" height="25%" childLayout="vertical">
-    				    	<text id="otext" font="aurulent-sans-16.fnt" text="Enable Plugins" 
-    				    	color="#ff0000ff" size="32" width="75%" height="100%" />
+    				    	<text id="otext" font="console.fnt" text="Enable Plugins" 
+    				    	color="#ff0000ff" size="128" width="75%" height="100%" />
     				</panel>
     			
     				<panel id="x"  width="100%" height="50%" childLayout="vertical">
