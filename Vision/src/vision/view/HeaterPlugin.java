@@ -48,7 +48,7 @@ public class HeaterPlugin extends Plugin {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);		
-		initHeaters(app);
+		
 	}
 	
 	/**
@@ -129,6 +129,8 @@ public class HeaterPlugin extends Plugin {
 	 * updates the client
 	 */
 	protected void clientUpdate(Application application, boolean changed) {
+		if (heater == null)
+			initHeaters(application);
 		if (changed) {
 			updateHeaters();
 		}
