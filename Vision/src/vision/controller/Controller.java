@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.AnalogListener;
 import com.jme3.scene.Geometry;
 
 import vision.model.Model;
@@ -26,7 +27,7 @@ import vision.view.View;
  * subcontrollers and the model
  * 
  */
-public class Controller implements ScreenController, ActionListener  {
+public class Controller implements ScreenController, ActionListener, AnalogListener  {
 	
 	private Nifty nifty;
 	private Screen screen;
@@ -266,6 +267,14 @@ public class Controller implements ScreenController, ActionListener  {
 			view.toggleMouse();
 		}
 
+	}
+
+	@Override
+	public void onAnalog(String name, float intensity, float tpf) {
+		if (name.equals("userPick") && view.isInOverview()) {
+			view.userPickOverview();
+		}
+		
 	}
 	
 
