@@ -91,7 +91,7 @@ public class MainAppState extends AbstractAppState {
 				miniMapNode.attachChild(g);
 			}
 		}
-				
+		
 		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.3f, 1.7f, 1);		
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
@@ -200,7 +200,8 @@ public class MainAppState extends AbstractAppState {
 	    if (moveForward)    { walkDirection.addLocal(camDir); }
 	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }
 	    player.setWalkDirection(walkDirection);
-		app.getCamera().setLocation(player.getPhysicsLocation());
+	    
+		app.getCamera().setLocation(player.getPhysicsLocation().addLocal(0, 0.5f, 0));
 		
 		updateMiniMap();
 	}
