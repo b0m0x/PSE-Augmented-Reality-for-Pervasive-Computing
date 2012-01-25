@@ -11,6 +11,7 @@ import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
 
+import java.awt.peer.ButtonPeer;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -229,6 +230,7 @@ public class Controller implements ScreenController, ActionListener  {
 	@NiftyEventSubscriber(id = "btn_Overview")
 	public void toggleOverview(String id, ButtonClickedEvent o) {
 		view.toggleOverviewCam();
+		Logger.getLogger("here").warning("click");
 	}
 
 	@NiftyEventSubscriber(id = "btn_back")
