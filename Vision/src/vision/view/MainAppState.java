@@ -121,7 +121,6 @@ public class MainAppState extends AbstractAppState {
 	@Override
 	public void stateAttached(AppStateManager stateManager) {
 		super.stateAttached(stateManager);
-		
 	}
 	
 	private void initMiniMap() {
@@ -139,18 +138,25 @@ public class MainAppState extends AbstractAppState {
 	void setUpLights() {
 		//add light
 		PointLight lamp_light = new PointLight();
-		lamp_light.setColor(ColorRGBA.Yellow);
-		lamp_light.setRadius(50f);
-		lamp_light.setPosition(new Vector3f(0, 1, 1));
+		lamp_light.setColor(ColorRGBA.White);
+		lamp_light.setRadius(20f);
+		lamp_light.setPosition(new Vector3f(7, 1, 20));
 		app.getRootNode().addLight(lamp_light);
 		
 		//add light
 		PointLight lamp_light2 = new PointLight();
 		lamp_light2.setColor(ColorRGBA.Green);
-		lamp_light2.setRadius(50f);
-		lamp_light2.setPosition(new Vector3f(5, 10, 3));
-		app.getRootNode().addLight(lamp_light2);
+		lamp_light2.setRadius(20f);
+		lamp_light2.setPosition(new Vector3f(7, 10, 3));
+		//app.getRootNode().addLight(lamp_light2);
 		miniMapNode.addLight(lamp_light2);
+		
+		
+		PointLight lamp_light3 = new PointLight();
+		lamp_light3.setColor(ColorRGBA.White);
+		lamp_light3.setRadius(50f);
+		lamp_light3.setPosition(new Vector3f(7, 1, 40));
+		app.getRootNode().addLight(lamp_light3);
 		
 		AmbientLight al = new AmbientLight();
 		al.setColor(ColorRGBA.White.mult(1.3f));

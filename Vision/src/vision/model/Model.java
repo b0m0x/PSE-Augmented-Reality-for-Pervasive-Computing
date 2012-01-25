@@ -271,24 +271,22 @@ ei						 */
 		m.setTexture("DiffuseMap", tex);
 		m.setFloat("Shininess", 3);
 		
+		CustomMeshCreator meshCreator = new CustomMeshCreator();
+		
 		
 		for (Wall w : groundplan.getWall()) {
-			Spatial g = new CustomMeshCreator().convert(w);
+			Spatial g = meshCreator.convert(w);
 			g.setMaterial(m);
 			staticGeometries.add(g);
 		}
 		
 		//add hardcoded floor
-		Geometry floor = new Geometry("floor", new Box(20f, 0.1f, 50f));
-		floor.setLocalTranslation(0, -1.7f, 0);
+		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(0, -1.7f, 0), new Vector3f(20f, 0.1f, 50f));
 		floor.setMaterial(m);
-		floor.addControl(new RigidBodyControl(0));
 		
 		
-		Geometry ceiling = new Geometry("ceiling", new Box(20f, 0.1f, 50f));
-		ceiling.setLocalTranslation(0, 1.7f, 0);
+		Geometry ceiling =  (Geometry) meshCreator.createCeiling(new Vector3f(0, 1.7f, 0), new Vector3f(20f, 0.1f, 50f));
 		ceiling.setMaterial(m);
-		ceiling.addControl(new RigidBodyControl(0));
 		
 		
 		staticGeometries.add(floor);

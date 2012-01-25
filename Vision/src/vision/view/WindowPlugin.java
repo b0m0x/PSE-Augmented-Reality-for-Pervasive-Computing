@@ -156,7 +156,7 @@ public class WindowPlugin extends Plugin {
 		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0),
 				(float) (rotation+Math.PI/2));
 		window.setLocalRotation(Converter.convert(rot));
-		window.setLocalScale(wallAdapter.getDepth(),holeAdapter.getSize().getX(),holeAdapter.getSize().getY());
+		window.setLocalScale(wallAdapter.getDepth(),holeAdapter.getSize().getY(), holeAdapter.getSize().getX());
 		return window;
 	}
 }

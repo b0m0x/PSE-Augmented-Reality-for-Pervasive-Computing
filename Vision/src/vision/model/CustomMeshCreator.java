@@ -43,7 +43,25 @@ public class CustomMeshCreator {
         buffer.rewind();
         buffer.put(texCoordinates);
 	}
+	
+	public Spatial createFloor(Vector3f position, Vector3f size) {
+		Geometry floor = new Geometry("floor");
+		Box box = new Box(size.x, size.y, size.z);
+		setTexCoords(box, TEXTURE_SIZE);
+		floor.setMesh(box);
+		
+		RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(size), 0);
+		floor.addControl(ctrl);
+		ctrl.setPhysicsLocation(position);
+		return floor;
+	}
 
+	public Spatial createCeiling(Vector3f position, Vector3f size) {
+		Spatial ceiling = createFloor(position, size);
+		ceiling.setName("ceiling");
+		return ceiling;
+	}
+	
 	/**
 	 * creates a mesh off of a wall object. builds in holes for windows if
 	 * necessary.
@@ -56,7 +74,6 @@ public class CustomMeshCreator {
 		RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(new Vector3f(wall.getWidth() / 2f, wall.getHeight() / 2f, wall.getDepth() /2f)), 0f);
 		ctrl.setKinematic(false);
 		wallMesh.addControl(ctrl);
-		
 		
 		for (Hole hole : wall.getHoles()) {
 			HoleAdapter h = new HoleAdapter(hole);
