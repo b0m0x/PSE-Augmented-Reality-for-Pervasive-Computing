@@ -316,7 +316,7 @@
 	
 	<wall>
 		<wallNumber>8</wallNumber>
-		<positionX1>5.5</positionX1>
+		<positionX1>5.5</positionX1>21.1
 		<positionY1>2.5</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>38</positionY2>
@@ -326,7 +326,7 @@
 	
 	<wall>
 		<wallNumber>9</wallNumber>
-		<positionX1>7.1<positionX1>
+		<positionX1>7.1</positionX1>
 		<positionY1>40</positionY1>
 		<positionX2>-9</positionX2>
 		<positionY2>42</positionY2>
