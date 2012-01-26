@@ -80,7 +80,8 @@ public abstract class Plugin extends AbstractAppState {
 
 	/**
 	 */
-	public Plugin(Model model) {
+	public Plugin(Model model, String[] tags) {
+		setTags(tags);
 		setDaten(model);
 		updateSensors();
 	}
@@ -95,7 +96,7 @@ public abstract class Plugin extends AbstractAppState {
 		for (Sensor s : daten.getSensor()) {
 			for (int j = 0; j < tags.length; j++) {
 				for (int i = 0; i < s.getTags().size(); i++) {
-					if (getTag(j) == s.getTags().get(i)) {
+					if (getTag(j).equals(s.getTags().get(i))) {
 						if (!sensors.contains(s))
 							sensors.add(s);
 					}
@@ -104,6 +105,12 @@ public abstract class Plugin extends AbstractAppState {
 		}
 		setSensors(sensors);
 		lastSensorHashCode = daten.getSensor().hashCode();
+	}
+	
+	@Override
+	public void update(float tpf) {
+		super.update(tpf);
+		update(app);
 	}
 
 	public void update(Application application) {

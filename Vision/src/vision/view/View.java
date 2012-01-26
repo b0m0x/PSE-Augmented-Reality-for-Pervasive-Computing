@@ -4,12 +4,25 @@
 package vision.view;
 
 
+
+import java.util.logging.Logger;
+
 import vision.controller.Controller;
 import vision.model.Model;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
+import com.jme3.collision.CollisionResult;
+import com.jme3.collision.CollisionResults;
 import com.jme3.input.FlyByCamera;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Ray;
+import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
+import com.jme3.renderer.Renderer;
+import com.jme3.renderer.ViewPort;
+import com.jme3.texture.Texture;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -17,7 +30,7 @@ import com.jme3.input.FlyByCamera;
  * 
  */
 public class View extends SimpleApplication {
-
+	
 	/**
 	 * @uml.property name="daten"
 	 * @uml.associationEnd inverse="view:vision.model.Model"
@@ -52,7 +65,9 @@ public class View extends SimpleApplication {
 	/**
 	 * is called every frame by jmonkey
 	 */
-	public void simpleUpdate() {
+	@Override
+	public void simpleUpdate(float tpf) {
+		
 	}
 
 	/**
@@ -60,21 +75,30 @@ public class View extends SimpleApplication {
 	 */
 	public void simpleInitApp() {
 
-		guiAppState = new GuiAppState(controller);
+		
+		guiAppState = new GuiAppState(controller, daten);
 		bulletAppState = new BulletAppState();
-		
 		mainAppState = new MainAppState(daten, controller);
-
-		for (Plugin p : daten.getPluginList()) {
-			p.initialize(stateManager, this);
-			stateManager.attach(p);
-		}
-		guiAppState.initialize(stateManager, this);
-		mainAppState.initialize(stateManager, this);
 		
+
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
 		stateManager.attach(mainAppState);
+		
+
+		for (Plugin p : daten.getPluginList()) {
+			stateManager.attach(p);
+		}
+		
+		setUpCam();
+		
+	}
+	
+	
+
+
+	private void setUpCam() {
+		cam.setFrustumPerspective(45f, (float) cam.getWidth() / cam.getHeight(), 0.01f, 1000f);
 	}
 
 	/**
@@ -182,7 +206,7 @@ public class View extends SimpleApplication {
 	}
 
 	public void toggleOverviewCam() {
-		mainAppState.toggleOverviewCam();		
+		mainAppState.toggleOverviewCam();
 	}
 
 	public void userSelect() {
@@ -205,4 +229,28 @@ public class View extends SimpleApplication {
 		showMouse = enabled;
 	}
 
+	public boolean isInOverview() {
+		return mainAppState.isInOverview();
+	}
+
+	public void userPickOverview() {
+		CollisionResults results = new CollisionResults();		
+		
+
+        Vector2f click2d = inputManager.getCursorPosition();
+        Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
+        Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d);
+	
+        Ray ray = new Ray(click3d, dir);
+        
+        rootNode.collideWith(ray, results);
+        
+        for (CollisionResult r : results) {
+        	if (r.getGeometry().getName().equals("floor")) {
+        		mainAppState.overviewSelect(r.getContactPoint());
+        		return;
+        	}
+        }
+	}
+	
 }

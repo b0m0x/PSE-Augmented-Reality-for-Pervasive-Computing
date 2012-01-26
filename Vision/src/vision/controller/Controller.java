@@ -2,22 +2,30 @@ package vision.controller;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.CheckBox;
+import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 import de.lessvoid.nifty.controls.Menu;
 import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
+import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
+import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
 
+import java.awt.peer.ButtonPeer;
 import java.util.Collection;
 import java.util.logging.Logger;
 
 import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.AnalogListener;
 import com.jme3.scene.Geometry;
 
 import vision.model.Model;
+import vision.view.Plugin;
 import vision.view.View;
 
 /**
@@ -25,7 +33,7 @@ import vision.view.View;
  * subcontrollers and the model
  * 
  */
-public class Controller implements ScreenController, ActionListener  {
+public class Controller implements ScreenController, ActionListener, AnalogListener  {
 	
 	private Nifty nifty;
 	private Screen screen;
@@ -35,7 +43,6 @@ public class Controller implements ScreenController, ActionListener  {
 		this.model = model;
 	}
 
-	private Element managePluginsPopup;
 
 	/**
 	 * binds the nifty instance to this controller
@@ -121,7 +128,6 @@ public class Controller implements ScreenController, ActionListener  {
 	 *                     inverse="controller:vision.view.View"
 	 */
 	private View view = new vision.view.View();
-	private boolean overviewCam;
 
 	/**
 	 * Getter of the property <tt>view</tt>
@@ -153,14 +159,7 @@ public class Controller implements ScreenController, ActionListener  {
 
 	}
 
-	/**
-	 * gets called by nifty if a checkbox of a plugin was pressed and forwards
-	 * it to the respective plugin controller
-	 */
-	//@NiftyEventSubscriber(pattern = ".*checkbox.*")
-	public void pluginCheckbox(String id, Object o) {
-
-	}
+	
 
 	/**
 	 * gets called by nifty if a button in the GUI was pressed
@@ -174,28 +173,17 @@ public class Controller implements ScreenController, ActionListener  {
 		l.info("Button was pressed.");
 	}
 
-	/**
-	 * called if the user picked an object
-	 * 
-	 * @param obj
-	 *            the picked geometry object
-	 */
-	public void userPick(Geometry obj) {
-
-	}
-	int i = 0;
 	
-
+		
+	private boolean loaded;
+	
 	/**
 	 * gets called if the user pressed the activate/deactivate button
 	 */
 	@NiftyEventSubscriber(id = "btn_manageplugins")
 	public void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
 	
-		Logger l= Logger.getLogger("buttonclick");
-		l.info("Button was pressed " + i++ + " times");
-		createMyPopupMenu();
-		nifty.showPopup(nifty.getCurrentScreen(), managePluginsPopup.getId(), null); 
+		view.getGuiAppState().managePluginsPopupMenu();
 	}
 	
 	/**
@@ -204,22 +192,12 @@ public class Controller implements ScreenController, ActionListener  {
 	 * @param o
 	 */
 	@NiftyEventSubscriber(id = "btn_Help")
-	public void help(String id, Object o) {
+	public void help(String id, ButtonClickedEvent bce) {
 		Logger l= Logger.getLogger("buttonclick");
 		l.info("Button was pressed.");
 	}
 	
 	
-	/**
-	 * 
-	 * @param id
-	 * @param o
-	 */
-	@NiftyEventSubscriber(id = "btn_LoadRoom")
-	public void loadRoom(String id, Object o) {
-		Logger l= Logger.getLogger("buttonclick");
-		l.info("Button was pressed.");
-	}
 	
 	
 
@@ -229,11 +207,27 @@ public class Controller implements ScreenController, ActionListener  {
 	 * @param o
 	 */
 	@NiftyEventSubscriber(id = "btn_Settings")
-	public void settings(String id, Object o) {
+	public void settings(String id, ButtonClickedEvent bce) {
 		nifty.gotoScreen("options");
 	}
 	
 	
+	/**
+	 * 
+	 * @param id
+	 * @param o
+	 */
+	@NiftyEventSubscriber(id = "btn_Overview")
+	public void toggleOverview(String id, ButtonClickedEvent o) {
+		view.toggleOverviewCam();
+		Logger.getLogger("here").warning("click");
+	}
+
+	@NiftyEventSubscriber(id = "btn_back")
+	public void backToMainScreen(String id, ButtonClickedEvent bce) {
+		nifty.gotoScreen("start");
+		
+	}
 	
 
 	/**
@@ -242,20 +236,14 @@ public class Controller implements ScreenController, ActionListener  {
 	 * @param id
 	 *            the id of the checkbox that was pressed
 	 */
-	//@NiftyEventSubscriber(pattern = "checkbox.*")
-	public void checkboxPressed(String id, Object o) {
+	//@NiftyEventSubscriber(pattern = "Pluginchecbox_.*")
+	public void plugincheckboxPressed(String id, CheckBoxStateChangedEvent cbsce) {
+		//string holen und trennen
 
 	}
 
 
-	public void createMyPopupMenu(){
-	  managePluginsPopup = nifty.createPopup("niftyPopupMenu");
-	  Menu myMenu = managePluginsPopup.findNiftyControl("#menu", Menu.class);
-	  myMenu.setWidth(new SizeValue("100px")); // must be set
-	  myMenu.addMenuItem("Click me!", new CheckboxControl());
-	 
-	}
-
+	
 	
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {
@@ -269,6 +257,14 @@ public class Controller implements ScreenController, ActionListener  {
 			view.toggleMouse();
 		}
 
+	}
+
+	@Override
+	public void onAnalog(String name, float intensity, float tpf) {
+		if (name.equals("userPick") && view.isInOverview()) {
+			view.userPickOverview();
+		}
+		
 	}
 	
 

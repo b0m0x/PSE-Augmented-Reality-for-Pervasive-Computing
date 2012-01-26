@@ -1,7 +1,11 @@
 package vision.view;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 import java.util.logging.Logger;
+
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 import vision.model.Model;
@@ -10,10 +14,15 @@ import vision.model.Sensor;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.SceneGraphVisitor;
+import com.jme3.scene.Spatial;
 
 /**
  * This class represents the plugins of the heater
@@ -23,8 +32,8 @@ public class HeaterPlugin extends Plugin {
 	/**
 	 * @uml.property name="heaters"
 	 */
-	private List<Geometry> heaters;
-	private Geometry heater;
+	private List<Spatial> heaters = new ArrayList<Spatial>();
+	private Spatial heater;
 	private Model model;
 	private Logger log = Logger.getLogger(HeaterPlugin.class.getName());
 
@@ -32,29 +41,29 @@ public class HeaterPlugin extends Plugin {
 	 * 
 	 */
 	public HeaterPlugin(Model model, View v) {
-		super(model);
+		super(model, new String[] { "heater" });
 		this.model = model;
-		setTags(new String[] { "heater" });
 	}
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
-		super.initialize(stateManager, app);
-		heater = (Geometry) app.getAssetManager()
-				.loadModel("Models/heater.j3o");
-		initHeaters(app);
+		super.initialize(stateManager, app);		
+		
 	}
 	
 	/**
 	 * align the heaters along walls
 	 */
 	private void alignHeaters() {
-		for (Geometry g : heaters) {
-			//TODO do it
+		for (Spatial g : heaters) {
+			
 		}
 	}
 
 	private void initHeaters(Application app) {
+		heater = app.getAssetManager()
+				.loadModel("Models/heater1.blend");
+		
 		for (Sensor s : getSensors()) {
 			float temperature = 0;
 			for (Sample sp : s.getMesswert()) {
@@ -64,37 +73,52 @@ public class HeaterPlugin extends Plugin {
 				}
 			}
 			
+			RigidBodyControl r = new RigidBodyControl(new BoxCollisionShape(new Vector3f(0.2f, 0.5f, 0.5f)), 0);
+			r.setKinematic(false);
 			
-			/* 
-			Material m = new Material(app.getAssetManager(),
-					"Common/MatDefs/Misc/Unshaded.j3md");
-			m.setColor("Color", new ColorRGBA(temperature / 50f, 0,
-					1 - temperature / 50f, 1));
-			heater.setMaterial(m);*/
-			heater.addControl(new RigidBodyControl(new BoxCollisionShape()));
+			heater.addControl(r);
 			
-			heater.setLocalTranslation(s.getPosition().getX(), s.getPosition()
-					.getY(), s.getPosition().getZ());
+			r.setPhysicsLocation(new Vector3f(s.getPosition().getX(), s.getPosition()
+					.getY(), s.getPosition().getZ()));
 			
-			heater.setUserData("sid", s.getId());
+			Logger.getLogger(this.getClass().getName()).warning("Added foo at " + s.getPosition().getX() + s.getPosition()
+					.getY() + s.getPosition().getZ());
+			heater.setUserData("sensorid", s.getId());
 			heaters.add(heater.clone());
+			((View)app).getRootNode().attachChild(heater);
+			
+			app.getStateManager().getState(BulletAppState.class).getPhysicsSpace().add(r);
 		}
 	}
 
 	private void updateHeaters() {
-		for (Geometry g : heaters) {
-			String sid = g.getUserData("sid");
+		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
+		m.setBoolean("UseMaterialColors", true);
+		
+		m.setColor("Ambient",  ColorRGBA.Gray);
+		m.setColor("Diffuse",  ColorRGBA.Gray);
+		m.setColor("Specular", ColorRGBA.White);
+		m.setFloat("Shininess", 3);
+		
+		for (Spatial g : heaters) {
+			String sid = g.getUserData("sensorid");
 			for (Sensor s : getSensors()) {
 				if (!s.getId().equals(sid)) {
 					continue;
 				}
 				for (Sample sp : s.getMesswert()) {
 					if (sp.getTyp().equals("Temperatur")) {
-						float temperature = sp.getValue();
-						g.getMaterial().setColor(
-								"Color",
-								new ColorRGBA(temperature / 50f, 0,
-										1 - temperature / 50f, 1));
+						final float temperature = sp.getValue(); 
+						g.depthFirstTraversal(new SceneGraphVisitor() {
+							
+							@Override
+							public void visit(Spatial s) {
+								if (s instanceof Geometry)
+									((Geometry)s ).setMaterial(m);
+								
+							}
+						});
+						
 					}
 				}
 			}
@@ -105,10 +129,11 @@ public class HeaterPlugin extends Plugin {
 	 * updates the client
 	 */
 	protected void clientUpdate(Application application, boolean changed) {
+		if (heater == null)
+			initHeaters(application);
 		if (changed) {
 			updateHeaters();
 		}
 		return;
 	}
-
 }
