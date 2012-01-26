@@ -302,7 +302,136 @@
 		<positionY2>47.39</positionY2>
 		<height>3.5</height>
 		<wide>0.3</wide>
-
+	</wall>
+	
+	<wall>
+		<wallNumber>7</wallNumber>
+		<positionX1>7.6</positionX1>
+		<positionY1>2.5</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>39.1</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>8</wallNumber>
+		<positionX1>5.5</positionX1>
+		<positionY1>2.5</positionY1>
+		<positionX2>5.5</positionX2>
+		<positionY2>38</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>9</wallNumber>
+		<positionX1>7.1<positionX1>
+		<positionY1>40</positionY1>
+		<positionX2>-9</positionX2>
+		<positionY2>42</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>10</wallNumber>
+		<positionX1>5.5</positionX1>
+		<positionY1>38</positionY1>
+		<positionX2>-9.1</positionX2>
+		<positionY2>40.3</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>11</wallNumber>
+		<positionX1>13.25</positionX1>
+		<positionY1>2.5</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>2.5</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>12</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>7.95</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>7.95</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>13</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>14.75</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>14.75</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>14</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>18.55</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>18.55</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>15</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>21.1</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>21.1</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>16</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>24.7</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>24.7</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>17</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>31.3</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>31.3</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>18</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>34.8</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>34.8</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
+	</wall>
+	
+	<wall>
+		<wallNumber>19</wallNumber>
+		<positionX1>11.83</positionX1>
+		<positionY1>39.1</positionY1>
+		<positionX2>7.6</positionX2>
+		<positionY2>39.1</positionY2>
+		<height>3.5</height>
+		<wide>0.3</wide>
 	</wall>
 
 	<reference>
