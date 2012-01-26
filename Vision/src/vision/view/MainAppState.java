@@ -232,8 +232,8 @@ public class MainAppState extends AbstractAppState {
 				"Texture/Skybox/front.bmp");
 		Texture bk = app.getAssetManager().loadTexture(
 				"Texture/Skybox/back.bmp");
-		return SkyFactory.createSky(app.getAssetManager(), bk, ft, rt,
-				lt, up, dn);
+		return SkyFactory.createSky(app.getAssetManager(), rt, lt, bk,
+				ft, up, dn);
 	}
 
 
