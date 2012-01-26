@@ -554,6 +554,16 @@
 		<height>3.5</height>
 		<wide>0.1</wide>
 	</wall>
+	
+	<wall>
+		<wallNumber>32</wallNumber>
+		<positionX1>-1.4</positionX1>
+		<positionY1>35.7</positionY1>
+		<positionX2>-1</positionX2>
+		<positionY2>38.9</positionY2>
+		<height>3.5</height>
+		<wide>0.1</wide>
+	</wall>
 
 	<reference>
 		<x>0.0</x>
