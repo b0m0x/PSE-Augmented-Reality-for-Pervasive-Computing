@@ -16,11 +16,8 @@ import vision.model.Wall;
 import vision.model.WallAdapter;
 
 import com.bulletphysics.linearmath.QuaternionUtil;
-import com.jme3.animation.AnimChannel;
-import com.jme3.animation.AnimControl;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.asset.BlenderKey;
 import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
@@ -35,9 +32,9 @@ public class WindowPlugin extends Plugin {
 	 */
 	private List<Spatial> windows = new ArrayList<Spatial>();
 	private Spatial window;
+	private Spatial windowopen;
+	private Spatial windowclosed;
 	private Model model;
-	private AnimChannel windowChannel;
-	private AnimControl windowControl;
 	Logger log = Logger.getLogger(WindowPlugin.class.getName());
 
 	public WindowPlugin(Model model, View view) {
@@ -54,7 +51,6 @@ public class WindowPlugin extends Plugin {
 	}
 
 	private void initWindows(Application app) {
-		// BlenderKey blenderWindow = new BlenderKey("Models/window.blend");
 		for (Sensor sensor : getSensors()) {
 			float status = 0;
 			for (Sample sample : sensor.getMesswert()) {
@@ -63,17 +59,16 @@ public class WindowPlugin extends Plugin {
 					break;
 				}
 			}
-			// Material m = new Material(app.getAssetManager(),
-			// "Common/MatDefs/Misc/Unshaded.j3md");
-			// windowControl = window.getControl(AnimControl.class);
-			// windowChannel = windowControl.createChannel();
-			// if (status > 0.0f) {
-			// windowChannel.setAnim("opened");
-			// } else {
-			// windowChannel.setAnim("closed");
-			// }
-			// window.setMaterial(m);
-			window = app.getAssetManager().loadModel("Models/window.blend");
+			windowclosed = app.getAssetManager().loadModel(
+					"Models/window.blend");
+			windowopen = app.getAssetManager().loadModel(
+					"Models/windowopen.blend");
+			if (status > 0) {
+				window = app.getAssetManager().loadModel(
+						"Models/windowopen.blend");
+			} else {
+				window = app.getAssetManager().loadModel("Models/window.blend");
+			}
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
 					.getPosition().getY(), sensor.getPosition().getZ());
 			Logger.getLogger(this.getClass().getName()).warning(
@@ -103,18 +98,16 @@ public class WindowPlugin extends Plugin {
 				if (!sensor.getId().equals(sid)) {
 					continue;
 				}
-				// for (Sample sample : sensor.getMesswert()) {
-				// if (sample.getTyp().equals("window")) {
-				// float status = sample.getValue();
-				// windowControl = g.getControl(AnimControl.class);
-				// windowChannel = windowControl.createChannel();
-				// if (status > 0.0f) {
-				// windowChannel.setAnim("open");
-				// } else {
-				// windowChannel.setAnim("close");
-				// }
-				// }
-				// }
+				for (Sample sample : sensor.getMesswert()) {
+					if (sample.getTyp().equals("window")) {
+						float status = sample.getValue();
+						if (status > 0.0f) {
+							window = windowopen;
+						} else {
+							window = windowclosed;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -132,9 +125,12 @@ public class WindowPlugin extends Plugin {
 				Vector2f holevec2 = holeAdapter.getPosition();
 				WallAdapter wallAdapter = new WallAdapter(w);
 				float rotation = wallAdapter.getRotation();
-				float newX = (float) (wallAdapter.getStart().getX() + holevec2.getX() * Math.cos(rotation));
-				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter.getHeight() / 2);
-				float newZ = (float) (wallAdapter.getStart().getY() + holevec2.getX() * Math.sin(rotation));
+				float newX = (float) (wallAdapter.getStart().getX() + holevec2
+						.getX() * Math.cos(rotation));
+				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
+						.getHeight() / 2);
+				float newZ = (float) (wallAdapter.getStart().getY() + holevec2
+						.getX() * Math.sin(rotation));
 				Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
 				if (HoleVec3.distance(windowpos) < distance) {
 					smallestHole = h;
@@ -147,16 +143,25 @@ public class WindowPlugin extends Plugin {
 		Vector2f holevec2 = holeAdapter.getPosition();
 		WallAdapter wallAdapter = new WallAdapter(smallestWall);
 		float rotation = wallAdapter.getRotation();
-		float newX = (float) (wallAdapter.getEnd().getX() + holevec2.getX() * Math.cos(rotation));
-		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter.getHeight() / 2);
-		float newZ = (float) (wallAdapter.getEnd().getY() + holevec2.getX() * Math.sin(rotation - Math.PI ));
+		float newX = (float) (wallAdapter.getEnd().getX() + holevec2.getX()
+				* Math.cos(rotation));
+		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
+				.getHeight() / 2);
+		float newZ = (float) (wallAdapter.getEnd().getY() + holevec2.getX()
+				* Math.sin(rotation - Math.PI));
 		Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
 		window.setLocalTranslation(HoleVec3f);
 		Quat4f rot = new Quat4f();
 		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0),
-				(float) (rotation+Math.PI/2));
+				(float) (rotation + Math.PI / 2));
 		window.setLocalRotation(Converter.convert(rot));
-		window.setLocalScale(wallAdapter.getDepth(), holeAdapter.getSize().getX(),holeAdapter.getSize().getY());
+		if (window == windowopen) {
+			window.setLocalScale(wallAdapter.getDepth(), holeAdapter.getSize()
+					.getX(), holeAdapter.getSize().getY());
+		} else {
+			window.setLocalScale(wallAdapter.getDepth() *2, holeAdapter.getSize()
+					.getX(), holeAdapter.getSize().getY());
+		}
 		return window;
 	}
 }
