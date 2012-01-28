@@ -17,7 +17,7 @@ public class Sensor {
 
 	public Sensor(String id, int time, List<Sample> samples) {
 		this.id = id;
-		samples = new ArrayList<Sample>();
+		messwert = samples;
 	}
 
 	/**

@@ -95,7 +95,7 @@ public class Model {
 	 * @return Returns the sensor.
 	 * @uml.property name="sensor"
 	 */
-	public List<Sensor> getSensor() {
+	public synchronized List<Sensor> getSensor() {
 		return sensor;
 	}
 
