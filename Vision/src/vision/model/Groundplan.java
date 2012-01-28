@@ -53,7 +53,7 @@ public class Groundplan {
 		JAXBContext jc = JAXBContext.newInstance("vision.model");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		return (Groundplan) unmarshaller.unmarshal(new File(
-				Config.groundplanPath));
+				Config.GROUNDPLAN_PATH));
 
 	}
 

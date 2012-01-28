@@ -11,9 +11,9 @@ public class Position {
 	private float x;
 
 	public Position(float f, float g, float h) {
-		setX(f);
-		setY(g);
-		setZ(h);
+		x = f;
+		y = g;
+		z = h;
 	}
 
 	/**

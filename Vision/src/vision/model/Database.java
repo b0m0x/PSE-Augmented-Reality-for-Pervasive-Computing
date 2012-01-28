@@ -1,8 +1,15 @@
 package vision.model;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * manages the database connection and saves sensordata
@@ -11,6 +18,7 @@ import java.util.List;
  */
 public class Database {
 
+	private static final Logger LOG = Logger.getLogger(Database.class.getName());
 	private Connection conn;
 
 	private boolean tableExists(String tableName, Connection conn) {
@@ -50,7 +58,7 @@ public class Database {
 				pst.setFloat(6, messwerte.getValue());
 				pst.setObject(7, tags);
 				pst.executeUpdate();
-				System.out.print("Stored: " + id + " ");
+				LOG.info("Stored: " + id + " ");
 			} else {
 				st.execute("create table Samples (" + "id VARCHAR(30), "
 						+ "Zeitpunkt LONG, " + "Type VARCHAR(30), "
@@ -65,7 +73,7 @@ public class Database {
 				pst.setFloat(6, messwerte.getValue());
 				pst.setObject(7, tags);
 				pst.executeUpdate();
-				System.out.print("Database created and stored: " + id + " ");
+				LOG.info("Database created and stored: " + id + " ");
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -97,8 +105,7 @@ public class Database {
 			return samples;
 
 		} catch (SQLException e) {
-			System.out.println("Error getting Sensor Data!");
-			System.exit(0);
+			LOG.warning("Error getting Sensor Data!");
 			return null;
 		}
 	}
@@ -128,8 +135,8 @@ public class Database {
 			return samples;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Error getting all Sensor Data");
-			System.exit(0);
+			LOG.warning("Error getting all Sensor Data");
+			//System.exit(0);
 			return null;
 		}
 
@@ -166,8 +173,7 @@ public class Database {
 			return samples;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Error getting data from Interval");
-			System.exit(0);
+			LOG.warning("Error getting data from Interval");
 			return null;
 		}
 	}

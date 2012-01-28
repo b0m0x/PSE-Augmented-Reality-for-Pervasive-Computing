@@ -2,7 +2,6 @@ package vision.view;
 
 import com.jme3.animation.LoopMode;
 import com.jme3.app.Application;
-import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.bullet.BulletAppState;
@@ -50,12 +49,12 @@ public class MainAppState extends AbstractAppState {
 	private ViewPort miniMapViewPort;
 	
 	private CameraNode camNode;
-	private Controller controller;
+	private final Controller controller;
 	private View app;
-	private Model model;
+	private final Model model;
 	private Node mainGeometryNode;
 	private boolean overviewCam;
-	private Logger log = Logger.getLogger(this.getClass().getName());
+	private static final Logger LOG = Logger.getLogger(MainAppState.class.getName());
 	private CharacterControl player;
 	
 	private boolean moveLeft;
@@ -76,10 +75,10 @@ public class MainAppState extends AbstractAppState {
 		super.initialize(stateManager, app);
 		this.app = (View) app;
 		
-		BulletAppState bas = stateManager.getState(BulletAppState.class);
+		final BulletAppState bas = stateManager.getState(BulletAppState.class);
 		PhysicsSpace pSpace = new PhysicsSpace();
 		if (bas == null) {
-			log.warning("No BulletAppState has been attached - continuing without physics");
+			LOG.warning("No BulletAppState has been attached - continuing without physics");
 		} else {
 			pSpace = bas.getPhysicsSpace();
 			pSpace.setAccuracy(0.001f);
@@ -87,7 +86,7 @@ public class MainAppState extends AbstractAppState {
 		
 		mainGeometryNode = new Node("static");
 		miniMapNode = new Node("minimap");
-		List<Spatial> staticObjects = model.getStaticGeometry();
+		final List<Spatial> staticObjects = model.getStaticGeometry();
 
 		for (Spatial g : staticObjects) {
 			mainGeometryNode.attachChild(g);
@@ -135,10 +134,6 @@ public class MainAppState extends AbstractAppState {
 	    camNode.getControl(0).setEnabled(false);
 	}
 
-	@Override
-	public void stateAttached(AppStateManager stateManager) {
-		super.stateAttached(stateManager);
-	}
 	
 	private void initMiniMap() {
 
@@ -152,7 +147,7 @@ public class MainAppState extends AbstractAppState {
 		miniMapCam.lookAt(getPlayerPosition(), new Vector3f(0, 1, 0));
 	}
 	
-	void setUpLights() {
+	private void setUpLights() {
 		//add light
 		PointLight lamp_light = new PointLight();
 		lamp_light.setColor(ColorRGBA.White);
@@ -364,7 +359,7 @@ public class MainAppState extends AbstractAppState {
 		player.setEnabled(overviewCam);
 		app.setMouseEnabled(!overviewCam);
 
-		overviewCam = !overviewCam;
+		overviewCam ^= true;
 	}
 
 	
@@ -376,9 +371,9 @@ public class MainAppState extends AbstractAppState {
 		for (int i = 0; i < results.size(); i++) {
 			Vector3f pt = results.getCollision(i).getContactPoint();
 			String hit = results.getCollision(i).getGeometry().getName();
-			if (hit.equals("floor")) {
+			if ("floor".equals(hit)) {
 				app.getCamera().setLocation(
-						pt.add(new Vector3f(0f, 0f, 1f)));
+						pt.add(Vector3f.UNIT_Z));
 				overviewCam = false;
 			}
 		}		

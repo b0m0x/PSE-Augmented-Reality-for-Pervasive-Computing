@@ -2,13 +2,14 @@ package vision.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * manages the server connection and fetches the sensor data
  * 
  */
 public class Update {
-
+	private static final Logger LOG = Logger.getLogger(Update.class.getName());
 	public Update(Model model) {
 		this.database = new Database();
 		this.jsonConverter = new JSONConverter();
@@ -128,11 +129,11 @@ public class Update {
 				database.updateSensors(sensorlist.get(i).getId(), l, sensorlist
 						.get(i).getMesswert().get(j), sensorlist.get(i)
 						.getTags());
-				System.out.println("Sample " + (j + 1));
+				LOG.info("Sample " + (j + 1));
 				samplecounter++;
 			}
 		}
-		System.out.println("Sensors stored: " + (sensorlist.size() + 1)
+		LOG.info("Sensors stored: " + (sensorlist.size() + 1)
 				+ "; Samples stored: " + samplecounter);
 	}
 

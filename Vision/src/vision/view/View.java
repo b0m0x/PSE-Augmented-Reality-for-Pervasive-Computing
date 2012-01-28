@@ -62,13 +62,7 @@ public class View extends SimpleApplication {
 
 	private boolean showMouse;
 
-	/**
-	 * is called every frame by jmonkey
-	 */
-	@Override
-	public void simpleUpdate(float tpf) {
-		
-	}
+
 
 	/**
 	 * initializes the view
@@ -191,8 +185,8 @@ public class View extends SimpleApplication {
 	 * @param p
 	 *            the plugin to enable
 	 */
-	public void enablePlugin(Plugin p) {
-		stateManager.attach(p);
+	public void enablePlugin(Plugin plugin) {
+		stateManager.attach(plugin);
 	}
 
 	/**
@@ -201,8 +195,8 @@ public class View extends SimpleApplication {
 	 * @param p
 	 *            the plugin to detach
 	 */
-	public void disablePlugin(Plugin p) {
-		stateManager.detach(p);
+	public void disablePlugin(Plugin plugin) {
+		stateManager.detach(plugin);
 	}
 
 	public void toggleOverviewCam() {

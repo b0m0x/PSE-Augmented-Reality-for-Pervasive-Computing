@@ -2,6 +2,7 @@ package vision.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +20,8 @@ import org.json.JSONObject;
 import vision.Config;
 
 public class JSONConverter {
+	
+	private static final Logger LOG = Logger.getLogger(JSONConverter.class.getName());
 
 	public JSONConverter() {
 		this.sensorList = new ArrayList<Sensor>();
@@ -29,7 +32,7 @@ public class JSONConverter {
 	private List<Sensor> sensorList;
 
 	public String getUrl() {
-		return Config.serverUrl;
+		return Config.SERVER_URL;
 	}
 
 	public JSONObject getJson() {
@@ -43,7 +46,7 @@ public class JSONConverter {
 			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 			return br.readLine();
 		} catch (FileNotFoundException e) {
-			System.out.println("File offlinestream not found!");
+			LOG.warning("File offlinestream not found!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,21 +58,19 @@ public class JSONConverter {
 	public String getJSONStream() {
 		try {
 			URL url = new URL(getUrl());
-			System.out.println("Connecting to " + Config.serverUrl + "...");
+			LOG.info("Connecting to " + Config.SERVER_URL + "...");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			System.out.println("Connection successful.");
+			LOG.info("Connection successful.");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
 
 			String content = br.readLine();
 			return content;
 		} catch (MalformedURLException e) {
-			System.out
-					.println("Connection Error(1). Using offlinestream instead...");
+			LOG.warning("Connection Error(1). Using offlinestream instead...");
 			return offlineStream();
 		} catch (IOException e) {
-			System.out
-					.println("Connection Error(2). Using offlinestream instead...");
+			LOG.warning("Connection Error(2). Using offlinestream instead...");
 			return offlineStream();
 		}
 

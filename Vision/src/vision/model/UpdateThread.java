@@ -2,6 +2,7 @@ package vision.model;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 import vision.Config;
 
@@ -10,7 +11,7 @@ import vision.Config;
  * 
  */
 public class UpdateThread extends Thread {
-
+    private static final Logger LOG = Logger.getLogger(UpdateThread.class.getName());
 	protected boolean running;
 
 	public UpdateThread(Model model) {
@@ -27,13 +28,12 @@ public class UpdateThread extends Thread {
 			public void run() {
 				update.store(System.currentTimeMillis());
 				if (!running) {
-					System.out
-							.println("Thread terminated. Closing connection...");
+					LOG.info("Thread terminated. Closing connection...");
 					update.getDatabase().disconnect();
 					timer.cancel();
 				}
 			}
-		}, 0, Config.updateIntervall);
+		}, 0, Config.UPDATE_INTERVAL);
 
 	}
 

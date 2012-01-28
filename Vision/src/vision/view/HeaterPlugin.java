@@ -34,8 +34,8 @@ public class HeaterPlugin extends Plugin {
 	 */
 	private List<Spatial> heaters = new ArrayList<Spatial>();
 	private Spatial heater;
-	private Model model;
-	private Logger log = Logger.getLogger(HeaterPlugin.class.getName());
+	private final Model model;
+	private static final Logger LOG = Logger.getLogger(HeaterPlugin.class.getName());
 
 	/**
 	 * 
@@ -81,7 +81,7 @@ public class HeaterPlugin extends Plugin {
 			r.setPhysicsLocation(new Vector3f(s.getPosition().getX(), s.getPosition()
 					.getY(), s.getPosition().getZ()));
 			
-			Logger.getLogger(this.getClass().getName()).warning("Added foo at " + s.getPosition().getX() + s.getPosition()
+			LOG.warning("Added foo at " + s.getPosition().getX() + s.getPosition()
 					.getY() + s.getPosition().getZ());
 			heater.setUserData("sensorid", s.getId());
 			heaters.add(heater.clone());
@@ -134,6 +134,5 @@ public class HeaterPlugin extends Plugin {
 		if (changed) {
 			updateHeaters();
 		}
-		return;
 	}
 }

@@ -11,8 +11,7 @@ public class Sensor {
 
 	public Sensor() {
 		this.setMesswert();
-		List<String> tags = new ArrayList<String>();
-		this.setTags(tags);
+		tags = new ArrayList<String>();
 	}
 
 	public Sensor(String id, int time, List<Sample> samples) {

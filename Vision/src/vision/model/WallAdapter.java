@@ -6,7 +6,7 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
 public class WallAdapter {
-	private Wall wall;
+	private final Wall wall;
 
 	public WallAdapter(Wall wall) {
 		this.wall = wall;
@@ -48,7 +48,7 @@ public class WallAdapter {
 	}
 	
 	public float getRotation() {
-		Vector2f wallDir = new Vector2f(getStart().getX()
+		final Vector2f wallDir = new Vector2f(getStart().getX()
 				- getEnd().getX(), getStart().getY()
 				- getEnd().getY());
 		

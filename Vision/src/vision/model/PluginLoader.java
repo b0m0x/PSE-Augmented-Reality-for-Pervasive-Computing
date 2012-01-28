@@ -71,7 +71,7 @@ public class PluginLoader {
 
 	public List<String> getPluginPaths() {
 		List<String> pathlist = new ArrayList<String>();
-		File pluginFolder = new File(Config.pluginpath);
+		File pluginFolder = new File(Config.PLUGIN_PATH);
 
 		if (!pluginFolder.isDirectory()) {
 			return Collections.emptyList();

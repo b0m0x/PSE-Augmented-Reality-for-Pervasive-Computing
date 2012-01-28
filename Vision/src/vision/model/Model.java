@@ -48,7 +48,7 @@ public class Model {
 		 * updater = new UpdateThread(this); updater.start();
 		 */
 
-		Logger.getLogger("").setLevel(Config.logLevel);
+		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
 	}
 

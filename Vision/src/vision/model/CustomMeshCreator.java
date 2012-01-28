@@ -26,7 +26,7 @@ import com.jme3.scene.shape.Box;
  */
 public class CustomMeshCreator {
 	
-	private static float TEXTURE_SIZE = 2f;
+	private static final float TEXTURE_SIZE = 2f;
 	
 	private void setTexCoords(Box box, float textureSize) {
 		float x = box.xExtent / textureSize;
@@ -41,7 +41,7 @@ public class CustomMeshCreator {
                 z, 0, 0, 0, 0, x, z, x // bottom
      
           };
-        FloatBuffer buffer = box.getFloatBuffer(Type.TexCoord);
+        final FloatBuffer buffer = box.getFloatBuffer(Type.TexCoord);
         buffer.rewind();
         buffer.put(texCoordinates);
 	}
