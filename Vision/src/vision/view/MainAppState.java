@@ -1,5 +1,6 @@
 package vision.view;
 
+import com.jme3.animation.LoopMode;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AbstractAppState;
@@ -8,6 +9,10 @@ import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.control.CharacterControl;
+import com.jme3.cinematic.MotionPath;
+import com.jme3.cinematic.MotionPathListener;
+import com.jme3.cinematic.events.MotionTrack;
+import com.jme3.cinematic.events.MotionTrack.Direction;
 import com.jme3.collision.CollisionResults;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
@@ -22,9 +27,11 @@ import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.ViewPort;
+import com.jme3.scene.CameraNode;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.Spatial.CullHint;
+import com.jme3.scene.control.CameraControl.ControlDirection;
 import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
 
@@ -41,6 +48,8 @@ public class MainAppState extends AbstractAppState {
 	
 	private Camera miniMapCam;
 	private ViewPort miniMapViewPort;
+	
+	private CameraNode camNode;
 	private Controller controller;
 	private View app;
 	private Model model;
@@ -56,10 +65,10 @@ public class MainAppState extends AbstractAppState {
 	private Node miniMapNode = new Node("Minimap");
 
 	
-	public MainAppState(Model model, Controller contoller) {
+	public MainAppState(Model model, Controller controller) {
 		this.model = model;
 		this.overviewCam = false;
-		this.controller = contoller;
+		this.controller = controller;
 	}
 
 	@Override
@@ -110,13 +119,20 @@ public class MainAppState extends AbstractAppState {
 		
 		this.app.getRootNode().setCullHint(CullHint.Dynamic);
 	
-		// init camera
-		this.app.getFlyByCamera().setEnabled(true);
+		setUpCamera();
 		
 		setUpLights();
 		setUpKeys();
 		
 		initMiniMap();
+	}
+
+	private void setUpCamera() {
+		app.getFlyByCamera().setEnabled(true);
+		camNode = new CameraNode("maincam", app.getCamera());
+		app.getRootNode().attachChild(camNode);
+		camNode.setControlDir(ControlDirection.SpatialToCamera);
+	    camNode.getControl(0).setEnabled(false);
 	}
 
 	@Override
@@ -201,8 +217,9 @@ public class MainAppState extends AbstractAppState {
 	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }
 	    player.setWalkDirection(walkDirection);
 	    
-		app.getCamera().setLocation(player.getPhysicsLocation().addLocal(0, 0.5f, 0));
-		
+	    if (!overviewCam) {
+	    	app.getCamera().setLocation(player.getPhysicsLocation().addLocal(0, 0.5f, 0));
+	    }
 		updateMiniMap();
 	}
 	
@@ -235,25 +252,119 @@ public class MainAppState extends AbstractAppState {
 		return SkyFactory.createSky(app.getAssetManager(), rt, lt, bk,
 				ft, up, dn);
 	}
+	
+	private MotionPath createCamZoomInPath() {
+		MotionPath path;
+		path = new MotionPath();
+	    
+		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 5, 0)).clone());
+	    
+		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 20, 0)).clone());
+
+	    path.addWayPoint(player.getPhysicsLocation().clone());
+
+	    
+	    path.setCurveTension(0.05f);
+	    
+	    
+	    path.addListener(new MotionPathListener() {
+			
+			@Override
+			public void onWayPointReach(MotionTrack mtr, int waypoint) {
+				if (waypoint >= 2) {
+					camNode.getControl(0).setEnabled(false);
+					mtr.stop();
+					mainGeometryNode.getChild("ceiling").setCullHint(CullHint.Dynamic);
+				}
+				
+			}
+		});
+	    
+	    return path;
+	}
+	
+	private MotionPath createCamZoomOutPath() {
+		MotionPath path;
+		path = new MotionPath();
+		
+		app.getCamera().getLocation().addLocal(0, 50, 0);
+
+	    path.addWayPoint(player.getPhysicsLocation().clone());
+
+		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 20, 0)).clone());
+	    
+		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 5, 0)).clone());
+	    
+	    path.setCurveTension(0.05f);
+	    
+	    
+	    path.addListener(new MotionPathListener() {
+			
+			@Override
+			public void onWayPointReach(MotionTrack mtr, int waypoint) {
+				if (waypoint >= 2) {
+					camNode.getControl(0).setEnabled(false);
+					mtr.stop();
+				}
+				
+			}
+		});
+	    
+	    return path;
+	}
+	
+	private void animateCamZoom(boolean zoomIn) {
+		Vector3f playerPos = player.getPhysicsLocation();
+		
+	    MotionPath path ;
+	    if (zoomIn) {
+	    	path = createCamZoomInPath();
+	    } else {
+	    	path = createCamZoomOutPath();
+	    }
+	    Vector3f lookAt;
+	    if (zoomIn) {
+		    lookAt = playerPos.subtract(camNode.getLocalTranslation()).clone().normalize();
+		    lookAt.setY(0.2f);
+		    lookAt.addLocal(playerPos);
+	    } else {
+	    	lookAt = playerPos;
+	    }
+	    MotionTrack mctrl = new MotionTrack(camNode, path);
+	    mctrl.setDirectionType(Direction.LookAt);
+	    mctrl.setLookAt(lookAt, Vector3f.UNIT_Y);
+	    mctrl.setLoopMode(LoopMode.DontLoop);
+	    
+	    if (zoomIn) {
+	    	mctrl.setSpeed(2.5f);
+	    } else {
+	    	mctrl.setSpeed(4.5f);
+	    }
+	    
+	    camNode.getControl(0).setEnabled(true);
+	    mctrl.play();
+
+	}
 
 
 	public void toggleOverviewCam() {
-		overviewCam = !overviewCam;
-		Vector3f playerPos = player.getPhysicsLocation();
-		if (!overviewCam) {
-			player.setPhysicsLocation(playerPos.add(new Vector3f(0, -50, 0)));
-			app.getCamera().setLocation(new Vector3f(4,1,4));
-			app.getCamera().lookAt(new Vector3f(1,1,1), new Vector3f(0, 1, 0));
-			mainGeometryNode.getChild("ceiling").setCullHint(CullHint.Dynamic);
-		} else {
-			player.setPhysicsLocation(playerPos.add(new Vector3f(0, 50, 0)));
-			app.getCamera().setLocation(player.getPhysicsLocation());
+			
+			animateCamZoom(overviewCam);
+		/*
+			//player.setPhysicsLocation(playerPos.add(new Vector3f(0, 50, 0)));
+			app.getCamera().setLocation(player.getPhysicsLocation().add(new Vector3f(0, 50, 0)));
 			app.getCamera().lookAt(playerPos.add(0, -50, 0), new Vector3f(0, 1, 0));
+
+			//camNode.setLocalTranslation(playerPos.add(new Vector3f(0, 50, 0)));
+			//app.getCamera().lookAt(playerPos.add(0, -50, 0), Vector3f.UNIT_Y);
+		}*/
+		if (!overviewCam) {
 			mainGeometryNode.getChild("ceiling").setCullHint(CullHint.Always);
 		}
-		player.setEnabled(!overviewCam);
-		app.setMouseEnabled(overviewCam);
-		
+		player.setEnabled(overviewCam);
+		app.setMouseEnabled(!overviewCam);
+
+		overviewCam = !overviewCam;
 	}
 
 	
@@ -304,9 +415,9 @@ public class MainAppState extends AbstractAppState {
 	 * gets called if the user selected a position from overview perspective
 	 * @param contactPoint the point in global coords
 	 */
-	public void overviewSelect(Vector3f contactPoint) {
-		toggleOverviewCam();
+	public void overviewSelect(Vector3f contactPoint) {		
 		player.setPhysicsLocation(contactPoint.addLocal(0, 1, 0));		
+		toggleOverviewCam();
 	}
 	
 }
