@@ -238,8 +238,18 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 */
 	//@NiftyEventSubscriber(pattern = "Pluginchecbox_.*")
 	public void plugincheckboxPressed(String id, CheckBoxStateChangedEvent cbsce) {
-		//string holen und trennen
-
+			String s = id.substring(14);
+			for(Plugin p : model.getPluginList()) {
+				if (s.equals(p.getClass().getName())) {
+					if(cbsce.isChecked() == true) {
+						view.enablePlugin(p);
+					} 
+					else {
+						view.disablePlugin(p);
+					}
+					
+				}
+			}
 	}
 
 
