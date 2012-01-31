@@ -64,11 +64,13 @@ public class Model {
 	 * ei
 	 */
 	// TODO fix
-	public List<Sensor> getTaggedSensors(List<String> tags) {
+	public List<Sensor> getTaggedSensors(String[] tags) {
 		List<Sensor> tagged = new ArrayList<Sensor>();
-		for (int i = 0; i < sensor.size(); i++) {
-			if (sensor.get(i).getTags().equals(tags)) {
-				tagged.add(sensor.get(i));
+		for (Sensor s : sensor) {
+			for (String tag : tags) {
+				if (s.getTags().contains(tag)) {
+					tagged.add(s);
+				}
 			}
 		}
 		return tagged;
