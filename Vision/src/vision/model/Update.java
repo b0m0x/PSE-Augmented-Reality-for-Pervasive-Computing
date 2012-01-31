@@ -133,6 +133,7 @@ public class Update {
 		}
 		LOG.info("Sensors stored: " + (sensorlist.size() + 1)
 				+ "; Samples stored: " + samplecounter);
+		jsonConverter.resetList();
 	}
 
 	/**
