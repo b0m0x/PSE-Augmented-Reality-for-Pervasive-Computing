@@ -2,6 +2,7 @@ package vision.view;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import vision.model.Model;
 import vision.model.Sensor;
@@ -13,6 +14,8 @@ import vision.controller.PluginController;
 
 public abstract class Plugin extends AbstractAppState {
 
+	private static final Logger LOG = Logger.getLogger(Plugin.class.getName());
+	
 	/**
 	 * @uml.property name="sensors"
 	 */
@@ -105,6 +108,7 @@ public abstract class Plugin extends AbstractAppState {
 		}*/
 		sensors = daten.getTaggedSensors(tags);
 		setSensors(sensors);
+		LOG.info("Old hashcode: " + lastSensorHashCode + "; new code: "+ daten.getSensor().hashCode());
 		lastSensorHashCode = daten.getSensor().hashCode();
 	}
 	
@@ -123,7 +127,7 @@ public abstract class Plugin extends AbstractAppState {
 	}
 
 	private boolean sensorsChanged() {
-		return daten.getSensor().hashCode() == lastSensorHashCode;
+		return daten.getSensor().hashCode() != lastSensorHashCode;
 	}
 
 	/**

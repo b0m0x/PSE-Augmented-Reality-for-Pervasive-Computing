@@ -19,6 +19,7 @@ import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
@@ -110,6 +111,7 @@ public class HeaterPlugin extends Plugin {
 		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
 		
+		
 		m.setColor("Ambient",  ColorRGBA.Gray);
 		m.setColor("Diffuse",  ColorRGBA.Gray);
 		m.setColor("Specular", ColorRGBA.White);
@@ -125,12 +127,15 @@ public class HeaterPlugin extends Plugin {
 					if (sp.getTyp().equals("Temperatur")) {
 						final float temperature = sp.getValue(); 
 						LOG.info("Temperature for Heater with sensor id " + sid + " is " + temperature + sp.getUnit());
+						ColorRGBA col = new ColorRGBA(temperature / 50f, 0, 1f - temperature / 50f, 1);
+						final Material mat = m.clone();
+						mat.setColor("Diffuse", col);
 						g.depthFirstTraversal(new SceneGraphVisitor() {
 							
 							@Override
 							public void visit(Spatial s) {
 								if (s instanceof Geometry)
-									((Geometry)s ).setMaterial(m);
+									((Geometry)s ).setMaterial(mat);
 								
 							}
 						});
