@@ -8,7 +8,6 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
-import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
@@ -29,7 +28,11 @@ public class GuiAppState extends AbstractAppState  {
 	private Model model;
 	private View view;
 	
-	
+	/**
+	 * Creates a new GuiAppState
+	 * @param controller the controller
+	 * @param model the model
+	 */
 	public GuiAppState(Controller controller, Model model) {
 		this.controller = controller;
 		this.model = model;
@@ -45,17 +48,24 @@ public class GuiAppState extends AbstractAppState  {
                 app.getInputManager(),
                 app.getAudioRenderer(),
                 app.getGuiViewPort());
+				
         nifty = niftyDisplay.getNifty();
 		nifty.fromXml("gui.xml", "start", controller);
 
 		//NiftyEventAnnotationProcessor.process(controller);
 		app.getGuiViewPort().addProcessor(niftyDisplay);
+		
+		pluginButtons();
+		
 
 	
 	}
 
 	private boolean loaded;
-
+	
+	/**
+	 * This Method manages the PluginsPopupMenue.
+	 */
 	public void managePluginsPopupMenu() {
 		
 		nifty.gotoScreen("managePlugins");
@@ -74,9 +84,7 @@ public class GuiAppState extends AbstractAppState  {
 			}};
 			pb.childLayoutHorizontal();
 			Element panel = pb.build(nifty, nifty.getCurrentScreen(), niftyElement);
-			
-			
-			
+				
 			
 			LabelBuilder lb= new LabelBuilder(){{
 	            alignLeft();
@@ -99,22 +107,36 @@ public class GuiAppState extends AbstractAppState  {
 		
 	}
 	
-	//private boolean buttonloaded;
-//	public void pluginButtons() {
-//		Element niftyElement = nifty.getCurrentScreen().findElementByName("panel_bottom_right");
-//		if (buttonloaded == false) {
-//			for (PluginController p : model.getPluginControllerList()) {
-//				java.util.Map<String, String> m;
-//				m = p.createButtons();
-//				for(String id : m.keySet()) {
-//					ButtonBuilder bb = new ButtonBuilder(id);
-//					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);
-//					buttonloaded = true;
-//				}
-//			}	
-//		}
-//		
-//	}
+	private boolean buttonloaded;
+	/**
+	 * Shows the Buttons of the several Plugins.
+	 */
+	public void pluginButtons() {
+		Element niftyElement = nifty.getCurrentScreen().findElementByName("panel_bottom_right");
+		if (buttonloaded == false) {
+			for (PluginController p : model.getPluginControllerList()) {
+				 java.util.Map<String, String> m;
+				
+				m = p.createButtons();
+				
+				for( String id : m.keySet()) {
+					String text = m.get(id);
+					ButtonBuilder bb = new ButtonBuilder("ButtonOf_"+p.getClass().getName()+id, text) {{
+						 	alignCenter();
+				            valignCenter();
+				            width("100%");
+				            height("25%");
+				            
+					}};;
+					//bb.text(m.get(id));
+					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);
+					buttonloaded = true;
+					
+				}
+			}	
+		}
+		
+	}
 	
 	
 }

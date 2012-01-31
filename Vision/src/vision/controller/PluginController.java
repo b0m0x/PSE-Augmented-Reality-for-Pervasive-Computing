@@ -1,6 +1,9 @@
 package vision.controller;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
 import vision.model.Model;
 import vision.view.Plugin;
 
@@ -61,7 +64,8 @@ public abstract class PluginController {
 	 *            the id of the button
 	 */
 	public void buttonPressed(String id) {
-
+		Logger l= Logger.getLogger("PluginController");
+		l.warning("Button was pressed.");
 	}
 
 	/**
@@ -71,7 +75,10 @@ public abstract class PluginController {
 	 * @return a Map of button ids and their Text
 	 */
 	public Map<String, String> createButtons() {
-		throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException();
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("idufrd", "lalalalala");
+		return m;
 	}
 
 	/**

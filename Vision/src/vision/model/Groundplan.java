@@ -29,6 +29,7 @@ import vision.Config;
  *         &lt;element ref="{}wall" maxOccurs="unbounded"/>
  *         &lt;element ref="{}reference" maxOccurs="unbounded"/>
  *         &lt;element ref="{}staticGeometry" maxOccurs="unbounded"/>
+ *         &lt;element ref="{}light" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,7 +42,8 @@ import vision.Config;
 @XmlType(name = "", propOrder = {
     "wall",
     "reference",
-    "staticGeometry"
+    "staticGeometry",
+    "light"
 })
 @XmlRootElement(name = "groundplan")
 public class Groundplan {
@@ -63,6 +65,8 @@ public class Groundplan {
     protected List<Reference> reference;
     @XmlElement(required = true)
     protected List<StaticGeometry> staticGeometry;
+    @XmlElement(required = true)
+    protected List<Light> light;
 
     /**
      * Gets the value of the wall property.
@@ -149,6 +153,35 @@ public class Groundplan {
             staticGeometry = new ArrayList<StaticGeometry>();
         }
         return this.staticGeometry;
+    }
+
+    /**
+     * Gets the value of the light property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the light property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLight().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Light }
+     * 
+     * 
+     */
+    public List<Light> getLight() {
+        if (light == null) {
+            light = new ArrayList<Light>();
+        }
+        return this.light;
     }
 
 }

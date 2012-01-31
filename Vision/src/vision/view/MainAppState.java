@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import vision.controller.Controller;
+import vision.model.Light;
 import vision.model.Model;
 
 /**
@@ -148,27 +149,14 @@ public class MainAppState extends AbstractAppState {
 	}
 	
 	private void setUpLights() {
+		for (Light l : model.getLights()) {
+			PointLight lamp_light = new PointLight();
+			lamp_light.setColor(ColorRGBA.White);
+			lamp_light.setRadius(20f);
+			lamp_light.setPosition(new Vector3f(l.getPositionX(), 3, l.getPositionY()));
+			app.getRootNode().addLight(lamp_light);
+		}
 		//add light
-		PointLight lamp_light = new PointLight();
-		lamp_light.setColor(ColorRGBA.White);
-		lamp_light.setRadius(20f);
-		lamp_light.setPosition(new Vector3f(7, 1, 20));
-		app.getRootNode().addLight(lamp_light);
-		
-		//add light
-		PointLight lamp_light2 = new PointLight();
-		lamp_light2.setColor(ColorRGBA.Green);
-		lamp_light2.setRadius(20f);
-		lamp_light2.setPosition(new Vector3f(7, 10, 3));
-		//app.getRootNode().addLight(lamp_light2);
-		miniMapNode.addLight(lamp_light2);
-		
-		
-		PointLight lamp_light3 = new PointLight();
-		lamp_light3.setColor(ColorRGBA.White);
-		lamp_light3.setRadius(50f);
-		lamp_light3.setPosition(new Vector3f(7, 1, 40));
-		app.getRootNode().addLight(lamp_light3);
 		
 		AmbientLight al = new AmbientLight();
 		al.setColor(ColorRGBA.White.mult(1.3f));
@@ -203,8 +191,8 @@ public class MainAppState extends AbstractAppState {
 	public void update(float tpf) {
 		super.update(tpf);
 		Camera cam = app.getCamera();
-	    Vector3f camDir = cam.getDirection().clone().multLocal(0.2f);
-	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.11f);
+	    Vector3f camDir = cam.getDirection().clone().multLocal(0.1f);
+	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.05f);
 	    Vector3f walkDirection = new Vector3f(0, 0, 0);
 	    if (moveLeft)  { walkDirection.addLocal(camLeft); }
 	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }
@@ -213,7 +201,7 @@ public class MainAppState extends AbstractAppState {
 	    player.setWalkDirection(walkDirection);
 	    
 	    if (!overviewCam) {
-	    	app.getCamera().setLocation(player.getPhysicsLocation().addLocal(0, 0.5f, 0));
+	    	app.getCamera().setLocation(player.getPhysicsLocation().add(0, 0.5f, 0));
 	    }
 		updateMiniMap();
 	}

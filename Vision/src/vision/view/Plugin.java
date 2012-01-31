@@ -210,5 +210,11 @@ public abstract class Plugin extends AbstractAppState {
 		// TODO Auto-generated method stub
 		super.stateDetached(stateManager);
 	}
+	
+	@Override
+	public void stateAttached(AppStateManager stateManager) {
+		super.stateAttached(stateManager);
+		lastSensorHashCode = 0;
+	}
 
 }

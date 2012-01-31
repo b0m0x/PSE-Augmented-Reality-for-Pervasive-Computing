@@ -46,7 +46,7 @@ public class Model {
 
 		this.datenbank = new vision.model.Database();
 		
-		updater = new UpdateThread(this); updater.start();
+		//updater = new UpdateThread(this); updater.start();
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
 	}
@@ -260,6 +260,10 @@ public class Model {
 			createGeometry();
 		}
 		return staticGeometries;
+	}
+	
+	public List<Light> getLights() {
+		return groundplan.getLight();
 	}
 
 	private void createGeometry() {
