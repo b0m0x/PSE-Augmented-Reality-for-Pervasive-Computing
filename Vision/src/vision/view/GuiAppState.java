@@ -96,15 +96,6 @@ public class GuiAppState extends AbstractAppState  {
 		
 	}
 
-		public void hidePlugin() {
-			nifty.gotoScreen("managePlugins");
-			Element niftyElement = nifty.getCurrentScreen().findElementByName("Pluginchecbox_.*");
-			for (Plugin p : model.getPluginList()) {
-				
-			}
-			
-		}
-	
 	
 	
 }
