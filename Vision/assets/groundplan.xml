@@ -566,8 +566,8 @@
 	</wall>
 
 	<reference>
-		<x>7.0</x>
-		<y>30.0</y>
+		<x>7.0</x>  <!-- estimated! -->
+		<y>30.0</y> <!-- estimated! -->
 		<lat>49.01265562319531</lat>
 		<lon>8.424016535282135</lon>
 	</reference>
