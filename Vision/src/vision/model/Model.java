@@ -40,7 +40,7 @@ public class Model {
 	public Model(View view) throws JAXBException {
 
 		this.groundplan = new vision.model.Groundplan().load();
-		//sensor = createTestSensors();
+		sensor = createTestSensors();
 		this.view = view;
 		loadPlugins();
 
@@ -68,6 +68,9 @@ public class Model {
 	 */
 	// TODO fix
 	public List<Sensor> getTaggedSensors(String[] tags) {
+		if (sensor == null) {
+			return Collections.emptyList();
+		}
 		List<Sensor> tagged = new ArrayList<Sensor>();
 		for (Sensor s : sensor) {
 			for (String tag : tags) {
@@ -296,7 +299,7 @@ public class Model {
 		staticGeometries.add(floor);
 		staticGeometries.add(ceiling);
 	}
-/*
+
 	protected List<Sensor> createTestSensors() {
 		List<Sensor> sensors = new ArrayList<Sensor>();
 		Sensor s = new Sensor();
@@ -337,7 +340,7 @@ public class Model {
 		}
 		return sensors;
 	}
-*/
+
 	protected void close() {
 		updater.setRunning(false);
 	}
