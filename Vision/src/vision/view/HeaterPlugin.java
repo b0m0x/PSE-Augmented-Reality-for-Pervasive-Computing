@@ -141,7 +141,7 @@ public class HeaterPlugin extends Plugin {
 	 * @param s the sensor to use (position and samples will be used)
 	 */
 	private void addHeaterSpatial(Sensor s) {
-		
+		LOG.warning("Position of heater: " + s.getPosition().getX() + "; " + s.getPosition().getZ());
 		heaterSpatial.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
 				.getY(), s.getPosition().getZ()));
 		heaterSpatial.setUserData("sensorid", s.getId());

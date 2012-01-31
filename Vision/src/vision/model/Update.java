@@ -12,14 +12,10 @@ public class Update {
 	private static final Logger LOG = Logger.getLogger(Update.class.getName());
 	public Update(Model model) {
 		this.database = new Database();
-		this.jsonConverter = new JSONConverter();
+		this.jsonConverter = new JSONConverter(model);
 		this.daten = model;
 	}
 
-	public Update() {
-		this.database = new Database();
-		this.jsonConverter = new JSONConverter();
-	}
 
 	/**
 	 * @uml.property name="daten"

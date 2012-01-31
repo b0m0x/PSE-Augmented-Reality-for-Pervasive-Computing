@@ -566,16 +566,16 @@
 	</wall>
 
 	<reference>
-		<x>0.0</x>
-		<y>0.0</y>
-		<lat>8.424107</lat>
-		<lon>49.013091</lon>
+		<x>7.0</x>
+		<y>30.0</y>
+		<lat>49.01265562319531</lat>
+		<lon>8.424016535282135</lon>
 	</reference>
 	<reference>
 		<x>0.0</x>
 		<y>0.0</y>
-		<lat>8.424107</lat>
-		<lon>49.013091</lon>
+		<lat>49.01308663519554</lat>
+		<lon>8.424110412597656</lon>
 	</reference>
 	<!-- <staticGeometry>
 		<x>30.0</x>

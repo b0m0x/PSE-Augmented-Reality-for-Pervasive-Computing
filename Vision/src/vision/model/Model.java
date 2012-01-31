@@ -300,6 +300,10 @@ public class Model {
 		staticGeometries.add(floor);
 		staticGeometries.add(ceiling);
 	}
+	
+	public List<Reference> getReferencePoints() {
+		return groundplan.getReference();
+	}
 
 	protected List<Sensor> createTestSensors() {
 		List<Sensor> sensors = new ArrayList<Sensor>();

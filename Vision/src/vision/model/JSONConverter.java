@@ -24,10 +24,12 @@ public class JSONConverter {
 	private static final Logger LOG = Logger.getLogger(JSONConverter.class
 			.getName());
 
-	public JSONConverter() {
+	public JSONConverter(Model model) {
 		this.sensorList = new ArrayList<Sensor>();
+		this.model = model;
 	}
 
+	private Model model;
 	private JSONObject json;
 	private Sensor sensor;
 	private List<Sensor> sensorList;
@@ -121,7 +123,10 @@ public class JSONConverter {
 				}
 				sensor.setUpdate(Long.parseLong(lvl1.getString("updated")));
 				sensor.setDescription(lvl1.getString("description"));
-				sensor.setPosition(new Position(0, 0, 0));
+				
+				double lat = lvl1.getDouble("latitude");
+				double lon = lvl1.getDouble("longitude");
+				sensor.setPosition(getLocalCoordinates(lat, lon));
 				sensor.setId(JSONObject.getNames(jo)[sensorid]);
 
 				this.addSensorToList();
@@ -134,108 +139,24 @@ public class JSONConverter {
 		}
 
 	}
-
-	private double calcX(double lon2, double lon1, double lat2, double lat1) {
-		return (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
-	}
-
-	private double calcY(double lat2, double lat1) {
-		return (lat2 - lat1);
-	}
-
-	private double calcD(double x, double y, int R) {
-		return Math.sqrt(x * x + y * y) * R;
-	}
-
-	private double diff(double x1, double y1, double x2, double y2) {
-		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-	}
-
-	private double surface(double r1, double r2, double d) {
-		return 0.25 * Math.sqrt(Math.abs((d + r1 + r2) * (-d + r1 + r2)
-				* (d - r1 + r2) * d + r1 - r2));
-	}
-
-	public Position calcLocalPos(String lat, String lon) {
-		double latitude = Double.parseDouble(lat);
-		double longitude = Double.parseDouble(lon);
-
-		final int R = 6371;
-
-		double ref1lat = 49.013089;
-		double ref1lon = 8.4241;
-
-		double ref2lat = 49.013099;
-		double ref2lon = 8.424298;
-
-		double ref3lat = 49.012681;
-		double ref3lon = 8.424321;
-
-		double x1 = 0;
-		double y1 = 0;
-
-		double x2 = 11.83;
-		double y2 = 0;
-
-		double x3 = 11.83;
-		double y3 = 45.5;
-
-		double d1 = calcD(calcX(ref1lon, longitude, ref1lat, latitude), calcY(
-				ref1lat, latitude), R);
-
-		double d2 = calcD(calcX(ref2lon, longitude, ref2lat, latitude), calcY(
-				ref2lat, latitude), R);
-
-		double d3 = calcD(calcX(ref3lon, longitude, ref3lat, latitude), calcY(
-				ref3lat, latitude), R);
-
-		double d = diff(x1, y1, x2, y2);
-		double f = surface(d1, d2, d);
-
-		double intcp1x = 0.5 * (x1 + x2 - ((d1 * d1 - d2 * d2) * (x1 - x2) + 4
-				* (y1 - y2) * f)
-				/ (d * d));
-
-		double intcp1y = 0.5 * (y1 + y2 - ((d1 * d1 - d2 * d2) * (y1 - y2) - 4
-				* (x1 - x2) * f)
-				/ (d * d));
-
-		double intcp2x = 0.5 * (x1 + x2 - ((d1 * d1 - d2 * d2) * (x1 - x2) - 4
-				* (y1 - y2) * f)
-				/ d);
-
-		double intcp2y = 0.5 * (y1 + y2 - ((d1 * d1 - d2 * d2) * (y1 - y2) + 4
-				* (x1 - x2) * f)
-				/ (d * d));
-
-		double diff1 = diff(intcp1x, intcp1y, x3, y3);
-		double diff2 = diff(intcp2x, intcp2y, x3, y3);
-		// System.out.println(diff1);
-		// System.out.println(diff2);
-		// System.out.println(d3);
-
-		System.out.println(d1);
-		System.out.println(d2);
-		System.out.println(d3 + "\n");
-
-		System.out.println(intcp1x);
-		System.out.println(intcp1y);
-
-		System.out.println("\n" + intcp2x);
-		System.out.println(intcp2y + "\n");
-
-		Position pos;
-
-		if (Math.abs(diff1 - d3) <= 0.01) {
-			pos = new Position((float) intcp1x, (float) intcp1y, 0);
-		} else if (Math.abs(diff2 - d3) <= 0.1) {
-			pos = new Position((float) intcp2x, (float) intcp2y, 0);
-		} else {
-			System.out.println("Du hast nur müll gerechnet -.-");
-			pos = new Position(0, 0, 0);
+	
+	private Position getLocalCoordinates(double lat, double lon) {
+		if (model.getReferencePoints().size() < 2) {
+			throw new UnsupportedOperationException("Need at least 2 Reference Points");
 		}
-
-		return pos;
+		Reference ref1 = model.getReferencePoints().get(0);
+		Reference ref2 = model.getReferencePoints().get(1);
+		
+		double dLat = ref1.lat - ref2.lat;
+		double dLon = ref1.lon - ref2.lon;
+		
+		double dX = ref1.x - ref2.x;
+		double dY = ref1.y - ref2.y;
+		
+		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
+		float y = (float) ((lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon);
+		
+		return new Position(x, 0, y);
 	}
 
 	public void resetList() {
