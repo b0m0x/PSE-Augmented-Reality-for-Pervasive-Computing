@@ -85,7 +85,7 @@ public class HeaterPlugin extends Plugin {
 			LOG.warning("Added foo at " + s.getPosition().getX() + s.getPosition()
 					.getY() + s.getPosition().getZ());
 			heater.setUserData("sensorid", s.getId());
-			heaters.add(heater.clone());
+			heaters.add(heater);
 			((View)app).getRootNode().attachChild(heater);
 			view = (View)app;
 					
@@ -125,11 +125,12 @@ public class HeaterPlugin extends Plugin {
 				}
 				for (Sample sp : s.getMesswert()) {
 					if (sp.getTyp().equals("Temperatur")) {
-						final float temperature = sp.getValue(); 
+						final float temperature = sp.getValue();
 						LOG.info("Temperature for Heater with sensor id " + sid + " is " + temperature + sp.getUnit());
 						ColorRGBA col = new ColorRGBA(temperature / 50f, 0, 1f - temperature / 50f, 1);
 						final Material mat = m.clone();
 						mat.setColor("Diffuse", col);
+						mat.setColor("Ambient", col);
 						g.depthFirstTraversal(new SceneGraphVisitor() {
 							
 							@Override
@@ -139,7 +140,6 @@ public class HeaterPlugin extends Plugin {
 								
 							}
 						});
-						
 					}
 				}
 			}
