@@ -133,7 +133,7 @@ public class JSONConverter {
 
 	}
 	
-	public Position calcLocalPos() {
+	public Position calcLocalPos(double lon, double lat) {
 		return null;
 	}
 	
