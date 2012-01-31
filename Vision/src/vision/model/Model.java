@@ -261,6 +261,10 @@ public class Model {
 		}
 		return staticGeometries;
 	}
+	
+	public List<Light> getLights() {
+		return groundplan.getLight();
+	}
 
 	private void createGeometry() {
 		staticGeometries = new ArrayList<Spatial>();
