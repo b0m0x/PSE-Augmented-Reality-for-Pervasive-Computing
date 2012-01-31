@@ -65,7 +65,6 @@ public class JSONConverter {
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
 			
-
 			String content = br.readLine();
 			return content;
 		} catch (MalformedURLException e) {
