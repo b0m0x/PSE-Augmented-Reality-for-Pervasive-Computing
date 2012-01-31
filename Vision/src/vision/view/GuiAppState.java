@@ -1,6 +1,7 @@
 package vision.view;
 
 import vision.controller.Controller;
+import vision.controller.PluginController;
 import vision.model.Model;
 
 import com.jme3.app.Application;
@@ -95,7 +96,11 @@ public class GuiAppState extends AbstractAppState  {
 			
 		
 	}
-
+	
+	
+	public void pluginButtons() {
+		//for (PluginController p :)
+	}
 	
 	
 }
