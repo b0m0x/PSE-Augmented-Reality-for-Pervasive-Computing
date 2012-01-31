@@ -61,12 +61,13 @@ public class JSONConverter {
 			LOG.info("Connecting to " + Config.SERVER_URL + "...");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			LOG.info("Connection successful.");
-//			BufferedReader br = new BufferedReader(new InputStreamReader(conn
-//					.getInputStream()));
-//
-//			String content = br.readLine();
-			//return content;
-			return offlineStream();
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn
+					.getInputStream()));
+			
+
+			String content = br.readLine();
+			return content;
 		} catch (MalformedURLException e) {
 			LOG.warning("Connection Error(1). Using offlinestream instead...");
 			return offlineStream();
@@ -131,21 +132,13 @@ public class JSONConverter {
 		}
 
 	}
-
-	private Sample makeSample(String s) {
+	
+	public Position calcLocalPos() {
 		return null;
 	}
-
-	private Position makePosition(String s) {
-		return null;
-	}
-
-	private boolean makeRegistered(String s) {
-		return false;
-	}
-
-	private List<String> makeTags(String s) {
-		return null;
+	
+	public void resetList() {
+		this.sensorList = null;
 	}
 
 	public void addSensorToList() {
