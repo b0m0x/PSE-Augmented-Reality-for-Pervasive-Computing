@@ -36,6 +36,7 @@ public class WindowPlugin extends Plugin {
 	private Spatial windowclosed;
 	private Model model;
 	Logger log = Logger.getLogger(WindowPlugin.class.getName());
+	View view;
 
 	public WindowPlugin(Model model, View view) {
 		super(model, new String[] { "window" });
@@ -48,6 +49,17 @@ public class WindowPlugin extends Plugin {
 			return;
 		}
 		super.initialize(stateManager, app);
+	}
+	
+	@Override
+	public void stateDetached(AppStateManager stateManager) {
+		// TODO Auto-generated method stub
+		super.stateDetached(stateManager);
+		for (Spatial s : windows) {
+			view.getRootNode().detachChild(s);
+		}
+		view.getRootNode().detachChild(window);
+		window = null;
 	}
 
 	private void initWindows(Application app) {
@@ -79,6 +91,7 @@ public class WindowPlugin extends Plugin {
 			window.setUserData("sid", sensor.getId());
 			windows.add(window);
 			((View) app).getRootNode().attachChild(window);
+			view = (View)app;
 		}
 	}
 

@@ -1,6 +1,7 @@
 package vision.view;
 
 import vision.controller.Controller;
+import vision.controller.PluginController;
 import vision.model.Model;
 
 import com.jme3.app.Application;
@@ -12,6 +13,7 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
+import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
 import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.elements.Element;
@@ -26,7 +28,11 @@ public class GuiAppState extends AbstractAppState  {
 	private Model model;
 	private View view;
 	
-	
+	/**
+	 * Creates a new GuiAppState
+	 * @param controller the controller
+	 * @param model the model
+	 */
 	public GuiAppState(Controller controller, Model model) {
 		this.controller = controller;
 		this.model = model;
@@ -42,17 +48,24 @@ public class GuiAppState extends AbstractAppState  {
                 app.getInputManager(),
                 app.getAudioRenderer(),
                 app.getGuiViewPort());
+				
         nifty = niftyDisplay.getNifty();
 		nifty.fromXml("gui.xml", "start", controller);
 
 		//NiftyEventAnnotationProcessor.process(controller);
 		app.getGuiViewPort().addProcessor(niftyDisplay);
+		
+		pluginButtons();
+		
 
 	
 	}
 
 	private boolean loaded;
-
+	
+	/**
+	 * This Method manages the PluginsPopupMenue.
+	 */
 	public void managePluginsPopupMenu() {
 		
 		nifty.gotoScreen("managePlugins");
@@ -71,9 +84,7 @@ public class GuiAppState extends AbstractAppState  {
 			}};
 			pb.childLayoutHorizontal();
 			Element panel = pb.build(nifty, nifty.getCurrentScreen(), niftyElement);
-			
-			
-			
+				
 			
 			LabelBuilder lb= new LabelBuilder(){{
 	            alignLeft();
@@ -95,16 +106,37 @@ public class GuiAppState extends AbstractAppState  {
 			
 		
 	}
-
-		public void hidePlugin() {
-			nifty.gotoScreen("managePlugins");
-			Element niftyElement = nifty.getCurrentScreen().findElementByName("Pluginchecbox_.*");
-			for (Plugin p : model.getPluginList()) {
-				
-			}
-			
-		}
 	
+	private boolean buttonloaded;
+	/**
+	 * Shows the Buttons of the several Plugins.
+	 */
+	public void pluginButtons() {
+		Element niftyElement = nifty.getCurrentScreen().findElementByName("panel_bottom_right");
+		if (buttonloaded == false) {
+			for (PluginController p : model.getPluginControllerList()) {
+				 java.util.Map<String, String> m;
+				
+				m = p.createButtons();
+				
+				for( String id : m.keySet()) {
+					String text = m.get(id);
+					ButtonBuilder bb = new ButtonBuilder("ButtonOf_"+p.getClass().getName()+id, text) {{
+						 	alignCenter();
+				            valignCenter();
+				            width("100%");
+				            height("25%");
+				            
+					}};;
+					//bb.text(m.get(id));
+					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);
+					buttonloaded = true;
+					
+				}
+			}	
+		}
+		
+	}
 	
 	
 }

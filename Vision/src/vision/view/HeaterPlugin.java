@@ -19,6 +19,7 @@ import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
@@ -73,22 +74,17 @@ public class HeaterPlugin extends Plugin {
 				}
 			}
 			
-			RigidBodyControl r = new RigidBodyControl(new BoxCollisionShape(new Vector3f(0.2f, 0.5f, 0.5f)), 0);
-			r.setKinematic(false);
 			
-			heater.addControl(r);
 			
-			r.setPhysicsLocation(new Vector3f(s.getPosition().getX(), s.getPosition()
+			heater.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
 					.getY(), s.getPosition().getZ()));
 			
 			LOG.warning("Added foo at " + s.getPosition().getX() + s.getPosition()
 					.getY() + s.getPosition().getZ());
 			heater.setUserData("sensorid", s.getId());
-			heaters.add(heater.clone());
+			heaters.add(heater);
 			((View)app).getRootNode().attachChild(heater);
 			view = (View)app;
-					
-			app.getStateManager().getState(BulletAppState.class).getPhysicsSpace().add(r);
 		}
 	}
 	
@@ -110,6 +106,7 @@ public class HeaterPlugin extends Plugin {
 		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
 		
+		
 		m.setColor("Ambient",  ColorRGBA.Gray);
 		m.setColor("Diffuse",  ColorRGBA.Gray);
 		m.setColor("Specular", ColorRGBA.White);
@@ -123,18 +120,21 @@ public class HeaterPlugin extends Plugin {
 				}
 				for (Sample sp : s.getMesswert()) {
 					if (sp.getTyp().equals("Temperatur")) {
-						final float temperature = sp.getValue(); 
+						final float temperature = sp.getValue();
 						LOG.info("Temperature for Heater with sensor id " + sid + " is " + temperature + sp.getUnit());
+						ColorRGBA col = new ColorRGBA(temperature / 50f, 0, 1f - temperature / 50f, 1);
+						final Material mat = m.clone();
+						mat.setColor("Diffuse", col);
+						mat.setColor("Ambient", col);
 						g.depthFirstTraversal(new SceneGraphVisitor() {
 							
 							@Override
 							public void visit(Spatial s) {
 								if (s instanceof Geometry)
-									((Geometry)s ).setMaterial(m);
+									((Geometry)s ).setMaterial(mat);
 								
 							}
 						});
-						
 					}
 				}
 			}

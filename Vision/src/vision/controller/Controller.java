@@ -39,6 +39,11 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	private Screen screen;
 	private final static Logger LOG = Logger.getLogger(Controller.class.getName());
 	
+	/**
+	 * Constructs a new Controller.
+	 * @param view the view
+	 * @param model the model
+	 */
 	public Controller(View view, Model model) {
 		this.view = view;
 		this.model = model;
@@ -155,8 +160,14 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 * pluginButton gets called by nifty if a button of a plugin was pressed and
 	 * forwards it to the respective plugin controller
 	 */
-	//@NiftyEventSubscriber(pattern = ".*button.*")
-	public void pluginButton(String id, Object o) {
+	@NiftyEventSubscriber(pattern = "ButtonOf_.*")
+	public void pluginButton(String id, ButtonClickedEvent bce) {
+		String s = id.substring(9);
+		for (PluginController p : model.getPluginControllerList()) {
+			if (s.startsWith(p.getClass().getName())) {
+				p.buttonPressed(id);
+			}
+		}
 
 	}
 

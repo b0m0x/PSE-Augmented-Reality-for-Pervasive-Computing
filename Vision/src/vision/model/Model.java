@@ -25,6 +25,7 @@ import de.lessvoid.nifty.builder.HoverEffectBuilder;
 import java.util.Date;
 
 import vision.Config;
+import vision.controller.PluginController;
 import vision.view.Plugin;
 import vision.view.View;
 
@@ -45,13 +46,14 @@ public class Model {
 
 		this.datenbank = new vision.model.Database();
 		
-		updater = new UpdateThread(this); updater.start();
+		//updater = new UpdateThread(this); updater.start();
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
 	}
 
 	private void loadPlugins() {
 		pluginList = pluginLoader.loadPlugins(this, view);
+		pluginControllerList = pluginLoader.getController();
 	}
 
 	/**
@@ -147,7 +149,9 @@ public class Model {
 	/**
 	 * @uml.property name="pluginList"
 	 */
-	private List<Plugin> pluginList = Collections.EMPTY_LIST;
+	private List<Plugin> pluginList = Collections.emptyList();
+	
+	private List<PluginController> pluginControllerList = Collections.emptyList();
 
 	/**
 	 * Getter of the property <tt>pluginList</tt>
@@ -159,6 +163,9 @@ public class Model {
 		return pluginList;
 	}
 
+	public List<PluginController> getPluginControllerList() {
+		return pluginControllerList;
+	}
 	/**
 	 * Setter of the property <tt>pluginList</tt>
 	 * 
@@ -253,6 +260,10 @@ public class Model {
 			createGeometry();
 		}
 		return staticGeometries;
+	}
+	
+	public List<Light> getLights() {
+		return groundplan.getLight();
 	}
 
 	private void createGeometry() {
