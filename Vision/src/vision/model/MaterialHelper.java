@@ -8,7 +8,9 @@ import com.jme3.texture.Texture.WrapMode;
 
 public class MaterialHelper {
 	
-	Material wallMaterial;
+	private Material wallMaterial;
+	private Material heaterMaterial;
+	
 	static MaterialHelper instance;
 	
 	private MaterialHelper() {
@@ -43,5 +45,27 @@ public class MaterialHelper {
 			createWallMaterial(am);
 		}
 		return wallMaterial;
+	}
+	
+	public Material getHeaterMaterial(AssetManager am, float temperature) {
+		if (heaterMaterial == null) {
+			createHeaterMaterial(am);
+		}
+		ColorRGBA col = new ColorRGBA(temperature / 50f, 0, 1f - temperature / 50f, 1f);
+		Material m = heaterMaterial.clone();
+		m.setColor("Diffuse", col);
+		m.setColor("Ambient", col);
+		return m;
+	}
+
+	private void createHeaterMaterial(AssetManager am) {
+		heaterMaterial = new Material(am, "Common/MatDefs/Light/Lighting.j3md");
+		heaterMaterial.setBoolean("UseMaterialColors", true);
+				
+		heaterMaterial.setColor("Ambient",  ColorRGBA.Gray);
+		heaterMaterial.setColor("Diffuse",  ColorRGBA.Gray);
+		heaterMaterial.setColor("Specular", ColorRGBA.White);
+		heaterMaterial.setFloat("Shininess", 3);
+		
 	}
 }

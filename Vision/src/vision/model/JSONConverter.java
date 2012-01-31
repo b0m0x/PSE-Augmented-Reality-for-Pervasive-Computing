@@ -63,6 +63,7 @@ public class JSONConverter {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			LOG.info("Connection successful.");
 			conn.setReadTimeout(500);
+			conn.setConnectTimeout(1000);
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
 

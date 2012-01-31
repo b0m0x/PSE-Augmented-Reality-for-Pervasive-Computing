@@ -40,14 +40,15 @@ public class Model {
 	public Model(View view) throws JAXBException {
 
 		this.groundplan = new vision.model.Groundplan().load();
-		sensor = createTestSensors();
+		//sensor = createTestSensors();
+		sensor = Collections.emptyList();
 		this.view = view;
 		loadPlugins();
 
 		this.datenbank = new vision.model.Database();
 		
 		updater = new UpdateThread(this); updater.start();
-		sensor = Collections.emptyList();
+		
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
 	}
@@ -341,7 +342,7 @@ public class Model {
 		return sensors;
 	}
 
-	protected void close() {
+	public void close() {
 		updater.setRunning(false);
 	}
 }

@@ -247,4 +247,10 @@ public class View extends SimpleApplication {
         }
 	}
 	
+	@Override
+	public void stop() {
+		daten.close();
+		super.stop();
+	}
+	
 }

@@ -119,7 +119,7 @@ public class Update {
 		List<Sensor> sensorlist = new ArrayList<Sensor>();
 		sensorlist = jsonConverter.getSensorList();
 
-		// daten.setSensor(sensorlist);
+		daten.setSensor(sensorlist);
 		int samplecounter = 1;
 
 		for (int i = 0; i < sensorlist.size(); i++) {
