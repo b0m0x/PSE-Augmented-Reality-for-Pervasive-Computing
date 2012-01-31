@@ -680,7 +680,7 @@
 		<lat>8.424107</lat>
 		<lon>49.013091</lon>
 	</reference>
-	<staticGeometry>
+<!-- 	<staticGeometry>
 		<x>30.0</x>
 		<y>20.0</y>
 		<angle>3.1415</angle>
@@ -691,7 +691,7 @@
 		<y>70.0</y>
 		<angle>7.1415</angle>
 		<path>Models/meinObjeckt.j3o</path>
-	</staticGeometry>
+	</staticGeometry> -->
 	<light>
 		<number>1</number>
         	<positionX>2.422332333316</positionX>

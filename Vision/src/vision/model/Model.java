@@ -40,13 +40,14 @@ public class Model {
 	public Model(View view) throws JAXBException {
 
 		this.groundplan = new vision.model.Groundplan().load();
-		sensor = createTestSensors();
+		//sensor = createTestSensors();
 		this.view = view;
 		loadPlugins();
 
 		this.datenbank = new vision.model.Database();
 		
-		//updater = new UpdateThread(this); updater.start();
+		updater = new UpdateThread(this); updater.start();
+		sensor = Collections.emptyList();
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
 	}
@@ -295,13 +296,13 @@ public class Model {
 		staticGeometries.add(floor);
 		staticGeometries.add(ceiling);
 	}
-
+/*
 	protected List<Sensor> createTestSensors() {
 		List<Sensor> sensors = new ArrayList<Sensor>();
 		Sensor s = new Sensor();
 		s.setId("testSensor");
 		s.addToTags("heater");
-		s.addToSamples(new Sample("Temperatur", "°C", 25.0f, System
+		s.addToSamples(new Sample("Temperatur", "°C", 15.0f, System
 				.currentTimeMillis()));
 		s.setPosition(new Position(2, -0.5f, 1));
 		sensors.add(s);
@@ -336,7 +337,7 @@ public class Model {
 		}
 		return sensors;
 	}
-
+*/
 	protected void close() {
 		updater.setRunning(false);
 	}
