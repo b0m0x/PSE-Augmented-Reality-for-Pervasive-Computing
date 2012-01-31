@@ -78,6 +78,7 @@ public class JSONConverter {
 	}
 
 	public void convert() {
+		this.resetList();
 		String stream = getJSONStream();
 		JSONObject jo;
 
@@ -137,7 +138,7 @@ public class JSONConverter {
 	}
 	
 	public void resetList() {
-		this.sensorList = null;
+		this.sensorList.clear();
 	}
 
 	public void addSensorToList() {
