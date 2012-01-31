@@ -568,8 +568,20 @@
 	<reference>
 		<x>0.0</x>
 		<y>0.0</y>
-		<lat>8.424107</lat>
-		<lon>49.013091</lon>
+		<lat>49.013091</lat>
+		<lon>8.424107</lon>
+	</reference>
+		<reference>
+		<x>0.0</x>
+		<y>0.0</y>
+		<lat>49.49.013099</lat>
+		<lon>8.424298</lon>
+	</reference>
+		<reference>
+		<x>0.0</x>
+		<y>0.0</y>
+		<lat>49.012681</lat>
+		<lon>8.4241</lon>
 	</reference>
 	<staticGeometry>
 		<x>30.0</x>
