@@ -606,13 +606,13 @@
 	</light>
 	
 	<light>
-		<number>3</number>
+		<number>4</number>
         	<positionX>-7.422332333316</positionX>
 			<positionY>30.374903487847</positionY>
 	</light>
 	
 	<light>
-		<number>4</number>
+		<number>5</number>
         	<positionX>7.422332333316</positionX>
 			<positionY>30.374903487847</positionY>
 	</light>

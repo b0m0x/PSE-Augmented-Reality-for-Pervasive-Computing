@@ -268,18 +268,7 @@ public class Model {
 
 	private void createGeometry() {
 		staticGeometries = new ArrayList<Spatial>();
-		Material m = new Material(view.getAssetManager(),
-				"Common/MatDefs/Light/Lighting.j3md");
-		m.setBoolean("UseMaterialColors", true);
-		m.setColor("Ambient", ColorRGBA.Gray);
-		m.setColor("Diffuse", ColorRGBA.Gray);
-		m.setColor("Specular", ColorRGBA.White);
-
-		Texture tex = view.getAssetManager().loadTexture(
-				"Texture/walltexture.jpg");
-		tex.setWrap(WrapMode.Repeat);
-		m.setTexture("DiffuseMap", tex);
-		m.setFloat("Shininess", 3);
+		Material m = MaterialHelper.getInstance().getWallMaterial(view.getAssetManager());
 		
 		CustomMeshCreator meshCreator = new CustomMeshCreator();
 	
@@ -288,6 +277,14 @@ public class Model {
 			g.setMaterial(m);
 			staticGeometries.add(g);
 		}
+		
+		for (StaticGeometry sg : groundplan.getStaticGeometry()) {
+			Spatial geo = view.getAssetManager().loadModel(sg.getPath());
+			geo.rotate(sg.getAngle(), 0, 0);
+			geo.setLocalTranslation(sg.getX(), 0, sg.getY());
+			staticGeometries.add(geo);
+		}
+		
 		//add hardcoded floor
 		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(0, -1.7f, 0), new Vector3f(20f, 0.1f, 50f));
 		floor.setMaterial(m);
