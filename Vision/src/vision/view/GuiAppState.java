@@ -1,17 +1,20 @@
 package vision.view;
 
 import vision.controller.Controller;
+import vision.controller.PluginController;
 import vision.model.Model;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
+import com.sun.xml.internal.xsom.impl.scd.Iterators.Map;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
 import de.lessvoid.nifty.builder.PanelBuilder;
 import de.lessvoid.nifty.controls.ButtonClickedEvent;
+import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
 import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
 import de.lessvoid.nifty.elements.Element;
@@ -95,7 +98,23 @@ public class GuiAppState extends AbstractAppState  {
 			
 		
 	}
-
+	
+	//private boolean buttonloaded;
+//	public void pluginButtons() {
+//		Element niftyElement = nifty.getCurrentScreen().findElementByName("panel_bottom_right");
+//		if (buttonloaded == false) {
+//			for (PluginController p : model.getPluginControllerList()) {
+//				java.util.Map<String, String> m;
+//				m = p.createButtons();
+//				for(String id : m.keySet()) {
+//					ButtonBuilder bb = new ButtonBuilder(id);
+//					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);
+//					buttonloaded = true;
+//				}
+//			}	
+//		}
+//		
+//	}
 	
 	
 }
