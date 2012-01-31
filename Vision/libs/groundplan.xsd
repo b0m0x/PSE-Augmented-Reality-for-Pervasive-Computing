@@ -6,6 +6,7 @@
         <xs:element maxOccurs="unbounded" ref="wall"/>
         <xs:element maxOccurs="unbounded" ref="reference"/>
         <xs:element maxOccurs="unbounded" ref="staticGeometry"/>
+        <xs:element maxOccurs="unbounded" ref="light"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -66,6 +67,18 @@
   </xs:element>
   <xs:element name="angle" type="xs:float"/>
   <xs:element name="path" type="xs:string"/>
+  <xs:element name="light">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="number"/>
+        <xs:element ref="positionX"/>
+        <xs:element ref="positionY"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="number" type="xs:integer"/>
+  <xs:element name="positionX" type="xs:float"/>
+  <xs:element name="positionY" type="xs:float"/>
   <xs:element name="positionX1" type="xs:float"/>
   <xs:element name="positionY1" type="xs:float"/>
   <xs:element name="positionX2" type="xs:float"/>
