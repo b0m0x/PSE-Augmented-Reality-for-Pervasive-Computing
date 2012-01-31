@@ -63,6 +63,7 @@ public class JSONConverter {
 			LOG.info("Connection successful.");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
+			
 
 			String content = br.readLine();
 			return content;
@@ -130,21 +131,13 @@ public class JSONConverter {
 		}
 
 	}
-
-	private Sample makeSample(String s) {
+	
+	public Position calcLocalPos() {
 		return null;
 	}
-
-	private Position makePosition(String s) {
-		return null;
-	}
-
-	private boolean makeRegistered(String s) {
-		return false;
-	}
-
-	private List<String> makeTags(String s) {
-		return null;
+	
+	public void resetList() {
+		this.sensorList = null;
 	}
 
 	public void addSensorToList() {

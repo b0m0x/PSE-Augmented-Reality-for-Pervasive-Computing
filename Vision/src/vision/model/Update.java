@@ -120,8 +120,6 @@ public class Update {
 		sensorlist = jsonConverter.getSensorList();
 
 		// daten.setSensor(sensorlist);
-
-		int sensorcounter = 1;
 		int samplecounter = 1;
 
 		for (int i = 0; i < sensorlist.size(); i++) {
@@ -135,6 +133,7 @@ public class Update {
 		}
 		LOG.info("Sensors stored: " + (sensorlist.size() + 1)
 				+ "; Samples stored: " + samplecounter);
+		jsonConverter.resetList();
 	}
 
 	/**
