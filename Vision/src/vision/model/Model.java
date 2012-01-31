@@ -307,7 +307,7 @@ public class Model {
 				if (h.getPositionY1() > 0) {
 					Sensor sensor = new Sensor();
 					sensor.addToTags("window");
-					sensor.addToSamples(new Sample("window", "bool", 0.0f,
+					sensor.addToSamples(new Sample("window", "bool", 1.0f,
 							System.currentTimeMillis()));
 					HoleAdapter holeAdapter = new HoleAdapter(h);
 					Vector2f holevec2 = holeAdapter.getPosition();

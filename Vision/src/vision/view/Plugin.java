@@ -199,5 +199,11 @@ public abstract class Plugin extends AbstractAppState {
 	public void setPluginController(PluginController pluginController) {
 		this.pluginController = pluginController;
 	}
+	
+	@Override
+	public void stateDetached(AppStateManager stateManager) {
+		// TODO Auto-generated method stub
+		super.stateDetached(stateManager);
+	}
 
 }

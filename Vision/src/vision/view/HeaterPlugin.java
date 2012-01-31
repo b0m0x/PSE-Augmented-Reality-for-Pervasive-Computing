@@ -36,6 +36,7 @@ public class HeaterPlugin extends Plugin {
 	private Spatial heater;
 	private final Model model;
 	private static final Logger LOG = Logger.getLogger(HeaterPlugin.class.getName());
+	private View view;
 
 	/**
 	 * 
@@ -48,7 +49,6 @@ public class HeaterPlugin extends Plugin {
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);		
-		
 	}
 	
 	/**
@@ -86,10 +86,24 @@ public class HeaterPlugin extends Plugin {
 			heater.setUserData("sensorid", s.getId());
 			heaters.add(heater.clone());
 			((View)app).getRootNode().attachChild(heater);
-			
+			view = (View)app;
+					
 			app.getStateManager().getState(BulletAppState.class).getPhysicsSpace().add(r);
 		}
 	}
+	
+	@Override
+	public void stateDetached(AppStateManager stateManager) {
+		// TODO Auto-generated method stub
+		super.stateDetached(stateManager);
+		for (Spatial s : heaters) {
+			view.getRootNode().detachChild(s);
+		}
+		view.getRootNode().detachChild(heater);
+		heater = null;
+	}
+	
+	
 
 	private void updateHeaters() {
 		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
