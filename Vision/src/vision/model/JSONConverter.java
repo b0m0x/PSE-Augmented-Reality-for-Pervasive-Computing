@@ -61,11 +61,12 @@ public class JSONConverter {
 			LOG.info("Connecting to " + Config.SERVER_URL + "...");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			LOG.info("Connection successful.");
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn
-					.getInputStream()));
-
-			String content = br.readLine();
-			return content;
+//			BufferedReader br = new BufferedReader(new InputStreamReader(conn
+//					.getInputStream()));
+//
+//			String content = br.readLine();
+			//return content;
+			return offlineStream();
 		} catch (MalformedURLException e) {
 			LOG.warning("Connection Error(1). Using offlinestream instead...");
 			return offlineStream();

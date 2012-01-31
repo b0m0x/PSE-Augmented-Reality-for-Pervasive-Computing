@@ -44,10 +44,8 @@ public class Model {
 		loadPlugins();
 
 		this.datenbank = new vision.model.Database();
-		/*
-		 * updater = new UpdateThread(this); updater.start();
-		 */
-
+		
+		updater = new UpdateThread(this); updater.start();
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
 	}

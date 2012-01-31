@@ -106,6 +106,7 @@ public class HeaterPlugin extends Plugin {
 	
 
 	private void updateHeaters() {
+		LOG.info("Sensor state changed. Updating heater Objects.");
 		final Material m = new Material(getApp().getAssetManager(), "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
 		
@@ -123,6 +124,7 @@ public class HeaterPlugin extends Plugin {
 				for (Sample sp : s.getMesswert()) {
 					if (sp.getTyp().equals("Temperatur")) {
 						final float temperature = sp.getValue(); 
+						LOG.info("Temperature for Heater with sensor id " + sid + " is " + temperature + sp.getUnit());
 						g.depthFirstTraversal(new SceneGraphVisitor() {
 							
 							@Override
