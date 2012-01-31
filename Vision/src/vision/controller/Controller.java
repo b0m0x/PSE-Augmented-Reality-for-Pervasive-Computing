@@ -37,6 +37,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	
 	private Nifty nifty;
 	private Screen screen;
+	private final static Logger LOG = Logger.getLogger(Controller.class.getName());
 	
 	public Controller(View view, Model model) {
 		this.view = view;
@@ -236,7 +237,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 * @param id
 	 *            the id of the checkbox that was pressed
 	 */
-	//@NiftyEventSubscriber(pattern = "Pluginchecbox_.*")
+	@NiftyEventSubscriber(pattern = "Pluginchecbox_.*")
 	public void plugincheckboxPressed(String id, CheckBoxStateChangedEvent cbsce) {
 			String s = id.substring(14);
 			for(Plugin p : model.getPluginList()) {
