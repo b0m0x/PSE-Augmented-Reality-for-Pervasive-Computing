@@ -39,6 +39,11 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	private Screen screen;
 	private final static Logger LOG = Logger.getLogger(Controller.class.getName());
 	
+	/**
+	 * Constructs a new Controller.
+	 * @param view the view
+	 * @param model the model
+	 */
 	public Controller(View view, Model model) {
 		this.view = view;
 		this.model = model;

@@ -28,7 +28,11 @@ public class GuiAppState extends AbstractAppState  {
 	private Model model;
 	private View view;
 	
-	
+	/**
+	 * Creates a new GuiAppState
+	 * @param controller the controller
+	 * @param model the model
+	 */
 	public GuiAppState(Controller controller, Model model) {
 		this.controller = controller;
 		this.model = model;
@@ -58,7 +62,10 @@ public class GuiAppState extends AbstractAppState  {
 	}
 
 	private boolean loaded;
-
+	
+	/**
+	 * This Method manages the PluginsPopupMenue.
+	 */
 	public void managePluginsPopupMenu() {
 		
 		nifty.gotoScreen("managePlugins");
@@ -77,9 +84,7 @@ public class GuiAppState extends AbstractAppState  {
 			}};
 			pb.childLayoutHorizontal();
 			Element panel = pb.build(nifty, nifty.getCurrentScreen(), niftyElement);
-			
-			
-			
+				
 			
 			LabelBuilder lb= new LabelBuilder(){{
 	            alignLeft();
@@ -103,6 +108,9 @@ public class GuiAppState extends AbstractAppState  {
 	}
 	
 	private boolean buttonloaded;
+	/**
+	 * Shows the Buttons of the several Plugins.
+	 */
 	public void pluginButtons() {
 		Element niftyElement = nifty.getCurrentScreen().findElementByName("panel_bottom_right");
 		if (buttonloaded == false) {
