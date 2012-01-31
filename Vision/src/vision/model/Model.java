@@ -306,7 +306,7 @@ public class Model {
 		Sensor s = new Sensor();
 		s.setId("testSensor");
 		s.addToTags("heater");
-		s.addToSamples(new Sample("Temperatur", "°C", 15.0f, System
+		s.addToSamples(new Sample("temperature", "°C", 15.0f, System
 				.currentTimeMillis()));
 		s.setPosition(new Position(2, -0.5f, 1));
 		sensors.add(s);

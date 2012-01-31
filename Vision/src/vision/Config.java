@@ -23,5 +23,5 @@ public class Config {
 	
 	public static final String GROUNDPLAN_PATH = "assets/groundplan.xml";
 	
-	public static final Level LOG_LEVEL = Level.INFO;
+	public static final Level LOG_LEVEL = Level.WARNING;
 }

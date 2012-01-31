@@ -77,8 +77,6 @@ public class HeaterPlugin extends Plugin {
 		
 		for (Sensor s : getSensors()) {
 			
-			LOG.warning("Added foo at " + s.getPosition().getX() + s.getPosition()
-					.getY() + s.getPosition().getZ());
 			addHeaterSpatial(s);
 			
 		}
@@ -101,40 +99,40 @@ public class HeaterPlugin extends Plugin {
 
 	private void updateHeaters() {
 		LOG.info("Sensor state changed. Updating heater Objects.");
-		
+
 		if (getSensors().size() > heaters.size()) {
 			for (Sensor s : getSensors()) {
-				addHeaterSpatial(s);
+				if (!heaters.containsKey(s.getId())) {
+					addHeaterSpatial(s);
+				}
 			}
 		}
-		
-		for (Spatial g : heaters.values()) {
-			String sid = g.getUserData("sensorid");
-			for (Sensor s : getSensors()) {
-				if (!s.getId().equals(sid)) {
-					continue;
-				}
-				for (Sample sp : s.getMesswert()) {
-					if (sp.getTyp().equals("Temperatur")) {
-						final float temperature = sp.getValue();
 
-						final Material m = MaterialHelper.getInstance().getHeaterMaterial(getApp().getAssetManager(), temperature);
-						LOG.info("Temperature for Heater with sensor id " + sid + " is " + temperature + sp.getUnit());
-						
-						g.depthFirstTraversal(new SceneGraphVisitor() {
-							
-							@Override
-							public void visit(Spatial s) {
-								if (s instanceof Geometry) {
-									((Geometry)s ).setMaterial(m);
-									LOG.info("Setting a color");
+		for (Sensor s : getSensors()) {
+			for (Sample sp : s.getMesswert()) {
+				if (sp.getTyp().equals("temperature")) {
+					final float temperature = sp.getValue();
+
+					final Material m = MaterialHelper.getInstance()
+							.getHeaterMaterial(getApp().getAssetManager(),
+									temperature);
+					LOG.info("Temperature for Heater with sensor id "
+							+ s.getId() + " is " + temperature + sp.getUnit());
+
+					heaters.get(s.getId()).depthFirstTraversal(
+							new SceneGraphVisitor() {
+
+								@Override
+								public void visit(Spatial s) {
+									if (s instanceof Geometry) {
+										((Geometry) s).setMaterial(m);
+										LOG.info("Setting a color");
+									}
 								}
-								
-							}
-						});
-					}
+							});
 				}
 			}
+
 		}
 	}
 
@@ -143,6 +141,7 @@ public class HeaterPlugin extends Plugin {
 	 * @param s the sensor to use (position and samples will be used)
 	 */
 	private void addHeaterSpatial(Sensor s) {
+		
 		heaterSpatial.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
 				.getY(), s.getPosition().getZ()));
 		heaterSpatial.setUserData("sensorid", s.getId());
