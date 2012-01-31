@@ -74,12 +74,9 @@ public class HeaterPlugin extends Plugin {
 				}
 			}
 			
-			RigidBodyControl r = new RigidBodyControl(new BoxCollisionShape(new Vector3f(0.2f, 0.5f, 0.5f)), 0);
-			r.setKinematic(false);
 			
-			heater.addControl(r);
 			
-			r.setPhysicsLocation(new Vector3f(s.getPosition().getX(), s.getPosition()
+			heater.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
 					.getY(), s.getPosition().getZ()));
 			
 			LOG.warning("Added foo at " + s.getPosition().getX() + s.getPosition()
@@ -88,8 +85,6 @@ public class HeaterPlugin extends Plugin {
 			heaters.add(heater);
 			((View)app).getRootNode().attachChild(heater);
 			view = (View)app;
-					
-			app.getStateManager().getState(BulletAppState.class).getPhysicsSpace().add(r);
 		}
 	}
 	
