@@ -13,13 +13,16 @@ import vision.Config;
 public class UpdateThread extends Thread {
     private static final Logger LOG = Logger.getLogger(UpdateThread.class.getName());
 	protected boolean running;
+	private Model model;
 
 	public UpdateThread(Model model) {
-		update = new Update(model);
 		running = true;
+		this.model = model;
 	}
 
 	public void run() {
+
+		update = new Update(model);
 		update.getDatabase().connect();
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {

@@ -45,11 +45,15 @@ public class GuiAppState extends AbstractAppState  {
                 app.getInputManager(),
                 app.getAudioRenderer(),
                 app.getGuiViewPort());
+				
         nifty = niftyDisplay.getNifty();
 		nifty.fromXml("gui.xml", "start", controller);
 
 		//NiftyEventAnnotationProcessor.process(controller);
 		app.getGuiViewPort().addProcessor(niftyDisplay);
+		
+		pluginButtons();
+		
 
 	
 	}
@@ -99,22 +103,33 @@ public class GuiAppState extends AbstractAppState  {
 		
 	}
 	
-	//private boolean buttonloaded;
-//	public void pluginButtons() {
-//		Element niftyElement = nifty.getCurrentScreen().findElementByName("panel_bottom_right");
-//		if (buttonloaded == false) {
-//			for (PluginController p : model.getPluginControllerList()) {
-//				java.util.Map<String, String> m;
-//				m = p.createButtons();
-//				for(String id : m.keySet()) {
-//					ButtonBuilder bb = new ButtonBuilder(id);
-//					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);
-//					buttonloaded = true;
-//				}
-//			}	
-//		}
-//		
-//	}
+	private boolean buttonloaded;
+	public void pluginButtons() {
+		Element niftyElement = nifty.getCurrentScreen().findElementByName("panel_bottom_right");
+		if (buttonloaded == false) {
+			for (PluginController p : model.getPluginControllerList()) {
+				 java.util.Map<String, String> m;
+				
+				m = p.createButtons();
+				
+				for( String id : m.keySet()) {
+					String text = m.get(id);
+					ButtonBuilder bb = new ButtonBuilder("ButtonOf_"+p.getClass().getName()+id, text) {{
+						 	alignCenter();
+				            valignCenter();
+				            width("100%");
+				            height("25%");
+				            
+					}};;
+					//bb.text(m.get(id));
+					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);
+					buttonloaded = true;
+					
+				}
+			}	
+		}
+		
+	}
 	
 	
 }
