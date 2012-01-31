@@ -92,8 +92,8 @@ public abstract class Plugin extends AbstractAppState {
 			boolean changed);
 
 	private void updateSensors() {
-		ArrayList<Sensor> sensors = new ArrayList<Sensor>();
-		for (Sensor s : daten.getSensor()) {
+		List<Sensor> sensors = new ArrayList<Sensor>();
+		/*for (Sensor s : daten.getSensor()) {
 			for (int j = 0; j < tags.length; j++) {
 				for (int i = 0; i < s.getTags().size(); i++) {
 					if (getTag(j).equals(s.getTags().get(i))) {
@@ -102,7 +102,8 @@ public abstract class Plugin extends AbstractAppState {
 					}
 				}
 			}
-		}
+		}*/
+		sensors = daten.getTaggedSensors(tags);
 		setSensors(sensors);
 		lastSensorHashCode = daten.getSensor().hashCode();
 	}
