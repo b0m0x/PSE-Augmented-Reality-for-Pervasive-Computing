@@ -235,18 +235,21 @@ public class Database {
 		return tags;
 	}
 
-	public void connect() {
+	public synchronized void connect() {
 		try {
-			Class.forName("org.h2.Driver");
+			//Class.forName("org.h2.Driver");
+			try {
+				wait(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			conn = DriverManager.getConnection("jdbc:h2:database/db", "user",
 					"pw");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	}
 
 	public void disconnect() {

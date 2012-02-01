@@ -36,7 +36,7 @@ public class UpdateThread extends Thread {
 					timer.cancel();
 				}
 			}
-		}, 0, Config.UPDATE_INTERVAL);
+		}, 5000, Config.UPDATE_INTERVAL);
 
 	}
 

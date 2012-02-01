@@ -38,7 +38,9 @@ public class GuiAppState extends AbstractAppState  {
 		this.model = model;
 	}
 
-	
+	/**
+	 * 
+	 */
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		// TODO Auto-generated method stub
