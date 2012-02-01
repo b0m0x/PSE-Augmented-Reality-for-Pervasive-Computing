@@ -1,12 +1,15 @@
 package vision.model.test;
 
 
+import javax.xml.bind.JAXBException;
+
 import vision.model.JSONConverter;
+import vision.model.Model;
+import vision.view.View;
 
 import junit.framework.TestCase;
 
 public class JSONConverterTest extends TestCase {
-	public JSONConverter json;
 
 	// public void testGetUrl() throws JSONException {
 	// json = new JSONConverter();

@@ -147,22 +147,25 @@ public class JSONConverter {
 		Reference ref1 = model.getReferencePoints().get(0);
 		Reference ref2 = model.getReferencePoints().get(1);
 		
-		double dLat = ref1.lat - ref2.lat;
-		double dLon = ref1.lon - ref2.lon;
+		double dLat = ref2.lat - ref1.lat;
+		double dLon = ref2.lon - ref1.lon;
 		
 //		double dLat = 49.01308663519554f - 49.01265562319531f;
 //		double dLon = 8.424110412597656f - 8.424016535282135f;
 //		
-		double dX = ref1.x - ref2.x;
-		double dY = ref1.y - ref2.y;
+		double dX = ref2.x - ref1.x;
+		double dY = ref2.y - ref1.y;
+
+		float x = (float) (((float)lat - ref1.lat) * dX / dLat + ((float)lon - ref1.lon) * dX / dLon);
+//		float y = -(float) (((float)lat - ref1.lat) * dY / dLat + ((float)lon - ref1.lon) * dY / dLon);
 		
-		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
-		float y = (float) ((lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon);
+		//double x = (float) (lon - ref1.lon) * dX / dLon;
+		double y = (lat - ref1.lat) * dY / dLat;// + (lon - ref1.lon) * dY / dLon;
 		
 //		float x = (float) ((lat - 49.01308663519554f) * dX / dLat + (lon - 8.424110412597656f) * dX / dLon);
 //		float y = (float) ((lat - 49.01308663519554f) * dY / dLat + (lon - 8.424110412597656f) * dY / dLon);
 		
-		return new Position(x, 0, y);
+		return new Position((float) x, 0, (float) y);
 	}
 
 	public void resetList() {
