@@ -150,11 +150,17 @@ public class JSONConverter {
 		double dLat = ref1.lat - ref2.lat;
 		double dLon = ref1.lon - ref2.lon;
 		
+//		double dLat = 49.01308663519554f - 49.01265562319531f;
+//		double dLon = 8.424110412597656f - 8.424016535282135f;
+//		
 		double dX = ref1.x - ref2.x;
 		double dY = ref1.y - ref2.y;
 		
-		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
-		float y = (float) ((lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon);
+//		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
+//		float y = (float) ((lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon);
+		
+		float x = (float) ((lat - ref1.lat) * dLat / dX + (lon - ref1.lon) * dLon / dX);
+		float y = (float) ((lat - ref1.lat) * dLat / dY + (lon - ref1.lon) * dLon / dY);
 		
 		return new Position(x, 0, y);
 	}

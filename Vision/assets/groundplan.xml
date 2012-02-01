@@ -564,19 +564,19 @@
 		<height>3.5</height>
 		<wide>0.1</wide>
 	</wall>
-
-	<reference>
-		<x>7.0</x>  <!-- estimated! -->
-		<y>30.0</y> <!-- estimated! -->
-		<lat>49.01265562319531</lat>
-		<lon>8.424016535282135</lon>
-	</reference>
 	<reference>
 		<x>0.0</x>
 		<y>0.0</y>
 		<lat>49.01308663519554</lat>
 		<lon>8.424110412597656</lon>
 	</reference>
+	<reference>
+		<x>7.0</x>  <!-- estimated! -->
+		<y>30.0</y> <!-- estimated! -->
+		<lat>49.01265562319531</lat>
+		<lon>8.424016535282135</lon>
+	</reference>
+	
 	<!-- <staticGeometry>
 		<x>30.0</x>
 		<y>20.0</y>
