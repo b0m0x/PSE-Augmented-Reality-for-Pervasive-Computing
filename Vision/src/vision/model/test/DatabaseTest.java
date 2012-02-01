@@ -25,11 +25,11 @@ public class DatabaseTest extends TestCase {
 	// update.getDatabase().disconnect();
 	// }
 
-	public void testCalc() {
-		JSONConverter json = new JSONConverter();
-		Position pos = json.calcLocalPos("49.013099", "8.424298");
-		System.out.println("Position: (" + pos.getX() + "/" + pos.getY() + ")");
-	}
+//	public void testCalc() {
+//		JSONConverter json = new JSONConverter();
+//		Position pos = json.calcLocalPos("49.013099", "8.424298");
+//		System.out.println("Position: (" + pos.getX() + "/" + pos.getY() + ")");
+//	}
 
 	// public void testGetSensorData() {
 	// Update update = new Update();
