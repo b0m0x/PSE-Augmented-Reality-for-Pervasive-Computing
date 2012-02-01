@@ -295,25 +295,26 @@ public class Model {
 			staticGeometries.add(geo);
 		}
 
-		// for (FloorCeiling fc : groundplan.getFloorCeiling()) {
-		FloorCeiling fc = groundplan.getFloorCeiling();
-		float MPX = (fc.getBenchmarks().get(0).getPositionX() + fc
-				.getBenchmarks().get(1).getPositionX()) / 2;
-		float MPY = (fc.getBenchmarks().get(0).getPositionY() + fc
-				.getBenchmarks().get(1).getPositionY()) / 2;
-		float SX = Math.abs((fc.getBenchmarks().get(0).getPositionX() - fc
-				.getBenchmarks().get(1).getPositionX()) / 2);
-		float SY = Math.abs((fc.getBenchmarks().get(0).getPositionY() - fc
-				.getBenchmarks().get(1).getPositionY()) / 2);
-		Geometry ceiling = (Geometry) meshCreator.createCeiling(new Vector3f(
-				MPX, fc.getCeilingHeight(), MPY), new Vector3f(SX, 0.1f, SY));
-		ceiling.setMaterial(m);
-		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(MPX,
-				-(fc.getCeilingHeight()), MPY), new Vector3f(SX, 0.1f, SY));
-		floor.setMaterial(fm);
-		staticGeometries.add(ceiling);
-		staticGeometries.add(floor);
-		// }
+		for (FloorCeiling fc : groundplan.getFloorCeiling()) {
+			float MPX = (fc.getBenchmarks().get(0).getPositionX() + fc
+					.getBenchmarks().get(1).getPositionX()) / 2;
+			float MPY = (fc.getBenchmarks().get(0).getPositionY() + fc
+					.getBenchmarks().get(1).getPositionY()) / 2;
+			float SX = Math.abs((fc.getBenchmarks().get(0).getPositionX() - fc
+					.getBenchmarks().get(1).getPositionX()) / 2);
+			float SY = Math.abs((fc.getBenchmarks().get(0).getPositionY() - fc
+					.getBenchmarks().get(1).getPositionY()) / 2);
+			Geometry ceiling = (Geometry) meshCreator.createCeiling(
+					new Vector3f(MPX, fc.getCeilingHeight(), MPY),
+					new Vector3f(SX, 0.1f, SY));
+			ceiling.setMaterial(m);
+			Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(
+					MPX, -(fc.getCeilingHeight()), MPY), new Vector3f(SX, 0.1f,
+					SY));
+			floor.setMaterial(fm);
+			staticGeometries.add(ceiling);
+			staticGeometries.add(floor);
+		}
 	}
 
 	public List<Reference> getReferencePoints() {
