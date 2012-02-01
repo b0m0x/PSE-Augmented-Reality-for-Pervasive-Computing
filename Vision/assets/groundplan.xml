@@ -572,7 +572,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>9(2)</wallNumber>
+		<wallNumber>9</wallNumber>
 		<positionX1>7.1</positionX1>
 		<positionY1>40</positionY1>
 		<positionX2>7.6</positionX2>
@@ -590,7 +590,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>9</wallNumber>
+		<wallNumber>10</wallNumber>
 		<positionX1>7.1</positionX1>
 		<positionY1>40</positionY1>
 		<positionX2>-10</positionX2>
@@ -633,7 +633,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>9(2)</wallNumber>
+		<wallNumber>11</wallNumber>
 		<positionX1>5.5</positionX1>
 		<positionY1>35</positionY1>
 		<positionX2>3</positionX2>
@@ -643,7 +643,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>10</wallNumber>
+		<wallNumber>12</wallNumber>
 		<positionX1>3</positionX1>
 		<positionY1>38.5</positionY1>
 		<positionX2>-10.5</positionX2>
@@ -677,7 +677,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>11</wallNumber>
+		<wallNumber>13</wallNumber>
 		<positionX1>12.5</positionX1>
 		<positionY1>2.5</positionY1>
 		<positionX2>7.6</positionX2>
@@ -687,7 +687,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>12</wallNumber>
+		<wallNumber>14</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>7.95</positionY1>
 		<positionX2>7.6</positionX2>
@@ -697,7 +697,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>13</wallNumber>
+		<wallNumber>15</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>14.75</positionY1>
 		<positionX2>7.6</positionX2>
@@ -715,7 +715,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>14</wallNumber>
+		<wallNumber>16</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>18.55</positionY1>
 		<positionX2>7.6</positionX2>
@@ -725,7 +725,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>15</wallNumber>
+		<wallNumber>17</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>21.1</positionY1>
 		<positionX2>7.6</positionX2>
@@ -735,7 +735,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>16</wallNumber>
+		<wallNumber>18</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>24.7</positionY1>
 		<positionX2>7.6</positionX2>
@@ -745,7 +745,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>17</wallNumber>
+		<wallNumber>19</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>31.3</positionY1>
 		<positionX2>7.6</positionX2>
@@ -755,7 +755,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>18</wallNumber>
+		<wallNumber>20</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>34.8</positionY1>
 		<positionX2>7.6</positionX2>
@@ -765,7 +765,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>19</wallNumber>
+		<wallNumber>21</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>39.1</positionY1>
 		<positionX2>7.6</positionX2>
@@ -775,7 +775,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>20</wallNumber>
+		<wallNumber>22</wallNumber>
 		<positionX1>6.73</positionX1>
 		<positionY1>45.8</positionY1>
 		<positionX2>7.1</positionX2>
@@ -785,7 +785,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>21</wallNumber>
+		<wallNumber>23</wallNumber>
 		<positionX1>2.5</positionX1>
 		<positionY1>46.4</positionY1>
 		<positionX2>2.1</positionX2>
@@ -795,7 +795,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>22</wallNumber>
+		<wallNumber>24</wallNumber>
 		<positionX1>-1.6</positionX1>
 		<positionY1>46.7</positionY1>
 		<positionX2>-2</positionX2>
@@ -805,7 +805,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>23</wallNumber>
+		<wallNumber>25</wallNumber>
 		<positionX1>-6.4</positionX1>
 		<positionY1>47.2</positionY1>
 		<positionX2>-6.8</positionX2>
@@ -816,7 +816,7 @@
 
 
 	<wall>
-		<wallNumber>24</wallNumber>
+		<wallNumber>26</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>2.5</positionY1>
 		<positionX2>4.5</positionX2>
@@ -826,7 +826,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>24(2)</wallNumber>
+		<wallNumber>27</wallNumber>
 		<positionX1>4.5</positionX1>
 		<positionY1>2.5</positionY1>
 		<positionX2>5.5</positionX2>
@@ -836,7 +836,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>25</wallNumber>
+		<wallNumber>28</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>7.95</positionY1>
 		<positionX2>5.5</positionX2>
@@ -846,7 +846,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>26</wallNumber>
+		<wallNumber>29</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>13.25</positionY1>
 		<positionX2>5.5</positionX2>
@@ -856,7 +856,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>27</wallNumber>
+		<wallNumber>30</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>15.75</positionY1>
 		<positionX2>5.5</positionX2>
@@ -866,7 +866,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>28</wallNumber>
+		<wallNumber>31</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>19.75</positionY1>
 		<positionX2>5.5</positionX2>
@@ -876,7 +876,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>29</wallNumber>
+		<wallNumber>32</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>23.65</positionY1>
 		<positionX2>5.5</positionX2>
@@ -894,7 +894,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>30</wallNumber>
+		<wallNumber>33</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>28.85</positionY1>
 		<positionX2>5.5</positionX2>
@@ -904,7 +904,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>31</wallNumber>
+		<wallNumber>34</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>33</positionY1>
 		<positionX2>5.5</positionX2>
@@ -914,7 +914,7 @@
 	</wall>
 
 	<wall>
-		<wallNumber>32</wallNumber>
+		<wallNumber>35</wallNumber>
 		<positionX1>-1.4</positionX1>
 		<positionY1>35.7</positionY1>
 		<positionX2>-1</positionX2>

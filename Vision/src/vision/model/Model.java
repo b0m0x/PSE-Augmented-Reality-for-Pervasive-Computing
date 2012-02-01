@@ -290,10 +290,10 @@ public class Model {
 		}
 		
 		//add hardcoded floor
-		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(0, -1.7f, 0), new Vector3f(20f, 0.1f, 50f));
+		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(0, -1.4f, 0), new Vector3f(20f, 0.1f, 50f));
 		floor.setMaterial(m);
 		
-		Geometry ceiling =  (Geometry) meshCreator.createCeiling(new Vector3f(0, 1.7f, 0), new Vector3f(20f, 0.1f, 50f));
+		Geometry ceiling =  (Geometry) meshCreator.createCeiling(new Vector3f(0, 1.4f, 0), new Vector3f(20f, 0.1f, 50f));
 		ceiling.setMaterial(m);
 
 		staticGeometries.add(floor);
