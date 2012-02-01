@@ -191,14 +191,14 @@ public class MainAppState extends AbstractAppState {
 	public void update(float tpf) {
 		super.update(tpf);
 		Camera cam = app.getCamera();
-	    Vector3f camDir = cam.getDirection().clone().multLocal( tpf);
-	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.5f * tpf);
+	    Vector3f camDir = cam.getDirection().clone().multLocal(0.8f);
+	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.5f);
 	    Vector3f walkDirection = new Vector3f(0, 0, 0);
 	    if (moveLeft)  { walkDirection.addLocal(camLeft); }
 	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }
 	    if (moveForward)    { walkDirection.addLocal(camDir); }
 	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }
-	    player.setWalkDirection(walkDirection);
+	    player.setWalkDirection(walkDirection.mult(tpf));
 	    
 	    if (!overviewCam) {
 	    	app.getCamera().setLocation(player.getPhysicsLocation().add(0, 0.5f, 0));
