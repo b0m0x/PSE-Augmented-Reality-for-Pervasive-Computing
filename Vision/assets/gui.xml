@@ -111,15 +111,22 @@
 			             	
 		          			</control>
                     
-               </panel>
-    			
-    			
-    			</panel>
-    		</layer>
+               </panel>		
+    		</panel>
+    	</layer>
     </screen>
     
+  <registerEffect name="DrawDiagram" class="vision.view.DrawDiagram" />
     
-    
+    <screen id="draw">
+    	<layer>
+   			 <panel id="panel-draw-diagram" childLayout="vertical" width="75%" align="center">
+    				<effect>
+      					<onActive name="DrawDiagram" post="true" />
+    				</effect>
+  			</panel>
+    	</layer>
+    </screen>
     
     
     
