@@ -114,7 +114,7 @@ public class HeaterPlugin extends Plugin {
 					final float temperature = sp.getValue();
 
 					final Material m = MaterialHelper.getInstance()
-							.getHeaterMaterial(getApp().getAssetManager(),
+							.getColoredMaterial(getApp().getAssetManager(),
 									temperature);
 					LOG.info("Temperature for Heater with sensor id "
 							+ s.getId() + " is " + temperature + sp.getUnit());

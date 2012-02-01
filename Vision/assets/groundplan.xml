@@ -410,7 +410,7 @@
 	<wall>
 		<wallNumber>7</wallNumber>
 		<positionX1>7.6</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.055</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>39.1</positionY2>
 		<height>2.7</height>
@@ -828,7 +828,7 @@
 	<wall>
 		<wallNumber>27</wallNumber>
 		<positionX1>4.5</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.055</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>3.5</positionY2>
 		<height>2.7</height>
@@ -967,23 +967,25 @@
 	</light>
 	<floorCeiling>
 		<benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
+			<positionX>0</positionX>
+			<positionY>0</positionY>
 		</benchmarks>
+		<ceilingHeight>1.4</ceilingHeight>
 		<benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
+			<positionX>13.25</positionX>
+			<positionY>35.7</positionY>
 		</benchmarks>
 	</floorCeiling>
 	<floorCeiling>
 		<benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
-		</benchmarks><benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
+			<positionX>-10.35</positionX>
+			<positionY>35.7</positionY>
 		</benchmarks>
-		<ceilingHeight>2.3</ceilingHeight>
+		<ceilingHeight>1.4</ceilingHeight>
+		<benchmarks>
+			<positionX>11.83</positionX>
+			<positionY>47.39</positionY>
+		</benchmarks>
 	</floorCeiling>
 </groundplan>
 
