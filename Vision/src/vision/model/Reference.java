@@ -40,8 +40,8 @@ public class Reference {
 
     protected float x;
     protected float y;
-    protected float lat;
-    protected float lon;
+    protected double lat;
+    protected double lon;
 
     /**
      * Gets the value of the x property.
@@ -79,7 +79,7 @@ public class Reference {
      * Gets the value of the lat property.
      * 
      */
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 
@@ -87,7 +87,7 @@ public class Reference {
      * Sets the value of the lat property.
      * 
      */
-    public void setLat(float value) {
+    public void setLat(double value) {
         this.lat = value;
     }
 
@@ -95,7 +95,7 @@ public class Reference {
      * Gets the value of the lon property.
      * 
      */
-    public float getLon() {
+    public double getLon() {
         return lon;
     }
 
@@ -103,7 +103,7 @@ public class Reference {
      * Sets the value of the lon property.
      * 
      */
-    public void setLon(float value) {
+    public void setLon(double value) {
         this.lon = value;
     }
 

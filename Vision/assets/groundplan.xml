@@ -965,5 +965,23 @@
 		<positionX>7.422332333316</positionX>
 		<positionY>30.374903487847</positionY>
 	</light>
+	<floorCeiling>
+		<benchmarks>
+			<positionX>23.422</positionX>
+			<positionY>12.374</positionY>
+		</benchmarks>
+		<benchmarks>
+			<positionX>23.422</positionX>
+			<positionY>12.374</positionY>
+		</benchmarks>
+		<benchmarks>
+			<positionX>23.422</positionX>
+			<positionY>12.374</positionY>
+		</benchmarks><benchmarks>
+			<positionX>23.422</positionX>
+			<positionY>12.374</positionY>
+		</benchmarks>
+		<ceilingHeight>2.3</ceilingHeight>
+	</floorCeiling>
 </groundplan>
 

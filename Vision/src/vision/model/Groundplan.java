@@ -30,6 +30,7 @@ import vision.Config;
  *         &lt;element ref="{}reference" maxOccurs="unbounded"/>
  *         &lt;element ref="{}staticGeometry" maxOccurs="unbounded"/>
  *         &lt;element ref="{}light" maxOccurs="unbounded"/>
+ *         &lt;element ref="{}floorCeiling"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,7 +44,8 @@ import vision.Config;
     "wall",
     "reference",
     "staticGeometry",
-    "light"
+    "light",
+    "floorCeiling"
 })
 @XmlRootElement(name = "groundplan")
 public class Groundplan {
@@ -67,6 +69,8 @@ public class Groundplan {
     protected List<StaticGeometry> staticGeometry;
     @XmlElement(required = true)
     protected List<Light> light;
+    @XmlElement(required = true)
+    protected FloorCeiling floorCeiling;
 
     /**
      * Gets the value of the wall property.
@@ -182,6 +186,30 @@ public class Groundplan {
             light = new ArrayList<Light>();
         }
         return this.light;
+    }
+
+    /**
+     * Gets the value of the floorCeiling property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link FloorCeiling }
+     *     
+     */
+    public FloorCeiling getFloorCeiling() {
+        return floorCeiling;
+    }
+
+    /**
+     * Sets the value of the floorCeiling property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FloorCeiling }
+     *     
+     */
+    public void setFloorCeiling(FloorCeiling value) {
+        this.floorCeiling = value;
     }
 
 }

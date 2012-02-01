@@ -7,6 +7,7 @@
         <xs:element maxOccurs="unbounded" ref="reference"/>
         <xs:element maxOccurs="unbounded" ref="staticGeometry"/>
         <xs:element maxOccurs="unbounded" ref="light"/>
+        <xs:element ref="floorCeiling"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -53,8 +54,8 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="lat" type="xs:float"/>
-  <xs:element name="lon" type="xs:float"/>
+  <xs:element name="lat" type="xs:double"/>
+  <xs:element name="lon" type="xs:double"/>
   <xs:element name="staticGeometry">
     <xs:complexType>
       <xs:sequence>
@@ -77,12 +78,29 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="number" type="xs:integer"/>
-  <xs:element name="positionX" type="xs:float"/>
-  <xs:element name="positionY" type="xs:float"/>
+  <xs:element name="floorCeiling">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="benchmarks"/>
+        <xs:element ref="ceilingHeight"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="benchmarks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="positionX"/>
+        <xs:element ref="positionY"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ceilingHeight" type="xs:float"/>
   <xs:element name="positionX1" type="xs:float"/>
   <xs:element name="positionY1" type="xs:float"/>
   <xs:element name="positionX2" type="xs:float"/>
   <xs:element name="positionY2" type="xs:float"/>
   <xs:element name="x" type="xs:float"/>
   <xs:element name="y" type="xs:float"/>
+  <xs:element name="positionX" type="xs:float"/>
+  <xs:element name="positionY" type="xs:float"/>
 </xs:schema>
