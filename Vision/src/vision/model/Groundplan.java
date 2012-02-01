@@ -70,7 +70,7 @@ public class Groundplan {
     @XmlElement(required = true)
     protected List<Light> light;
     @XmlElement(required = true)
-    protected FloorCeiling floorCeiling;
+    protected List<FloorCeiling> floorCeiling;
 
     /**
      * Gets the value of the wall property.
@@ -196,7 +196,7 @@ public class Groundplan {
      *     {@link FloorCeiling }
      *     
      */
-    public FloorCeiling getFloorCeiling() {
+    public List<FloorCeiling> getFloorCeiling() {
         return floorCeiling;
     }
 
@@ -208,7 +208,7 @@ public class Groundplan {
      *     {@link FloorCeiling }
      *     
      */
-    public void setFloorCeiling(FloorCeiling value) {
+    public void setFloorCeiling(List<FloorCeiling> value) {
         this.floorCeiling = value;
     }
 
