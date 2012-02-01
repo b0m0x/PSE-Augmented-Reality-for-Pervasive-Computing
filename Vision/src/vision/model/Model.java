@@ -67,8 +67,7 @@ public class Model {
 	/**
 	 * ei
 	 */
-	// TODO fix
-	public List<Sensor> getTaggedSensors(String[] tags) {
+	public synchronized List<Sensor> getTaggedSensors(String[] tags) {
 		if (sensor == null) {
 			return Collections.emptyList();
 		}

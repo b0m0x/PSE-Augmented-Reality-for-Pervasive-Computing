@@ -6,77 +6,112 @@
 		<positionY1>35.7</positionY1>
 		<positionX2>0</positionX2>
 		<positionY2>0</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.3</wide>
 		<hole>
 			<holeNumber>1</holeNumber>
-			<positionX1>2.67</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>5.17</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>0.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>1</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>2</holeNumber>
-			<positionX1>5.47</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>7.97</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>1.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>2</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>3</holeNumber>
-			<positionX1>8.27</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>10.77</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>3</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>4.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>4</holeNumber>
-			<positionX1>11.07</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>13.57</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>5.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>7</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>5</holeNumber>
-			<positionX1>13.87</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>16.37</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>8.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>10</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>6</holeNumber>
-			<positionX1>16.67</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>19.17</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>11</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>12.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>7</holeNumber>
-			<positionX1>21.27</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>23.77</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>14</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>15.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>8</holeNumber>
-			<positionX1>24.07</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>26.57</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>16.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>18</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>9</holeNumber>
-			<positionX1>26.87</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>29.37</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>19</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>19.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>10</holeNumber>
-			<positionX1>29.67</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>32.17</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>20.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>21</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>11</holeNumber>
+			<positionX1>22</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>23.5</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>12</holeNumber>
+			<positionX1>24.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>26</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>13</holeNumber>
+			<positionX1>27</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>28.5</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>14</holeNumber>
+			<positionX1>29.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>31</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>15</holeNumber>
+			<positionX1>32</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>32.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 	</wall>
 
@@ -87,14 +122,14 @@
 		<positionY1>0</positionY1>
 		<positionX2>13.25</positionX2>
 		<positionY2>0</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.3</wide>
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>6.625</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>8.125</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
 
@@ -104,21 +139,21 @@
 		<positionY1>5.3</positionY1>
 		<positionX2>13.25</positionX2>
 		<positionY2>0</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.3</wide>
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>0.3</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>1.8</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>2</holeNumber>
 			<positionX1>2.8</positionX1>
 			<positionY1>0</positionY1>
-			<positionX2>5.8</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX2>5.5</positionX2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
 
@@ -128,84 +163,133 @@
 		<positionY1>5.3</positionY1>
 		<positionX2>11.83</positionX2>
 		<positionY2>45.5</positionY2>
-		<height>3.4</height>
+		<height>2.7</height>
 		<wide>0.3</wide>
 		<hole>
 			<holeNumber>1</holeNumber>
-			<positionX1>3.25</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>5.75</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>2</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>3</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>2</holeNumber>
-			<positionX1>6.75</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>9.25</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>4</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>5.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>3</holeNumber>
-			<positionX1>11.05</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>13.55</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>6.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>8</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>4</holeNumber>
-			<positionX1>13.85</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>16.35</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>9</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>9.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>5</holeNumber>
-			<positionX1>16.56</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>19.06</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>10.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>11</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>6</holeNumber>
-			<positionX1>20.56</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>23.06</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>12</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>13.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>7</holeNumber>
-			<positionX1>23.36</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>25.86</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>14.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>16</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>8</holeNumber>
-			<positionX1>26.16</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>28.66</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>17</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>18.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>9</holeNumber>
-			<positionX1>30.16</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>32.66</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>19.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>20</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>10</holeNumber>
-			<positionX1>32.96</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>35.46</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>21</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>21.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>11</holeNumber>
-			<positionX1>35.76</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>38.26</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>22.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>24</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>12</holeNumber>
+			<positionX1>25</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>26.5</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>13</holeNumber>
+			<positionX1>27.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>29</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>14</holeNumber>
+			<positionX1>30</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>30.5</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>15</holeNumber>
+			<positionX1>31.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>32</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>16</holeNumber>
+			<positionX1>33</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>34.5</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>17</holeNumber>
+			<positionX1>35.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>37</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>18</holeNumber>
+			<positionX1>38</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>39</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 	</wall>
 
@@ -215,51 +299,64 @@
 		<positionY1>45.5</positionY1>
 		<positionX2>-9.26</positionX2>
 		<positionY2>47.39</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.3</wide>
 		<hole>
 			<holeNumber>1</holeNumber>
-			<positionX1>2.8</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>5.3</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>3</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>4.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>2</holeNumber>
-			<positionX1>5.6</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>8.1</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>5.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>7</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>3</holeNumber>
-			<positionX1>8.4</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>10.9</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>8.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>10</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>4</holeNumber>
-			<positionX1>12.4</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>14.9</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>11</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>10.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>5</holeNumber>
-			<positionX1>15.2</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>17.7</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>12.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>12</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>6</holeNumber>
-			<positionX1>18.0</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>19.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>14</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>15.5</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
-
+		<hole>
+			<holeNumber>7</holeNumber>
+			<positionX1>16.5</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>18</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
+		<hole>
+			<holeNumber>8</holeNumber>
+			<positionX1>19</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>20</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
 	</wall>
 
 	<wall>
@@ -268,30 +365,36 @@
 		<positionY1>35.7</positionY1>
 		<positionX2>-10.35</positionX2>
 		<positionY2>36.6</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.3</wide>
 		<hole>
 			<holeNumber>1</holeNumber>
-			<positionX1>0.6</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>2.1</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>1</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>2</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>2</holeNumber>
-			<positionX1>2.4</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>3.9</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>3</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>4</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>3</holeNumber>
-			<positionX1>5.4</positionX1>
-			<positionY1>0.75</positionY1>
-			<positionX2>6.9</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionX1>6</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>7</positionX2>
+			<positionY2>2</positionY2>
 		</hole>
-
+		<hole>
+			<holeNumber>4</holeNumber>
+			<positionX1>8</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>8.5</positionX2>
+			<positionY2>2</positionY2>
+		</hole>
 	</wall>
 
 	<wall>
@@ -300,207 +403,207 @@
 		<positionY1>36.6</positionY1>
 		<positionX2>-9.26</positionX2>
 		<positionY2>47.39</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.3</wide>
 	</wall>
-	
-<wall>
+
+	<wall>
 		<wallNumber>7</wallNumber>
 		<positionX1>7.6</positionX1>
 		<positionY1>2.5</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>39.1</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
-		
-			<hole>
+
+		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>3</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>4</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>2</holeNumber>
 			<positionX1>5.8</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>6.8</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>3</holeNumber>
 			<positionX1>9.25</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>10.25</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>4</holeNumber>
 			<positionX1>12.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>13.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>5</holeNumber>
 			<positionX1>16.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>17.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>6</holeNumber>
 			<positionX1>19.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>20.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>7</holeNumber>
 			<positionX1>23</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>24</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>8</holeNumber>
 			<positionX1>25.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>26.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>9</holeNumber>
 			<positionX1>29.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>30.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>11</holeNumber>
 			<positionX1>31.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>32.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
-	
-<wall>
+
+	<wall>
 		<wallNumber>8</wallNumber>
 		<positionX1>5.5</positionX1>
 		<positionY1>3.5</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>35</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
-		
+
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>0.7</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>1.7</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>2</holeNumber>
 			<positionX1>4</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>3</holeNumber>
 			<positionX1>8.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>9.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>4</holeNumber>
 			<positionX1>12</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>13</positionX2>
-			<positionY2>2.5</positionY2>
-		</hole>	
-		
+			<positionY2>2.1</positionY2>
+		</hole>
+
 		<hole>
 			<holeNumber>5</holeNumber>
 			<positionX1>17.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>18.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>6</holeNumber>
 			<positionX1>19.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>20.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>7</holeNumber>
 			<positionX1>22.3</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>23.3</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>8</holeNumber>
 			<positionX1>28.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>29.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>9(2)</wallNumber>
 		<positionX1>7.1</positionX1>
 		<positionY1>40</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>39.1</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
-		
+
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>0</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>1</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
-	
-<wall>
+
+	<wall>
 		<wallNumber>9</wallNumber>
 		<positionX1>7.1</positionX1>
 		<positionY1>40</positionY1>
 		<positionX2>-10</positionX2>
 		<positionY2>42</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
-		
+
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>2</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>3</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 
 		<hole>
@@ -508,15 +611,15 @@
 			<positionX1>5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>6</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>3</holeNumber>
 			<positionX1>9</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>10</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 
 		<hole>
@@ -524,211 +627,211 @@
 			<positionX1>13</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>14</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-				
+
 	</wall>
-	
+
 	<wall>
 		<wallNumber>9(2)</wallNumber>
 		<positionX1>5.5</positionX1>
 		<positionY1>35</positionY1>
 		<positionX2>3</positionX2>
 		<positionY2>38.5</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>10</wallNumber>
 		<positionX1>3</positionX1>
 		<positionY1>38.5</positionY1>
 		<positionX2>-10.5</positionX2>
 		<positionY2>40.3</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
-	
+
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>4</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>2</holeNumber>
 			<positionX1>7</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>8</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
-		
+
 		<hole>
 			<holeNumber>2</holeNumber>
 			<positionX1>11</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>12</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>11</wallNumber>
 		<positionX1>12.5</positionX1>
 		<positionY1>2.5</positionY1>
 		<positionX2>7.6</positionX2>
-		<positionY2>2.5</positionY2>
-		<height>3.5</height>
+		<positionY2>2.1</positionY2>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>12</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>7.95</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>7.95</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
-		<wall>
+
+	<wall>
 		<wallNumber>13</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>14.75</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>14.75</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
-		
+
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>0.5</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>1.5</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>14</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>18.55</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>18.55</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>15</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>21.1</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>21.1</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>16</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>24.7</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>24.7</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>17</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>31.3</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>31.3</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>18</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>34.8</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>34.8</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>19</wallNumber>
 		<positionX1>11.83</positionX1>
 		<positionY1>39.1</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>39.1</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>20</wallNumber>
 		<positionX1>6.73</positionX1>
 		<positionY1>45.8</positionY1>
 		<positionX2>7.1</positionX2>
 		<positionY2>40</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>21</wallNumber>
 		<positionX1>2.5</positionX1>
 		<positionY1>46.4</positionY1>
 		<positionX2>2.1</positionX2>
 		<positionY2>40.7</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>22</wallNumber>
 		<positionX1>-1.6</positionX1>
 		<positionY1>46.7</positionY1>
 		<positionX2>-2</positionX2>
 		<positionY2>41.2</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>23</wallNumber>
 		<positionX1>-6.4</positionX1>
 		<positionY1>47.2</positionY1>
 		<positionX2>-6.8</positionX2>
 		<positionY2>41.75</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
-	
+
+
 	<wall>
 		<wallNumber>24</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>2.5</positionY1>
 		<positionX2>4.5</positionX2>
-		<positionY2>2.5</positionY2>
-		<height>3.5</height>
+		<positionY2>2.1</positionY2>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>24(2)</wallNumber>
 		<positionX1>4.5</positionX1>
 		<positionY1>2.5</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>3.5</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
 
@@ -738,85 +841,85 @@
 		<positionY1>7.95</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>7.95</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>26</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>13.25</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>13.25</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>27</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>15.75</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>15.75</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>28</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>19.75</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>19.75</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
-<wall>
+
+	<wall>
 		<wallNumber>29</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>23.65</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>23.65</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
-		
+
 		<hole>
 			<holeNumber>1</holeNumber>
 			<positionX1>2</positionX1>
 			<positionY1>0</positionY1>
 			<positionX2>3</positionX2>
-			<positionY2>2.5</positionY2>
+			<positionY2>2.1</positionY2>
 		</hole>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>30</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>28.85</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>28.85</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>31</wallNumber>
 		<positionX1>0</positionX1>
 		<positionY1>33</positionY1>
 		<positionX2>5.5</positionX2>
 		<positionY2>33</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
-	
+
 	<wall>
 		<wallNumber>32</wallNumber>
 		<positionX1>-1.4</positionX1>
 		<positionY1>35.7</positionY1>
 		<positionX2>-1</positionX2>
 		<positionY2>38.9</positionY2>
-		<height>3.5</height>
+		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
 	<reference>
@@ -831,45 +934,36 @@
 		<lat>49.01265562319531</lat>
 		<lon>8.424016535282135</lon>
 	</reference>
-	
-	<!-- <staticGeometry>
-		<x>30.0</x>
-		<y>20.0</y>
-		<angle>3.1415</angle>
-		<path>Models/meinObjektt.j3o</path>
-	</staticGeometry>
-	<staticGeometry>
-		<x>40.0</x>
-		<y>70.0</y>
-		<angle>7.1415</angle>
-		<path>Models/meinObjeckt.j3o</path>
-	</staticGeometry> -->
+
+	<!-- <staticGeometry> <x>30.0</x> <y>20.0</y> <angle>3.1415</angle> <path>Models/meinObjektt.j3o</path> 
+		</staticGeometry> <staticGeometry> <x>40.0</x> <y>70.0</y> <angle>7.1415</angle> 
+		<path>Models/meinObjeckt.j3o</path> </staticGeometry> -->
 	<light>
 		<number>1</number>
-        	<positionX>2.422332333316</positionX>
-			<positionY>1.374903487847</positionY>
+		<positionX>2.422332333316</positionX>
+		<positionY>1.374903487847</positionY>
 	</light>
 	<light>
 		<number>2</number>
-        	<positionX>10.422332333316</positionX>
-			<positionY>5.374903487847</positionY>
+		<positionX>10.422332333316</positionX>
+		<positionY>5.374903487847</positionY>
 	</light>
 	<light>
 		<number>3</number>
-        	<positionX>7.422332333316</positionX>
-			<positionY>20.374903487847</positionY>
+		<positionX>7.422332333316</positionX>
+		<positionY>20.374903487847</positionY>
 	</light>
-	
+
 	<light>
 		<number>4</number>
-        	<positionX>-7.422332333316</positionX>
-			<positionY>30.374903487847</positionY>
+		<positionX>-7.422332333316</positionX>
+		<positionY>30.374903487847</positionY>
 	</light>
-	
+
 	<light>
 		<number>5</number>
-        	<positionX>7.422332333316</positionX>
-			<positionY>30.374903487847</positionY>
+		<positionX>7.422332333316</positionX>
+		<positionY>30.374903487847</positionY>
 	</light>
 </groundplan>
 
