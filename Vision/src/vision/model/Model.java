@@ -40,15 +40,16 @@ public class Model {
 	public Model(View view) throws JAXBException {
 
 		this.groundplan = new vision.model.Groundplan().load();
-		//sensor = createTestSensors();
+		// sensor = createTestSensors();
 		sensor = Collections.emptyList();
 		this.view = view;
 		loadPlugins();
 
 		this.datenbank = new vision.model.Database();
-		
-		updater = new UpdateThread(this); updater.start();
-		
+
+		updater = new UpdateThread(this);
+		updater.start();
+
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
 	}
@@ -154,8 +155,9 @@ public class Model {
 	 * @uml.property name="pluginList"
 	 */
 	private List<Plugin> pluginList = Collections.emptyList();
-	
-	private List<PluginController> pluginControllerList = Collections.emptyList();
+
+	private List<PluginController> pluginControllerList = Collections
+			.emptyList();
 
 	/**
 	 * Getter of the property <tt>pluginList</tt>
@@ -170,6 +172,7 @@ public class Model {
 	public List<PluginController> getPluginControllerList() {
 		return pluginControllerList;
 	}
+
 	/**
 	 * Setter of the property <tt>pluginList</tt>
 	 * 
@@ -265,41 +268,54 @@ public class Model {
 		}
 		return staticGeometries;
 	}
-	
+
 	public List<Light> getLights() {
 		return groundplan.getLight();
 	}
 
 	private void createGeometry() {
 		staticGeometries = new ArrayList<Spatial>();
-		Material m = MaterialHelper.getInstance().getWallMaterial(view.getAssetManager());
-		
+		Material m = MaterialHelper.getInstance().getWallMaterial(
+				view.getAssetManager());
+		Material fm = MaterialHelper.getInstance().getFloorMaterial(
+				view.getAssetManager());
+
 		CustomMeshCreator meshCreator = new CustomMeshCreator();
-	
+
 		for (Wall w : groundplan.getWall()) {
 			Spatial g = meshCreator.convert(w);
 			g.setMaterial(m);
 			staticGeometries.add(g);
 		}
-		
+
 		for (StaticGeometry sg : groundplan.getStaticGeometry()) {
 			Spatial geo = view.getAssetManager().loadModel(sg.getPath());
 			geo.rotate(sg.getAngle(), 0, 0);
 			geo.setLocalTranslation(sg.getX(), 0, sg.getY());
 			staticGeometries.add(geo);
 		}
-		
-		//add hardcoded floor
-		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(0, -1.4f, 0), new Vector3f(20f, 0.1f, 50f));
-		floor.setMaterial(m);
-		
-		Geometry ceiling =  (Geometry) meshCreator.createCeiling(new Vector3f(0, 1.4f, 0), new Vector3f(20f, 0.1f, 50f));
-		ceiling.setMaterial(m);
 
-		staticGeometries.add(floor);
+		// for (FloorCeiling fc : groundplan.getFloorCeiling()) {
+		FloorCeiling fc = groundplan.getFloorCeiling();
+		float MPX = (fc.getBenchmarks().get(0).getPositionX() + fc
+				.getBenchmarks().get(1).getPositionX()) / 2;
+		float MPY = (fc.getBenchmarks().get(0).getPositionY() + fc
+				.getBenchmarks().get(1).getPositionY()) / 2;
+		float SX = Math.abs((fc.getBenchmarks().get(0).getPositionX() - fc
+				.getBenchmarks().get(1).getPositionX()) / 2);
+		float SY = Math.abs((fc.getBenchmarks().get(0).getPositionY() - fc
+				.getBenchmarks().get(1).getPositionY()) / 2);
+		Geometry ceiling = (Geometry) meshCreator.createCeiling(new Vector3f(
+				MPX, fc.getCeilingHeight(), MPY), new Vector3f(SX, 0.1f, SY));
+		ceiling.setMaterial(m);
+		Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(MPX,
+				-(fc.getCeilingHeight()), MPY), new Vector3f(SX, 0.1f, SY));
+		floor.setMaterial(fm);
 		staticGeometries.add(ceiling);
+		staticGeometries.add(floor);
+		// }
 	}
-	
+
 	public List<Reference> getReferencePoints() {
 		return groundplan.getReference();
 	}

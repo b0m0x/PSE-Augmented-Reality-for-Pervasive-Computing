@@ -10,6 +10,7 @@ public class MaterialHelper {
 	
 	private Material wallMaterial;
 	private Material heaterMaterial;
+	private Material floorMaterial;
 	
 	static MaterialHelper instance;
 	
@@ -47,9 +48,30 @@ public class MaterialHelper {
 		return wallMaterial;
 	}
 	
-	public Material getHeaterMaterial(AssetManager am, float temperature) {
+	private void createFloorMaterial(AssetManager am) {
+		Material m = new Material(am, "Common/MatDefs/Light/Lighting.j3md");
+		m.setBoolean("UseMaterialColors", true);
+		m.setColor("Ambient", ColorRGBA.Gray);
+		m.setColor("Diffuse", ColorRGBA.Gray);
+		m.setColor("Specular", ColorRGBA.White);
+		
+		Texture tex = am.loadTexture("Texture/carpet-copy.png");
+		tex.setWrap(WrapMode.Repeat);
+		m.setTexture("DiffuseMap", tex);
+		m.setFloat("Shininess", 3);
+		floorMaterial = m;
+	}
+	
+	public Material getFloorMaterial(AssetManager am) {
+		if (floorMaterial == null) {
+			createFloorMaterial(am);
+		}
+		return floorMaterial;
+	}
+	
+	public Material getColoredMaterial(AssetManager am, float temperature) {
 		if (heaterMaterial == null) {
-			createHeaterMaterial(am);
+			createColoredMaterial(am);
 		}
 		ColorRGBA col = new ColorRGBA(temperature / 50f, 0, 1f - temperature / 50f, 1f);
 		Material m = heaterMaterial.clone();
@@ -58,7 +80,7 @@ public class MaterialHelper {
 		return m;
 	}
 
-	private void createHeaterMaterial(AssetManager am) {
+	private void createColoredMaterial(AssetManager am) {
 		heaterMaterial = new Material(am, "Common/MatDefs/Light/Lighting.j3md");
 		heaterMaterial.setBoolean("UseMaterialColors", true);
 				
