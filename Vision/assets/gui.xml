@@ -119,7 +119,7 @@
   <registerEffect name="DrawDiagram" class="vision.view.DrawDiagram" />
     
     <screen id="draw">
-    	<layer>
+    	<layer childLayout="vertical">
    			 <panel id="panel-draw-diagram" childLayout="vertical" width="75%" align="center">
     				<effect>
       					<onActive name="DrawDiagram" post="true" />
