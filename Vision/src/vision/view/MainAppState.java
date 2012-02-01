@@ -101,7 +101,7 @@ public class MainAppState extends AbstractAppState {
 			}
 		}
 		
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.2f, 1.7f, 1);		
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.1f, 1.7f, 1);		
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
 		player.setGravity(20f);

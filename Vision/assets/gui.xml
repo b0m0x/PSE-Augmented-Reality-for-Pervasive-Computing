@@ -41,8 +41,7 @@
       </panel>
       
       
-      <panel id="panel_bottom_right" height="35%" width="25%" align="right" childLayout="vertical"
-             backgroundColor="#00f8">  
+      <panel id="panel_bottom_right" height="35%" width="25%" align="right" childLayout="vertical">  
         		
       </panel>
 
