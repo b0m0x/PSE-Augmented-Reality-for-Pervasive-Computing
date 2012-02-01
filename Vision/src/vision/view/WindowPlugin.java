@@ -145,7 +145,7 @@ public class WindowPlugin extends Plugin {
 				float newZ = (float) (wallAdapter.getStart().getY() + holevec2
 						.getX() * Math.sin(rotation));
 				Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
-				if (HoleVec3.distance(windowpos) < distance) {
+				if (HoleVec3.distance(windowpos) < distance && h.getHeightGround() > 0) {
 					smallestHole = h;
 					smallestWall = w;
 					distance = HoleVec3.distance(windowpos);
