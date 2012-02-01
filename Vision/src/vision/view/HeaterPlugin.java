@@ -119,7 +119,12 @@ public class HeaterPlugin extends Plugin {
 					LOG.info("Temperature for Heater with sensor id "
 							+ s.getId() + " is " + temperature + sp.getUnit());
 
-					heaters.get(s.getId()).depthFirstTraversal(
+					Spatial h3d = heaters.get(s.getId());
+					if (h3d == null) {
+						continue;
+					}
+					
+					h3d.depthFirstTraversal(
 							new SceneGraphVisitor() {
 
 								@Override

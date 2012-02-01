@@ -64,8 +64,8 @@ public class JSONConverter {
 			LOG.info("Connecting to " + Config.SERVER_URL + "...");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			LOG.info("Connection successful.");
-			conn.setReadTimeout(500);
-			conn.setConnectTimeout(1000);
+			conn.setReadTimeout(1500);
+			conn.setConnectTimeout(1500);
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn
 					.getInputStream()));
 
@@ -156,11 +156,11 @@ public class JSONConverter {
 		double dX = ref1.x - ref2.x;
 		double dY = ref1.y - ref2.y;
 		
-//		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
-//		float y = (float) ((lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon);
+		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
+		float y = (float) ((lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon);
 		
-		float x = (float) ((lat - ref1.lat) * dLat / dX + (lon - ref1.lon) * dLon / dX);
-		float y = (float) ((lat - ref1.lat) * dLat / dY + (lon - ref1.lon) * dLon / dY);
+//		float x = (float) ((lat - 49.01308663519554f) * dX / dLat + (lon - 8.424110412597656f) * dX / dLon);
+//		float y = (float) ((lat - 49.01308663519554f) * dY / dLat + (lon - 8.424110412597656f) * dY / dLon);
 		
 		return new Position(x, 0, y);
 	}
