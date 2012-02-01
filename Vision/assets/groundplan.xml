@@ -967,21 +967,25 @@
 	</light>
 	<floorCeiling>
 		<benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
+			<positionX>0</positionX>
+			<positionY>0</positionY>
 		</benchmarks>
+		<ceilingHeight>1.4</ceilingHeight>
 		<benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
+			<positionX>13.25</positionX>
+			<positionY>35.7</positionY>
 		</benchmarks>
+	</floorCeiling>
+	<floorCeiling>
 		<benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
-		</benchmarks><benchmarks>
-			<positionX>23.422</positionX>
-			<positionY>12.374</positionY>
+			<positionX>-10.35</positionX>
+			<positionY>35.7</positionY>
 		</benchmarks>
-		<ceilingHeight>2.3</ceilingHeight>
+		<ceilingHeight>1.4</ceilingHeight>
+		<benchmarks>
+			<positionX>11.83</positionX>
+			<positionY>47.39</positionY>
+		</benchmarks>
 	</floorCeiling>
 </groundplan>
 
