@@ -69,6 +69,7 @@ public class WindowPlugin extends Plugin {
 		windowopen = app.getAssetManager().loadModel(
 				"Models/windowopen.blend");
 		for (final Sensor sensor : getSensors()) {
+			window = null;
 			float status = 0;
 			for (Sample sample : sensor.getMesswert()) {
 				if (sample.getTyp().equals("window")) {
@@ -84,13 +85,10 @@ public class WindowPlugin extends Plugin {
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
 					.getPosition().getY(), sensor.getPosition().getZ());
 			Logger.getLogger(this.getClass().getName()).warning(
-					"Added bar at " + sensor.getPosition().getX()
-							+ sensor.getPosition().getY()
-							+ sensor.getPosition().getZ());
+					"Added bar at " + window.getLocalTranslation());
 			window = fitInHole(window);
-			Logger.getLogger(this.getClass().getName()).warning("Moved bar to "  + window.getLocalTranslation().getX()
-							+ window.getLocalTranslation().getY()
-							+ window.getLocalTranslation().getZ()); 
+			Logger.getLogger(this.getClass().getName()).warning(
+					"Move bar at " + window.getLocalTranslation());
 			window.setUserData("sid", sensor.getId());
 			window.depthFirstTraversal(new SceneGraphVisitor() {
 				
@@ -100,8 +98,8 @@ public class WindowPlugin extends Plugin {
 					
 				}
 			});
-			windows.add(window.clone());
-			((View) app).getRootNode().attachChild(window);
+			windows.add(window);
+			((View) app).getRootNode().attachChild(window.clone());
 			view = (View)app;
 		}
 	}
@@ -149,12 +147,12 @@ public class WindowPlugin extends Plugin {
 				Vector2f holevec2 = holeAdapter.getPosition();
 				WallAdapter wallAdapter = new WallAdapter(w);
 				float rotation = wallAdapter.getRotation();
-				float newX = (float) (wallAdapter.getEnd().getX() + holevec2
+				float newX = (float) (wallAdapter.getStart().getX() + holevec2
 						.getX() * Math.cos(rotation));
 				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
 						.getHeight() / 2);
-				float newZ = (float) (wallAdapter.getEnd().getY() + holevec2
-						.getX() * Math.sin(rotation - Math.PI));
+				float newZ = (float) (wallAdapter.getStart().getY() + holevec2
+						.getX() * Math.sin(rotation));
 				Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
 				if (HoleVec3.distance(windowpos) < distance && h.getPositionY1() > 0) {
 					smallestHole = h;
