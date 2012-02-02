@@ -390,7 +390,7 @@ public class MainAppState extends AbstractAppState {
 	}
 
 	public boolean isInOverview() {
-		return overviewCam;		
+		return overviewCam;	
 	}
 
 	/**
