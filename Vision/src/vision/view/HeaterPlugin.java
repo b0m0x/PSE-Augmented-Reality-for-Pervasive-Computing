@@ -1,14 +1,9 @@
 package vision.view;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 import java.util.logging.Logger;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 import vision.model.Hole;
@@ -22,20 +17,15 @@ import vision.model.WallAdapter;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.bullet.BulletAppState;
-import com.jme3.bullet.collision.shapes.BoxCollisionShape;
-import com.jme3.bullet.control.RigidBodyControl;
-import com.jme3.collision.CollisionResult;
-import com.jme3.collision.CollisionResults;
+import com.jme3.light.Light;
+import com.jme3.light.PointLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.debug.Arrow;
 
 /**
  * This class represents the plugins of the heater
@@ -50,7 +40,7 @@ public class HeaterPlugin extends Plugin {
 	private static final Logger LOG = Logger.getLogger(HeaterPlugin.class.getName());
 	private View view;
 	private Map<String, Spatial> heaters = new HashMap<String, Spatial>();
-	private boolean debugHoles;
+	private Map<String, Light> heaterLights = new HashMap<String, Light>();
 
 	/**
 	 * 
@@ -71,27 +61,11 @@ public class HeaterPlugin extends Plugin {
 	 */
 	private void alignHeater(Spatial g) {
 		moveToClosestHole(g);
-		CollisionResults res = new CollisionResults();
-		view.getRootNode().collideWith(g.getWorldBound(), res);
-		if (res.size() == 0) { //No collisions - nothing to do
-			return;
-		} 
-		//align to first colliding wall
-		LOG.warning("rotate " + g.getName() + " because it collides with a wall");
-		Geometry collidingWall = res.getCollision(0).getGeometry();
-		g.setLocalRotation(new Quaternion(new float[] { 0, collidingWall.getWorldRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
-		g.updateModelBound();
-		
-
-		view.getRootNode().collideWith(g.getWorldBound(), res);
-		for (CollisionResult col : res) {
-			//g.getLocalTranslation().addLocal(col.);
-		}
 	}
 
 	private void initHeaters(Application app) {
 		heaterSpatial = app.getAssetManager()
-				.loadModel("Models/heater1.blend");
+				.loadModel("Models/heater1.j3o");
 		
 		for (Sensor s : getSensors()) {
 			addHeaterSpatial(s);
@@ -101,7 +75,6 @@ public class HeaterPlugin extends Plugin {
 	
 	@Override
 	public void stateDetached(AppStateManager stateManager) {
-		// TODO Auto-generated method stub
 		super.stateDetached(stateManager);
 		for (Spatial s : heaters.values()) {
 			view.getRootNode().detachChild(s);
@@ -109,6 +82,11 @@ public class HeaterPlugin extends Plugin {
 		view.getRootNode().detachChild(heaterSpatial);
 		heaterSpatial = null;
 		heaters.clear();
+		
+		for (Light l : heaterLights.values()) {
+			view.getRootNode().removeLight(l);
+		}
+		heaterLights.clear();
 	}
 	
 	
@@ -136,6 +114,13 @@ public class HeaterPlugin extends Plugin {
 							+ s.getId() + " is " + temperature + sp.getUnit());
 
 					Spatial h3d = heaters.get(s.getId());
+					
+					ColorRGBA col = new ColorRGBA();
+					col.set(temperature / 50f, 0, 1 - temperature / 50f, 1);
+					Light l = heaterLights.get(s.getId());
+					if (l != null) {
+						l.setColor(col);
+					}
 					if (h3d == null) {
 						continue;
 					}
@@ -199,11 +184,10 @@ public class HeaterPlugin extends Plugin {
 	}
 
 	/**
-	 * adds a heater object to the scene graph, using the data of the sensor
+	 * adds a heater object and a light to the scene graph, using the data of the sensor
 	 * @param s the sensor to use (position and samples will be used)
 	 */
 	private void addHeaterSpatial(final Sensor s) {
-		LOG.warning("Position of heater " + s.getId() + ": " + s.getPosition().getX() + "; " + s.getPosition().getZ());
 		heaterSpatial.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
 				.getY() - 1.0f, s.getPosition().getZ()));
 		heaterSpatial.setUserData("sensorid", s.getId());
@@ -218,6 +202,18 @@ public class HeaterPlugin extends Plugin {
 		heaters.put(s.getId(), h);
 		alignHeater(h);
 		view.getRootNode().attachChild(h);
+		
+		PointLight l = createHeaterLight(); 
+		heaterLights.put(s.getId(), l);
+		l.setPosition(h.getLocalTranslation());
+		view.getRootNode().addLight(l);
+	}
+	
+	PointLight createHeaterLight() {
+		PointLight pl = new PointLight();
+		pl.setName("heaterlight");
+		pl.setRadius(4.f);
+		return pl;
 	}
 
 	/**

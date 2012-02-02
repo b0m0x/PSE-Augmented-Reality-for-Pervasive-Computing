@@ -679,7 +679,7 @@
 	<wall>
 		<wallNumber>13</wallNumber>
 		<positionX1>12.5</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.1</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>2.1</positionY2>
 		<height>2.7</height>
@@ -818,7 +818,7 @@
 	<wall>
 		<wallNumber>26</wallNumber>
 		<positionX1>0</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.1</positionY1>
 		<positionX2>4.5</positionX2>
 		<positionY2>2.1</positionY2>
 		<height>2.7</height>
@@ -832,6 +832,14 @@
 		<positionX2>5.5</positionX2>
 		<positionY2>3.5</positionY2>
 		<height>2.7</height>
+		
+				<hole>
+			<holeNumber>1</holeNumber>
+			<positionX1>0.3</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>1.5</positionX2>
+			<positionY2>1.5</positionY2>
+		</hole>
 		<wide>0.1</wide>
 	</wall>
 
@@ -977,14 +985,9 @@
 		<positionX>-7.422332333316</positionX>
 		<positionY>30.374903487847</positionY>
 	</light>
-<light>
-		<number>4</number>
-		<positionX>-5.422332333316</positionX>
-		<positionY>42.374903487847</positionY>
-	</light>
 	<light>
 		<number>5</number>
-		<positionX>7.422332333316</positionX>
+		<positionX>0.422332333316</positionX>
 		<positionY>42.374903487847</positionY>
 	</light>
 	<floorCeiling>
