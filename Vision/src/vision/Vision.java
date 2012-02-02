@@ -18,7 +18,7 @@ public class Vision {
 
 	public static void main(String[] args) {
 		AppSettings settings = new AppSettings(true);
-		settings.setSettingsDialogImage("8.png");
+		settings.setSettingsDialogImage("9.jpg");
 		View mainView = new View();
 		Model mainModel = null;
 		try {
