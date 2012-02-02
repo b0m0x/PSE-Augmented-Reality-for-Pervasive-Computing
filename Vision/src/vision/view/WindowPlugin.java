@@ -23,6 +23,7 @@ import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
 
 public class WindowPlugin extends Plugin {
@@ -89,6 +90,14 @@ public class WindowPlugin extends Plugin {
 							+ sensor.getPosition().getZ());
 			window = fitInHole(window);
 			window.setUserData("sid", sensor.getId());
+			window.depthFirstTraversal(new SceneGraphVisitor() {
+				
+				@Override
+				public void visit(Spatial arg0) {
+					arg0.setName("WindowPlugin");
+					
+				}
+			});
 			windows.add(window);
 			((View) app).getRootNode().attachChild(window);
 			view = (View)app;

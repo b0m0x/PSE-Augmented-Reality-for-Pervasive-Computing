@@ -227,7 +227,7 @@ public class View extends SimpleApplication {
 		return mainAppState.isInOverview();
 	}
 
-	public void userPickOverview() {
+	public void userPick() {
 		CollisionResults results = new CollisionResults();		
 		
 
@@ -240,9 +240,12 @@ public class View extends SimpleApplication {
         rootNode.collideWith(ray, results);
         
         for (CollisionResult r : results) {
-        	if (r.getGeometry().getName().equals("floor")) {
+        	if (r.getGeometry().getName().equals("floor") && isInOverview()) {
         		mainAppState.overviewSelect(r.getContactPoint());
         		return;
+        	}
+        	if (r.getGeometry().getName().contains("Plugin")) {
+        		mainAppState.objectSelect(r.getContactPoint(), r.getGeometry().getName());
         	}
         }
 	}
