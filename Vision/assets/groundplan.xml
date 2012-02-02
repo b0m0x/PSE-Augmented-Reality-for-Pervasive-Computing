@@ -679,7 +679,7 @@
 	<wall>
 		<wallNumber>13</wallNumber>
 		<positionX1>12.5</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.1</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>2.1</positionY2>
 		<height>2.7</height>
@@ -818,7 +818,7 @@
 	<wall>
 		<wallNumber>26</wallNumber>
 		<positionX1>0</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.1</positionY1>
 		<positionX2>4.5</positionX2>
 		<positionY2>2.1</positionY2>
 		<height>2.7</height>
