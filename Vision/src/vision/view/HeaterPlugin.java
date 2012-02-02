@@ -11,10 +11,14 @@ import java.util.logging.Logger;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
+import vision.model.Hole;
+import vision.model.HoleAdapter;
 import vision.model.MaterialHelper;
 import vision.model.Model;
 import vision.model.Sample;
 import vision.model.Sensor;
+import vision.model.Wall;
+import vision.model.WallAdapter;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -64,6 +68,7 @@ public class HeaterPlugin extends Plugin {
 	 * align the heaters along walls
 	 */
 	private void alignHeater(Spatial g) {
+		g.setLocalTranslation(findClosestHole(g.getLocalTranslation()));
 		CollisionResults res = new CollisionResults();
 		view.getRootNode().collideWith(g.getWorldBound(), res);
 		if (res.size() == 0) { //No collisions - nothing to do
@@ -148,6 +153,28 @@ public class HeaterPlugin extends Plugin {
 			}
 
 		}
+	}
+	
+	private Vector3f findClosestHole(Vector3f pos) {
+		Vector3f closestHole = new Vector3f();
+		float distance = 10000.0f;
+		for (Wall w : model.getGroundplan().getWall()) {
+			WallAdapter wall = new WallAdapter(w);
+			for (Hole h : wall.getHoles()) {
+				HoleAdapter hole = new HoleAdapter(h);
+				float xAbs = (float) (Math.sin(Math.PI / 2 + wall.getRotation()) * hole.getPosition().x);
+				float zAbs = (float) (Math.cos(Math.PI / 2 + wall.getRotation()) * hole.getPosition().x);
+				float yAbs = hole.getPosition().y - wall.getHeight() / 2f;
+				
+				Vector3f holeWorldPosition = new Vector3f(xAbs, yAbs, zAbs).addLocal(new Vector3f(wall.getStart().getX(), 0 , wall.getStart().getY()));
+				float curDist = holeWorldPosition.distanceSquared(pos);
+				if(curDist < distance) {
+					distance = curDist;
+					closestHole = holeWorldPosition;
+				}
+			}
+		}
+		return closestHole;
 	}
 
 	/**
