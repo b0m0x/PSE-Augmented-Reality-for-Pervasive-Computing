@@ -246,7 +246,7 @@ public class View extends SimpleApplication {
         	}
         	if (r.getGeometry().getName().contains("id")) {
         		String id = r.getGeometry().getName().substring(0, r.getGeometry().getName().indexOf("id"));
-        		guiAppState.showstat(id);
+        		guiAppState.showState(id);
         	}
         }
 	}
