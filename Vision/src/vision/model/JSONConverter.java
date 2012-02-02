@@ -160,7 +160,7 @@ public class JSONConverter {
 //		float y = -(float) (((float)lat - ref1.lat) * dY / dLat + ((float)lon - ref1.lon) * dY / dLon);
 		
 		//double x = (float) (lon - ref1.lon) * dX / dLon;
-		double y = (lat - ref1.lat) * dY / dLat;// + (lon - ref1.lon) * dY / dLon;
+		double y = (lat - ref1.lat) * dY / dLat + (lon * dY - ref1.lon * dY) / dLon;
 		
 //		float x = (float) ((lat - 49.01308663519554f) * dX / dLat + (lon - 8.424110412597656f) * dX / dLon);
 //		float y = (float) ((lat - 49.01308663519554f) * dY / dLat + (lon - 8.424110412597656f) * dY / dLon);

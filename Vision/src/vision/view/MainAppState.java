@@ -167,7 +167,6 @@ public class MainAppState extends AbstractAppState {
 
 	private void setUpKeys() {
 		InputManager inputManager = app.getInputManager();
-		inputManager.addMapping("select", new KeyTrigger(MouseInput.BUTTON_LEFT));
 		inputManager.addMapping("zoom", new KeyTrigger(KeyInput.KEY_O));
 		inputManager.addListener(controller, new String[] { "zoom", "select" });
 		inputManager.addMapping("Left", new KeyTrigger(KeyInput.KEY_A));
@@ -191,14 +190,14 @@ public class MainAppState extends AbstractAppState {
 	public void update(float tpf) {
 		super.update(tpf);
 		Camera cam = app.getCamera();
-	    Vector3f camDir = cam.getDirection().clone().multLocal(0.1f);
-	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.05f);
+	    Vector3f camDir = cam.getDirection().clone().multLocal(0.8f);
+	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.5f);
 	    Vector3f walkDirection = new Vector3f(0, 0, 0);
 	    if (moveLeft)  { walkDirection.addLocal(camLeft); }
 	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }
 	    if (moveForward)    { walkDirection.addLocal(camDir); }
 	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }
-	    player.setWalkDirection(walkDirection);
+	    player.setWalkDirection(walkDirection.mult(tpf));
 	    
 	    if (!overviewCam) {
 	    	app.getCamera().setLocation(player.getPhysicsLocation().add(0, 0.5f, 0));
@@ -401,6 +400,15 @@ public class MainAppState extends AbstractAppState {
 	public void overviewSelect(Vector3f contactPoint) {		
 		player.setPhysicsLocation(contactPoint.addLocal(0, 1, 0));		
 		toggleOverviewCam();
+	}
+	
+	public void objectSelect(Vector3f contactPoint, String PluginName) {
+		List<Plugin> plugins = model.getPluginList();
+		for(Plugin p : plugins) {
+			if(p.getClass().getName().equals(PluginName)) {
+				p.selected();
+			}
+		}
 	}
 	
 }
