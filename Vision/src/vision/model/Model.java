@@ -42,13 +42,13 @@ public class Model {
 
 
 		this.groundplan = new vision.model.Groundplan().load();
-//		 sensor = createTestSensors();
-		sensor = Collections.emptyList();
+		 sensor = createTestSensors();
+//		sensor = Collections.emptyList();
 		this.view = view;
 		loadPlugins();
 
-		updater = new UpdateThread(this);
-		updater.start();
+//		updater = new UpdateThread(this);
+//		updater.start();
 
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
