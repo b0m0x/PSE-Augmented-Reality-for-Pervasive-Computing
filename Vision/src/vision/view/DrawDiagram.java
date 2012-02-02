@@ -15,10 +15,7 @@ public class DrawDiagram implements EffectImpl {
 	public void activate(Nifty nifty, Element element, EffectProperties parameter) {
 		 
 		
-		nifty.gotoScreen("draw");
-		element = nifty.getCurrentScreen().findElementByName("panel-draw-diagram");
 		
-
 		
 	}
 
