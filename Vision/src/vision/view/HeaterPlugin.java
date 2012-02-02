@@ -65,7 +65,7 @@ public class HeaterPlugin extends Plugin {
 
 	private void initHeaters(Application app) {
 		heaterSpatial = app.getAssetManager()
-				.loadModel("Models/heater1.blend");
+				.loadModel("Models/heater1.j3o");
 		
 		for (Sensor s : getSensors()) {
 			addHeaterSpatial(s);

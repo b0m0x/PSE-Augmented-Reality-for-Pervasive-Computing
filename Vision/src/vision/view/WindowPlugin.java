@@ -20,14 +20,9 @@ import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.bullet.util.Converter;
-import com.jme3.material.Material;
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.debug.Arrow;
-
 public class WindowPlugin extends Plugin {
 
 	/**
@@ -67,7 +62,7 @@ public class WindowPlugin extends Plugin {
 
 	private void initWindows(Application app) {
 		windowclosed = app.getAssetManager().loadModel(
-				"Models/window.blend");
+				"Models/window.j3o");
 		windowopen = app.getAssetManager().loadModel(
 				"Models/windowopen.blend");
 		for (final Sensor sensor : getSensors()) {
