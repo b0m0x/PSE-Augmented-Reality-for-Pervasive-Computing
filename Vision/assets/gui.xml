@@ -60,10 +60,10 @@
                     
                </panel>
                
-               <panel id="WaendetransparenzPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="25%" width="100%">
-                    <text id="Waendetransparenz" font="aurulent-sans-16.fnt" text="Wände transparent machen"  size="24" width="75%" height="100%"
+               <panel id="debugInfoPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="25%" width="100%">
+                    <text id="debugInfo" font="aurulent-sans-16.fnt" text="Debug Informationen anzeigen"  size="24" width="75%" height="100%"
                     color="#ff0000ff" />
-                    <control name="checkbox" id="WaendeCheckbox" checked="true" align="center" valign="center" ></control>
+                    <control name="checkbox" id="DebugCheckbox" checked="true" align="center" valign="center" ></control>
                 </panel>
                 
                 <panel id="iwasPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="25%" width="100%">
