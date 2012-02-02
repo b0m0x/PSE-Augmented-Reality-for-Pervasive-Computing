@@ -1,5 +1,7 @@
 package vision.view;
 
+import java.util.logging.Logger;
+
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.effects.EffectImpl;
 import de.lessvoid.nifty.effects.EffectProperties;
@@ -10,6 +12,7 @@ import de.lessvoid.nifty.render.NiftyRenderEngine;
 public class DrawDiagram implements EffectImpl {
 
 	private Nifty nifty;
+	Logger log = Logger.getLogger(" ");
 
 	@Override
 	public void activate(Nifty nifty, Element element, EffectProperties parameter) {
@@ -27,8 +30,9 @@ public class DrawDiagram implements EffectImpl {
 	@Override
 	public void execute(Element element, float normalizedTime, Falloff falloff,
 			NiftyRenderEngine r) {
-		// TODO Auto-generated method stub
-		
+		element.findElementByName("panel-draw-diagram");
+		r.createImage("Texture/walltexture.jpg", true);
+		r.moveTo(300, 100);
 	}
 
 }
