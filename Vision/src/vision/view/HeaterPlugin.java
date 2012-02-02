@@ -74,6 +74,13 @@ public class HeaterPlugin extends Plugin {
 	private void initHeaters(Application app) {
 		heaterSpatial = app.getAssetManager()
 				.loadModel("Models/heater1.blend");
+		heaterSpatial.breadthFirstTraversal(new SceneGraphVisitor() {
+			
+			@Override
+			public void visit(Spatial arg0) {
+				arg0.setName(this.getClass().getName());				
+			}
+		});
 		
 		for (Sensor s : getSensors()) {
 			

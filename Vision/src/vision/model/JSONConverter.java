@@ -155,13 +155,16 @@ public class JSONConverter {
 //		
 		double dX = ref2.x - ref1.x;
 		double dY = ref2.y - ref1.y;
+		
+		double latRelative = (lat - ref1.lat);
+		double factor = dX / dLat;
 
-		float x = (float) (((float)lat - ref1.lat) * dX / dLat + ((float)lon - ref1.lon) * dX / dLon);
+		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
 //		float y = -(float) (((float)lat - ref1.lat) * dY / dLat + ((float)lon - ref1.lon) * dY / dLon);
 		
 		//double x = (float) (lon - ref1.lon) * dX / dLon;
-		double y = (lat - ref1.lat) * dY / dLat + (lon * dY - ref1.lon * dY) / dLon;
-		
+		//double y = (lat - ref1.lat) * dY / dLat + (lon * dY - ref1.lon * dY) / dLon;
+		double y = (lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon;
 //		float x = (float) ((lat - 49.01308663519554f) * dX / dLat + (lon - 8.424110412597656f) * dX / dLon);
 //		float y = (float) ((lat - 49.01308663519554f) * dY / dLat + (lon - 8.424110412597656f) * dY / dLon);
 		
@@ -169,7 +172,7 @@ public class JSONConverter {
 	}
 
 	public void resetList() {
-		this.sensorList.clear();
+		this.sensorList = new ArrayList<Sensor>();
 	}
 
 	public void addSensorToList() {
