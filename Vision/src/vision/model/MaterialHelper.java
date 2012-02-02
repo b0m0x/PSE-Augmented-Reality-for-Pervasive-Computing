@@ -37,7 +37,7 @@ public class MaterialHelper {
 				"Texture/walltexture.jpg");
 		tex.setWrap(WrapMode.Repeat);
 		m.setTexture("DiffuseMap", tex);
-		m.setFloat("Shininess", 3);
+		m.setFloat("Shininess", 1);
 		wallMaterial = m;
 	}
 	
@@ -75,7 +75,7 @@ public class MaterialHelper {
 		}
 		ColorRGBA col = new ColorRGBA(temperature / 50f, 0, 1f - temperature / 50f, 1f);
 		Material m = heaterMaterial.clone();
-		m.setColor("Diffuse", col);
+		//m.setColor("Diffuse", col);
 		m.setColor("Ambient", col);
 		return m;
 	}
