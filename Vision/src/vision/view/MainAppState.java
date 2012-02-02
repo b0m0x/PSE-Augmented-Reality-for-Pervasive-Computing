@@ -331,16 +331,10 @@ public class MainAppState extends AbstractAppState {
 
 
 	public void toggleOverviewCam() {
-			
-			animateCamZoom(overviewCam);
-		/*
-			//player.setPhysicsLocation(playerPos.add(new Vector3f(0, 50, 0)));
-			app.getCamera().setLocation(player.getPhysicsLocation().add(new Vector3f(0, 50, 0)));
-			app.getCamera().lookAt(playerPos.add(0, -50, 0), new Vector3f(0, 1, 0));
-
-			//camNode.setLocalTranslation(playerPos.add(new Vector3f(0, 50, 0)));
-			//app.getCamera().lookAt(playerPos.add(0, -50, 0), Vector3f.UNIT_Y);
-		}*/
+		if (camNode.getControl(0).isEnabled()) {
+			return;
+		}
+		animateCamZoom(overviewCam);
 		if (!overviewCam) {
 			mainGeometryNode.getChild("ceiling").setCullHint(CullHint.Always);
 		}

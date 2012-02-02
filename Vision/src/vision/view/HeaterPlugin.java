@@ -70,9 +70,9 @@ public class HeaterPlugin extends Plugin {
 			return;
 		} 
 		//align to first colliding wall
-
+		LOG.warning("rotate " + g.getName() + " because it collides with a wall");
 		Geometry collidingWall = res.getCollision(0).getGeometry();
-		g.setLocalRotation(new Quaternion(new float[] { 0, collidingWall.getLocalRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
+		g.setLocalRotation(new Quaternion(new float[] { 0, collidingWall.getWorldRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
 		g.updateModelBound();
 		
 

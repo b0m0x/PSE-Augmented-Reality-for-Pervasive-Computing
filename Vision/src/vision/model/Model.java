@@ -41,13 +41,13 @@ public class Model {
 	public Model(View view) throws JAXBException {
 
 		this.groundplan = new vision.model.Groundplan().load();
-		 sensor = createTestSensors();
-//		sensor = Collections.emptyList();
+//		 sensor = createTestSensors();
+		sensor = Collections.emptyList();
 		this.view = view;
 		loadPlugins();
 
-//		updater = new UpdateThread(this);
-//		updater.start();
+		updater = new UpdateThread(this);
+		updater.start();
 
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
@@ -274,7 +274,7 @@ public class Model {
 
 		for (StaticGeometry sg : groundplan.getStaticGeometry()) {
 			Spatial geo = view.getAssetManager().loadModel(sg.getPath());
-			geo.rotate(sg.getAngle(), 0, 0);
+			geo.rotate(0, sg.getAngle(), 0);
 			geo.setLocalTranslation(sg.getX(), 0, sg.getY());
 			staticGeometries.add(geo);
 		}
