@@ -1,14 +1,9 @@
 package vision.view;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Timer;
 import java.util.logging.Logger;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 import vision.model.Hole;
@@ -22,22 +17,15 @@ import vision.model.WallAdapter;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
-import com.jme3.bullet.BulletAppState;
-import com.jme3.bullet.collision.shapes.BoxCollisionShape;
-import com.jme3.bullet.control.RigidBodyControl;
-import com.jme3.collision.CollisionResult;
-import com.jme3.collision.CollisionResults;
 import com.jme3.light.Light;
 import com.jme3.light.PointLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.debug.Arrow;
 
 /**
  * This class represents the plugins of the heater
@@ -87,7 +75,6 @@ public class HeaterPlugin extends Plugin {
 	
 	@Override
 	public void stateDetached(AppStateManager stateManager) {
-		// TODO Auto-generated method stub
 		super.stateDetached(stateManager);
 		for (Spatial s : heaters.values()) {
 			view.getRootNode().detachChild(s);
