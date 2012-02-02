@@ -922,6 +922,8 @@
 		<height>2.7</height>
 		<wide>0.1</wide>
 	</wall>
+	
+	<!--  reference points. DO NOT TOUCH OR CHANGE ORDER (someone will try to kill you!) -->
 	<reference>
 		<x>0.0</x>
 		<y>0.0</y>
@@ -929,11 +931,18 @@
 		<lon>8.42409834265709</lon>
 	</reference>
 	<reference>
-		<x>-9.26</x>  <!-- estimated! -->
-		<y>47.39</y> <!-- estimated! -->
-		<lat>49.01265562319531</lat>
-		<lon>8.42401921749115</lon>
+		<x>11.0</x>  
+		<y>0.5</y> 
+		<lat>49.01308663519554</lat>
+		<lon>8.424289662929535</lon>
 	</reference>
+	<reference>
+		<x>-2.0</x>  
+		<y>50.0</y>
+		<lat>49.01265663519554</lat>
+		<lon>8.424127846956253</lon>
+	</reference>	
+	
 
 	<!-- <staticGeometry> <x>30.0</x> <y>20.0</y> <angle>3.1415</angle> <path>Models/meinObjektt.j3o</path> 
 		</staticGeometry> <staticGeometry> <x>40.0</x> <y>70.0</y> <angle>7.1415</angle> 

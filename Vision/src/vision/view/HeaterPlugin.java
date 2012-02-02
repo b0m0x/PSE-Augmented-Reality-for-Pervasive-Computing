@@ -74,13 +74,7 @@ public class HeaterPlugin extends Plugin {
 	private void initHeaters(Application app) {
 		heaterSpatial = app.getAssetManager()
 				.loadModel("Models/heater1.blend");
-		heaterSpatial.breadthFirstTraversal(new SceneGraphVisitor() {
-			
-			@Override
-			public void visit(Spatial arg0) {
-				arg0.setName(this.getClass().getName());				
-			}
-		});
+		
 		
 		for (Sensor s : getSensors()) {
 			
@@ -152,12 +146,19 @@ public class HeaterPlugin extends Plugin {
 	 * adds a heater object to the scene graph, using the data of the sensor
 	 * @param s the sensor to use (position and samples will be used)
 	 */
-	private void addHeaterSpatial(Sensor s) {
+	private void addHeaterSpatial(final Sensor s) {
 		LOG.warning("Position of heater " + s.getId() + ": " + s.getPosition().getX() + "; " + s.getPosition().getZ());
 		heaterSpatial.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
 				.getY(), s.getPosition().getZ()));
 		heaterSpatial.setUserData("sensorid", s.getId());
 		Spatial h = heaterSpatial.clone();
+		h.breadthFirstTraversal(new SceneGraphVisitor() {
+			
+			@Override
+			public void visit(Spatial arg0) {
+				arg0.setName(s.getId() + "id");				
+			}
+		});
 		heaters.put(s.getId(), h);
 		alignHeater(h);
 		view.getRootNode().attachChild(h);

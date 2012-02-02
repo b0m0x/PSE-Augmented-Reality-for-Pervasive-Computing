@@ -13,9 +13,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.vecmath.Matrix3d;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.bulletphysics.linearmath.MatrixUtil;
+import com.jme3.math.Matrix3f;
 
 import vision.Config;
 
@@ -141,32 +146,22 @@ public class JSONConverter {
 	}
 	
 	private Position getLocalCoordinates(double lat, double lon) {
-		if (model.getReferencePoints().size() < 2) {
-			throw new UnsupportedOperationException("Need at least 2 Reference Points");
+		if (model.getReferencePoints().size() < 3) {
+			throw new UnsupportedOperationException("Need at least 3 Reference Points");
 		}
-		Reference ref1 = model.getReferencePoints().get(0);
-		Reference ref2 = model.getReferencePoints().get(1);
-		
-		double dLat = ref2.lat - ref1.lat;
-		double dLon = ref2.lon - ref1.lon;
-		
-//		double dLat = 49.01308663519554f - 49.01265562319531f;
-//		double dLon = 8.424110412597656f - 8.424016535282135f;
-//		
-		double dX = ref2.x - ref1.x;
-		double dY = ref2.y - ref1.y;
-		
-		double latRelative = (lat - ref1.lat);
-		double factor = dX / dLat;
 
-		float x = (float) ((lat - ref1.lat) * dX / dLat + (lon - ref1.lon) * dX / dLon);
-//		float y = -(float) (((float)lat - ref1.lat) * dY / dLat + ((float)lon - ref1.lon) * dY / dLon);
+		Reference ref0 = model.getReferencePoints().get(0);
+		Reference refLon = model.getReferencePoints().get(1);
+		Reference refLat = model.getReferencePoints().get(2);
 		
-		//double x = (float) (lon - ref1.lon) * dX / dLon;
-		//double y = (lat - ref1.lat) * dY / dLat + (lon * dY - ref1.lon * dY) / dLon;
-		double y = (lat - ref1.lat) * dY / dLat + (lon - ref1.lon) * dY / dLon;
-//		float x = (float) ((lat - 49.01308663519554f) * dX / dLat + (lon - 8.424110412597656f) * dX / dLon);
-//		float y = (float) ((lat - 49.01308663519554f) * dY / dLat + (lon - 8.424110412597656f) * dY / dLon);
+		double dLat = refLat.getLat() - ref0.getLat();
+		double dLon = refLon.getLon() - ref0.getLon();
+				
+		double[] latToXY= new double[] { (refLat.getX() - ref0.getX()) / dLat, (refLat.getY() - ref0.getY()) / dLat };
+		double[] lonToXY= new double[] { (refLon.getX() - ref0.getX()) / dLon, (refLon.getY() - ref0.getY()) / dLon };
+		
+		double x = latToXY[0] * (lat - ref0.getLat()) + lonToXY[0] * (lon - ref0.getLon());
+		double y = latToXY[1] * (lat - ref0.getLat()) + lonToXY[1] * (lon - ref0.getLon());
 		
 		return new Position((float) x, 0, (float) y);
 	}
