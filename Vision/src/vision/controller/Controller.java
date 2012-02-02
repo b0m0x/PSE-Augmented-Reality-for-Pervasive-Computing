@@ -271,8 +271,6 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	public void onAction(String name, boolean keyPressed, float tpf) {
 		if (name.equals("zoom") && keyPressed) {
 			view.toggleOverviewCam();
-		} else if (name.equals("select")) {
-			view.userSelect();
 		} else if (name.equals("Left") || name.equals("Right") || name.equals("Up") || name.equals("Down") || name.equals("Jump")) {
 			view.userMoveAction(name, keyPressed);
 		} else if (name.equals("toggleMouse") && !keyPressed) {
@@ -283,8 +281,8 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 
 	@Override
 	public void onAnalog(String name, float intensity, float tpf) {
-		if (name.equals("userPick") && view.isInOverview()) {
-			view.userPickOverview();
+		if (name.equals("userPick")) {
+			view.userPick();
 		}
 		
 	}
