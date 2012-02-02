@@ -70,7 +70,7 @@ public class HeaterPlugin extends Plugin {
 	 * align the heaters along walls
 	 */
 	private void alignHeater(Spatial g) {
-		g.setLocalTranslation(findClosestHole(g.getLocalTranslation()));
+		moveToClosestHole(g);
 		CollisionResults res = new CollisionResults();
 		view.getRootNode().collideWith(g.getWorldBound(), res);
 		if (res.size() == 0) { //No collisions - nothing to do
@@ -157,21 +157,14 @@ public class HeaterPlugin extends Plugin {
 		}
 	}
 	
-	public Spatial getDebugMark() {
-		 Arrow arrow = new Arrow(Vector3f.UNIT_Z.mult(2f));
-		    arrow.setLineWidth(3);
-		 
-		    //Sphere sphere = new Sphere(30, 30, 0.2f);
-		    Geometry mark = new Geometry("debug", arrow);
-		    //mark = new Geometry("BOOM!", sphere);
-		    Material mark_mat = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
-		    mark.setMaterial(mark_mat);
-		    return mark;
-	}
-	
-	private Vector3f findClosestHole(Vector3f pos) {
-		Spatial debugMark = getDebugMark();
+	/**
+	 * moves the heater under the closest window hole
+	 * @param g the heater to move
+	 */
+	private void moveToClosestHole(Spatial g) {
+		Vector3f pos = g.getLocalTranslation();
 		Vector3f closestHole = new Vector3f();
+		WallAdapter closestWall = null;
 		float distance = 10000.0f;
 		for (Wall w : model.getGroundplan().getWall()) {
 			WallAdapter wall = new WallAdapter(w);
@@ -182,22 +175,26 @@ public class HeaterPlugin extends Plugin {
 				HoleAdapter hole = new HoleAdapter(h);
 				float xAbs = - (float) (Math.sin(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getX();
 				float zAbs = - (float) (Math.cos(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getY();
-				float yAbs = hole.getPosition().y - wall.getHeight() / 2f;
+				float yAbs = h.getPositionY1() - wall.getHeight() / 2f - 0.30f;
 				
 				Vector3f holeWorldPosition = new Vector3f(xAbs, yAbs, zAbs);
-				if (!debugHoles) {
-					debugMark.setLocalTranslation(holeWorldPosition.clone());
-					view.getRootNode().attachChild(debugMark.clone());
-				}
 				float curDist = holeWorldPosition.distanceSquared(pos);
 				if(curDist < distance) {
 					distance = curDist;
 					closestHole = holeWorldPosition;
+					closestWall = wall;
 				}
 			}
 		}
-		debugHoles = true;
-		return closestHole;
+		g.setLocalRotation(new Quaternion(new float[] {0, closestWall.getRotation(), 0}));
+		Vector3f diff = closestHole.subtract(g.getLocalTranslation());
+		Vector3f wallNormal = new Vector3f(closestWall.getEnd().getX() - closestWall.getStart().getX(), 0 , closestWall.getEnd().getY() - closestWall.getStart().getY()).cross(Vector3f.UNIT_Y);
+		if (wallNormal.dot(diff) > 0) {
+			wallNormal.negateLocal();
+		}
+		wallNormal.normalizeLocal();
+		
+		g.setLocalTranslation(closestHole.add(wallNormal.mult(0.3f)));
 
 	}
 
