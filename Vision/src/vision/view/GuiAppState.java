@@ -3,6 +3,7 @@ package vision.view;
 import vision.controller.Controller;
 import vision.controller.PluginController;
 import vision.model.Model;
+import vision.model.Sensor;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -137,6 +138,11 @@ public class GuiAppState extends AbstractAppState  {
 				}
 			}	
 		}
+		
+	}
+	
+	public void showState(String sensorid) {
+		nifty.gotoScreen("draw");
 		
 	}
 	

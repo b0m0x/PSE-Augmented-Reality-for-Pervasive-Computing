@@ -13,8 +13,7 @@ public class DrawDiagram implements EffectImpl {
 
 	@Override
 	public void activate(Nifty nifty, Element element, EffectProperties parameter) {
-		 
-		
+		 		
 		
 		
 	}
