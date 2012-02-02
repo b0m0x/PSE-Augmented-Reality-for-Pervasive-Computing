@@ -40,6 +40,7 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 
+
 		this.groundplan = new vision.model.Groundplan().load();
 //		 sensor = createTestSensors();
 		sensor = Collections.emptyList();
@@ -316,7 +317,7 @@ public class Model {
 		s.addToTags("heater");
 		s.addToSamples(new Sample("temperature", "°C", 15.0f, System
 				.currentTimeMillis()));
-		s.setPosition(new Position(2, -0.5f, 1));
+		s.setPosition(new Position(0, 0, 0));
 		sensors.add(s);
 
 		List<Wall> walls = groundplan.getWall();
@@ -351,6 +352,8 @@ public class Model {
 	}
 
 	public void close() {
-		updater.setRunning(false);
+		if (updater != null) {
+			updater.setRunning(false);
+		}
 	}
 }

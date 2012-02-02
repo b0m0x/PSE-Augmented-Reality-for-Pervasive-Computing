@@ -3,6 +3,8 @@ package vision.model.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import vision.model.Database;
 import vision.model.JSONConverter;
 import vision.model.Position;
@@ -150,5 +152,37 @@ public class DatabaseTest extends TestCase {
 	// public void testGetSensorDataInterval() {
 	// assertNotNull(db.getSensorDataInterval(0, 0, 0));
 	// }
+	
+	@Test
+	public void testStoreAndFetch() {
+		List<String> tags = new ArrayList<String>();
+		long time = System.currentTimeMillis() / 1000;
+		tags.add("tag1");
+		tags.add("tag2");
+		
+		Database db = new Database();
+		db.connect();
+		db.updateSensors("test" + time, time, new Sample("Temperatur", "celsious", 22.0f, time), tags);
+		db.updateSensors("test" + time, time, new Sample("Fenster", "boolean", 1.0f, time), tags);
+		
+		List<Sample> fetched = db.getAllSensorData("test" + time);
+		assertEquals(2, fetched.size());
+		assertEquals(time, fetched.get(0).getUpdate());
+		assertEquals("Temperatur", fetched.get(0).getTyp());
+		assertEquals("Fenster", fetched.get(1).getTyp());
+		assertEquals(1.0f, fetched.get(1).getValue(), 0.0001f);
+		assertEquals(22.0f, fetched.get(0).getValue(), 0.0001f);
+		db.disconnect();
+		
+		db.connect();
+		fetched = db.getAllSensorData("test" + time);
+		assertEquals(2, fetched.size());
+		assertEquals(time, fetched.get(0).getUpdate());
+		assertEquals("Temperatur", fetched.get(0).getTyp());
+		assertEquals("Fenster", fetched.get(1).getTyp());
+		assertEquals(1.0f, fetched.get(1).getValue(), 0.0001f);
+		assertEquals(22.0f, fetched.get(0).getValue(), 0.0001f);
+		db.disconnect();
+	}
 
 }

@@ -121,16 +121,14 @@ public class Database {
 		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from Samples");
+			ResultSet rs = st.executeQuery("SELECT * FROM Samples WHERE id = '" + id + "'");
 			while (rs.next()) {
-				if (rs.getString("id").equals(id)) {
-					Sample sample = new Sample();
-					sample.setTyp(rs.getString("Type"));
-					sample.setUnit(rs.getString("Unit"));
-					sample.setUpdate(rs.getLong("Updated"));
-					sample.setValue(rs.getFloat("Value"));
-					samples.add(sample);
-				}
+				Sample sample = new Sample();
+				sample.setTyp(rs.getString("Type"));
+				sample.setUnit(rs.getString("Unit"));
+				sample.setUpdate(rs.getLong("Updated"));
+				sample.setValue(rs.getFloat("Value"));
+				samples.add(sample);
 			}
 			return samples;
 		} catch (SQLException e) {

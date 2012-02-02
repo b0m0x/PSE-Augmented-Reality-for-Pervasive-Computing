@@ -25,7 +25,8 @@ public class GroundplanTest {
 		int number1 = test.getWallNumber();
 		float posx1 = test.getPositionX1();
 		assertEquals(number1, 1);
-		assertEquals(posx1, 23.422332333316, 0.000005);
+		assertEquals(0.0, posx1, 0.000005);
+
 	}
 
 }
