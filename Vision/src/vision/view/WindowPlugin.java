@@ -10,6 +10,7 @@ import vision.controller.WindowController;
 import vision.model.Hole;
 import vision.model.HoleAdapter;
 import vision.model.Model;
+import vision.model.Position;
 import vision.model.Sample;
 import vision.model.Sensor;
 import vision.model.Wall;
@@ -25,6 +26,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.debug.Arrow;
 
 public class WindowPlugin extends Plugin {
 
@@ -102,6 +104,22 @@ public class WindowPlugin extends Plugin {
 			((View) app).getRootNode().attachChild(window.clone());
 			view = (View)app;
 		}
+		for(Wall w : model.getGroundplan().getWall()) {
+			for(Hole h : w.getHole()) {
+				WallAdapter wallAdapter = new WallAdapter(w);
+				HoleAdapter holeAdapter = new HoleAdapter(h);
+				Vector3f vec = createVector(wallAdapter, holeAdapter);
+				boolean empty = true;
+				for(Spatial window : windows) {
+					if(window.getLocalTranslation().distance(vec) < 0.1f) {
+						empty = false;
+					}
+				}
+				if(empty) {
+					createDummy(vec, app);
+				}
+			}
+		}
 	}
 
 	protected void clientUpdate(Application application, boolean changed) {
@@ -144,16 +162,8 @@ public class WindowPlugin extends Plugin {
 			List<Hole> holes = w.getHole();
 			for (Hole h : holes) {
 				HoleAdapter holeAdapter = new HoleAdapter(h);
-				Vector2f holevec2 = holeAdapter.getPosition();
 				WallAdapter wallAdapter = new WallAdapter(w);
-				float rotation = wallAdapter.getRotation();
-				float newX = (float) (wallAdapter.getStart().getX() + holevec2
-						.getX() * Math.cos(Math.PI - rotation));
-				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
-						.getHeight() / 2);
-				float newZ = (float) (wallAdapter.getStart().getY() + holevec2
-						.getX() * Math.sin(rotation));
-				Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
+				Vector3f HoleVec3 = new Vector3f(createVector(wallAdapter, holeAdapter));
 				if (HoleVec3.distance(windowpos) < distance && h.getPositionY1() > 0) {
 					smallestHole = h;
 					smallestWall = w;
@@ -162,16 +172,9 @@ public class WindowPlugin extends Plugin {
 			}
 		}
 		HoleAdapter holeAdapter = new HoleAdapter(smallestHole);
-		Vector2f holevec2 = holeAdapter.getPosition();
 		WallAdapter wallAdapter = new WallAdapter(smallestWall);
 		float rotation = wallAdapter.getRotation();
-		float newX = (float) (wallAdapter.getStart().getX() + holevec2.getX()
-				* Math.cos(Math.PI - rotation));
-		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
-				.getHeight() / 2);
-		float newZ = (float) (wallAdapter.getStart().getY() + holevec2.getX()
-				* Math.sin(rotation));
-		Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
+		Vector3f HoleVec3f = new Vector3f(createVector(wallAdapter, holeAdapter));
 		window.setLocalTranslation(HoleVec3f);
 		Quat4f rot = new Quat4f();
 		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0),
@@ -185,5 +188,30 @@ public class WindowPlugin extends Plugin {
 					.getX(), holeAdapter.getSize().getY());
 		}
 		return window;
+	}
+	
+	private Vector3f createVector(WallAdapter wallAdapter, HoleAdapter holeAdapter) {
+		float newX = - (float) (Math.sin(- Math.PI / 2 + wallAdapter.getRotation()) * holeAdapter.getPosition().x) + wallAdapter.getEnd().getX();
+		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
+				.getHeight() / 2);
+		float newZ = - (float) (Math.cos(- Math.PI / 2 + wallAdapter.getRotation()) * holeAdapter.getPosition().x) + wallAdapter.getEnd().getY();
+		Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
+		return HoleVec3;
+	}
+	
+	private void createDummy(Vector3f vec, Application app) {
+		Sensor sensor = new Sensor();
+		sensor.addToTags("window");
+		sensor.addToSamples(new Sample("window", "bool", 0.0f,
+				System.currentTimeMillis()));
+		sensor.setId("Dummy");
+		sensor.setPosition(new Position(vec.getX(), vec.getY(), vec.getZ()));
+		window = windowclosed;
+		window.setLocalTranslation(vec);
+		window = fitInHole(window);
+		window.setUserData("sid", sensor.getId());
+		windows.add(window);
+		((View) app).getRootNode().attachChild(window.clone());
+		view = (View)app;
 	}
 }

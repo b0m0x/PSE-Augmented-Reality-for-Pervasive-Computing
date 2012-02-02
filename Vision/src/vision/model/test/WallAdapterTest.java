@@ -53,6 +53,15 @@ public class WallAdapterTest {
 		w.setPositionY2(0);
 		
 		assertEquals(-Math.PI/2 , wall.getRotation(), 0.0001f);
+		
+		
+		w.setPositionX1(0);
+		w.setPositionY1(0);
+		
+		w.setPositionX2(1);
+		w.setPositionY2(1);
+		
+		assertEquals(Math.PI / 2 + Math.PI/4 , wall.getRotation(), 0.0001f);
 	}
 
 }

@@ -977,11 +977,10 @@
 		<positionX>-7.422332333316</positionX>
 		<positionY>30.374903487847</positionY>
 	</light>
-
 	<light>
 		<number>5</number>
-		<positionX>7.422332333316</positionX>
-		<positionY>30.374903487847</positionY>
+		<positionX>0.422332333316</positionX>
+		<positionY>42.374903487847</positionY>
 	</light>
 	<floorCeiling>
 		<benchmarks>
