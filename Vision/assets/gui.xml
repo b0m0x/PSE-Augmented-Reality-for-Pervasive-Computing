@@ -55,7 +55,7 @@
             <panel id="panel" height="75%" width="50%" align="center" valign="center" backgroundColor="#69696995" childLayout="vertical" visibleToMouse="true">
                 
                <panel id="panel_oben" childLayout="center" align="center" height="25%" width="100%">
-               		<text id="settings" font="aurulent-sans-16.fnt" text="Settings" size="32"
+               		<text id="settings" font="aurulent-sans-16.fnt"  text="Settings" size="32"
             				align="center" valign="center" color="#ff0000ff"/>
                     
                </panel>
