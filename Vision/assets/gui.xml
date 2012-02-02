@@ -118,12 +118,22 @@
     
   <registerEffect name="DrawDiagram" class="vision.view.DrawDiagram" />
     
-    <screen id="draw">
-    	<layer childLayout="vertical" backgroundColor="#ffffff88">
-   			 <panel id="panel-draw-diagram" childLayout="vertical" width="50%" valign="center" align="center" height ="75%" backgroundColor="#ffffff88">
+    <screen id="draw" controller="vision.controller.Controller">
+    	<layer childLayout="center" backgroundColor="#0000">
+   			<panel childLayout="vertical" backgroundColor="#ffffff88" width="75%" valign="center" align="center" height ="75%">
+   			 <panel id="panel-draw-diagram" width="100%" height="80%" childLayout="center" >
     				<effect>
       					<onActive name="DrawDiagram" post="true" />
     				</effect>
+    		</panel>
+    		<panel id="panelunten" width="100%" height="20%" childLayout="center">
+    				<control name="button" label="Back to main screen" id="btn_back" align="center"
+			             	visibleToMouse="true" width="80%" > 
+			             	
+		          			</control>
+    		
+    		</panel>		
+    				
   			</panel>
     	</layer>
     </screen>
