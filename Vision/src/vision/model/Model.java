@@ -29,6 +29,7 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 
+
 		this.groundplan = new vision.model.Groundplan().load();
 //		 sensor = createTestSensors();
 		sensor = Collections.emptyList();

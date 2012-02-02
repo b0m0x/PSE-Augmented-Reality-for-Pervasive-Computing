@@ -188,16 +188,16 @@
 		</hole>
 		<hole>
 			<holeNumber>4</holeNumber>
-			<positionX1>9</positionX1>
+			<positionX1>9.5</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>9.5</positionX2>
+			<positionX2>10</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>5</holeNumber>
-			<positionX1>10.5</positionX1>
+			<positionX1>11</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>11</positionX2>
+			<positionX2>11.5</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
@@ -326,14 +326,14 @@
 			<holeNumber>4</holeNumber>
 			<positionX1>11</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>10.5</positionX2>
+			<positionX2>11.5</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>5</holeNumber>
 			<positionX1>12.5</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>12</positionX2>
+			<positionX2>13</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
