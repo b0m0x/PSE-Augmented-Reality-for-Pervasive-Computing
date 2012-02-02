@@ -187,7 +187,6 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 
 	
 		
-	private boolean loaded;
 	
 	/**
 	 * gets called if the user pressed the activate/deactivate button
@@ -239,6 +238,11 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	public void backToMainScreen(String id, ButtonClickedEvent bce) {
 		nifty.gotoScreen("start");
 		
+	}
+	
+	@NiftyEventSubscriber(id = "DebugCheckbox")
+	public void showDebugInformation(String id, CheckBoxStateChangedEvent cbsce) {
+		view.setDisplayStatView(cbsce.isChecked());
 	}
 	
 
