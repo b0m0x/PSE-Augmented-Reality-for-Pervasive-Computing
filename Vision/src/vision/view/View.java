@@ -19,6 +19,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.post.FilterPostProcessor;
+import com.jme3.post.filters.DepthOfFieldFilter;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.Renderer;
 import com.jme3.renderer.ViewPort;
@@ -62,6 +64,10 @@ public class View extends SimpleApplication {
 
 	private boolean showMouse;
 
+	private DepthOfFieldFilter dofFilter;
+
+	private FilterPostProcessor fpp;
+
 
 
 	/**
@@ -85,10 +91,28 @@ public class View extends SimpleApplication {
 		}
 		
 		setUpCam();
+		setUpPostProcessingEffects();
 		
 	}
 	
 	
+
+
+	private void setUpPostProcessingEffects() {
+
+        fpp = new FilterPostProcessor(assetManager);
+        //     fpp.setNumSamples(4);
+
+        dofFilter = new DepthOfFieldFilter();
+        dofFilter.setFocusDistance(0);
+        dofFilter.setFocusRange(20);
+        dofFilter.setBlurScale(1.4f);
+        fpp.addFilter(dofFilter);
+        viewPort.addProcessor(fpp);
+		
+	}
+
+
 
 
 	private void setUpCam() {
