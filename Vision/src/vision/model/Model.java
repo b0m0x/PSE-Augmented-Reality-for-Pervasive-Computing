@@ -41,13 +41,13 @@ public class Model {
 	public Model(View view) throws JAXBException {
 
 		this.groundplan = new vision.model.Groundplan().load();
-		// sensor = createTestSensors();
-		sensor = Collections.emptyList();
+		 sensor = createTestSensors();
+//		sensor = Collections.emptyList();
 		this.view = view;
 		loadPlugins();
 
-		updater = new UpdateThread(this);
-		updater.start();
+//		updater = new UpdateThread(this);
+//		updater.start();
 
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
 
@@ -325,10 +325,10 @@ public class Model {
 			List<Hole> holes = w.getHole();
 			WallAdapter wAdapter = new WallAdapter(w);
 			for (Hole h : holes) {
-				if (h.getPositionY1() > 0) {
+				
 					Sensor sensor = new Sensor();
 					sensor.addToTags("window");
-					sensor.addToSamples(new Sample("window", "bool", 1.0f,
+					sensor.addToSamples(new Sample("window", "bool", 0.0f,
 							System.currentTimeMillis()));
 					HoleAdapter holeAdapter = new HoleAdapter(h);
 					Vector2f holevec2 = holeAdapter.getPosition();
@@ -344,7 +344,7 @@ public class Model {
 					sensor.setPosition(new Position(HoleVec3f.getX(), HoleVec3f
 							.getY(), HoleVec3f.getZ()));
 					sensors.add(sensor);
-				}
+				
 			}
 		}
 		return sensors;
