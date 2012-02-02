@@ -938,15 +938,24 @@
 	</reference>
 	<reference>
 		<x>-2.0</x>  
-		<y>50.0</y>
+		<y>52.0</y>
 		<lat>49.01265663519554</lat>
 		<lon>8.424127846956253</lon>
 	</reference>	
 	
 
-	<!-- <staticGeometry> <x>30.0</x> <y>20.0</y> <angle>3.1415</angle> <path>Models/meinObjektt.j3o</path> 
-		</staticGeometry> <staticGeometry> <x>40.0</x> <y>70.0</y> <angle>7.1415</angle> 
-		<path>Models/meinObjeckt.j3o</path> </staticGeometry> -->
+	<staticGeometry> 
+		<x>3.0</x> 
+		<y>30.0</y> 
+		<angle>3.1415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	<staticGeometry> 
+		<x>-5.0</x> 
+		<y>20.0</y> 
+		<angle>7.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
 	<light>
 		<number>1</number>
 		<positionX>2.422332333316</positionX>
