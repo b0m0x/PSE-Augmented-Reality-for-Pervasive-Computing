@@ -244,8 +244,9 @@ public class View extends SimpleApplication {
         		mainAppState.overviewSelect(r.getContactPoint());
         		return;
         	}
-        	if (r.getGeometry().getName().contains("Plugin")) {
-        		mainAppState.objectSelect(r.getContactPoint(), r.getGeometry().getName());
+        	if (r.getGeometry().getName().contains("id")) {
+        		String id = r.getGeometry().getName().substring(0, r.getGeometry().getName().indexOf("id"));
+        		guiAppState.showstat(id);
         	}
         }
 	}
