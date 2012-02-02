@@ -64,7 +64,7 @@ public class WindowPlugin extends Plugin {
 	}
 
 	private void initWindows(Application app) {
-		for (Sensor sensor : getSensors()) {
+		for (final Sensor sensor : getSensors()) {
 			float status = 0;
 			for (Sample sample : sensor.getMesswert()) {
 				if (sample.getTyp().equals("window")) {
@@ -94,7 +94,7 @@ public class WindowPlugin extends Plugin {
 				
 				@Override
 				public void visit(Spatial arg0) {
-					arg0.setName("WindowPlugin");
+					arg0.setName(sensor.getId() + "id");
 					
 				}
 			});

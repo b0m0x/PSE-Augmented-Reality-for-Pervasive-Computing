@@ -206,9 +206,4 @@ public abstract class Plugin extends AbstractAppState {
 		super.stateAttached(stateManager);
 		lastSensorHashCode = 0;
 	}
-	
-	public void selected() {
-		
-	}
-
 }

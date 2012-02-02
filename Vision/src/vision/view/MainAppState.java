@@ -402,13 +402,4 @@ public class MainAppState extends AbstractAppState {
 		toggleOverviewCam();
 	}
 	
-	public void objectSelect(Vector3f contactPoint, String PluginName) {
-		List<Plugin> plugins = model.getPluginList();
-		for(Plugin p : plugins) {
-			if(p.getClass().getName().equals(PluginName)) {
-				p.selected();
-			}
-		}
-	}
-	
 }
