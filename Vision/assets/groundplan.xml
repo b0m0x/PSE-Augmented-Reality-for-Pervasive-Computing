@@ -776,7 +776,7 @@
 
 	<wall>
 		<wallNumber>22</wallNumber>
-		<positionX1>6.73</positionX1>
+		<positionX1>7.2</positionX1>
 		<positionY1>45.8</positionY1>
 		<positionX2>7.1</positionX2>
 		<positionY2>40</positionY2>
@@ -835,10 +835,10 @@
 		
 				<hole>
 			<holeNumber>1</holeNumber>
-			<positionX1>0.3</positionX1>
-			<positionY1>0.5</positionY1>
+			<positionX1>0.1</positionX1>
+			<positionY1>1.3</positionY1>
 			<positionX2>1.5</positionX2>
-			<positionY2>1.5</positionY2>
+			<positionY2>2.3</positionY2>
 		</hole>
 		<wide>0.1</wide>
 	</wall>
