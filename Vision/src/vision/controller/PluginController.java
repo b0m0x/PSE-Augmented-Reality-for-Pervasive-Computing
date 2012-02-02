@@ -77,7 +77,6 @@ public abstract class PluginController {
 	public Map<String, String> createButtons() {
 		//throw new UnsupportedOperationException();
 		Map<String, String> m = new HashMap<String, String>();
-		m.put("idufrd", "lalalalala");
 		return m;
 	}
 
