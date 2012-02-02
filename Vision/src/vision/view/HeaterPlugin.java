@@ -66,9 +66,19 @@ public class HeaterPlugin extends Plugin {
 	private void alignHeater(Spatial g) {
 		CollisionResults res = new CollisionResults();
 		view.getRootNode().collideWith(g.getWorldBound(), res);
-		for (CollisionResult collision : res) {
-			g.setLocalRotation(new Quaternion(new float[] { 0, collision.getGeometry().getLocalRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
-			break;
+		if (res.size() == 0) { //No collisions - nothing to do
+			return;
+		} 
+		//align to first colliding wall
+
+		Geometry collidingWall = res.getCollision(0).getGeometry();
+		g.setLocalRotation(new Quaternion(new float[] { 0, collidingWall.getLocalRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
+		g.updateModelBound();
+		
+
+		view.getRootNode().collideWith(g.getWorldBound(), res);
+		for (CollisionResult col : res) {
+			//g.getLocalTranslation().addLocal(col.);
 		}
 	}
 
@@ -76,11 +86,8 @@ public class HeaterPlugin extends Plugin {
 		heaterSpatial = app.getAssetManager()
 				.loadModel("Models/heater1.blend");
 		
-		
 		for (Sensor s : getSensors()) {
-			
 			addHeaterSpatial(s);
-			
 		}
 		updateHeaters();
 	}
@@ -150,7 +157,7 @@ public class HeaterPlugin extends Plugin {
 	private void addHeaterSpatial(final Sensor s) {
 		LOG.warning("Position of heater " + s.getId() + ": " + s.getPosition().getX() + "; " + s.getPosition().getZ());
 		heaterSpatial.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
-				.getY(), s.getPosition().getZ()));
+				.getY() - 1.0f, s.getPosition().getZ()));
 		heaterSpatial.setUserData("sensorid", s.getId());
 		Spatial h = heaterSpatial.clone();
 		h.breadthFirstTraversal(new SceneGraphVisitor() {
