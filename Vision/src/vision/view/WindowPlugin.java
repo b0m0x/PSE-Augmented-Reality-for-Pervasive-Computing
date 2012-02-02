@@ -64,6 +64,10 @@ public class WindowPlugin extends Plugin {
 	}
 
 	private void initWindows(Application app) {
+		windowclosed = app.getAssetManager().loadModel(
+				"Models/window.blend");
+		windowopen = app.getAssetManager().loadModel(
+				"Models/windowopen.blend");
 		for (final Sensor sensor : getSensors()) {
 			float status = 0;
 			for (Sample sample : sensor.getMesswert()) {
@@ -72,15 +76,10 @@ public class WindowPlugin extends Plugin {
 					break;
 				}
 			}
-			windowclosed = app.getAssetManager().loadModel(
-					"Models/window.blend");
-			windowopen = app.getAssetManager().loadModel(
-					"Models/windowopen.blend");
 			if (status > 0) {
-				window = app.getAssetManager().loadModel(
-						"Models/windowopen.blend");
+				window = windowopen;
 			} else {
-				window = app.getAssetManager().loadModel("Models/window.blend");
+				window = windowclosed;
 			}
 			window.setLocalTranslation(sensor.getPosition().getX(), sensor
 					.getPosition().getY(), sensor.getPosition().getZ());
@@ -89,6 +88,9 @@ public class WindowPlugin extends Plugin {
 							+ sensor.getPosition().getY()
 							+ sensor.getPosition().getZ());
 			window = fitInHole(window);
+			Logger.getLogger(this.getClass().getName()).warning("Moved bar to "  + window.getLocalTranslation().getX()
+							+ window.getLocalTranslation().getY()
+							+ window.getLocalTranslation().getZ()); 
 			window.setUserData("sid", sensor.getId());
 			window.depthFirstTraversal(new SceneGraphVisitor() {
 				
@@ -98,7 +100,7 @@ public class WindowPlugin extends Plugin {
 					
 				}
 			});
-			windows.add(window);
+			windows.add(window.clone());
 			((View) app).getRootNode().attachChild(window);
 			view = (View)app;
 		}
@@ -152,7 +154,7 @@ public class WindowPlugin extends Plugin {
 				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
 						.getHeight() / 2);
 				float newZ = (float) (wallAdapter.getEnd().getY() + holevec2
-						.getX() * Math.sin(rotation));
+						.getX() * Math.sin(rotation - Math.PI));
 				Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
 				if (HoleVec3.distance(windowpos) < distance && h.getPositionY1() > 0) {
 					smallestHole = h;
