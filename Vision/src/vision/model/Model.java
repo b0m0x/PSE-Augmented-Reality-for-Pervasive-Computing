@@ -3,27 +3,16 @@ package vision.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBException;
 
-import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Box;
-import com.jme3.texture.Texture;
-import com.jme3.texture.Texture.WrapMode;
-
-import de.lessvoid.nifty.builder.HoverEffectBuilder;
-
-import java.util.Date;
 
 import vision.Config;
 import vision.controller.PluginController;
@@ -40,8 +29,9 @@ public class Model {
 
 	public Model(View view) throws JAXBException {
 
+
 		this.groundplan = new vision.model.Groundplan().load();
-		// sensor = createTestSensors();
+//		 sensor = createTestSensors();
 		sensor = Collections.emptyList();
 		this.view = view;
 		loadPlugins();
@@ -274,7 +264,7 @@ public class Model {
 
 		for (StaticGeometry sg : groundplan.getStaticGeometry()) {
 			Spatial geo = view.getAssetManager().loadModel(sg.getPath());
-			geo.rotate(sg.getAngle(), 0, 0);
+			geo.rotate(0, sg.getAngle(), 0);
 			geo.setLocalTranslation(sg.getX(), 0, sg.getY());
 			staticGeometries.add(geo);
 		}
@@ -316,7 +306,7 @@ public class Model {
 		s.addToTags("heater");
 		s.addToSamples(new Sample("temperature", "°C", 15.0f, System
 				.currentTimeMillis()));
-		s.setPosition(new Position(2, -0.5f, 1));
+		s.setPosition(new Position(0, 0, 0));
 		sensors.add(s);
 
 		List<Wall> walls = groundplan.getWall();
@@ -325,10 +315,10 @@ public class Model {
 			List<Hole> holes = w.getHole();
 			WallAdapter wAdapter = new WallAdapter(w);
 			for (Hole h : holes) {
-				if (h.getPositionY1() > 0) {
+				
 					Sensor sensor = new Sensor();
 					sensor.addToTags("window");
-					sensor.addToSamples(new Sample("window", "bool", 1.0f,
+					sensor.addToSamples(new Sample("window", "bool", 0.0f,
 							System.currentTimeMillis()));
 					HoleAdapter holeAdapter = new HoleAdapter(h);
 					Vector2f holevec2 = holeAdapter.getPosition();
@@ -344,13 +334,16 @@ public class Model {
 					sensor.setPosition(new Position(HoleVec3f.getX(), HoleVec3f
 							.getY(), HoleVec3f.getZ()));
 					sensors.add(sensor);
-				}
+					i++;
+				
 			}
 		}
 		return sensors;
 	}
 
 	public void close() {
-		updater.setRunning(false);
+		if (updater != null) {
+			updater.setRunning(false);
+		}
 	}
 }

@@ -109,9 +109,8 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Spatial g = c.convert(wall);
 
-		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
-				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
-		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
+		assertEquals(Math.PI / 2 + Math.PI / 4, ((RigidBodyControl) g.getControl(0)).getPhysicsRotation().toAngleAxis(Vector3f.UNIT_Y), 0.01f);
+		assertEquals(new Vector3f(1.5f, 0f, 0.5f), ((RigidBodyControl) g.getControl(0)).getPhysicsLocation());
 	}
 
 	/**
@@ -147,9 +146,8 @@ public class CustomMeshCreatorTest {
 		CustomMeshCreator c = new CustomMeshCreator();
 		Spatial g = c.convert(wall);
 
-		assertEquals(Math.PI / 2 + Math.PI / 4, g.getLocalRotation()
-				.toAngleAxis(new Vector3f(0f, 0f, 1f)), 0.01f);
-		assertEquals(new Vector3f(1.5f, 0.5f, 0f), g.getLocalTranslation());
+		assertEquals(Math.PI / 2 + Math.PI / 4, ((RigidBodyControl) g.getControl(0)).getPhysicsRotation().toAngleAxis(Vector3f.UNIT_Y), 0.01f);
+		assertEquals(new Vector3f(1.5f, 0f, 0.5f), ((RigidBodyControl) g.getControl(0)).getPhysicsLocation());
 	}
 	
 

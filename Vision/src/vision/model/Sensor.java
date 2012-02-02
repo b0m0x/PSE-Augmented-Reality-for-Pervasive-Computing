@@ -14,9 +14,10 @@ public class Sensor {
 		tags = new ArrayList<String>();
 	}
 
-	public Sensor(String id, int time, List<Sample> samples) {
+	public Sensor(String id, long time, List<Sample> samples) {
 		this.id = id;
 		messwert = samples;
+		update = time;
 	}
 
 	/**

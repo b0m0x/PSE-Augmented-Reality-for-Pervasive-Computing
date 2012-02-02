@@ -27,9 +27,8 @@ public class PluginLoaderTest {
 		}
 
 		assertEquals(false, plugins.isEmpty());
-		assertArrayEquals(new String[] { "heater" }, plugins.get(0).getTags());
+		assertArrayEquals(new String[] { "window" }, plugins.get(0).getTags());
 
-		List<PluginController> controller = loader.getController();
 
 	}
 

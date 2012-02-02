@@ -11,10 +11,14 @@ import java.util.logging.Logger;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
+import vision.model.Hole;
+import vision.model.HoleAdapter;
 import vision.model.MaterialHelper;
 import vision.model.Model;
 import vision.model.Sample;
 import vision.model.Sensor;
+import vision.model.Wall;
+import vision.model.WallAdapter;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -31,6 +35,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.debug.Arrow;
 
 /**
  * This class represents the plugins of the heater
@@ -45,6 +50,7 @@ public class HeaterPlugin extends Plugin {
 	private static final Logger LOG = Logger.getLogger(HeaterPlugin.class.getName());
 	private View view;
 	private Map<String, Spatial> heaters = new HashMap<String, Spatial>();
+	private boolean debugHoles;
 
 	/**
 	 * 
@@ -64,11 +70,22 @@ public class HeaterPlugin extends Plugin {
 	 * align the heaters along walls
 	 */
 	private void alignHeater(Spatial g) {
+		moveToClosestHole(g);
 		CollisionResults res = new CollisionResults();
 		view.getRootNode().collideWith(g.getWorldBound(), res);
-		for (CollisionResult collision : res) {
-			g.setLocalRotation(new Quaternion(new float[] { 0, collision.getGeometry().getLocalRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
-			break;
+		if (res.size() == 0) { //No collisions - nothing to do
+			return;
+		} 
+		//align to first colliding wall
+		LOG.warning("rotate " + g.getName() + " because it collides with a wall");
+		Geometry collidingWall = res.getCollision(0).getGeometry();
+		g.setLocalRotation(new Quaternion(new float[] { 0, collidingWall.getWorldRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
+		g.updateModelBound();
+		
+
+		view.getRootNode().collideWith(g.getWorldBound(), res);
+		for (CollisionResult col : res) {
+			//g.getLocalTranslation().addLocal(col.);
 		}
 	}
 
@@ -76,11 +93,8 @@ public class HeaterPlugin extends Plugin {
 		heaterSpatial = app.getAssetManager()
 				.loadModel("Models/heater1.blend");
 		
-		
 		for (Sensor s : getSensors()) {
-			
 			addHeaterSpatial(s);
-			
 		}
 		updateHeaters();
 	}
@@ -142,6 +156,47 @@ public class HeaterPlugin extends Plugin {
 
 		}
 	}
+	
+	/**
+	 * moves the heater under the closest window hole
+	 * @param g the heater to move
+	 */
+	private void moveToClosestHole(Spatial g) {
+		Vector3f pos = g.getLocalTranslation();
+		Vector3f closestHole = new Vector3f();
+		WallAdapter closestWall = null;
+		float distance = 10000.0f;
+		for (Wall w : model.getGroundplan().getWall()) {
+			WallAdapter wall = new WallAdapter(w);
+			for (Hole h : wall.getHoles()) {
+				if (h.getPositionY1() < 0.0001f) {
+					continue; //ignore doors
+				}
+				HoleAdapter hole = new HoleAdapter(h);
+				float xAbs = - (float) (Math.sin(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getX();
+				float zAbs = - (float) (Math.cos(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getY();
+				float yAbs = h.getPositionY1() - wall.getHeight() / 2f - 0.30f;
+				
+				Vector3f holeWorldPosition = new Vector3f(xAbs, yAbs, zAbs);
+				float curDist = holeWorldPosition.distanceSquared(pos);
+				if(curDist < distance) {
+					distance = curDist;
+					closestHole = holeWorldPosition;
+					closestWall = wall;
+				}
+			}
+		}
+		g.setLocalRotation(new Quaternion(new float[] {0, closestWall.getRotation(), 0}));
+		Vector3f diff = closestHole.subtract(g.getLocalTranslation());
+		Vector3f wallNormal = new Vector3f(closestWall.getEnd().getX() - closestWall.getStart().getX(), 0 , closestWall.getEnd().getY() - closestWall.getStart().getY()).cross(Vector3f.UNIT_Y);
+		if (wallNormal.dot(diff) > 0) {
+			wallNormal.negateLocal();
+		}
+		wallNormal.normalizeLocal();
+		
+		g.setLocalTranslation(closestHole.add(wallNormal.mult(0.3f)));
+
+	}
 
 	/**
 	 * adds a heater object to the scene graph, using the data of the sensor
@@ -150,7 +205,7 @@ public class HeaterPlugin extends Plugin {
 	private void addHeaterSpatial(final Sensor s) {
 		LOG.warning("Position of heater " + s.getId() + ": " + s.getPosition().getX() + "; " + s.getPosition().getZ());
 		heaterSpatial.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()
-				.getY(), s.getPosition().getZ()));
+				.getY() - 1.0f, s.getPosition().getZ()));
 		heaterSpatial.setUserData("sensorid", s.getId());
 		Spatial h = heaterSpatial.clone();
 		h.breadthFirstTraversal(new SceneGraphVisitor() {

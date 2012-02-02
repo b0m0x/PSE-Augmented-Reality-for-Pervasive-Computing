@@ -188,16 +188,16 @@
 		</hole>
 		<hole>
 			<holeNumber>4</holeNumber>
-			<positionX1>9</positionX1>
+			<positionX1>9.5</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>9.5</positionX2>
+			<positionX2>10</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>5</holeNumber>
-			<positionX1>10.5</positionX1>
+			<positionX1>11</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>11</positionX2>
+			<positionX2>11.5</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
@@ -326,14 +326,14 @@
 			<holeNumber>4</holeNumber>
 			<positionX1>11</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>10.5</positionX2>
+			<positionX2>11.5</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
 			<holeNumber>5</holeNumber>
 			<positionX1>12.5</positionX1>
 			<positionY1>0.5</positionY1>
-			<positionX2>12</positionX2>
+			<positionX2>13</positionX2>
 			<positionY2>2</positionY2>
 		</hole>
 		<hole>
@@ -938,15 +938,24 @@
 	</reference>
 	<reference>
 		<x>-2.0</x>  
-		<y>50.0</y>
+		<y>52.0</y>
 		<lat>49.01265663519554</lat>
 		<lon>8.424127846956253</lon>
 	</reference>	
 	
 
-	<!-- <staticGeometry> <x>30.0</x> <y>20.0</y> <angle>3.1415</angle> <path>Models/meinObjektt.j3o</path> 
-		</staticGeometry> <staticGeometry> <x>40.0</x> <y>70.0</y> <angle>7.1415</angle> 
-		<path>Models/meinObjeckt.j3o</path> </staticGeometry> -->
+	<staticGeometry> 
+		<x>3.0</x> 
+		<y>30.0</y> 
+		<angle>3.1415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	<staticGeometry> 
+		<x>-5.0</x> 
+		<y>20.0</y> 
+		<angle>7.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
 	<light>
 		<number>1</number>
 		<positionX>2.422332333316</positionX>
@@ -968,11 +977,15 @@
 		<positionX>-7.422332333316</positionX>
 		<positionY>30.374903487847</positionY>
 	</light>
-
+<light>
+		<number>4</number>
+		<positionX>-5.422332333316</positionX>
+		<positionY>42.374903487847</positionY>
+	</light>
 	<light>
 		<number>5</number>
 		<positionX>7.422332333316</positionX>
-		<positionY>30.374903487847</positionY>
+		<positionY>42.374903487847</positionY>
 	</light>
 	<floorCeiling>
 		<benchmarks>
