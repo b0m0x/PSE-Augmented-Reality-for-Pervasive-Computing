@@ -145,15 +145,11 @@ public class WindowPlugin extends Plugin {
 			List<Hole> holes = w.getHole();
 			for (Hole h : holes) {
 				HoleAdapter holeAdapter = new HoleAdapter(h);
-				Vector2f holevec2 = holeAdapter.getPosition();
 				WallAdapter wallAdapter = new WallAdapter(w);
-				float rotation = wallAdapter.getRotation();
-				float newX = (float) (wallAdapter.getStart().getX() + holevec2
-						.getX() * Math.cos(Math.PI - rotation));
+				float newX = - (float) (Math.sin(- Math.PI / 2 + wallAdapter.getRotation()) * holeAdapter.getPosition().x) + wallAdapter.getEnd().getX();
 				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
 						.getHeight() / 2);
-				float newZ = (float) (wallAdapter.getStart().getY() + holevec2
-						.getX() * Math.sin(rotation));
+				float newZ = - (float) (Math.cos(- Math.PI / 2 + wallAdapter.getRotation()) * holeAdapter.getPosition().x) + wallAdapter.getEnd().getY();
 				Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);
 				if (HoleVec3.distance(windowpos) < distance && h.getPositionY1() > 0) {
 					smallestHole = h;
@@ -163,15 +159,12 @@ public class WindowPlugin extends Plugin {
 			}
 		}
 		HoleAdapter holeAdapter = new HoleAdapter(smallestHole);
-		Vector2f holevec2 = holeAdapter.getPosition();
 		WallAdapter wallAdapter = new WallAdapter(smallestWall);
 		float rotation = wallAdapter.getRotation();
-		float newX = (float) (wallAdapter.getStart().getX() + holevec2.getX()
-				* Math.cos(Math.PI - rotation));
+		float newX = - (float) (Math.sin(- Math.PI / 2 + wallAdapter.getRotation()) * holeAdapter.getPosition().x) + wallAdapter.getEnd().getX();
 		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
 				.getHeight() / 2);
-		float newZ = (float) (wallAdapter.getStart().getY() + holevec2.getX()
-				* Math.sin(rotation));
+		float newZ = - (float) (Math.cos(- Math.PI / 2 + wallAdapter.getRotation()) * holeAdapter.getPosition().x) + wallAdapter.getEnd().getY();
 		Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
 		window.setLocalTranslation(HoleVec3f);
 		Quat4f rot = new Quat4f();
