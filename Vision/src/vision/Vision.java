@@ -19,12 +19,12 @@ public class Vision {
 	public static void main(String[] args) {
 		AppSettings settings = new AppSettings(true);
 		settings.setSettingsDialogImage("8.png");
+		settings.setTitle("Vision - Augmented Reality for Pervasive Computing");
 		View mainView = new View();
 		Model mainModel = null;
 		try {
 			mainModel = new Model(mainView);
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
