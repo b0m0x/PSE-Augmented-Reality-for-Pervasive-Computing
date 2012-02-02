@@ -46,8 +46,6 @@ public class Model {
 		this.view = view;
 		loadPlugins();
 
-		this.datenbank = new vision.model.Database();
-
 		updater = new UpdateThread(this);
 		updater.start();
 
@@ -63,7 +61,7 @@ public class Model {
 	/**
 					 */
 	public List<Sample> getSensordata(String id, int time) {
-		return datenbank.getSensordata(id, time);
+		return getDatenbank().getSensordata(id, time);
 	}
 
 	/**
@@ -107,11 +105,6 @@ public class Model {
 		return sensor;
 	}
 
-	/**
-	 * @uml.property name="datenbank"
-	 * @uml.associationEnd inverse="daten:vision.model.Database"
-	 */
-	private Database datenbank;
 
 	/**
 	 * Getter of the property <tt>datenbank</tt>
@@ -120,19 +113,9 @@ public class Model {
 	 * @uml.property name="datenbank"
 	 */
 	public Database getDatenbank() {
-		return datenbank;
+		return updater.getUpdate().getDatabase();
 	}
 
-	/**
-	 * Setter of the property <tt>datenbank</tt>
-	 * 
-	 * @param datenbank
-	 *            The datenbank to set.
-	 * @uml.property name="datenbank"
-	 */
-	public void setDatenbank(Database datenbank) {
-		this.datenbank = datenbank;
-	}
 
 	/**
 	 * Setter of the property <tt>sensor</tt>
