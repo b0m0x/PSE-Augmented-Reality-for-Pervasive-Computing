@@ -35,6 +35,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.SceneGraphVisitor;
 import com.jme3.scene.Spatial;
+import com.jme3.scene.debug.Arrow;
 
 /**
  * This class represents the plugins of the heater
@@ -49,6 +50,7 @@ public class HeaterPlugin extends Plugin {
 	private static final Logger LOG = Logger.getLogger(HeaterPlugin.class.getName());
 	private View view;
 	private Map<String, Spatial> heaters = new HashMap<String, Spatial>();
+	private boolean debugHoles;
 
 	/**
 	 * 
@@ -155,18 +157,38 @@ public class HeaterPlugin extends Plugin {
 		}
 	}
 	
+	public Spatial getDebugMark() {
+		 Arrow arrow = new Arrow(Vector3f.UNIT_Z.mult(2f));
+		    arrow.setLineWidth(3);
+		 
+		    //Sphere sphere = new Sphere(30, 30, 0.2f);
+		    Geometry mark = new Geometry("debug", arrow);
+		    //mark = new Geometry("BOOM!", sphere);
+		    Material mark_mat = new Material(view.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+		    mark.setMaterial(mark_mat);
+		    return mark;
+	}
+	
 	private Vector3f findClosestHole(Vector3f pos) {
+		Spatial debugMark = getDebugMark();
 		Vector3f closestHole = new Vector3f();
 		float distance = 10000.0f;
 		for (Wall w : model.getGroundplan().getWall()) {
 			WallAdapter wall = new WallAdapter(w);
 			for (Hole h : wall.getHoles()) {
+				if (h.getPositionY1() < 0.0001f) {
+					continue; //ignore doors
+				}
 				HoleAdapter hole = new HoleAdapter(h);
-				float xAbs = (float) (Math.sin(Math.PI / 2 + wall.getRotation()) * hole.getPosition().x);
-				float zAbs = (float) (Math.cos(Math.PI / 2 + wall.getRotation()) * hole.getPosition().x);
+				float xAbs = - (float) (Math.sin(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getX();
+				float zAbs = - (float) (Math.cos(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getY();
 				float yAbs = hole.getPosition().y - wall.getHeight() / 2f;
 				
-				Vector3f holeWorldPosition = new Vector3f(xAbs, yAbs, zAbs).addLocal(new Vector3f(wall.getStart().getX(), 0 , wall.getStart().getY()));
+				Vector3f holeWorldPosition = new Vector3f(xAbs, yAbs, zAbs);
+				if (!debugHoles) {
+					debugMark.setLocalTranslation(holeWorldPosition.clone());
+					view.getRootNode().attachChild(debugMark.clone());
+				}
 				float curDist = holeWorldPosition.distanceSquared(pos);
 				if(curDist < distance) {
 					distance = curDist;
@@ -174,7 +196,9 @@ public class HeaterPlugin extends Plugin {
 				}
 			}
 		}
+		debugHoles = true;
 		return closestHole;
+
 	}
 
 	/**
