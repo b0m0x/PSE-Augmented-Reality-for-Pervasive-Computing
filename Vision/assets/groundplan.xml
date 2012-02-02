@@ -832,6 +832,14 @@
 		<positionX2>5.5</positionX2>
 		<positionY2>3.5</positionY2>
 		<height>2.7</height>
+		
+				<hole>
+			<holeNumber>1</holeNumber>
+			<positionX1>0.3</positionX1>
+			<positionY1>0.5</positionY1>
+			<positionX2>1.5</positionX2>
+			<positionY2>1.5</positionY2>
+		</hole>
 		<wide>0.1</wide>
 	</wall>
 
