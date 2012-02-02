@@ -15,6 +15,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.texture.Texture;
@@ -294,6 +295,8 @@ public class Model {
 			geo.setLocalTranslation(sg.getX(), 0, sg.getY());
 			staticGeometries.add(geo);
 		}
+		
+		Node ceilingNode = new Node("ceiling");
 
 		for (FloorCeiling fc : groundplan.getFloorCeiling()) {
 			float MPX = (fc.getBenchmarks().get(0).getPositionX() + fc
@@ -312,9 +315,11 @@ public class Model {
 					MPX, -(fc.getCeilingHeight()), MPY), new Vector3f(SX, 0.1f,
 					SY));
 			floor.setMaterial(fm);
-			staticGeometries.add(ceiling);
+			
+			ceilingNode.attachChild(ceiling);
 			staticGeometries.add(floor);
 		}
+		staticGeometries.add(ceilingNode);
 	}
 
 	public List<Reference> getReferencePoints() {
