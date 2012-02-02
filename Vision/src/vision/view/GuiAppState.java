@@ -142,6 +142,7 @@ public class GuiAppState extends AbstractAppState  {
 	}
 	
 	public void showState(String sensorid) {
+		DrawDiagram.samples = model.getDatenbank().getAllSensorData(sensorid);
 		nifty.gotoScreen("draw");
 	
 	}

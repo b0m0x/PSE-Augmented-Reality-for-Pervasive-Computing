@@ -67,7 +67,8 @@ public class HeaterPlugin extends Plugin {
 		CollisionResults res = new CollisionResults();
 		view.getRootNode().collideWith(g.getWorldBound(), res);
 		for (CollisionResult collision : res) {
-			g.setLocalRotation(new Quaternion(new float[] { 0, collision.getGeometry().getWorldRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
+			g.setLocalRotation(new Quaternion(new float[] { 0, collision.getGeometry().getLocalRotation().toAngleAxis(Vector3f.UNIT_Y), 0}));
+			break;
 		}
 	}
 
