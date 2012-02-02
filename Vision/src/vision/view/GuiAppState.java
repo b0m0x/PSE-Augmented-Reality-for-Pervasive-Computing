@@ -143,7 +143,6 @@ public class GuiAppState extends AbstractAppState  {
 	
 	public void showState(String sensorid) {
 		nifty.gotoScreen("draw");
-		
 	}
 	
 	
