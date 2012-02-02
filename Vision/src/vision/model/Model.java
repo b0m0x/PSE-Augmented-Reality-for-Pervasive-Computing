@@ -334,6 +334,7 @@ public class Model {
 					sensor.setPosition(new Position(HoleVec3f.getX(), HoleVec3f
 							.getY(), HoleVec3f.getZ()));
 					sensors.add(sensor);
+					i++;
 				
 			}
 		}

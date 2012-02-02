@@ -148,7 +148,7 @@ public class WindowPlugin extends Plugin {
 				WallAdapter wallAdapter = new WallAdapter(w);
 				float rotation = wallAdapter.getRotation();
 				float newX = (float) (wallAdapter.getStart().getX() + holevec2
-						.getX() * Math.cos(rotation));
+						.getX() * Math.cos(Math.PI - rotation));
 				float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
 						.getHeight() / 2);
 				float newZ = (float) (wallAdapter.getStart().getY() + holevec2
@@ -165,12 +165,12 @@ public class WindowPlugin extends Plugin {
 		Vector2f holevec2 = holeAdapter.getPosition();
 		WallAdapter wallAdapter = new WallAdapter(smallestWall);
 		float rotation = wallAdapter.getRotation();
-		float newX = (float) (wallAdapter.getEnd().getX() + holevec2.getX()
-				* Math.cos(rotation));
+		float newX = (float) (wallAdapter.getStart().getX() + holevec2.getX()
+				* Math.cos(Math.PI - rotation));
 		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter
 				.getHeight() / 2);
-		float newZ = (float) (wallAdapter.getEnd().getY() + holevec2.getX()
-				* Math.sin(rotation - Math.PI));
+		float newZ = (float) (wallAdapter.getStart().getY() + holevec2.getX()
+				* Math.sin(rotation));
 		Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);
 		window.setLocalTranslation(HoleVec3f);
 		Quat4f rot = new Quat4f();
