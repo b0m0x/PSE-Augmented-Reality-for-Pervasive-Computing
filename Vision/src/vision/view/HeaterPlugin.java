@@ -43,7 +43,7 @@ public class HeaterPlugin extends Plugin {
 	private Map<String, Light> heaterLights = new HashMap<String, Light>();
 
 	/**
-	 * 
+	 * Constructs the Heaterplugin.
 	 */
 	public HeaterPlugin(Model model, View v) {
 		super(model, new String[] { "heater" });

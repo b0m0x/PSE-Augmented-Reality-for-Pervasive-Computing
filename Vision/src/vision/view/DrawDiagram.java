@@ -15,26 +15,36 @@ import de.lessvoid.nifty.elements.Element;
 
 import de.lessvoid.nifty.render.NiftyRenderEngine;
 
-
+/**
+ * This class draws a diagram with the values.
+ *
+ */
 public class DrawDiagram implements EffectImpl {
 
 	Logger log = Logger.getLogger(" ");
-	
+	/**
+	 * list of samples.
+	 */
 	public static List<Sample> samples;
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void activate(Nifty niftyy, Element element, EffectProperties parameter) {
-		
-			
+
 	}
 	
-
+	/**
+	 * 
+	 */
 	@Override
 	public void deactivate() {
 		// TODO Auto-generated method stub
-		
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public void execute(Element element, float normalizedTime, Falloff falloff,
 			NiftyRenderEngine r) {

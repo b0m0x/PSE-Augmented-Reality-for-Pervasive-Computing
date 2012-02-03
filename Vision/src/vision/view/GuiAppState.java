@@ -40,6 +40,7 @@ public class GuiAppState extends AbstractAppState  {
 	}
 
 	/**
+	 * 
 	 */
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
