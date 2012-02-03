@@ -24,10 +24,8 @@ import com.jme3.post.filters.DepthOfFieldFilter;
 /**
  * main class of the view package. contains the main update loop and calls the
  * plugin and main views
- * 
  */
 public class View extends SimpleApplication {
-	
 	/**
 	 * @uml.property name="daten"
 	 * @uml.associationEnd inverse="view:vision.model.Model"
@@ -70,33 +68,25 @@ public class View extends SimpleApplication {
 	 */
 	public void simpleInitApp() {
 
-		
 		guiAppState = new GuiAppState(controller, daten);
 		bulletAppState = new BulletAppState();
 		mainAppState = new MainAppState(daten, controller);
-		
 
 		stateManager.attach(guiAppState);
 		stateManager.attach(bulletAppState);
 		stateManager.attach(mainAppState);
-		
 
 		for (Plugin p : daten.getPluginList()) {
 			stateManager.attach(p);
 		}
-		
 		setUpCam();
 		setUpPostProcessingEffects();
-		
 	}
-	
-	
 
 
 	private void setUpPostProcessingEffects() {
 
         fpp = new FilterPostProcessor(assetManager);
-        //     fpp.setNumSamples(4);
 
         bloomFilter = new BloomFilter();
         bloomFilter.setBlurScale(1.4f);
@@ -106,7 +96,7 @@ public class View extends SimpleApplication {
         bloomFilter.setDownSamplingFactor(2f);
         fpp.addFilter(bloomFilter);
         viewPort.addProcessor(fpp);
-		
+
 	}
 
 
@@ -117,8 +107,7 @@ public class View extends SimpleApplication {
 	}
 
 	/**
-	 * Getter of the property <tt>daten</tt>
-	 * 
+	 * Getter of the property <tt>daten</tt>.
 	 * @return Returns the daten.
 	 * @uml.property name="daten"
 	 */
@@ -127,8 +116,7 @@ public class View extends SimpleApplication {
 	}
 
 	/**
-	 * Setter of the property <tt>daten</tt>
-	 * 
+	 * Setter of the property <tt>daten</tt>.
 	 * @param daten
 	 *            The daten to set.
 	 * @uml.property name="daten"
@@ -139,8 +127,7 @@ public class View extends SimpleApplication {
 
 	/**
 	 * Getter of the property <tt>controller</tt>
-	 * 
-	 * @return Returns the controller.
+	 * 	 * @return Returns the controller.
 	 * @uml.property name="controller"
 	 */
 	public Controller getController() {
@@ -149,7 +136,6 @@ public class View extends SimpleApplication {
 
 	/**
 	 * Setter of the property <tt>controller</tt>
-	 * 
 	 * @param controller
 	 *            The controller to set.
 	 * @uml.property name="controller"
@@ -160,7 +146,6 @@ public class View extends SimpleApplication {
 
 	/**
 	 * Getter of the property <tt>mainAppState</tt>
-	 * 
 	 * @return Returns the mainAppState.
 	 * @uml.property name="mainAppState"
 	 */
@@ -170,7 +155,6 @@ public class View extends SimpleApplication {
 
 	/**
 	 * Setter of the property <tt>mainAppState</tt>
-	 * 
 	 * @param mainAppState
 	 *            The mainAppState to set.
 	 * @uml.property name="mainAppState"
@@ -180,8 +164,7 @@ public class View extends SimpleApplication {
 	}
 
 	/**
-	 * Getter of the property <tt>guiAppState</tt>
-	 * 
+	 * Getter of the property <tt>guiAppState</tt>.
 	 * @return Returns the guiAppState.
 	 * @uml.property name="guiAppState"
 	 */
@@ -190,54 +173,64 @@ public class View extends SimpleApplication {
 	}
 
 	/**
-	 * Setter of the property <tt>guiAppState</tt>
-	 * 
+	 * Setter of the property <tt>guiAppState</tt>.
 	 * @param guiAppState
 	 *            The guiAppState to set.
 	 * @uml.property name="guiAppState"
 	 */
-	public void setGuiAppState(GuiAppState guiAppState) {
+	public final void setGuiAppState(GuiAppState guiAppState) {
 		this.guiAppState = guiAppState;
 	}
 
 	/**
 	 * enables a plugin
-	 * 
 	 * @param p
 	 *            the plugin to enable
 	 */
-	public void enablePlugin(Plugin plugin) {
+	public final void enablePlugin(Plugin plugin) {
 		stateManager.attach(plugin);
 	}
 
 	/**
 	 * disables a plugin
-	 * 
 	 * @param p
 	 *            the plugin to detach
 	 */
-	public void disablePlugin(Plugin plugin) {
+	public final void disablePlugin(Plugin plugin) {
 		stateManager.detach(plugin);
 	}
-
+	/**
+	 * 
+	 */
 	public void toggleOverviewCam() {
 		mainAppState.toggleOverviewCam();
 	}
-
+	/**
+	 * 
+	 */
 	public void userSelect() {
 		mainAppState.userSelect();
 	}
-
+	/**
+	 * 
+	 * @param name
+	 * @param keyPressed
+	 */
 	public void userMoveAction(String name, boolean keyPressed) {
 		mainAppState.userMoveAction(name, keyPressed);		
 	}
-
+	/**
+	 * 
+	 */
 	public void toggleMouse() {
 		showMouse = !showMouse;
 		setMouseEnabled(showMouse);
 	}
 	
-	
+	/**
+	 * 
+	 * @param enabled
+	 */
 	public void setMouseEnabled(boolean enabled) {
 		inputManager.setCursorVisible(enabled);
 		flyCam.setEnabled(!enabled);

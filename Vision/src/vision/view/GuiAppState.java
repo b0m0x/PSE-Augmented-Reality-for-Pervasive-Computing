@@ -30,7 +30,7 @@ public class GuiAppState extends AbstractAppState  {
 	private View view;
 	
 	/**
-	 * Creates a new GuiAppState
+	 * Creates a new GuiAppState.
 	 * @param controller the controller
 	 * @param model the model
 	 */
@@ -40,10 +40,10 @@ public class GuiAppState extends AbstractAppState  {
 	}
 
 	/**
-	 * 
+	 * initializes the user interface.
 	 */
 	@Override
-	public void initialize(AppStateManager stateManager, Application app) {
+	public void initialize(final AppStateManager stateManager, Application app) {
 		// TODO Auto-generated method stub
 		super.initialize(stateManager, app);
 		this.view = (View) app;
@@ -51,7 +51,6 @@ public class GuiAppState extends AbstractAppState  {
                 app.getInputManager(),
                 app.getAudioRenderer(),
                 app.getGuiViewPort());
-		
         nifty = niftyDisplay.getNifty();
 		nifty.fromXml("gui.xml", "start", controller);
 		app.getGuiViewPort().addProcessor(niftyDisplay);
@@ -71,7 +70,6 @@ public class GuiAppState extends AbstractAppState  {
 		if (loaded == false) {
 
 			for (Plugin p: model.getPluginList()) {
-			
 				PanelBuilder pb = new PanelBuilder() { {
 					alignCenter();
 		            valignCenter();
@@ -81,7 +79,7 @@ public class GuiAppState extends AbstractAppState  {
 			pb.childLayoutHorizontal();
 			Element panel = pb.build(nifty, nifty.getCurrentScreen(), niftyElement);
 
-			LabelBuilder lb = new LabelBuilder(){{
+			LabelBuilder lb = new LabelBuilder() { {
 	            alignLeft();
 	            width("75%");
 	            color("#ff0000");
@@ -89,8 +87,8 @@ public class GuiAppState extends AbstractAppState  {
 			lb.text(p.getClass().getSimpleName());
 			Element el = lb.build(nifty, nifty.getCurrentScreen(), panel);
 
-			CheckboxBuilder chb= new CheckboxBuilder();
-			chb.id("Pluginchecbox_"+p.getClass().getName());
+			CheckboxBuilder chb = new CheckboxBuilder();
+			chb.id("Pluginchecbox_"+ p.getClass().getName());
 			chb.checked(view.getStateManager().hasState(p));
 			Element b = chb.build(nifty, nifty.getCurrentScreen(), panel);
 			loaded = true;
@@ -118,7 +116,6 @@ public class GuiAppState extends AbstractAppState  {
 				            width("100%");
 				            height("25%");
  					 } }; 
- 					 
 					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);
 					buttonloaded = true;
 				}
@@ -130,7 +127,7 @@ public class GuiAppState extends AbstractAppState  {
 	 * shows the State of the sensors.
 	 * @param sensorid
 	 */
-	public void showState(final String sensorid) {
+	public final void showState(final String sensorid) {
 		DrawDiagram.samples = model.getDatenbank().getAllSensorData(sensorid);
 		nifty.gotoScreen("draw");
 	}

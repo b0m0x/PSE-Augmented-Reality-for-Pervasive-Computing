@@ -12,7 +12,6 @@ import vision.view.View;
 
 /**
  * Main class starts up the whole software.
- * 
  */
 public class Vision {
 

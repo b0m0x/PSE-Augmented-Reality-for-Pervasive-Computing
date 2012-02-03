@@ -6,9 +6,9 @@ import java.util.logging.Level;
  * Holds global configuration variables.
  */
 public class Config {
-	
+
 	/**
-	 * defines where to fetch the sensor updates
+	 * defines where to fetch the sensor updates.
 	 */
 	public static final String SERVER_URL = "http://cumulus.teco.edu:51525/sensor/entity";
 

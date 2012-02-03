@@ -11,7 +11,10 @@ import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
 import vision.controller.PluginController;
-
+/**
+ * This class defines the Plugins.
+ *
+ */
 public abstract class Plugin extends AbstractAppState {
 
 	private static final Logger LOG = Logger.getLogger(Plugin.class.getName());
@@ -24,7 +27,7 @@ public abstract class Plugin extends AbstractAppState {
 	/**
 	 * @uml.property name="tags"
 	 */
-	private String tags[];
+	private String[] tags;
 
 	/**
 	 * @uml.property name="daten"
@@ -48,21 +51,19 @@ public abstract class Plugin extends AbstractAppState {
 
 	/**
 	 * Getter of the property <tt>sensors</tt>
-	 * 
 	 * @return Returns the sensors.
 	 * @uml.property name="sensors"
 	 */
-	public List<Sensor> getSensors() {
+	public final List<Sensor> getSensors() {
 		return sensors;
 	}
 
 	/**
 	 * Getter of the property <tt>tags</tt>
-	 * 
 	 * @return Returns the tags.
 	 * @uml.property name="tags"
 	 */
-	public String[] getTags() {
+	public final String[] getTags() {
 		return tags;
 	}
 
@@ -72,24 +73,27 @@ public abstract class Plugin extends AbstractAppState {
 
 	/**
 	 * Setter of the property <tt>tags</tt>
-	 * 
 	 * @param tags
 	 *            The tags to set.
 	 * @uml.property name="tags"
 	 */
-	public void setTags(String[] tags) {
+	public final void setTags(String[] tags) {
 		this.tags = tags;
 	}
 
 	/**
+	 * Creates the Pluging.
 	 */
-	public Plugin(Model model, String[] tags) {
+	public Plugin(final Model model, String[] tags) {
 		setTags(tags);
 		setDaten(model);
 		updateSensors();
 	}
 
 	/**
+	 * 
+	 * @param application
+	 * @param changed
 	 */
 	protected abstract void clientUpdate(Application application,
 			boolean changed);
@@ -100,13 +104,19 @@ public abstract class Plugin extends AbstractAppState {
 		setSensors(sensors);
 		lastSensorHashCode = daten.getSensor().hashCode();
 	}
-	
+	/**
+	 * update method.
+	 */
 	@Override
-	public void update(float tpf) {
+	public void update(final float tpf) {
 		super.update(tpf);
 		update(app);
 	}
-
+	
+	/**
+	 * This method updates sensord of the application.
+	 * @param application
+	 */
 	public void update(Application application) {
 		boolean changed = sensorsChanged();
 		if (changed) {
@@ -126,35 +136,33 @@ public abstract class Plugin extends AbstractAppState {
 	}
 
 	/**
-	 * Getter of the property <tt>daten</tt>
-	 * 
+	 * Getter of the property <tt>daten</tt>.
 	 * @return Returns the daten.
 	 * @uml.property name="daten"
 	 */
-	public Model getDaten() {
+	public final Model getDaten() {
 		return daten;
 	}
 
 	/**
-	 * Setter of the property <tt>daten</tt>
-	 * 
+	 * Setter of the property <tt>daten</tt>.
 	 * @param daten
 	 *            The daten to set.
 	 * @uml.property name="daten"
 	 */
-	public void setDaten(Model daten) {
+	public final void setDaten(Model daten) {
 		this.daten = daten;
 	}
 
 	/**
+	 * initializes the app.
 	 */
-	public void initialize(AppStateManager stateManager, Application app) {
+	public final void initialize(AppStateManager stateManager, Application app) {
 		this.app = app;
 	}
 
 	/**
-	 * Getter of the property <tt>app</tt>
-	 * 
+	 * Getter of the property <tt>app</tt>.
 	 * @return Returns the app.
 	 * @uml.property name="app"
 	 */
@@ -164,7 +172,6 @@ public abstract class Plugin extends AbstractAppState {
 
 	/**
 	 * Setter of the property <tt>sensors</tt>
-	 * 
 	 * @param sensors
 	 *            The sensors to set.
 	 * @uml.property name="sensors"
@@ -174,31 +181,33 @@ public abstract class Plugin extends AbstractAppState {
 	}
 
 	/**
-	 * Getter of the property <tt>pluginController</tt>
-	 * 
+	 * Getter of the property <tt>pluginController</tt>.
 	 * @return Returns the pluginController.
 	 * @uml.property name="pluginController"
 	 */
-	public PluginController getPluginController() {
+	public final PluginController getPluginController() {
 		return pluginController;
 	}
 
 	/**
-	 * Setter of the property <tt>pluginController</tt>
-	 * 
+	 * Setter of the property <tt>pluginController</tt>.
 	 * @param pluginController
 	 *            The pluginController to set.
 	 * @uml.property name="pluginController"
 	 */
-	public void setPluginController(PluginController pluginController) {
+	public final void setPluginController(PluginController pluginController) {
 		this.pluginController = pluginController;
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public void stateDetached(AppStateManager stateManager) {
 		super.stateDetached(stateManager);
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public void stateAttached(AppStateManager stateManager) {
 		super.stateAttached(stateManager);
