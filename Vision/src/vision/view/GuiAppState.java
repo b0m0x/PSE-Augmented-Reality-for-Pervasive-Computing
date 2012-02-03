@@ -43,7 +43,7 @@ public class GuiAppState extends AbstractAppState  {
 	 * initializes the user interface.
 	 */
 	@Override
-	public void initialize(final AppStateManager stateManager, Application app) {
+	public void initialize(AppStateManager stateManager, Application app) {
 		// TODO Auto-generated method stub
 		super.initialize(stateManager, app);
 		this.view = (View) app;

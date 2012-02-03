@@ -51,6 +51,7 @@ public abstract class Plugin extends AbstractAppState {
 	
 	
 	/**
+	 * Creates the Plugin
 	 */
 	public Plugin(Model model, String[] tags) {
 		setTags(tags);
@@ -91,14 +92,6 @@ public abstract class Plugin extends AbstractAppState {
 		this.tags = tags;
 	}
 
-	/**
-	 * Creates the Pluging.
-	 */
-	public Plugin(final Model model, String[] tags) {
-		setTags(tags);
-		setDaten(model);
-		updateSensors();
-	}
 
 	/**
 	 * 
@@ -167,7 +160,7 @@ public abstract class Plugin extends AbstractAppState {
 	/**
 	 * initializes the app.
 	 */
-	public final void initialize(AppStateManager stateManager, Application app) {
+	public void initialize(AppStateManager stateManager, Application app) {
 		this.app = app;
 	}
 
