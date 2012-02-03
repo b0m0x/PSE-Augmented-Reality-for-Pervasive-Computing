@@ -196,7 +196,6 @@ public abstract class Plugin extends AbstractAppState {
 	
 	@Override
 	public void stateDetached(AppStateManager stateManager) {
-		// TODO Auto-generated method stub
 		super.stateDetached(stateManager);
 	}
 	

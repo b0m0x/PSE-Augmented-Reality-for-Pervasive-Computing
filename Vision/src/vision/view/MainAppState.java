@@ -82,7 +82,7 @@ public class MainAppState extends AbstractAppState {
 			LOG.warning("No BulletAppState has been attached - continuing without physics");
 		} else {
 			pSpace = bas.getPhysicsSpace();
-			pSpace.setAccuracy(0.001f);
+			pSpace.setAccuracy(0.0001f);
 		}
 		
 		mainGeometryNode = new Node("static");
