@@ -23,7 +23,7 @@ public class UpdateThread extends Thread {
 	public void run() {
 
 		update = new Update(model);
-		update.getDatabase().connect();
+		update.getDatabase().connect(this);
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 
