@@ -966,35 +966,35 @@
 		<path>Models/table.j3o</path> 
 	</staticGeometry> 
 	
-		<staticGeometry> 
+	 <staticGeometry> 
 		<x>2</x> 
-		<y>8.5</y> 
+		<y>9</y> 
 		<angle>4.6415</angle> 
 		<path>Models/chair.j3o</path> 
 	</staticGeometry> 
 	
 	<staticGeometry> 
 		<x>1</x> 
-		<y>8.5</y> 
+		<y>9</y> 
 		<angle>3.1415</angle> 
 		<path>Models/table.j3o</path> 
 	</staticGeometry> 
 	
 		<staticGeometry> 
 		<x>2</x> 
-		<y>13.75</y> 
+		<y>14</y> 
 		<angle>4.6415</angle> 
 		<path>Models/chair.j3o</path> 
 	</staticGeometry> 
 	
 	<staticGeometry> 
 		<x>1</x> 
-		<y>13.75</y> 
+		<y>14</y> 
 		<angle>3.1415</angle> 
 		<path>Models/table.j3o</path> 
 	</staticGeometry> 
 	
-			<staticGeometry> 
+	<staticGeometry> 
 		<x>2</x> 
 		<y>18</y> 
 		<angle>4.6415</angle> 
@@ -1207,7 +1207,7 @@
 		<path>Models/table.j3o</path> 
 	</staticGeometry> 
 	
-			<staticGeometry> 
+		<staticGeometry> 
 		<x>-5</x> 
 		<y>45</y> 
 		<angle>1.6415</angle> 
