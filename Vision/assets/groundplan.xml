@@ -953,17 +953,35 @@
 	
 
 	<staticGeometry> 
-		<x>3.0</x> 
-		<y>30.0</y> 
-		<angle>3.1415</angle> 
+		<x>2</x> 
+		<y>3</y> 
+		<angle>4.6415</angle> 
 		<path>Models/chair.j3o</path> 
 	</staticGeometry> 
+	
 	<staticGeometry> 
-		<x>-5.0</x> 
-		<y>20.0</y> 
-		<angle>7.1415</angle> 
+		<x>1</x> 
+		<y>3</y> 
+		<angle>3.1415</angle> 
 		<path>Models/table.j3o</path> 
 	</staticGeometry> 
+	
+	
+	<staticGeometry> 
+		<x>9.5</x> 
+		<y>3</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>3</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+	
 	<light>
 		<number>1</number>
 		<positionX>2.422332333316</positionX>
