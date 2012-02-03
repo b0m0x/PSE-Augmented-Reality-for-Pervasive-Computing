@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import vision.model.Wall;
 import vision.model.WallAdapter;
+import vision.model.xml.Wall;
 
 public class WallAdapterTest {
 

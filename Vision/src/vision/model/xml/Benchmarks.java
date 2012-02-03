@@ -1,4 +1,4 @@
-package vision.model;
+package vision.model.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -10,14 +10,14 @@ import java.util.logging.Logger;
 import javax.vecmath.Quat4f;
 
 import vision.controller.WindowController;
-import vision.model.Hole;
 import vision.model.HoleAdapter;
 import vision.model.Model;
 import vision.model.Position;
 import vision.model.Sample;
 import vision.model.Sensor;
-import vision.model.Wall;
 import vision.model.WallAdapter;
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
 
 import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.app.Application;

@@ -1,4 +1,4 @@
-package vision.model;
+package vision.model.xml;
 
 import java.math.BigInteger;
 import javax.xml.bind.JAXBElement;

@@ -1,14 +1,14 @@
-package vision.model;
+package vision.model.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <pre>
  * &lt;complexType>
@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{}x"/>
  *         &lt;element ref="{}y"/>
- *         &lt;element ref="{}lat"/>
- *         &lt;element ref="{}lon"/>
+ *         &lt;element ref="{}angle"/>
+ *         &lt;element ref="{}path"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,16 +29,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "x",
     "y",
-    "lat",
-    "lon"
+    "angle",
+    "path"
 })
-@XmlRootElement(name = "reference")
-public class Reference {
+@XmlRootElement(name = "staticGeometry")
+public class StaticGeometry {
 
     protected float x;
     protected float y;
-    protected double lat;
-    protected double lon;
+    protected float angle;
+    @XmlElement(required = true)
+    private String path;
 
     /**
      * Gets the value of the x property.
@@ -50,7 +51,7 @@ public class Reference {
     /**
      * Sets the value of the x property.
      */
-    public final void setX(float value) {
+    public final void setX(final float value) {
         this.x = value;
     }
 
@@ -69,31 +70,37 @@ public class Reference {
     }
 
     /**
-     * Gets the value of the lat property.
+     * Gets the value of the angle property.
      */
-    public final double getLat() {
-        return lat;
+    public final float getAngle() {
+        return angle;
     }
 
     /**
-     * Sets the value of the lat property.
+     * Sets the value of the angle property.
      */
-    public final void setLat(double value) {
-        this.lat = value;
+    public final void setAngle(float value) {
+        this.angle = value;
     }
 
     /**
-     * Gets the value of the lon property.
+     * Gets the value of the path property.
+     * @return
+     *     possible object is
+     *     {@link String }
      */
-    public final double getLon() {
-        return lon;
+    public final String getPath() {
+        return path;
     }
 
     /**
-     * Sets the value of the lon property.
+     * Sets the value of the path property.
+     * @param value
+     *     allowed object is
+     *     {@link String }
      */
-    public final void setLon(double value) {
-        this.lon = value;
+    public final void setPath(String value) {
+        this.path = value;
     }
 
 }

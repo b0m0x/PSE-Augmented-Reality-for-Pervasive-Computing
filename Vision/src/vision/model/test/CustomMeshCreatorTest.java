@@ -12,8 +12,9 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
 
 import vision.model.CustomMeshCreator;
-import vision.model.Hole;
-import vision.model.Wall;
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
 import com.jme3.bullet.control.RigidBodyControl;
 
 public class CustomMeshCreatorTest {

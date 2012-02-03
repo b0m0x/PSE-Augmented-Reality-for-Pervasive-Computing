@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import javax.vecmath.Quat4f;
 
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
 
 import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;

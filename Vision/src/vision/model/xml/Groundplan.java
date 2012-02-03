@@ -1,4 +1,4 @@
-package vision.model;
+package vision.model.xml;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class Groundplan {
 	 * @return
 	 */
 	public Groundplan load() throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("vision.model");
+		JAXBContext jc = JAXBContext.newInstance("vision.model.xml");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		return (Groundplan) unmarshaller.unmarshal(new File(
 				Config.GROUNDPLAN_PATH));
