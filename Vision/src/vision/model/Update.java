@@ -110,9 +110,9 @@ public class Update {
 		int samplecounter = 1;
 
 		for (int i = 0; i < sensorlist.size(); i++) {
-			for (int j = 0; j < sensorlist.get(i).getMesswert().size(); j++) {
+			for (int j = 0; j < sensorlist.get(i).getSamples().size(); j++) {
 				database.updateSensors(sensorlist.get(i).getId(), l, sensorlist
-						.get(i).getMesswert().get(j), sensorlist.get(i)
+						.get(i).getSamples().get(j), sensorlist.get(i)
 						.getTags());
 				LOG.info("Sample " + (j + 1));
 				samplecounter++;

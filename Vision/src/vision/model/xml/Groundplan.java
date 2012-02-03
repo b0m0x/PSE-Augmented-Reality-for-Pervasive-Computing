@@ -89,7 +89,7 @@ public class Groundplan {
      * Objects of the following type(s) are allowed in the list
      * {@link Wall }
      */
-    public List<Wall> getWall() {
+    public List<Wall> getWalls() {
         if (wall == null) {
             wall = new ArrayList<Wall>();
         }
@@ -112,7 +112,7 @@ public class Groundplan {
      * Objects of the following type(s) are allowed in the list
      * {@link Reference }
      */
-    public final List<Reference> getReference() {
+    public final List<Reference> getReferencePoints() {
         if (reference == null) {
             reference = new ArrayList<Reference>();
         }
@@ -138,7 +138,7 @@ public class Groundplan {
      * {@link StaticGeometry }
 
      */
-    public final List<StaticGeometry> getStaticGeometry() {
+    public final List<StaticGeometry> getStaticGeometries() {
         if (staticGeometry == null) {
             staticGeometry = new ArrayList<StaticGeometry>();
         }
@@ -167,7 +167,7 @@ public class Groundplan {
      * 
      * 
      */
-    public final List<Light> getLight() {
+    public final List<Light> getLights() {
         if (light == null) {
             light = new ArrayList<Light>();
         }
@@ -181,7 +181,7 @@ public class Groundplan {
      *     possible object is
      *     {@link FloorCeiling }
      */
-    public final List<FloorCeiling> getFloorCeiling() {
+    public final List<FloorCeiling> getFloorAndCeilings() {
         return floorCeiling;
     }
 

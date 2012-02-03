@@ -67,7 +67,7 @@ public class WindowPlugin extends Plugin {
 				"Models/window.j3o");
 		windowopen = app.getAssetManager().loadModel(
 				"Models/windowopen.j3o");
-		for (Wall w : model.getGroundplan().getWall()) {
+		for (Wall w : model.getGroundplan().getWalls()) {
 			for (Hole h : w.getHole()) {
 				WallAdapter wallAdapter = new WallAdapter(w);
 				HoleAdapter holeAdapter = new HoleAdapter(h);
@@ -125,7 +125,7 @@ public class WindowPlugin extends Plugin {
 	private void addwindowSpatial(final Sensor sensor) {
 		windowSpatial = null;
 		float status = 0;
-		for (Sample sample : sensor.getMesswert()) {
+		for (Sample sample : sensor.getSamples()) {
 
 			if (sample.getTyp().equals("window")) {
 				status = sample.getValue();
@@ -154,7 +154,7 @@ public class WindowPlugin extends Plugin {
 	}
 
 	private Spatial fitInHole(Spatial windowSpatial) {
-		List<Wall> walls = model.getGroundplan().getWall();
+		List<Wall> walls = model.getGroundplan().getWalls();
 		Vector3f windowSpatialpos = windowSpatial.getLocalTranslation();
 		Hole smallestHole = walls.get(0).getHole().get(0);
 		Wall smallestWall = walls.get(0);

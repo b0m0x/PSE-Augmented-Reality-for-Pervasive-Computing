@@ -32,7 +32,7 @@ public class SensorTest {
 
 		assertEquals(500, sensor.getUpdate());
 		assertEquals("Sensor1", sensor.getId());
-		assertEquals(l, sensor.getMesswert());
+		assertEquals(l, sensor.getSamples());
 
 	}
 

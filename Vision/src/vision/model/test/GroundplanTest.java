@@ -21,16 +21,16 @@ public class GroundplanTest {
 
 	@Test
 	public void testGroundplan() {
-		Wall test = (Wall) gp.getWall().get(0);
+		Wall test = (Wall) gp.getWalls().get(0);
 		int number1 = test.getWallNumber();
 		float posx1 = test.getPositionX1();
 		assertEquals(number1, 1);
 		assertEquals(0.0, posx1, 0.000005);
 		
-		assertEquals(2, gp.getFloorCeiling().size());
-		assertEquals(40, gp.getStaticGeometry().size());
+		assertEquals(2, gp.getFloorAndCeilings().size());
+		assertEquals(40, gp.getStaticGeometries().size());
 
-		assertEquals(5, gp.getLight().size());
+		assertEquals(5, gp.getLights().size());
 
 	}
 

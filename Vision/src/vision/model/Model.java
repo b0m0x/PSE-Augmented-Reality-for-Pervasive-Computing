@@ -251,7 +251,7 @@ public class Model {
 	}
 
 	public List<Light> getLights() {
-		return groundplan.getLight();
+		return groundplan.getLights();
 	}
 
 	private void createGeometry() {
@@ -263,13 +263,13 @@ public class Model {
 
 		CustomMeshCreator meshCreator = new CustomMeshCreator();
 
-		for (Wall w : groundplan.getWall()) {
+		for (Wall w : groundplan.getWalls()) {
 			Spatial g = meshCreator.convert(w);
 			g.setMaterial(m);
 			staticGeometries.add(g);
 		}
 
-		for (StaticGeometry sg : groundplan.getStaticGeometry()) {
+		for (StaticGeometry sg : groundplan.getStaticGeometries()) {
 			Spatial geo = view.getAssetManager().loadModel(sg.getPath());
 			geo.rotate(0, sg.getAngle(), 0);
 			geo.setLocalTranslation(sg.getX(), -0.95f, sg.getY());
@@ -278,7 +278,7 @@ public class Model {
 		
 		Node ceilingNode = new Node("ceiling");
 
-		for (FloorCeiling fc : groundplan.getFloorCeiling()) {
+		for (FloorCeiling fc : groundplan.getFloorAndCeilings()) {
 			float MPX = (fc.getBenchmarks().get(0).getPositionX() + fc
 					.getBenchmarks().get(1).getPositionX()) / 2;
 			float MPY = (fc.getBenchmarks().get(0).getPositionY() + fc
@@ -303,7 +303,7 @@ public class Model {
 	}
 
 	public List<Reference> getReferencePoints() {
-		return groundplan.getReference();
+		return groundplan.getReferencePoints();
 	}
 
 	protected List<Sensor> createTestSensors() {
@@ -316,7 +316,7 @@ public class Model {
 		s.setPosition(new Position(0, 0, 0));
 		sensors.add(s);
 
-		List<Wall> walls = groundplan.getWall();
+		List<Wall> walls = groundplan.getWalls();
 		int i = 0;
 		for (Wall w : walls) {
 			List<Hole> holes = w.getHole();
