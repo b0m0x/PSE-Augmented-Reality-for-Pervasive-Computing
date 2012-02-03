@@ -31,7 +31,7 @@ public class PluginLoader {
 
 		for (int i = 0; i < pluginpaths.size(); i++) {
 
-			File fJar = new File(pluginpaths.get(i)); // Path of jar file
+			File fJar = new File(Config.PLUGIN_PATH + File.separator + pluginpaths.get(i)); // Path of jar file
 			URL url = null;
 			try {
 				// get Jar-Url
