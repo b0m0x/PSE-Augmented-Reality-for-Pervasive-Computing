@@ -66,9 +66,9 @@
                     <control name="checkbox" id="DebugCheckbox" checked="true" align="center" valign="center" ></control>
                 </panel>
                 
-                <panel id="iwasPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="25%" width="100%">
-                    <text id="iwasText" font="aurulent-sans-16.fnt" text="irgendetwas machen"  size="24" width="75%" height="100%" color="#ff0000ff"/>
-                    <control name="checkbox" id="iwasCheckbox" checked="true" align="center" valign="center" ></control>
+                <panel id="EffektPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="25%" width="100%">
+                    <text id="EffektText" font="aurulent-sans-16.fnt" text="Effekte einblenden"  size="24" width="75%" height="100%" color="#ff0000ff"/>
+                    <control name="checkbox" id="EffektCheckbox" checked="true" align="center" valign="center" ></control>
                 </panel> 
                 
                  

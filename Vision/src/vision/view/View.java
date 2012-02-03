@@ -258,5 +258,7 @@ public class View extends SimpleApplication {
 	}
 	
 	
-	
+	public void showEffectOfPlugin(Boolean b) {
+		
+	}
 }
