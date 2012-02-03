@@ -67,9 +67,6 @@ public class WindowPlugin extends Plugin {
 				"Models/window.j3o");
 		windowopen = app.getAssetManager().loadModel(
 				"Models/windowopen.j3o");
-		for (Sensor sensor : getSensors()) {
-			addwindowSpatial(sensor);
-		}
 		for (Wall w : model.getGroundplan().getWall()) {
 			for (Hole h : w.getHole()) {
 				WallAdapter wallAdapter = new WallAdapter(w);
@@ -101,7 +98,7 @@ public class WindowPlugin extends Plugin {
 	private void updatewindows() {
 		for (Sensor s : getSensors()) {
 			if (!windows.containsKey(s.getId())) {
-				Spatial dummy = windowclosed;
+				Spatial dummy = windowclosed.clone();
 				dummy.setLocalTranslation(s.getPosition().getX(), s
 						.getPosition().getY(), s.getPosition().getZ());
 				dummy = fitInHole(dummy);
@@ -110,17 +107,19 @@ public class WindowPlugin extends Plugin {
 							dummy.getLocalTranslation()) < 0.1f && window.getUserData("sid").equals("Dummy")) {
 						windows.remove(window);
 						view.getRootNode().detachChild(window);
+						
 					}
+					log.warning("dummy:" + dummy.getLocalTranslation().x + " " + dummy.getLocalTranslation().y + " " + dummy.getLocalTranslation().z);
 				}
 				addwindowSpatial(s);
-			}
+			}/*
 			for (Sample samp : s.getMesswert()) {
-				if (samp.equals("window")) {
+				if (samp.getTyp().equals("window")) {
 					view.getRootNode().detachChild(windows.get(s.getId()));
 					windows.remove(s.getId());
 					addwindowSpatial(s);
 				}
-			}
+			}*/
 		}
 	}
 

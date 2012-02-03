@@ -265,7 +265,7 @@ public class Model {
 		for (StaticGeometry sg : groundplan.getStaticGeometry()) {
 			Spatial geo = view.getAssetManager().loadModel(sg.getPath());
 			geo.rotate(0, sg.getAngle(), 0);
-			geo.setLocalTranslation(sg.getX(), 0, sg.getY());
+			geo.setLocalTranslation(sg.getX(), -0.95f, sg.getY());
 			staticGeometries.add(geo);
 		}
 		
