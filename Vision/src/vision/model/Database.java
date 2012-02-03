@@ -59,7 +59,7 @@ public class Database {
 				pst = conn.prepareStatement(insert);
 				pst.setString(1, id);
 				pst.setLong(2, zeitpunkt);
-				pst.setString(3, messwerte.getTyp());
+				pst.setString(3, messwerte.getType());
 				pst.setString(4, messwerte.getUnit());
 				pst.setLong(5, messwerte.getUpdate());
 				pst.setFloat(6, messwerte.getValue());
@@ -74,7 +74,7 @@ public class Database {
 				pst = conn.prepareStatement(insert);
 				pst.setString(1, id);
 				pst.setLong(2, zeitpunkt);
-				pst.setString(3, messwerte.getTyp());
+				pst.setString(3, messwerte.getType());
 				pst.setString(4, messwerte.getUnit());
 				pst.setLong(5, messwerte.getUpdate());
 				pst.setFloat(6, messwerte.getValue());
@@ -102,7 +102,7 @@ public class Database {
 				if (rs.getString("id").equals(id)
 						&& rs.getInt("zeitpunkt") == zeitpunkt) {
 					Sample sample = new Sample();
-					sample.setTyp(rs.getString("Type"));
+					sample.setType(rs.getString("Type"));
 					sample.setUnit(rs.getString("Unit"));
 					sample.setUpdate(rs.getLong("Updated"));
 					sample.setValue(rs.getFloat("Value"));
@@ -132,7 +132,7 @@ public class Database {
 					+ id + "'");
 			while (rs.next()) {
 				Sample sample = new Sample();
-				sample.setTyp(rs.getString("Type"));
+				sample.setType(rs.getString("Type"));
 				sample.setUnit(rs.getString("Unit"));
 				sample.setUpdate(rs.getLong("Updated"));
 				sample.setValue(rs.getFloat("Value"));
@@ -168,7 +168,7 @@ public class Database {
 						&& rs.getInt("zeitpunkt") >= from
 						&& rs.getInt("zeitpunkt") <= to) {
 					Sample sample = new Sample();
-					sample.setTyp(rs.getString("Type"));
+					sample.setType(rs.getString("Type"));
 					sample.setUnit(rs.getString("Unit"));
 					sample.setUpdate(rs.getLong("Updated"));
 					sample.setValue(rs.getFloat("Value"));

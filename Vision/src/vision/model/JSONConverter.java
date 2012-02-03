@@ -140,7 +140,7 @@ public class JSONConverter {
 
 					// sample.setSensor(sensor);
 
-					sample.setTyp(JSONObject.getNames(lvl2)[type]);
+					sample.setType(JSONObject.getNames(lvl2)[type]);
 					sample.setUnit(lvl3.getString("unit"));
 					sample.setUpdate(Long.parseLong(lvl3.getString("updated")));
 					sample.setValue(Float.parseFloat(lvl3.getString("value")));

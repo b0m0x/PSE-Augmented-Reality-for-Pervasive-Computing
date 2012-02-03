@@ -48,6 +48,16 @@ public abstract class Plugin extends AbstractAppState {
 	private PluginController pluginController;
 
 	private int lastSensorHashCode;
+	
+	
+	/**
+	 */
+	public Plugin(Model model, String[] tags) {
+		setTags(tags);
+		setDaten(model);
+		updateSensors();
+	}
+	
 
 	/**
 	 * Getter of the property <tt>sensors</tt>

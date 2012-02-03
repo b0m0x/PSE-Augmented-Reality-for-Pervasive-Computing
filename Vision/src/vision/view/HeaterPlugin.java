@@ -103,8 +103,8 @@ public class HeaterPlugin extends Plugin {
 		}
 
 		for (Sensor s : getSensors()) {
-			for (Sample sp : s.getMesswert()) {
-				if (sp.getTyp().equals("temperature")) {
+			for (Sample sp : s.getSamples()) {
+				if (sp.getType().equals("temperature")) {
 					final float temperature = sp.getValue();
 
 					final Material m = MaterialHelper.getInstance()
@@ -151,7 +151,7 @@ public class HeaterPlugin extends Plugin {
 		Vector3f closestHole = new Vector3f();
 		WallAdapter closestWall = null;
 		float distance = 10000.0f;
-		for (Wall w : model.getGroundplan().getWall()) {
+		for (Wall w : model.getGroundplan().getWalls()) {
 			WallAdapter wall = new WallAdapter(w);
 			for (Hole h : wall.getHoles()) {
 				if (h.getPositionY1() < 0.0001f) {

@@ -17,7 +17,7 @@ public class SensorTest {
 	public void test() {
 		List<Sample> l = new ArrayList<Sample>();
 		Sample s = new Sample();
-		s.setTyp("Temperatur");
+		s.setType("Temperatur");
 		s.setUnit("°C");
 		s.setUpdate(10000);
 		l.add(new Sample());
@@ -32,7 +32,7 @@ public class SensorTest {
 
 		assertEquals(500, sensor.getUpdate());
 		assertEquals("Sensor1", sensor.getId());
-		assertEquals(l, sensor.getMesswert());
+		assertEquals(l, sensor.getSamples());
 
 	}
 

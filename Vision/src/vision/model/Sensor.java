@@ -8,18 +8,7 @@ import java.util.List;
  * 
  */
 public class Sensor {
-
-	public Sensor() {
-		this.setMesswert();
-		tags = new ArrayList<String>();
-	}
-
-	public Sensor(String id, long time, List<Sample> samples) {
-		this.id = id;
-		messwert = samples;
-		update = time;
-	}
-
+	
 	/**
 	 * @uml.property name="id"
 	 */
@@ -28,7 +17,7 @@ public class Sensor {
 	/**
 	 * @uml.property name="tags"
 	 */
-	private List<String> tags;
+	private List<String> tags = new ArrayList<String>();
 
 	/**
 	 * @uml.property name="Description"
@@ -44,6 +33,26 @@ public class Sensor {
 	 * @uml.property name="registered"
 	 */
 	private long registered;
+	
+	/**
+	 * @uml.property name="position"
+	 * @uml.associationEnd inverse="sensor:vision.model.Position"
+	 */
+	private Position position;
+	private List<Sample> samples = new ArrayList<Sample>();
+
+
+
+	
+	public Sensor() {
+	}
+
+	public Sensor(String id, long time, List<Sample> samples) {
+		this.id = id;
+		this.samples = samples;
+		update = time;
+	}
+
 
 	/**
 	 * Getter of the property <tt>id</tt>
@@ -156,18 +165,13 @@ public class Sensor {
 	 * @return Returns the messwerte.
 	 * @uml.property name="messwerte"
 	 */
-	public List<Sample> getMesswert() {
-		return messwert;
+	public List<Sample> getSamples() {
+		return samples;
 	}
 
-	private List<Sample> messwert;
-
-	private void setMesswert() {
-		this.messwert = new ArrayList<Sample>();
-	}
 
 	public void addToSamples(Sample s) {
-		this.messwert.add(s);
+		this.samples.add(s);
 	}
 
 	public void addToTags(String s) {
@@ -179,12 +183,6 @@ public class Sensor {
 	 * 
 	 * @param sample
 	 */
-
-	/**
-	 * @uml.property name="position"
-	 * @uml.associationEnd inverse="sensor:vision.model.Position"
-	 */
-	private Position position;
 
 	/**
 	 * Getter of the property <tt>position</tt>

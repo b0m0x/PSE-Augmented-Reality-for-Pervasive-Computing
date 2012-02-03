@@ -9,16 +9,47 @@ public class Sample {
 	/**
 	 * @uml.property name="typ"
 	 */
-	private String typ;
+	private String type;
+	
 
+	/**
+	 * @uml.property name="unit"
+	 */
+	private String unit;
+
+
+	/**
+	 * @uml.property name="value"
+	 */
+	private float value;
+
+
+	/**
+	 * @uml.property name="update"
+	 */
+	private long update;
+
+	
+	public Sample() {
+
+	}
+	
+	public Sample(String typ, String unit, float value, long update) {
+		this.type = typ;
+		this.unit = unit;
+		this.value = value;
+		this.update = update;
+	}
+
+	
 	/**
 	 * Getter of the property <tt>typ</tt>
 	 * 
 	 * @return Returns the typ.
 	 * @uml.property name="typ"
 	 */
-	public String getTyp() {
-		return typ;
+	public String getType() {
+		return type;
 	}
 
 	/**
@@ -28,14 +59,9 @@ public class Sample {
 	 *            The typ to set.
 	 * @uml.property name="typ"
 	 */
-	public void setTyp(String typ) {
-		this.typ = typ;
+	public void setType(String type) {
+		this.type = type;
 	}
-
-	/**
-	 * @uml.property name="unit"
-	 */
-	private String unit;
 
 	/**
 	 * Getter of the property <tt>unit</tt>
@@ -59,11 +85,6 @@ public class Sample {
 	}
 
 	/**
-	 * @uml.property name="value"
-	 */
-	private float value;
-
-	/**
 	 * Getter of the property <tt>value</tt>
 	 * 
 	 * @return Returns the value.
@@ -83,11 +104,6 @@ public class Sample {
 	public void setValue(float value) {
 		this.value = value;
 	}
-
-	/**
-	 * @uml.property name="update"
-	 */
-	private long update;
 
 	/**
 	 * Getter of the property <tt>update</tt>
@@ -111,14 +127,5 @@ public class Sample {
 	}
 
 
-	public Sample(String typ, String unit, float value, long update) {
-		this.typ = typ;
-		this.unit = unit;
-		this.value = value;
-		this.update = update;
-	}
-
-	public Sample() {
-
-	}
+	
 }

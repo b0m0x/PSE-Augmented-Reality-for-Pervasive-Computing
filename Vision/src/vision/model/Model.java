@@ -33,7 +33,44 @@ import vision.view.View;
 public class Model {
 
 	UpdateThread updater;
+	/**
+	 * @uml.property name="view"
+	 * @uml.associationEnd inverse="daten:vision.view.View"
+	 */
+	private View view;
 
+	/**
+	 * @uml.property name="sensor"
+	 * @uml.associationEnd multiplicity="(0 -1)"
+	 *                     inverse="daten:vision.model.Sensor"
+	 */
+	private List<Sensor> sensor;
+	
+	/**
+	 * @uml.property name="pluginLoader"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="model:vision.model.PluginLoader"
+	 */
+	private PluginLoader pluginLoader = new vision.model.PluginLoader();
+
+	/**
+	 * @uml.property name="pluginList"
+	 */
+	private List<Plugin> pluginList = Collections.emptyList();
+
+	private List<PluginController> pluginControllerList = Collections
+			.emptyList();
+
+
+	/**
+	 * @uml.property name="groundplan"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="model:vision.model.Groundplan"
+	 */
+	private Groundplan groundplan;
+
+	private List<Spatial> staticGeometries;
+	
 	public Model(View view) throws JAXBException {
 
 
@@ -62,7 +99,7 @@ public class Model {
 	}
 
 	/**
-	 * ei
+	 * returns a list with all sensors containing one of the tags in the argument array
 	 */
 	public synchronized List<Sensor> getTaggedSensors(String[] tags) {
 		if (sensor == null) {
@@ -79,19 +116,7 @@ public class Model {
 		return tagged;
 	}
 
-	/**
-	 * @uml.property name="view"
-	 * @uml.associationEnd inverse="daten:vision.view.View"
-	 */
-	private View view;
-
-	/**
-	 * @uml.property name="sensor"
-	 * @uml.associationEnd multiplicity="(0 -1)"
-	 *                     inverse="daten:vision.model.Sensor"
-	 */
-	private List<Sensor> sensor;
-
+	
 	/**
 	 * Getter of the property <tt>sensor</tt>
 	 * 
@@ -125,21 +150,7 @@ public class Model {
 		this.sensor = sensor;
 	}
 
-	/**
-	 * @uml.property name="pluginLoader"
-	 * @uml.associationEnd multiplicity="(1 1)"
-	 *                     inverse="model:vision.model.PluginLoader"
-	 */
-	private PluginLoader pluginLoader = new vision.model.PluginLoader();
-
-	/**
-	 * @uml.property name="pluginList"
-	 */
-	private List<Plugin> pluginList = Collections.emptyList();
-
-	private List<PluginController> pluginControllerList = Collections
-			.emptyList();
-
+	
 	/**
 	 * Getter of the property <tt>pluginList</tt>
 	 * 
@@ -171,14 +182,7 @@ public class Model {
 		return getSensor();
 	}
 
-	/**
-	 * @uml.property name="groundplan"
-	 * @uml.associationEnd multiplicity="(1 1)"
-	 *                     inverse="model:vision.model.Groundplan"
-	 */
-	private Groundplan groundplan;
-
-	private List<Spatial> staticGeometries;
+	
 
 	/**
 	 * Getter of the property <tt>groundplan</tt>
@@ -251,7 +255,7 @@ public class Model {
 	}
 
 	public List<Light> getLights() {
-		return groundplan.getLight();
+		return groundplan.getLights();
 	}
 
 	private void createGeometry() {
@@ -263,13 +267,13 @@ public class Model {
 
 		CustomMeshCreator meshCreator = new CustomMeshCreator();
 
-		for (Wall w : groundplan.getWall()) {
+		for (Wall w : groundplan.getWalls()) {
 			Spatial g = meshCreator.convert(w);
 			g.setMaterial(m);
 			staticGeometries.add(g);
 		}
 
-		for (StaticGeometry sg : groundplan.getStaticGeometry()) {
+		for (StaticGeometry sg : groundplan.getStaticGeometries()) {
 			Spatial geo = view.getAssetManager().loadModel(sg.getPath());
 			geo.rotate(0, sg.getAngle(), 0);
 			geo.setLocalTranslation(sg.getX(), -0.95f, sg.getY());
@@ -278,7 +282,7 @@ public class Model {
 		
 		Node ceilingNode = new Node("ceiling");
 
-		for (FloorCeiling fc : groundplan.getFloorCeiling()) {
+		for (FloorCeiling fc : groundplan.getFloorAndCeilings()) {
 			float MPX = (fc.getBenchmarks().get(0).getPositionX() + fc
 					.getBenchmarks().get(1).getPositionX()) / 2;
 			float MPY = (fc.getBenchmarks().get(0).getPositionY() + fc
@@ -303,7 +307,7 @@ public class Model {
 	}
 
 	public List<Reference> getReferencePoints() {
-		return groundplan.getReference();
+		return groundplan.getReferencePoints();
 	}
 
 	protected List<Sensor> createTestSensors() {
@@ -316,7 +320,7 @@ public class Model {
 		s.setPosition(new Position(0, 0, 0));
 		sensors.add(s);
 
-		List<Wall> walls = groundplan.getWall();
+		List<Wall> walls = groundplan.getWalls();
 		int i = 0;
 		for (Wall w : walls) {
 			List<Hole> holes = w.getHole();
