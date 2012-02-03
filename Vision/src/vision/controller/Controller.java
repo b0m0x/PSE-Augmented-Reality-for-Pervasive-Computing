@@ -253,7 +253,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 		
 	@NiftyEventSubscriber(id = "EffektCheckbox")
 	public void showEffects(String id, CheckBoxStateChangedEvent cbsce) {
-		view.showEffectOfPlugin(cbsce.isChecked());
+		view.enablePostProcessingEffects(cbsce.isChecked());
 	}
 	
 
