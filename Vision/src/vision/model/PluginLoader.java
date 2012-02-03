@@ -21,10 +21,21 @@ public class PluginLoader {
 	private List<Plugin> plugins = new ArrayList<Plugin>();
 	private List<PluginController> pluginController = new ArrayList<PluginController>();
 
+	/**
+	 * returns the controllers belonging to the plugins.
+	 * call loadPlugins before or you will get an empty list
+	 * @return a list of plugin controllers, or an empty list if none have been loaded yet
+	 */
 	public List<PluginController> getController() {
 		return pluginController;
 	}
-
+	
+	/**
+	 * loads all plugins from the Config.PLUGIN_PATH path and returns one instance of each
+	 * @param model model 
+	 * @param view view 
+	 * @return a list of plugin instances
+	 */
 	public List<Plugin> loadPlugins(Model model, View view) {
 
 		List<String> pluginpaths = getPluginPaths();
@@ -69,7 +80,7 @@ public class PluginLoader {
 		return plugins;
 	}
 
-	public List<String> getPluginPaths() {
+	private List<String> getPluginPaths() {
 		List<String> pathlist = new ArrayList<String>();
 		File pluginFolder = new File(Config.PLUGIN_PATH);
 
