@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import javax.xml.bind.JAXBException;
 
-import vision.model.Groundplan;
-import vision.model.Wall;
+import vision.model.xml.Groundplan;
+import vision.model.xml.Wall;
 
 public class GroundplanTest {
 
@@ -16,7 +16,7 @@ public class GroundplanTest {
 
 	@Before
 	public void setUp() throws JAXBException {
-		gp = new vision.model.Groundplan().load();
+		gp = new vision.model.xml.Groundplan().load();
 	}
 
 	@Test
@@ -26,6 +26,11 @@ public class GroundplanTest {
 		float posx1 = test.getPositionX1();
 		assertEquals(number1, 1);
 		assertEquals(0.0, posx1, 0.000005);
+		
+		assertEquals(2, gp.getFloorCeiling().size());
+		assertEquals(40, gp.getStaticGeometry().size());
+
+		assertEquals(5, gp.getLight().size());
 
 	}
 

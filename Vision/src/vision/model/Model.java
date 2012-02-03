@@ -16,6 +16,13 @@ import com.jme3.scene.Spatial;
 
 import vision.Config;
 import vision.controller.PluginController;
+import vision.model.xml.FloorCeiling;
+import vision.model.xml.Groundplan;
+import vision.model.xml.Hole;
+import vision.model.xml.Light;
+import vision.model.xml.Reference;
+import vision.model.xml.StaticGeometry;
+import vision.model.xml.Wall;
 import vision.view.Plugin;
 import vision.view.View;
 
@@ -30,7 +37,7 @@ public class Model {
 	public Model(View view) throws JAXBException {
 
 
-		this.groundplan = new vision.model.Groundplan().load();
+		this.groundplan = new vision.model.xml.Groundplan().load();
 //		 sensor = createTestSensors();
 		sensor = Collections.emptyList();
 		this.view = view;

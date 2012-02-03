@@ -23,6 +23,7 @@ import com.bulletphysics.linearmath.MatrixUtil;
 import com.jme3.math.Matrix3f;
 
 import vision.Config;
+import vision.model.xml.Reference;
 /**
  * This class Converts the Data of the JSON stream.
  */

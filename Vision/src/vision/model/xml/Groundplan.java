@@ -1,4 +1,4 @@
-package vision.model;
+package vision.model.xml;
 
 import java.io.File;
 import java.util.ArrayList;

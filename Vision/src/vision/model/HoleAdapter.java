@@ -1,5 +1,7 @@
 package vision.model;
 
+import vision.model.xml.Hole;
+
 import com.jme3.math.Vector2f;
 
 public class HoleAdapter {

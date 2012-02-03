@@ -38,8 +38,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import vision.controller.Controller;
-import vision.model.Light;
 import vision.model.Model;
+import vision.model.xml.Light;
 
 /**
  * Renders all static objects and rooms

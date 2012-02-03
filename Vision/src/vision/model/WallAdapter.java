@@ -2,6 +2,9 @@ package vision.model;
 
 import java.util.List;
 
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 
