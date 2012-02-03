@@ -34,11 +34,11 @@ import vision.view.View;
  * 
  */
 public class Controller implements ScreenController, ActionListener, AnalogListener  {
-	
+
 	private Nifty nifty;
 	private Screen screen;
 	private final static Logger LOG = Logger.getLogger(Controller.class.getName());
-	
+
 	/**
 	 * Constructs a new Controller.
 	 * @param view the view
