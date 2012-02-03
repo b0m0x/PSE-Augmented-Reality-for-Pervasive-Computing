@@ -98,7 +98,6 @@ public abstract class Plugin extends AbstractAppState {
 		List<Sensor> sensors = new ArrayList<Sensor>();
 		sensors = daten.getTaggedSensors(tags);
 		setSensors(sensors);
-		LOG.info("Old hashcode: " + lastSensorHashCode + "; new code: "+ daten.getSensor().hashCode());
 		lastSensorHashCode = daten.getSensor().hashCode();
 	}
 	
@@ -197,7 +196,6 @@ public abstract class Plugin extends AbstractAppState {
 	
 	@Override
 	public void stateDetached(AppStateManager stateManager) {
-		// TODO Auto-generated method stub
 		super.stateDetached(stateManager);
 	}
 	

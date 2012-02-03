@@ -109,7 +109,6 @@ public class WindowPlugin extends Plugin {
 						view.getRootNode().detachChild(window);
 						
 					}
-					log.warning("dummy:" + dummy.getLocalTranslation().x + " " + dummy.getLocalTranslation().y + " " + dummy.getLocalTranslation().z);
 				}
 				addwindowSpatial(s);
 			}/*
@@ -140,11 +139,7 @@ public class WindowPlugin extends Plugin {
 		}
 		windowSpatial.setLocalTranslation(sensor.getPosition().getX(), sensor
 				.getPosition().getY(), sensor.getPosition().getZ());
-		Logger.getLogger(this.getClass().getName()).warning(
-				"Added bar at " + windowSpatial.getLocalTranslation());
 		windowSpatial = fitInHole(windowSpatial);
-		Logger.getLogger(this.getClass().getName()).warning(
-				"Move bar at " + windowSpatial.getLocalTranslation());
 		windowSpatial.setUserData("sid", sensor.getId());
 		windowSpatial.depthFirstTraversal(new SceneGraphVisitor() {
 
