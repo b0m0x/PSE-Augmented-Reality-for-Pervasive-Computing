@@ -109,7 +109,6 @@ public class WindowPlugin extends Plugin {
 						view.getRootNode().detachChild(window);
 						
 					}
-					log.warning("dummy:" + dummy.getLocalTranslation().x + " " + dummy.getLocalTranslation().y + " " + dummy.getLocalTranslation().z);
 				}
 				addwindowSpatial(s);
 			}/*
