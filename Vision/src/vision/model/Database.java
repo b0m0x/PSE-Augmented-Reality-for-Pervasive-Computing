@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.h2.jdbc.JdbcSQLException;
+
 /**
  * manages the database connection and saves sensordata
  * 
@@ -18,8 +20,10 @@ import java.util.logging.Logger;
  */
 public class Database {
 
-	private static final Logger LOG = Logger.getLogger(Database.class.getName());
+	private static final Logger LOG = Logger
+			.getLogger(Database.class.getName());
 	private Connection conn;
+	private boolean inUse = false;
 
 	private boolean tableExists(String tableName, Connection conn) {
 		try {
@@ -46,7 +50,12 @@ public class Database {
 		try {
 			String insert = "INSERT INTO SAMPLES VALUES(?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pst;
-			Statement st = conn.createStatement();
+			Statement st = null;
+			if (!inUse) {
+				st = conn.createStatement();
+			} else {
+				return;
+			}
 
 			if (tableExists("SAMPLES", conn)) {
 				pst = conn.prepareStatement(insert);
@@ -121,7 +130,8 @@ public class Database {
 		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM Samples WHERE id = '" + id + "'");
+			ResultSet rs = st.executeQuery("SELECT * FROM Samples WHERE id = '"
+					+ id + "'");
 			while (rs.next()) {
 				Sample sample = new Sample();
 				sample.setTyp(rs.getString("Type"));
@@ -134,7 +144,7 @@ public class Database {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			LOG.warning("Error getting all Sensor Data");
-			//System.exit(0);
+			// System.exit(0);
 			return null;
 		}
 
@@ -233,26 +243,33 @@ public class Database {
 		return tags;
 	}
 
-	public synchronized void connect() {
+	public synchronized void connect(UpdateThread bg) {
 		try {
-			//Class.forName("org.h2.Driver");
+			// Class.forName("org.h2.Driver");
 			try {
 				wait(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			conn = DriverManager.getConnection("jdbc:h2:database/db", "user",
-					"pw");
+			try {
+				conn = DriverManager.getConnection("jdbc:h2:database/db",
+						"user", "pw");
+			} catch (JdbcSQLException e) {
+				inUse = true;
+				LOG.warning("Database already in use. Please close all instances of \"Vision\"...");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	public void disconnect() {
 		try {
-			conn.close();
+			if (!inUse) {
+				conn.close();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

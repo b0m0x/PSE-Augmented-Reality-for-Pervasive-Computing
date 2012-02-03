@@ -153,8 +153,8 @@ public class MainAppState extends AbstractAppState {
 		for (Light l : model.getLights()) {
 			PointLight lamp_light = new PointLight();
 			lamp_light.setColor(ColorRGBA.White);
-			lamp_light.setRadius(20f);
-			lamp_light.setPosition(new Vector3f(l.getPositionX(), 3, l.getPositionY()));
+			lamp_light.setRadius(10f);
+			lamp_light.setPosition(new Vector3f(l.getPositionX(), 3f, l.getPositionY()));
 			app.getRootNode().addLight(lamp_light);
 		}
 		//add light

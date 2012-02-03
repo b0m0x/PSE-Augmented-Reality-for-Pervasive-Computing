@@ -679,7 +679,7 @@
 	<wall>
 		<wallNumber>13</wallNumber>
 		<positionX1>12.5</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.1</positionY1>
 		<positionX2>7.6</positionX2>
 		<positionY2>2.1</positionY2>
 		<height>2.7</height>
@@ -776,7 +776,7 @@
 
 	<wall>
 		<wallNumber>22</wallNumber>
-		<positionX1>6.73</positionX1>
+		<positionX1>7.2</positionX1>
 		<positionY1>45.8</positionY1>
 		<positionX2>7.1</positionX2>
 		<positionY2>40</positionY2>
@@ -818,7 +818,7 @@
 	<wall>
 		<wallNumber>26</wallNumber>
 		<positionX1>0</positionX1>
-		<positionY1>2.5</positionY1>
+		<positionY1>2.1</positionY1>
 		<positionX2>4.5</positionX2>
 		<positionY2>2.1</positionY2>
 		<height>2.7</height>
@@ -832,6 +832,14 @@
 		<positionX2>5.5</positionX2>
 		<positionY2>3.5</positionY2>
 		<height>2.7</height>
+		
+				<hole>
+			<holeNumber>1</holeNumber>
+			<positionX1>0.1</positionX1>
+			<positionY1>1.3</positionY1>
+			<positionX2>1.5</positionX2>
+			<positionY2>2.3</positionY2>
+		</hole>
 		<wide>0.1</wide>
 	</wall>
 
@@ -945,17 +953,288 @@
 	
 
 	<staticGeometry> 
-		<x>3.0</x> 
-		<y>30.0</y> 
-		<angle>3.1415</angle> 
+		<x>2</x> 
+		<y>3</y> 
+		<angle>4.6415</angle> 
 		<path>Models/chair.j3o</path> 
 	</staticGeometry> 
+	
 	<staticGeometry> 
-		<x>-5.0</x> 
-		<y>20.0</y> 
-		<angle>7.1415</angle> 
+		<x>1</x> 
+		<y>3</y> 
+		<angle>3.1415</angle> 
 		<path>Models/table.j3o</path> 
 	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>2</x> 
+		<y>8.5</y> 
+		<angle>4.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>1</x> 
+		<y>8.5</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>2</x> 
+		<y>13.75</y> 
+		<angle>4.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>1</x> 
+		<y>13.75</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+			<staticGeometry> 
+		<x>2</x> 
+		<y>18</y> 
+		<angle>4.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>1</x> 
+		<y>18</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+			<staticGeometry> 
+		<x>2</x> 
+		<y>22</y> 
+		<angle>4.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>1</x> 
+		<y>22</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>2</x> 
+		<y>25</y> 
+		<angle>4.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>1</x> 
+		<y>25</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+	
+		<staticGeometry> 
+		<x>2</x> 
+		<y>30</y> 
+		<angle>4.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>1</x> 
+		<y>30</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+	
+	
+	<staticGeometry> 
+		<x>9.5</x> 
+		<y>3</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>3</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>10</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>10</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>15.5</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>15.5</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 	
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>19.5</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>19.5</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>24</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>24</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>29.5</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>29.5</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 	
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>33</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>33</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>36.5</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>36.5</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>9.5</x> 
+		<y>42</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>10.5</x> 
+		<y>42</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>4</x> 
+		<y>42</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>5</x> 
+		<y>42</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+		<staticGeometry> 
+		<x>0</x> 
+		<y>44</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>1</x> 
+		<y>44</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+			<staticGeometry> 
+		<x>-5</x> 
+		<y>45</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>-4</x> 
+		<y>45</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
+				<staticGeometry> 
+		<x>-5</x> 
+		<y>37</y> 
+		<angle>1.6415</angle> 
+		<path>Models/chair.j3o</path> 
+	</staticGeometry> 
+	
+	<staticGeometry> 
+		<x>-4</x> 
+		<y>37</y> 
+		<angle>3.1415</angle> 
+		<path>Models/table.j3o</path> 
+	</staticGeometry> 
+	
 	<light>
 		<number>1</number>
 		<positionX>2.422332333316</positionX>

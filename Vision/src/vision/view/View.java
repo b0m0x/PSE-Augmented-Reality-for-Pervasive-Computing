@@ -14,15 +14,12 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
-import com.jme3.input.FlyByCamera;
-import com.jme3.math.Quaternion;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.Camera;
-import com.jme3.renderer.Renderer;
-import com.jme3.renderer.ViewPort;
-import com.jme3.texture.Texture;
+import com.jme3.post.FilterPostProcessor;
+import com.jme3.post.filters.BloomFilter;
+import com.jme3.post.filters.DepthOfFieldFilter;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -62,6 +59,10 @@ public class View extends SimpleApplication {
 
 	private boolean showMouse;
 
+	private BloomFilter bloomFilter;
+
+	private FilterPostProcessor fpp;
+
 
 
 	/**
@@ -85,10 +86,30 @@ public class View extends SimpleApplication {
 		}
 		
 		setUpCam();
+		setUpPostProcessingEffects();
 		
 	}
 	
 	
+
+
+	private void setUpPostProcessingEffects() {
+
+        fpp = new FilterPostProcessor(assetManager);
+        //     fpp.setNumSamples(4);
+
+        bloomFilter = new BloomFilter();
+        bloomFilter.setBlurScale(1.4f);
+        bloomFilter.setBloomIntensity(0.1f);
+        bloomFilter.setExposureCutOff(0.01f);
+        bloomFilter.setExposurePower(2.f);
+        bloomFilter.setDownSamplingFactor(2f);
+        fpp.addFilter(bloomFilter);
+        viewPort.addProcessor(fpp);
+		
+	}
+
+
 
 
 	private void setUpCam() {
@@ -257,4 +278,10 @@ public class View extends SimpleApplication {
 		super.stop();
 	}
 	
+	/**
+	 * enables or disables the bloom effect
+	 */
+	public void enablePostProcessingEffects(boolean enable) {
+		bloomFilter.setEnabled(enable);
+	}
 }

@@ -187,7 +187,6 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 
 	
 		
-	private boolean loaded;
 	
 	/**
 	 * gets called if the user pressed the activate/deactivate button
@@ -225,7 +224,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	
 	
 	/**
-	 * 
+	 * gets called, when the user clicks the button "overview" then switches to the overview
 	 * @param id
 	 * @param o
 	 */
@@ -234,11 +233,27 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 		view.toggleOverviewCam();
 		Logger.getLogger("here").warning("click");
 	}
-
+	
+	/**
+	 * gets called, when the user clicks to the button to go back to the mainscreen
+	 */
 	@NiftyEventSubscriber(id = "btn_back")
 	public void backToMainScreen(String id, ButtonClickedEvent bce) {
 		nifty.gotoScreen("start");
 		
+	}
+	
+	/**
+	 * gets called if the user checks or unchecks the checkbox for the Debug information
+	 */
+	@NiftyEventSubscriber(id = "DebugCheckbox")
+	public void showDebugInformation(String id, CheckBoxStateChangedEvent cbsce) {
+		view.setDisplayStatView(cbsce.isChecked());
+	}
+		
+	@NiftyEventSubscriber(id = "EffektCheckbox")
+	public void showEffects(String id, CheckBoxStateChangedEvent cbsce) {
+		view.enablePostProcessingEffects(cbsce.isChecked());
 	}
 	
 
