@@ -41,7 +41,7 @@ public class WindowPlugin extends Plugin {
 	Logger log = Logger.getLogger(WindowPlugin.class.getName());
 
 	public WindowPlugin(Model model, View view) {
-		super(model, new String[] { "windowSpatial" });
+		super(model, new String[] { "window" });
 		this.model = model;
 		this.view = view;
 	}
@@ -66,15 +66,15 @@ public class WindowPlugin extends Plugin {
 		windowclosed = app.getAssetManager().loadModel(
 				"Models/window.j3o");
 		windowopen = app.getAssetManager().loadModel(
-				"Models/windowopen.blend");
-		for (final Sensor sensor : getSensors()) {
+				"Models/windowopen.j3o");
+		for (Sensor sensor : getSensors()) {
 			addwindowSpatial(sensor);
 		}
 		for (Wall w : model.getGroundplan().getWall()) {
 			for (Hole h : w.getHole()) {
 				WallAdapter wallAdapter = new WallAdapter(w);
 				HoleAdapter holeAdapter = new HoleAdapter(h);
-				Vector3f vec = createVector(wallAdapter, holeAdapter);
+				Vector3f vec = getWorldPosition(wallAdapter, holeAdapter);
 				boolean empty = true;
 				for (Spatial windowSpatial : windows.values()) {
 					if (windowSpatial.getLocalTranslation().distance(vec) < 0.1f) {
@@ -114,6 +114,13 @@ public class WindowPlugin extends Plugin {
 				}
 				addwindowSpatial(s);
 			}
+			for (Sample samp : s.getMesswert()) {
+				if (samp.equals("window")) {
+					view.getRootNode().detachChild(windows.get(s.getId()));
+					windows.remove(s.getId());
+					addwindowSpatial(s);
+				}
+			}
 		}
 	}
 
@@ -121,15 +128,16 @@ public class WindowPlugin extends Plugin {
 		windowSpatial = null;
 		float status = 0;
 		for (Sample sample : sensor.getMesswert()) {
-			if (sample.getTyp().equals("windowSpatial")) {
+
+			if (sample.getTyp().equals("window")) {
 				status = sample.getValue();
 				break;
 			}
 		}
 		if (status > 0) {
-			windowSpatial = windowopen;
+			windowSpatial = windowopen.clone();
 		} else {
-			windowSpatial = windowclosed;
+			windowSpatial = windowclosed.clone();
 		}
 		windowSpatial.setLocalTranslation(sensor.getPosition().getX(), sensor
 				.getPosition().getY(), sensor.getPosition().getZ());
@@ -148,7 +156,7 @@ public class WindowPlugin extends Plugin {
 			}
 		});
 		windows.put(sensor.getId(), windowSpatial);
-		view.getRootNode().attachChild(windowSpatial.clone());
+		view.getRootNode().attachChild(windowSpatial);
 	}
 
 	private Spatial fitInHole(Spatial windowSpatial) {
@@ -162,7 +170,7 @@ public class WindowPlugin extends Plugin {
 			for (Hole h : holes) {
 				HoleAdapter holeAdapter = new HoleAdapter(h);
 				WallAdapter wallAdapter = new WallAdapter(w);
-				Vector3f HoleVec3 = new Vector3f(createVector(wallAdapter,
+				Vector3f HoleVec3 = new Vector3f(getWorldPosition(wallAdapter,
 						holeAdapter));
 				if (HoleVec3.distance(windowSpatialpos) < distance
 						&& h.getPositionY1() > 0) {
@@ -176,7 +184,7 @@ public class WindowPlugin extends Plugin {
 		WallAdapter wallAdapter = new WallAdapter(smallestWall);
 		float rotation = wallAdapter.getRotation();
 		Vector3f HoleVec3f = new Vector3f(
-				createVector(wallAdapter, holeAdapter));
+				getWorldPosition(wallAdapter, holeAdapter));
 		windowSpatial.setLocalTranslation(HoleVec3f);
 		Quat4f rot = new Quat4f();
 		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0),
@@ -192,7 +200,7 @@ public class WindowPlugin extends Plugin {
 		return windowSpatial;
 	}
 
-	private Vector3f createVector(WallAdapter wallAdapter,
+	private Vector3f getWorldPosition(WallAdapter wallAdapter,
 			HoleAdapter holeAdapter) {
 		float newX = -(float) (Math.sin(-Math.PI / 2
 				+ wallAdapter.getRotation()) * holeAdapter.getPosition().x)
