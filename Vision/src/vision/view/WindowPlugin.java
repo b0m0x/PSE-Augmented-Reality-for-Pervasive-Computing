@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.vecmath.Quat4f;
@@ -47,9 +48,6 @@ public class WindowPlugin extends Plugin {
 
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
-		if (isInitialized()) {
-			return;
-		}
 		super.initialize(stateManager, app);
 	}
 
@@ -184,7 +182,7 @@ public class WindowPlugin extends Plugin {
 		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0),
 				(float) (rotation + Math.PI / 2));
 		windowSpatial.setLocalRotation(Converter.convert(rot));
-		if (windowSpatial == windowopen) {
+		if (windowSpatial.equals(windowopen)) {
 			windowSpatial.setLocalScale(wallAdapter.getDepth(), holeAdapter
 					.getSize().getX(), holeAdapter.getSize().getY());
 		} else {
@@ -209,17 +207,12 @@ public class WindowPlugin extends Plugin {
 	}
 
 	private void createDummy(Vector3f vec, Application app) {
-		Sensor sensor = new Sensor();
-		sensor.addToTags("windowSpatial");
-		sensor.addToSamples(new Sample("windowSpatial", "bool", 0.0f, System
-				.currentTimeMillis()));
-		sensor.setId("Dummy");
-		sensor.setPosition(new Position(vec.getX(), vec.getY(), vec.getZ()));
-		windowSpatial = windowclosed;
+		windowSpatial = windowclosed.clone();
 		windowSpatial.setLocalTranslation(vec);
 		windowSpatial = fitInHole(windowSpatial);
-		windowSpatial.setUserData("sid", sensor.getId());
-		windows.put(sensor.getId(), windowSpatial);
-		view.getRootNode().attachChild(windowSpatial.clone());
+		windowSpatial.setUserData("sid", "Dummy");
+		
+		windows.put(UUID.randomUUID().toString(), windowSpatial); // put it in so we can detach them later
+		view.getRootNode().attachChild(windowSpatial);
 	}
 }

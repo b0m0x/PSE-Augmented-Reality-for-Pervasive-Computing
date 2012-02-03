@@ -67,7 +67,7 @@
                 </panel>
                 
                 <panel id="EffektPanel" childLayout="horizontal" align="center" valign="center" color="000f" height="25%" width="100%">
-                    <text id="EffektText" font="aurulent-sans-16.fnt" text="Effekte einblenden"  size="24" width="75%" height="100%" color="#ff0000ff"/>
+                    <text id="EffektText" font="aurulent-sans-16.fnt" text="enable post processing effects"  size="24" width="75%" height="100%" color="#ff0000ff"/>
                     <control name="checkbox" id="EffektCheckbox" checked="true" align="center" valign="center" ></control>
                 </panel> 
                 

@@ -278,8 +278,10 @@ public class View extends SimpleApplication {
 		super.stop();
 	}
 	
-	
-	public void showEffectOfPlugin(Boolean b) {
-		
+	/**
+	 * enables or disables the bloom effect
+	 */
+	public void enablePostProcessingEffects(boolean enable) {
+		bloomFilter.setEnabled(enable);
 	}
 }
