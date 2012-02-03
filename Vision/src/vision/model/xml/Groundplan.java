@@ -55,7 +55,7 @@ public class Groundplan {
 	 * @return
 	 */
 	public Groundplan load() throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("vision.model");
+		JAXBContext jc = JAXBContext.newInstance("vision.model.xml");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		return (Groundplan) unmarshaller.unmarshal(new File(
 				Config.GROUNDPLAN_PATH));
