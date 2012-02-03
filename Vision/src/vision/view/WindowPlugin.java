@@ -127,7 +127,7 @@ public class WindowPlugin extends Plugin {
 		float status = 0;
 		for (Sample sample : sensor.getSamples()) {
 
-			if (sample.getTyp().equals("window")) {
+			if (sample.getType().equals("window")) {
 				status = sample.getValue();
 				break;
 			}

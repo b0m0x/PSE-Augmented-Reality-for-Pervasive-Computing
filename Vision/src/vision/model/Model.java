@@ -33,7 +33,44 @@ import vision.view.View;
 public class Model {
 
 	UpdateThread updater;
+	/**
+	 * @uml.property name="view"
+	 * @uml.associationEnd inverse="daten:vision.view.View"
+	 */
+	private View view;
 
+	/**
+	 * @uml.property name="sensor"
+	 * @uml.associationEnd multiplicity="(0 -1)"
+	 *                     inverse="daten:vision.model.Sensor"
+	 */
+	private List<Sensor> sensor;
+	
+	/**
+	 * @uml.property name="pluginLoader"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="model:vision.model.PluginLoader"
+	 */
+	private PluginLoader pluginLoader = new vision.model.PluginLoader();
+
+	/**
+	 * @uml.property name="pluginList"
+	 */
+	private List<Plugin> pluginList = Collections.emptyList();
+
+	private List<PluginController> pluginControllerList = Collections
+			.emptyList();
+
+
+	/**
+	 * @uml.property name="groundplan"
+	 * @uml.associationEnd multiplicity="(1 1)"
+	 *                     inverse="model:vision.model.Groundplan"
+	 */
+	private Groundplan groundplan;
+
+	private List<Spatial> staticGeometries;
+	
 	public Model(View view) throws JAXBException {
 
 
@@ -62,7 +99,7 @@ public class Model {
 	}
 
 	/**
-	 * ei
+	 * returns a list with all sensors containing one of the tags in the argument array
 	 */
 	public synchronized List<Sensor> getTaggedSensors(String[] tags) {
 		if (sensor == null) {
@@ -79,19 +116,7 @@ public class Model {
 		return tagged;
 	}
 
-	/**
-	 * @uml.property name="view"
-	 * @uml.associationEnd inverse="daten:vision.view.View"
-	 */
-	private View view;
-
-	/**
-	 * @uml.property name="sensor"
-	 * @uml.associationEnd multiplicity="(0 -1)"
-	 *                     inverse="daten:vision.model.Sensor"
-	 */
-	private List<Sensor> sensor;
-
+	
 	/**
 	 * Getter of the property <tt>sensor</tt>
 	 * 
@@ -125,21 +150,7 @@ public class Model {
 		this.sensor = sensor;
 	}
 
-	/**
-	 * @uml.property name="pluginLoader"
-	 * @uml.associationEnd multiplicity="(1 1)"
-	 *                     inverse="model:vision.model.PluginLoader"
-	 */
-	private PluginLoader pluginLoader = new vision.model.PluginLoader();
-
-	/**
-	 * @uml.property name="pluginList"
-	 */
-	private List<Plugin> pluginList = Collections.emptyList();
-
-	private List<PluginController> pluginControllerList = Collections
-			.emptyList();
-
+	
 	/**
 	 * Getter of the property <tt>pluginList</tt>
 	 * 
@@ -171,14 +182,7 @@ public class Model {
 		return getSensor();
 	}
 
-	/**
-	 * @uml.property name="groundplan"
-	 * @uml.associationEnd multiplicity="(1 1)"
-	 *                     inverse="model:vision.model.Groundplan"
-	 */
-	private Groundplan groundplan;
-
-	private List<Spatial> staticGeometries;
+	
 
 	/**
 	 * Getter of the property <tt>groundplan</tt>

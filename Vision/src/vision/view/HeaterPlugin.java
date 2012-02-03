@@ -104,7 +104,7 @@ public class HeaterPlugin extends Plugin {
 
 		for (Sensor s : getSensors()) {
 			for (Sample sp : s.getSamples()) {
-				if (sp.getTyp().equals("temperature")) {
+				if (sp.getType().equals("temperature")) {
 					final float temperature = sp.getValue();
 
 					final Material m = MaterialHelper.getInstance()
