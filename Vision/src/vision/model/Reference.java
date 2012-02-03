@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlType;
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -25,8 +24,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -45,65 +42,57 @@ public class Reference {
 
     /**
      * Gets the value of the x property.
-     * 
      */
-    public float getX() {
+    public final float getX() {
         return x;
     }
 
     /**
      * Sets the value of the x property.
-     * 
      */
-    public void setX(float value) {
+    public final void setX(float value) {
         this.x = value;
     }
 
     /**
      * Gets the value of the y property.
-     * 
      */
-    public float getY() {
+    public final float getY() {
         return y;
     }
 
     /**
      * Sets the value of the y property.
-     * 
      */
-    public void setY(float value) {
+    public final void setY(float value) {
         this.y = value;
     }
 
     /**
      * Gets the value of the lat property.
-     * 
      */
-    public double getLat() {
+    public final double getLat() {
         return lat;
     }
 
     /**
      * Sets the value of the lat property.
-     * 
      */
-    public void setLat(double value) {
+    public final void setLat(double value) {
         this.lat = value;
     }
 
     /**
      * Gets the value of the lon property.
-     * 
      */
-    public double getLon() {
+    public final double getLon() {
         return lon;
     }
 
     /**
      * Sets the value of the lon property.
-     * 
      */
-    public void setLon(double value) {
+    public final void setLon(double value) {
         this.lon = value;
     }
 

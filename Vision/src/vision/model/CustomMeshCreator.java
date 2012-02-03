@@ -23,7 +23,7 @@ import com.jme3.scene.debug.Arrow;
 import com.jme3.scene.shape.Box;
 
 /**
- * converts a Wall object to a renderable Mesh
+ * converts a wall object to a renderable mesh.
  */
 public class CustomMeshCreator {
 	
@@ -47,18 +47,29 @@ public class CustomMeshCreator {
         buffer.put(texCoordinates);
 	}
 	
+	/**
+	 * This method creates the floor.
+	 * @param position
+	 * @param size
+	 * @return
+	 */
 	public Spatial createFloor(Vector3f position, Vector3f size) {
 		Geometry floor = new Geometry("floor");
 		Box box = new Box(size.x, size.y, size.z);
 		setTexCoords(box, TEXTURE_SIZE);
 		floor.setMesh(box);
-		
 		RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(size), 0);
 		floor.addControl(ctrl);
 		ctrl.setPhysicsLocation(position);
 		return floor;
 	}
-
+	
+	/**
+	 * This method creates the ceiling.
+	 * @param position
+	 * @param size
+	 * @return
+	 */
 	public Spatial createCeiling(Vector3f position, Vector3f size) {
 		Spatial ceiling = createFloor(position, size);
 		ceiling.setName("ceiling");
@@ -68,10 +79,11 @@ public class CustomMeshCreator {
 	/**
 	 * creates a mesh off of a wall object. builds in holes for windows if
 	 * necessary.
+	 * @return
 	 */
 	public Spatial convert(Wall w) {
 		WallAdapter wall = new WallAdapter(w);
-		assert(wall.getDepth() != 0);
+		assert (wall.getDepth() != 0);
 		
 		Node wallMesh = new Node("Wall");
 		
@@ -86,7 +98,6 @@ public class CustomMeshCreator {
 			float lowerHeight = h.getPosition().getY() - h.getSize().getY() / 2;
 			float upperHeight = (w.getHeight() - (h.getPosition().getY() + h.getSize().getY() / 2));
 			
-			 
 			// plane under hole
 			addWallBlock(wallMesh, new Vector3f(h.getPosition().getX() - wall.getWidth() / 2, - wall.getHeight()/2 + (h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0), 
 					new Vector3f(width, lowerHeight / 2, wall.getDepth() / 2));
@@ -104,7 +115,7 @@ public class CustomMeshCreator {
 				return (int) Math.signum(a.getPositionX1() - b.getPositionX1());
 			}
 		});
-		
+
 		float lastHRightBound = 0;
 		for (Hole hole : wall.getHoles()) {
 			HoleAdapter h = new HoleAdapter(hole);
@@ -114,7 +125,7 @@ public class CustomMeshCreator {
 			addWallBlock(wallMesh, position, new Vector3f((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));
 			lastHRightBound = hLeftBound + h.getSize().getX();
 		}
-		
+
 		float hLeftBound = wall.getWidth();
 		
 		addWallBlock(wallMesh, new Vector3f((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0), new Vector3f((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));

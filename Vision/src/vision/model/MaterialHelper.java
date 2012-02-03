@@ -18,13 +18,20 @@ public class MaterialHelper {
 		
 	}
 	
+	/**
+	 * gets the instance 
+	 * @return returns the instance
+	 */
 	public static MaterialHelper getInstance() {
 		if (instance == null) {
 			instance = new MaterialHelper();
 		}
 		return instance;
 	}
-	
+	/**
+	 * creates the material of the wall.
+	 * @param am
+	 */
 	private void createWallMaterial(AssetManager am) {
 		Material m = new Material(am,
 				"Common/MatDefs/Light/Lighting.j3md");
@@ -41,13 +48,18 @@ public class MaterialHelper {
 		wallMaterial = m;
 	}
 	
+	/**
+	 * gets the material of the wall.
+	 * @param am
+	 * @return returns the wallmaterial
+	 */
 	public Material getWallMaterial(AssetManager am) {
 		if (wallMaterial == null) {
 			createWallMaterial(am);
 		}
 		return wallMaterial;
 	}
-	
+ 
 	private void createFloorMaterial(AssetManager am) {
 		Material m = new Material(am, "Common/MatDefs/Light/Lighting.j3md");
 		m.setBoolean("UseMaterialColors", true);
@@ -61,14 +73,23 @@ public class MaterialHelper {
 		m.setFloat("Shininess", 3);
 		floorMaterial = m;
 	}
-	
+	/**
+	 * gets the material of the floor.
+	 * @param am
+	 * @return floormaterial
+	 */
 	public Material getFloorMaterial(AssetManager am) {
 		if (floorMaterial == null) {
 			createFloorMaterial(am);
 		}
 		return floorMaterial;
 	}
-	
+	/**
+	 * gets the coloredMaterial.
+	 * @param am
+	 * @param temperature
+	 * @return
+	 */
 	public Material getColoredMaterial(AssetManager am, float temperature) {
 		if (heaterMaterial == null) {
 			createColoredMaterial(am);
@@ -83,7 +104,6 @@ public class MaterialHelper {
 	private void createColoredMaterial(AssetManager am) {
 		heaterMaterial = new Material(am, "Common/MatDefs/Light/Lighting.j3md");
 		heaterMaterial.setBoolean("UseMaterialColors", true);
-				
 		heaterMaterial.setColor("Ambient",  ColorRGBA.Gray);
 		heaterMaterial.setColor("Diffuse",  ColorRGBA.Gray);
 		heaterMaterial.setColor("Specular", ColorRGBA.White);

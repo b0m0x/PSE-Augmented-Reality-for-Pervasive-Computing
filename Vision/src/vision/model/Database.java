@@ -14,9 +14,7 @@ import java.util.logging.Logger;
 import org.h2.jdbc.JdbcSQLException;
 
 /**
- * manages the database connection and saves sensordata
- * 
- * 
+ * This class manages the database connection and saves sensordata.
  */
 public class Database {
 
@@ -44,7 +42,7 @@ public class Database {
 	/**
 	 * saves a sensor object in the database
 	 */
-	public void updateSensors(String id, long zeitpunkt, Sample messwerte,
+	public final void updateSensors(String id, long zeitpunkt, Sample messwerte,
 			List<String> tags) {
 
 		try {
@@ -92,7 +90,8 @@ public class Database {
 	}
 
 	/**
-	 * fetches the sensor samples collected
+	 * fetches the sensor samples collected.
+	 * @return samples
 	 */
 	public List<Sample> getSensordata(String id, long zeitpunkt) {
 		List<Sample> samples = new ArrayList<Sample>();
@@ -120,13 +119,12 @@ public class Database {
 	}
 
 	/**
-	 * returns all stored samples of a sensor
-	 * 
-	 * @param id
+	 * returns all stored samples of a sensor.
+	 * 	 * @param id
 	 *            id of the sensor
 	 * @return a list of all sensor samples belonging to the given sensor
 	 */
-	public List<Sample> getAllSensorData(String id) {
+	public final List<Sample> getAllSensorData(String id) {
 		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
@@ -151,8 +149,7 @@ public class Database {
 	}
 
 	/**
-	 * returns all samples of a sensor inbetween a given interval
-	 * 
+	 * returns all samples of a sensor inbetween a given interval.
 	 * @param id
 	 *            id of the sensor
 	 * @param from
@@ -161,7 +158,7 @@ public class Database {
 	 *            timestamp of the end of the interval
 	 * @return a list of all sensor samples belonging to the given sensor
 	 */
-	public List<Sample> getSensorDataInterval(String id, long from, long to) {
+	public List<Sample> getSensorDataInterval(final String id, final long from, final long to) {
 		List<Sample> samples = new ArrayList();
 		try {
 			Statement st = conn.createStatement();
@@ -185,7 +182,11 @@ public class Database {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int size() {
 
 		int i = 0;
@@ -201,7 +202,12 @@ public class Database {
 		}
 		return i;
 	}
-
+	
+	/**
+	 * Gets the IDs.
+	 * @param index
+	 * @return
+	 */
 	public String getIDs(int index) {
 		String s = "";
 		Statement st;
@@ -222,7 +228,11 @@ public class Database {
 		}
 		return s;
 	}
-
+	/**
+	 * Gets the tags and creates a list.
+	 * @param index
+	 * @return
+	 */
 	public List<String> getTags(int index) {
 		List<String> tags = new ArrayList<String>();
 		Statement st;
@@ -242,7 +252,11 @@ public class Database {
 		}
 		return tags;
 	}
-
+	
+	/**
+	 * 
+	 * @param bg
+	 */
 	public synchronized void connect(UpdateThread bg) {
 		try {
 			// Class.forName("org.h2.Driver");
@@ -264,7 +278,10 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void disconnect() {
 		try {
 			if (!inUse) {
@@ -275,7 +292,10 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * gets the connection.
+	 * @return
+	 */
 	public Connection getConn() {
 		return this.conn;
 	}

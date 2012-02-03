@@ -31,8 +31,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "holeNumber", "positionX1", "positionY1",
@@ -51,11 +49,9 @@ public class Hole {
 
 	/**
 	 * Gets the value of the holeNumber property.
-	 * 
 	 * @return possible object is {@link int }
-	 * 
 	 */
-	public int getHoleNumber() {
+	public final int getHoleNumber() {
 		return holeNumber;
 	}
 
@@ -64,49 +60,43 @@ public class Hole {
 	 * 
 	 * @param value
 	 *            allowed object is {@link int }
-	 * 
 	 */
-	public void setHoleNumber(int value) {
+	public final void setHoleNumber(int value) {
 		this.holeNumber = value;
 	}
 
 	/**
 	 * Gets the value of the positionX1 property.
-	 * 
 	 */
-	public float getPositionX1() {
+	public final float getPositionX1() {
 		return positionX1;
 	}
 
 	/**
 	 * Sets the value of the positionX1 property.
-	 * 
 	 */
-	public void setPositionX1(float value) {
+	public final void setPositionX1(float value) {
 		this.positionX1 = value;
 	}
 
 	/**
 	 * Gets the value of the positionY1 property.
-	 * 
 	 */
-	public float getPositionY1() {
+	public final float getPositionY1() {
 		return positionY1;
 	}
 
 	/**
 	 * Sets the value of the positionY1 property.
-	 * 
 	 */
-	public void setPositionY1(float value) {
+	public final void setPositionY1(float value) {
 		this.positionY1 = value;
 	}
 
 	/**
 	 * Gets the value of the positionX2 property.
-	 * 
 	 */
-	public float getPositionX2() {
+	public final float getPositionX2() {
 		return positionX2;
 	}
 
@@ -114,55 +104,49 @@ public class Hole {
 	 * Sets the value of the positionX2 property.
 	 * 
 	 */
-	public void setPositionX2(float value) {
+	public final void setPositionX2(float value) {
 		this.positionX2 = value;
 	}
 
 	/**
 	 * Gets the value of the positionY2 property.
-	 * 
 	 */
-	public float getPositionY2() {
+	public final float getPositionY2() {
 		return positionY2;
 	}
 
 	/**
 	 * Sets the value of the positionY2 property.
-	 * 
 	 */
-	public void setPositionY2(float value) {
+	public final void setPositionY2(float value) {
 		this.positionY2 = value;
 	}
 
 	/**
 	 * Gets the value of the heightGround property.
-	 * 
 	 */
-	public float getHeightGround() {
+	public final float getHeightGround() {
 		return heightGround;
 	}
 
 	/**
 	 * Sets the value of the heightGround property.
-	 * 
 	 */
-	public void setHeightGround(float value) {
+	public final void setHeightGround(float value) {
 		this.heightGround = value;
 	}
 
 	/**
 	 * Gets the value of the heightWindow property.
-	 * 
 	 */
-	public float getHeightWindow() {
+	public final float getHeightWindow() {
 		return heightWindow;
 	}
 
 	/**
 	 * Sets the value of the heightWindow property.
-	 * 
 	 */
-	public void setHeightWindow(float value) {
+	public final void setHeightWindow(float value) {
 		this.heightWindow = value;
 	}
 

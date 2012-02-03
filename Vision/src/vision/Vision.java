@@ -11,7 +11,7 @@ import vision.model.Model;
 import vision.view.View;
 
 /**
- * Main class starts up the whole software
+ * Main class starts up the whole software.
  * 
  */
 public class Vision {
@@ -32,7 +32,6 @@ public class Vision {
 		mainView.setSettings(settings);
 		mainView.setController(mainController);
 		mainView.setDaten(mainModel);
-		
 		mainView.start();
 	}
 

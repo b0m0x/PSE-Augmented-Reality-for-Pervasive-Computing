@@ -30,7 +30,7 @@ import vision.view.View;
 
 /**
  * the main controller that passes key presses, user inputs and events to the
- * subcontrollers and the model
+ * subcontrollers and the model.
  * 
  */
 public class Controller implements ScreenController, ActionListener, AnalogListener  {
@@ -44,17 +44,17 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 * @param view the view
 	 * @param model the model
 	 */
-	public Controller(View view, Model model) {
+	public Controller(final View view, final Model model) {
 		this.view = view;
 		this.model = model;
 	}
 
 
 	/**
-	 * binds the nifty instance to this controller
+	 * binds the nifty instance to this controller.
 	 */
 	@Override
-	public void bind(Nifty nifty, Screen screen) {
+	public final void bind(Nifty nifty, Screen screen) {
 		this.nifty = nifty;
 		this.screen = screen;
 	}
@@ -74,23 +74,21 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	/**
 	 * @uml.property name="pluginController"
 	 * @uml.associationEnd multiplicity="(0 -1)"
-	 *                     inverse="controller:vision.controller.PluginController"
+	 * inverse="controller:vision.controller.PluginController"
 	 */
 	private Collection<PluginController> pluginController;
 
 	/**
-	 * Getter of the property <tt>pluginController</tt>
-	 * 
+	 * Getter of the property <tt>pluginController</tt>.
 	 * @return Returns the pluginController.
 	 * @uml.property name="pluginController"
 	 */
-	public Collection<PluginController> getPluginController() {
+	public final Collection<PluginController> getPluginController() {
 		return pluginController;
 	}
 
 	/**
-	 * Setter of the property <tt>pluginController</tt>
-	 * 
+	 * Setter of the property <tt>pluginController</tt>.
 	 * @param pluginController
 	 *            The pluginController to set.
 	 * @uml.property name="pluginController"
@@ -109,22 +107,20 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 
 	/**
 	 * Getter of the property <tt>model</tt>
-	 * 
 	 * @return Returns the model.
 	 * @uml.property name="model"
 	 */
-	public Model getModel() {
+	public final Model getModel() {
 		return model;
 	}
 
 	/**
-	 * Setter of the property <tt>model</tt>
-	 * 
+	 * Setter of the property <tt>model</tt>.
 	 * @param model
 	 *            The model to set.
 	 * @uml.property name="model"
 	 */
-	public void setModel(Model model) {
+	public final void setModel(Model model) {
 		this.model = model;
 	}
 
@@ -136,8 +132,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	private View view = new vision.view.View();
 
 	/**
-	 * Getter of the property <tt>view</tt>
-	 * 
+	 * Getter of the property <tt>view</tt>.
 	 * @return Returns the view.
 	 * @uml.property name="view"
 	 */
@@ -146,8 +141,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	}
 
 	/**
-	 * Setter of the property <tt>view</tt>
-	 * 
+	 * Setter of the property <tt>view</tt>.
 	 * @param view
 	 *            The view to set.
 	 * @uml.property name="view"
@@ -161,7 +155,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 * forwards it to the respective plugin controller
 	 */
 	@NiftyEventSubscriber(pattern = "ButtonOf_.*")
-	public void pluginButton(String id, ButtonClickedEvent bce) {
+	public final void pluginButton(String id, ButtonClickedEvent bce) {
 		String s = id.substring(9);
 		for (PluginController p : model.getPluginControllerList()) {
 			if (s.startsWith(p.getClass().getName())) {
@@ -171,49 +165,42 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 
 	}
 
-	
 
 	/**
-	 * gets called by nifty if a button in the GUI was pressed
-	 * 
+	 * gets called by nifty if a button in the GUI was pressed.
 	 * @param id
 	 *            id of the clicked button
 	 */
 	//@NiftyEventSubscriber(pattern = ".*button.*")
-	public void buttonClick(String id, ButtonClickedEvent bce) {
+	public final void buttonClick(String id, ButtonClickedEvent bce) {
 		Logger l= Logger.getLogger("buttonclick");
 		l.info("Button was pressed.");
 	}
 
-	
-		
-	
+
 	/**
-	 * gets called if the user pressed the activate/deactivate button
+	 * gets called if the user pressed the activate/deactivate button.
 	 */
 	@NiftyEventSubscriber(id = "btn_manageplugins")
-	public void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
+	public final void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
 	
 		view.getGuiAppState().managePluginsPopupMenu();
 	}
 	
 	/**
-	 * 
+	 * gets called if the user pressed the help button. 
 	 * @param id
 	 * @param o
 	 */
 	@NiftyEventSubscriber(id = "btn_Help")
-	public void help(String id, ButtonClickedEvent bce) {
-		Logger l= Logger.getLogger("buttonclick");
+	public final void help(String id, ButtonClickedEvent bce) {
+		Logger l = Logger.getLogger("buttonclick");
 		l.info("Button was pressed.");
 	}
-	
-	
-	
-	
+
 
 	/**
-	 * 
+	 * gets called if the user pressed the settings button.
 	 * @param id
 	 * @param o
 	 */
@@ -224,21 +211,21 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	
 	
 	/**
-	 * gets called, when the user clicks the button "overview" then switches to the overview
+	 * gets called, when the user clicks the button "overview" then switches to the overview.
 	 * @param id
 	 * @param o
 	 */
 	@NiftyEventSubscriber(id = "btn_Overview")
-	public void toggleOverview(String id, ButtonClickedEvent o) {
+	public final void toggleOverview(String id, ButtonClickedEvent o) {
 		view.toggleOverviewCam();
 		Logger.getLogger("here").warning("click");
 	}
 	
 	/**
-	 * gets called, when the user clicks to the button to go back to the mainscreen
+	 * gets called, when the user clicks to the button to go back to the mainscreen.
 	 */
 	@NiftyEventSubscriber(id = "btn_back")
-	public void backToMainScreen(String id, ButtonClickedEvent bce) {
+	public final void backToMainScreen(String id, ButtonClickedEvent bce) {
 		nifty.gotoScreen("start");
 		
 	}
@@ -250,15 +237,20 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	public void showDebugInformation(String id, CheckBoxStateChangedEvent cbsce) {
 		view.setDisplayStatView(cbsce.isChecked());
 	}
-		
+
+	/**
+	 * gets called, if the user choses an effect.
+	 * @param id
+	 * @param cbsce
+	 */
 	@NiftyEventSubscriber(id = "EffektCheckbox")
 	public void showEffects(String id, CheckBoxStateChangedEvent cbsce) {
 		view.enablePostProcessingEffects(cbsce.isChecked());
 	}
-	
+
 
 	/**
-	 * gets called if a user checked or unchecked a non-plugin defined checkbox
+	 * gets called if a user checked or unchecked a non-plugin defined checkbox.
 	 * 
 	 * @param id
 	 *            the id of the checkbox that was pressed
@@ -266,22 +258,22 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	@NiftyEventSubscriber(pattern = "Pluginchecbox_.*")
 	public void plugincheckboxPressed(String id, CheckBoxStateChangedEvent cbsce) {
 			String s = id.substring(14);
-			for(Plugin p : model.getPluginList()) {
+			for (Plugin p : model.getPluginList()) {
 				if (s.equals(p.getClass().getName())) {
-					if(cbsce.isChecked() == true) {
+					if (cbsce.isChecked() == true) {
 						view.enablePlugin(p);
 					} 
 					else {
 						view.disablePlugin(p);
 					}
-					
 				}
 			}
 	}
 
 
-	
-	
+	/**
+	 * 
+	 */
 	@Override
 	public void onAction(String name, boolean keyPressed, float tpf) {
 		if (name.equals("zoom") && keyPressed) {
@@ -293,14 +285,15 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 		}
 
 	}
-
+	
+/**
+ * 
+ */
 	@Override
 	public void onAnalog(String name, float intensity, float tpf) {
 		if (name.equals("userPick")) {
 			view.userPick();
 		}
-		
 	}
-	
 
 }

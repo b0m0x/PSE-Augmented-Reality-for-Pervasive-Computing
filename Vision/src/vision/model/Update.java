@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * manages the server connection and fetches the sensor data
- * 
+ * manages the server connection and fetches the sensor data.
  */
 public class Update {
 	private static final Logger LOG = Logger.getLogger(Update.class.getName());
+	/**
+	 * The constructor of the class.
+	 * @param model
+	 */
 	public Update(Model model) {
 		this.database = new Database();
 		this.jsonConverter = new JSONConverter(model);
@@ -17,35 +20,29 @@ public class Update {
 	}
 
 
-	/**
-	 * @uml.property name="daten"
-	 * @uml.associationEnd inverse="update:vision.model.Model"
-	 */
+	
 	/**
 	 * provides a facade for all objects belonging to the model
-	 * 
 	 */
 
 	private Model daten;
 
 	/**
-	 * Getter of the property <tt>daten</tt>
-	 * 
+	 * Getter of the property <tt>daten</tt>.
 	 * @return Returns the daten.arg0
 	 * @uml.property name="daten"
 	 */
-	public Model getDaten() {
+	public final Model getDaten() {
 		return daten;
 	}
 
 	/**
-	 * Setter of the property <tt>daten</tt>
-	 * 
+	 * Setter of the property <tt>daten</tt>.
 	 * @param daten
 	 *            The daten to set.
 	 * @uml.property name="daten"
 	 */
-	public void setDaten(Model daten) {
+	public final void setDaten(Model daten) {
 		this.daten = daten;
 	}
 
@@ -57,22 +54,19 @@ public class Update {
 
 	/**
 	 * Getter of the property <tt>jSONConverter</tt>
-	 * 
 	 * @return Returns the jsonConverter.
 	 * @uml.property name="jSONConverter"
 	 */
-	public JSONConverter getJSONConverter() {
+	public final JSONConverter getJSONConverter() {
 		return jsonConverter;
 	}
 
+
 	/**
-	 * Setter of the property <tt>jSONConverter</tt> arg0
-	 * 
-	 * @param jSONConverter
-	 *            The jsonConverter to set.
-	 * @uml.property name="jSONConverter"
+	 * Setter of the property <tt>jSONConverter</tt>.
+	 * @param jsonConverter  the jsonConverter to set.
 	 */
-	public void setJSONConverter(JSONConverter jsonConverter) {
+	public final void setJSONConverter(JSONConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}
 
@@ -83,33 +77,30 @@ public class Update {
 	private Database database;
 
 	/**
-	 * Getter of the property <tt>database</tt>
-	 * 
+	 * Getter of the property <tt>database</tt>.
 	 * @return Returns the database.
 	 * @uml.property name="database"
 	 */
-	public Database getDatabase() {
+	public final Database getDatabase() {
 		return database;
 	}
 
 	/**
-	 * Setter of the property <tt>database</tt>
-	 * 
+	 * Setter of the property <tt>database</tt>.
 	 * @param database
 	 *            The database to set.
 	 * @uml.property name="database"
 	 */
-	public void setDatabase(Database database) {
+	public final void setDatabase(Database database) {
 		this.database = database;
 	}
 
 	/**
-	 * stores all the Data from the JSON-Stream into the database
-	 * 
+	 * stores all the Data from the JSON-Stream into the database.
 	 * @param l
 	 *            the current time of when the data was stored
 	 */
-	public void store(long l) {
+	public final void store(long l) {
 
 		jsonConverter.convert();
 		List<Sensor> sensorlist = new ArrayList<Sensor>();
@@ -133,8 +124,9 @@ public class Update {
 	}
 
 	/**
-		 */
-	public void getAllData() {
+	 * gets all the Data.
+	 */
+	public final void getAllData() {
 		jsonConverter.convert();
 	}
 

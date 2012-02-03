@@ -23,12 +23,18 @@ import com.bulletphysics.linearmath.MatrixUtil;
 import com.jme3.math.Matrix3f;
 
 import vision.Config;
-
+/**
+ * This class Converts the Data of the JSON stream.
+ */
 public class JSONConverter {
 
 	private static final Logger LOG = Logger.getLogger(JSONConverter.class
 			.getName());
-
+	
+	/**
+	 * Constructs the JSONConverter.
+	 * @param model
+	 */
 	public JSONConverter(Model model) {
 		this.sensorList = new ArrayList<Sensor>();
 		this.model = model;
@@ -39,14 +45,26 @@ public class JSONConverter {
 	private Sensor sensor;
 	private List<Sensor> sensorList;
 
+	/**
+	 * Gets the Url.
+	 * @return returns the server url.
+	 */
 	public String getUrl() {
 		return Config.SERVER_URL;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public JSONObject getJson() {
 		return this.json;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String offlineStream() {
 		File file = new File("offlinestream");
 		try {
@@ -62,7 +80,11 @@ public class JSONConverter {
 		return "Error.";
 
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getJSONStream() {
 		try {
 			URL url = new URL(getUrl());
@@ -85,7 +107,10 @@ public class JSONConverter {
 		}
 
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void convert() {
 		this.resetList();
 		String stream = getJSONStream();
@@ -165,15 +190,22 @@ public class JSONConverter {
 		
 		return new Position((float) x, 0, (float) y);
 	}
-
+	/**
+	 * resets all the sensorlist.
+	 */
 	public void resetList() {
 		this.sensorList = new ArrayList<Sensor>();
 	}
-
+	/**
+	 * adds a sensor to the list.
+	 */
 	public void addSensorToList() {
 		this.sensorList.add(this.sensor);
 	}
-
+	/**
+	 * gets the sensorlist.
+	 * @return
+	 */
 	public List<Sensor> getSensorList() {
 		return this.sensorList;
 	}

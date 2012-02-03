@@ -9,9 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -26,8 +24,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -43,77 +39,67 @@ public class StaticGeometry {
     protected float y;
     protected float angle;
     @XmlElement(required = true)
-    protected String path;
+    private String path;
 
     /**
      * Gets the value of the x property.
-     * 
      */
-    public float getX() {
+    public final float getX() {
         return x;
     }
 
     /**
      * Sets the value of the x property.
-     * 
      */
-    public void setX(float value) {
+    public final void setX(final float value) {
         this.x = value;
     }
 
     /**
      * Gets the value of the y property.
-     * 
      */
-    public float getY() {
+    public final float getY() {
         return y;
     }
 
     /**
      * Sets the value of the y property.
-     * 
      */
-    public void setY(float value) {
+    public final void setY(float value) {
         this.y = value;
     }
 
     /**
      * Gets the value of the angle property.
-     * 
      */
-    public float getAngle() {
+    public final float getAngle() {
         return angle;
     }
 
     /**
      * Sets the value of the angle property.
-     * 
      */
-    public void setAngle(float value) {
+    public final void setAngle(float value) {
         this.angle = value;
     }
 
     /**
      * Gets the value of the path property.
-     * 
      * @return
      *     possible object is
      *     {@link String }
-     *     
      */
-    public String getPath() {
+    public final String getPath() {
         return path;
     }
 
     /**
      * Sets the value of the path property.
-     * 
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
      */
-    public void setPath(String value) {
+    public final void setPath(String value) {
         this.path = value;
     }
 

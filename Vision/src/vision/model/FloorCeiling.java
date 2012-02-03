@@ -26,8 +26,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -49,19 +47,15 @@ public class FloorCeiling {
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the benchmarks property.
-     * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getBenchmarks().add(newItem);
      * </pre>
-     * 
-     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Benchmarks }
-     * 
-     * 
+
      */
     public List<Benchmarks> getBenchmarks() {
         if (benchmarks == null) {

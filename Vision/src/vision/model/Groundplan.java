@@ -52,6 +52,7 @@ public class Groundplan {
 
 	/**
 	 * @throws MalformedURLException
+	 * @return
 	 */
 	public Groundplan load() throws JAXBException {
 		JAXBContext jc = JAXBContext.newInstance("vision.model");
@@ -74,25 +75,19 @@ public class Groundplan {
 
     /**
      * Gets the value of the wall property.
-     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the wall property.
-     * 
-     * <p>
+     *      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getWall().add(newItem);
      * </pre>
-     * 
-     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Wall }
-     * 
-     * 
      */
     public List<Wall> getWall() {
         if (wall == null) {
@@ -103,27 +98,21 @@ public class Groundplan {
 
     /**
      * Gets the value of the reference property.
-     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the reference property.
-     * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getReference().add(newItem);
      * </pre>
-     * 
-     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Reference }
-     * 
-     * 
      */
-    public List<Reference> getReference() {
+    public final List<Reference> getReference() {
         if (reference == null) {
             reference = new ArrayList<Reference>();
         }
@@ -144,15 +133,12 @@ public class Groundplan {
      * <pre>
      *    getStaticGeometry().add(newItem);
      * </pre>
-     * 
-     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link StaticGeometry }
-     * 
-     * 
+
      */
-    public List<StaticGeometry> getStaticGeometry() {
+    public final List<StaticGeometry> getStaticGeometry() {
         if (staticGeometry == null) {
             staticGeometry = new ArrayList<StaticGeometry>();
         }
@@ -181,7 +167,7 @@ public class Groundplan {
      * 
      * 
      */
-    public List<Light> getLight() {
+    public final List<Light> getLight() {
         if (light == null) {
             light = new ArrayList<Light>();
         }
@@ -194,9 +180,8 @@ public class Groundplan {
      * @return
      *     possible object is
      *     {@link FloorCeiling }
-     *     
      */
-    public List<FloorCeiling> getFloorCeiling() {
+    public final List<FloorCeiling> getFloorCeiling() {
         return floorCeiling;
     }
 
@@ -208,7 +193,7 @@ public class Groundplan {
      *     {@link FloorCeiling }
      *     
      */
-    public void setFloorCeiling(List<FloorCeiling> value) {
+    public final void setFloorCeiling(List<FloorCeiling> value) {
         this.floorCeiling = value;
     }
 

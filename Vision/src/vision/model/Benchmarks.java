@@ -23,8 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -41,7 +40,7 @@ public class Benchmarks {
      * Gets the value of the positionX property.
      * 
      */
-    public float getPositionX() {
+    public final float getPositionX() {
         return positionX;
     }
 
@@ -49,7 +48,7 @@ public class Benchmarks {
      * Sets the value of the positionX property.
      * 
      */
-    public void setPositionX(float value) {
+    public final void setPositionX(float value) {
         this.positionX = value;
     }
 
@@ -57,7 +56,7 @@ public class Benchmarks {
      * Gets the value of the positionY property.
      * 
      */
-    public float getPositionY() {
+    public final float getPositionY() {
         return positionY;
     }
 
@@ -65,7 +64,7 @@ public class Benchmarks {
      * Sets the value of the positionY property.
      * 
      */
-    public void setPositionY(float value) {
+    public final void setPositionY(float value) {
         this.positionY = value;
     }
 
