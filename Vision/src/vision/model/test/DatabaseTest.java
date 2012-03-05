@@ -1,20 +1,19 @@
 package vision.model.test;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import vision.model.Database;
-import vision.model.JSONConverter;
-import vision.model.Position;
-import vision.model.Sample;
-import vision.model.Update;
-import junit.framework.TestCase;
 
-public class DatabaseTest extends TestCase {
+public class DatabaseTest {
 
 	Database db = new Database();
+	
+	@Test
+	public void doNothing() {
+		assertTrue(true);
+	}
 
 	// public void testCurrentTime() {
 	// System.out.println(System.currentTimeMillis());
