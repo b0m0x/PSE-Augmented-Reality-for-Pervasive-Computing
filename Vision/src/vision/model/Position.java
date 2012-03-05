@@ -89,33 +89,7 @@ public class Position {
 		this.z = z;
 	}
 
-	/**
-	 * @uml.property name="sensor"
-	 * @uml.associationEnd inverse="position:vision.model.Sensor"
-	 */
-	private Sensor sensor;
-
-	/**
-	 * Getter of the property <tt>sensor</tt>
-	 * 
-	 * @return Returns the sensor.
-	 * @uml.property name="sensor"
-	 */
-	public Sensor getSensor() {
-		return sensor;
-	}
-
-	/**
-	 * Setter of the property <tt>sensor</tt>
-	 * 
-	 * @param sensor
-	 *            The sensor to set.
-	 * @uml.property name="sensor"
-	 */
-	public void setSensor(Sensor sensor) {
-		this.sensor = sensor;
-	}
-
+	
 	public String toString() {
 		String s = "Position X: " + this.x + "\nPosition Y: " + this.y
 				+ "\nPosition Z: " + this.z;
