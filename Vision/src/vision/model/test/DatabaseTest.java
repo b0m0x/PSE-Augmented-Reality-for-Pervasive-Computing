@@ -1,20 +1,68 @@
 package vision.model.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import vision.model.Database;
-import vision.model.JSONConverter;
-import vision.model.Position;
 import vision.model.Sample;
-import vision.model.Update;
-import junit.framework.TestCase;
 
-public class DatabaseTest extends TestCase {
+public class DatabaseTest {
 
 	Database db = new Database();
+	
+	@Before
+	public void connect() {
+		db.connect(null);
+	}
+	
+	@Test
+	public void insertTestData() {
+		db.dropTable();
+		assertEquals(0, db.size());
+		
+		List<String> tags = new ArrayList<String>();
+		tags.add("testTag1");
+		tags.add("testTag2");
+		db.updateSensors("testid1", 0, new Sample("radioaktivität", "bequerel", 200000, 0), tags);
+		db.updateSensors("testid1", 0, new Sample("gewicht", "kg", 2, 0), tags);
+		tags.add("testTag3");
+		tags.remove("testTag1");
+		db.updateSensors("testid2", 0, new Sample("temperatur", "celsius", 15, 0), tags);
+		
+		List<Sample> samples = db.getSensordata("testid1", 0);
+		assertEquals(samples.size(), db.getAllSensorData("testid1").size());
+		assertEquals(2, samples.size());
+		assertEquals("radioaktivität", samples.get(0).getType());
+		assertEquals("gewicht", samples.get(1).getType());
+		
+		samples = db.getSensordata("testid2", 0);
+		assertEquals(1, samples.size());
+		assertEquals("temperatur", samples.get(0).getType());
+		
+		assertEquals(3, db.size());
+		
+		db.updateSensors("testid1", 1, new Sample("gewicht", "kg", 2, 0), tags);
+		db.updateSensors("testid1", 2, new Sample("gewicht", "kg", 2, 0), tags);
+		
+		assertEquals(4, db.getSensorDataInterval("testid1", 0, 3).size());
+		assertEquals(2, db.getSensorDataInterval("testid1", 1, 3).size());
+		assertEquals(0, db.getSensorDataInterval("testid1", 5, 3).size());
+		
+		
+		
+	}
+	
+	
+	@After
+	public void disconnect() {
+		db.disconnect();
+	}
 
 	// public void testCurrentTime() {
 	// System.out.println(System.currentTimeMillis());

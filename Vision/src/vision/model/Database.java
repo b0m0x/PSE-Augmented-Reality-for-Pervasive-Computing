@@ -22,6 +22,16 @@ public class Database {
 			.getLogger(Database.class.getName());
 	private Connection conn;
 	private boolean inUse = false;
+	
+	public void dropTable() {
+		Statement st;
+		try {
+			st = conn.createStatement();
+			st.execute("DROP TABLE Samples IF EXISTS");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private boolean tableExists(String tableName, Connection conn) {
 		try {
@@ -203,56 +213,7 @@ public class Database {
 		return i;
 	}
 	
-	/**
-	 * Gets the IDs.
-	 * @param index
-	 * @return
-	 */
-	public String getIDs(int index) {
-		String s = "";
-		Statement st;
-		int i = 0;
-		try {
-			st = conn.createStatement();
-			ResultSet rs = st.executeQuery("Select * from Samples");
-			while (rs.next()) {
-				if (index == i) {
-					s = rs.getString("id");
-				}
-				i++;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 
-		}
-		return s;
-	}
-	/**
-	 * Gets the tags and creates a list.
-	 * @param index
-	 * @return
-	 */
-	public List<String> getTags(int index) {
-		List<String> tags = new ArrayList<String>();
-		Statement st;
-		int i = 0;
-		try {
-			st = conn.createStatement();
-			ResultSet rs = st.executeQuery("Select * from Samples");
-			while (rs.next()) {
-				if (i == index) {
-					tags = (List<String>) rs.getObject("Tags");
-				}
-				i++;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return tags;
-	}
-	
 	/**
 	 * 
 	 * @param bg
@@ -263,7 +224,6 @@ public class Database {
 			try {
 				wait(500);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
@@ -274,7 +234,6 @@ public class Database {
 				LOG.warning("Database already in use. Please close all instances of \"Vision\"...");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

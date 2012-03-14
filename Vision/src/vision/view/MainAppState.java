@@ -126,6 +126,8 @@ public class MainAppState extends AbstractAppState {
 		setUpKeys();
 		
 		initMiniMap();
+		
+		toggleOverviewCam();
 	}
 
 	private void setUpCamera() {
