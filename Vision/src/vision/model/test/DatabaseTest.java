@@ -44,6 +44,9 @@ public class DatabaseTest {
 		samples = db.getSensordata("testid2", 0);
 		assertEquals(1, samples.size());
 		assertEquals("temperatur", samples.get(0).getType());
+		assertEquals("celsius", samples.get(0).getUnit());
+		assertEquals(15f, samples.get(0).getValue(), 0.001f);
+		
 		
 		assertEquals(3, db.size());
 		
@@ -52,10 +55,7 @@ public class DatabaseTest {
 		
 		assertEquals(4, db.getSensorDataInterval("testid1", 0, 3).size());
 		assertEquals(2, db.getSensorDataInterval("testid1", 1, 3).size());
-		assertEquals(0, db.getSensorDataInterval("testid1", 5, 3).size());
-		
-		
-		
+		assertEquals(0, db.getSensorDataInterval("testid1", 5, 3).size());	
 	}
 	
 	

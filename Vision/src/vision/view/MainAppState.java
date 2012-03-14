@@ -63,6 +63,7 @@ public class MainAppState extends AbstractAppState {
 	private boolean moveForward;
 	private boolean moveBack;
 	private Node miniMapNode = new Node("Minimap");
+	private final static float playerHeight = 1.7f;
 
 	
 	public MainAppState(Model model, Controller controller) {
@@ -102,7 +103,7 @@ public class MainAppState extends AbstractAppState {
 			}
 		}
 		
-		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.1f, 1.7f, 1);		
+		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.1f, playerHeight, 1);		
 		player = new CharacterControl(pcs, 0.02f);
 		player.setFallSpeed(20f);
 		player.setGravity(20f);
@@ -204,6 +205,13 @@ public class MainAppState extends AbstractAppState {
 	    
 	    if (!overviewCam) {
 	    	app.getCamera().setLocation(player.getPhysicsLocation().add(0, 0.5f, 0));
+	    }
+	    
+	    //vermeidung von freiem fall
+	    float lowestPoint = -(model.getGroundplan().getWalls().get(0).getHeight()/2) + (playerHeight/2);
+	    if(player.getPhysicsLocation().getY() < lowestPoint)
+	    {
+	    	player.setPhysicsLocation(new Vector3f(player.getPhysicsLocation().getX(), lowestPoint, player.getPhysicsLocation().getZ()));
 	    }
 		updateMiniMap();
 	}
