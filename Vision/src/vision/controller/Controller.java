@@ -194,8 +194,7 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 */
 	@NiftyEventSubscriber(id = "btn_Help")
 	public final void help(final String id, final ButtonClickedEvent bce) {
-		Logger l = Logger.getLogger("buttonclick");
-		l.info("Button was pressed.");
+		nifty.gotoScreen("helpPopup");
 	}
 
 
