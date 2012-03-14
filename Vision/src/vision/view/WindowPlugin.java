@@ -111,28 +111,41 @@ public class WindowPlugin extends Plugin {
 					}
 				}
 				addwindowSpatial(s);
-			}/*
-			for (Sample samp : s.getMesswert()) {
-				if (samp.getTyp().equals("window")) {
+			} else {
+			for (Sample samp : s.getSamples()) {
+				if (samp.getType().equals("window")) {
 					view.getRootNode().detachChild(windows.get(s.getId()));
 					windows.remove(s.getId());
 					addwindowSpatial(s);
 				}
-			}*/
+				if (samp.getType().equals("light")) {
+					view.getRootNode().detachChild(windows.get(s.getId()));
+					windows.remove(s.getId());
+					addwindowSpatial(s);
+				}
+			}
+			}
 		}
 	}
 
 	private void addwindowSpatial(final Sensor sensor) {
 		windowSpatial = null;
 		float status = 0;
+		float limit = 0;
 		for (Sample sample : sensor.getSamples()) {
 
 			if (sample.getType().equals("window")) {
 				status = sample.getValue();
+				limit = 0;
+				break;
+			}
+			if (sample.getType().equals("light")) {
+				status = sample.getValue();
+				limit = 50;
 				break;
 			}
 		}
-		if (status > 0) {
+		if (status > limit) {
 			windowSpatial = windowopen.clone();
 		} else {
 			windowSpatial = windowclosed.clone();
