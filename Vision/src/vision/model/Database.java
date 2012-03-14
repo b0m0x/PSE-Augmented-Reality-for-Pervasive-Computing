@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,32 +19,43 @@ import org.h2.jdbc.JdbcSQLException;
  */
 public class Database {
 
+	private static final String CREATE_STATEMENT = "CREATE TABLE Samples ("
+			+ "id VARCHAR(30), " + "Zeitpunkt LONG, " + "Type VARCHAR(30), "
+			+ "Unit VARCHAR(30), " + "Updated LONG, " + "Value FLOAT, "
+			+ "Tags OBJECT)";
+	
+	private static final String DROP_STATEMENT = "DROP TABLE Samples IF EXISTS";
+	
+	private static final String FETCH_ALL_QUERY = "SELECT * FROM Samples";
+
+	private static final String COUNT_QUERY = "SELECT COUNT(*) AS rowcount FROM Samples";
+
 	private static final Logger LOG = Logger
 			.getLogger(Database.class.getName());
+
+
 	private Connection conn;
 	private boolean inUse = false;
-	
+
+	/**
+	 * delete all samples
+	 */
 	public void dropTable() {
 		Statement st;
 		try {
 			st = conn.createStatement();
-			st.execute("DROP TABLE Samples IF EXISTS");
+			st.execute(DROP_STATEMENT);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private boolean tableExists(String tableName, Connection conn) {
+	private boolean tableExists(String tableName) {
 		try {
 			DatabaseMetaData dbm = conn.getMetaData();
 			ResultSet rs = dbm.getTables(null, null, tableName, null);
-			if (rs.next()) {
-				return true;
-			} else {
-				return false;
-			}
+			return rs.next();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -52,8 +64,8 @@ public class Database {
 	/**
 	 * saves a sensor object in the database
 	 */
-	public final void updateSensors(String id, long zeitpunkt, Sample messwerte,
-			List<String> tags) {
+	public final void updateSensors(String id, long zeitpunkt,
+			Sample messwerte, List<String> tags) {
 
 		try {
 			String insert = "INSERT INTO SAMPLES VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -65,35 +77,24 @@ public class Database {
 				return;
 			}
 
-			if (tableExists("SAMPLES", conn)) {
-				pst = conn.prepareStatement(insert);
-				pst.setString(1, id);
-				pst.setLong(2, zeitpunkt);
-				pst.setString(3, messwerte.getType());
-				pst.setString(4, messwerte.getUnit());
-				pst.setLong(5, messwerte.getUpdate());
-				pst.setFloat(6, messwerte.getValue());
-				pst.setObject(7, tags);
-				pst.executeUpdate();
-				LOG.info("Stored: " + id + " ");
-			} else {
-				st.execute("create table Samples (" + "id VARCHAR(30), "
-						+ "Zeitpunkt LONG, " + "Type VARCHAR(30), "
-						+ "Unit VARCHAR(30), " + "Updated LONG, "
-						+ "Value FLOAT, " + "Tags OBJECT)");
-				pst = conn.prepareStatement(insert);
-				pst.setString(1, id);
-				pst.setLong(2, zeitpunkt);
-				pst.setString(3, messwerte.getType());
-				pst.setString(4, messwerte.getUnit());
-				pst.setLong(5, messwerte.getUpdate());
-				pst.setFloat(6, messwerte.getValue());
-				pst.setObject(7, tags);
-				pst.executeUpdate();
-				LOG.info("Database created and stored: " + id + " ");
+			if (!tableExists("SAMPLES")) {
+				st.execute(CREATE_STATEMENT);
 			}
+			//Set parameters for the database statement
+			pst = conn.prepareStatement(insert);
+			pst.setString(1, id);
+			pst.setLong(2, zeitpunkt);
+			pst.setString(3, messwerte.getType());
+			pst.setString(4, messwerte.getUnit());
+			pst.setLong(5, messwerte.getUpdate());
+			pst.setFloat(6, messwerte.getValue());
+			pst.setObject(7, tags);
+			
+			//execute statement
+			pst.executeUpdate();
+			
+			LOG.info("Stored: " + id + " ");
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -101,13 +102,14 @@ public class Database {
 
 	/**
 	 * fetches the sensor samples collected.
+	 * 
 	 * @return samples
 	 */
 	public List<Sample> getSensordata(String id, long zeitpunkt) {
 		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from Samples");
+			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);
 			while (rs.next()) {
 				if (rs.getString("id").equals(id)
 						&& rs.getInt("zeitpunkt") == zeitpunkt) {
@@ -129,9 +131,8 @@ public class Database {
 	}
 
 	/**
-	 * returns all stored samples of a sensor.
-	 * 	 * @param id
-	 *            id of the sensor
+	 * returns all stored samples of a sensor. 
+	 * @param id id of the sensor	 * 
 	 * @return a list of all sensor samples belonging to the given sensor
 	 */
 	public final List<Sample> getAllSensorData(String id) {
@@ -160,6 +161,7 @@ public class Database {
 
 	/**
 	 * returns all samples of a sensor inbetween a given interval.
+	 * 
 	 * @param id
 	 *            id of the sensor
 	 * @param from
@@ -168,11 +170,12 @@ public class Database {
 	 *            timestamp of the end of the interval
 	 * @return a list of all sensor samples belonging to the given sensor
 	 */
-	public List<Sample> getSensorDataInterval(final String id, final long from, final long to) {
-		List<Sample> samples = new ArrayList();
+	public List<Sample> getSensorDataInterval(final String id, final long from,
+			final long to) {
+		List<Sample> samples = new ArrayList<Sample>();
 		try {
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from Samples");
+			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);
 			while (rs.next()) {
 				if (rs.getString("id").equals(id)
 						&& rs.getInt("zeitpunkt") >= from
@@ -187,32 +190,25 @@ public class Database {
 			}
 			return samples;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			LOG.warning("Error getting data from Interval");
-			return null;
+			LOG.severe("Error getting data from Interval");
+			return Collections.emptyList();
 		}
 	}
-	
+
 	/**
-	 * 
-	 * @return
+	 * returns the number of stored samples
+	 * @return the number of stored samples, 0 in case of error
 	 */
 	public int size() {
-
-		int i = 0;
 		try {
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from Samples");
-			while (rs.next()) {
-				i++;
-			}
+			ResultSet rs = st.executeQuery(COUNT_QUERY);
+			rs.next();
+			return rs.getInt("rowcount");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return 0;
 		}
-		return i;
 	}
-	
 
 	/**
 	 * 
@@ -237,7 +233,7 @@ public class Database {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -247,12 +243,13 @@ public class Database {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * gets the connection.
+	 * 
 	 * @return
 	 */
 	public Connection getConn() {
