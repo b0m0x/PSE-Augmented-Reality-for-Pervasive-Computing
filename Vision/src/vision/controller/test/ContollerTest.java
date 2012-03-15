@@ -28,6 +28,7 @@ public class ContollerTest extends TestCase {
 		controller.bind(null, null);
 		
 		assertEquals(null, controller.getPluginController());
+		
 			
 	}
 

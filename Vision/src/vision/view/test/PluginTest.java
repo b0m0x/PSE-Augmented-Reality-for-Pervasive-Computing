@@ -16,6 +16,7 @@ import org.junit.Test;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.DesktopAssetManager;
 
 import vision.model.Model;
 import vision.model.Position;
@@ -72,6 +73,7 @@ public class PluginTest {
 		sensor2.setPosition(sensor2pos);
 		HeaterPlugin heaterPlugin = new HeaterPlugin(m, v);
 		Application app = new Application();
+		app.setAssetManager(new DesktopAssetManager(true));
 		AppStateManager stateManager = new AppStateManager(app);
 		heaterPlugin.initialize(stateManager, app);
 		heaterPlugin.setDaten(m);
