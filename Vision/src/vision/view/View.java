@@ -298,7 +298,7 @@ public class View extends SimpleApplication {
 				localAssert(inputManager.isCursorVisible());
 				controller.onAction("toggleMouse", false, 20);
 				localAssert(!inputManager.isCursorVisible());
-				
+							
 				
 				//DIsable heater and WIndow plugin
 				controller.plugincheckboxPressed("Pluginchecbox_vision.view.HeaterPlugin", new CheckBoxStateChangedEvent(null, false));
@@ -306,6 +306,7 @@ public class View extends SimpleApplication {
 				
 				localAssert(stateManager.getState(HeaterPlugin.class) == null);
 				localAssert(stateManager.getState(WindowPlugin.class) == null);
+				guiAppState.managePluginsPopupMenu();
 				break;
 			case 250:
 				controller.plugincheckboxPressed("Pluginchecbox_vision.view.HeaterPlugin", new CheckBoxStateChangedEvent(null, true));
@@ -315,7 +316,7 @@ public class View extends SimpleApplication {
 				localAssert(stateManager.getState(WindowPlugin.class) != null);
 				
 				userPick();
-				
+				controller.backToMainScreen("la", null);
 			case 1000:
 				testSuccessful = true;
 				stop();

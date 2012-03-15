@@ -15,7 +15,7 @@ public class ContollerTest extends TestCase {
 	@Test
 	public void testContoller() {
 		
-		MockView view = new MockView();
+		View view = new View();
 		Model model = null;
 		try {
 			model = new Model(view);
