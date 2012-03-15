@@ -48,13 +48,15 @@ public abstract class Plugin extends AbstractAppState {
 	private PluginController pluginController;
 
 	private int lastSensorHashCode;
-	
-	
+		
 	/**
 	 * Creates the Plugin
 	 */
 	public Plugin(Model model, String[] tags) {
 		setTags(tags);
+		if (model == null) {
+			return;
+		}
 		setDaten(model);
 		updateSensors();
 	}

@@ -195,7 +195,7 @@ public class View extends SimpleApplication {
 	 * @param p
 	 *            the plugin to enable
 	 */
-	public final void enablePlugin(Plugin plugin) {
+	public void enablePlugin(Plugin plugin) {
 		stateManager.attach(plugin);
 	}
 
@@ -204,7 +204,7 @@ public class View extends SimpleApplication {
 	 * @param p
 	 *            the plugin to detach
 	 */
-	public final void disablePlugin(Plugin plugin) {
+	public void disablePlugin(Plugin plugin) {
 		stateManager.detach(plugin);
 	}
 	/**

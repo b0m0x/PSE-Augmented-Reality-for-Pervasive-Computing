@@ -170,16 +170,6 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	}
 
 
-	/**
-	 * gets called by nifty if a button in the GUI was pressed.
-	 * @param id
-	 *            id of the clicked button
-	 */
-	//@NiftyEventSubscriber(pattern = ".*button.*")
-	public final void buttonClick(final String id, ButtonClickedEvent bce) {
-		Logger l= Logger.getLogger("buttonclick");
-		l.info("Button was pressed.");
-	}
 
 
 	/**
