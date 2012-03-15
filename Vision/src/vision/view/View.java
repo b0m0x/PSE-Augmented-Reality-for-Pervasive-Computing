@@ -14,12 +14,16 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
+import com.jme3.input.KeyInput;
+import com.jme3.input.event.KeyInputEvent;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.post.filters.BloomFilter;
 import com.jme3.post.filters.DepthOfFieldFilter;
+
+import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 
 /**
  * main class of the view package. contains the main update loop and calls the
@@ -60,6 +64,10 @@ public class View extends SimpleApplication {
 	private BloomFilter bloomFilter;
 
 	private FilterPostProcessor fpp;
+
+	private boolean testMode;
+
+	private boolean testSuccessful;
 
 
 
@@ -240,6 +248,82 @@ public class View extends SimpleApplication {
 	public boolean isInOverview() {
 		return mainAppState.isInOverview();
 	}
+	
+	private int testIteration;
+	
+	void localAssert(boolean condition) {
+		if (condition) {
+			return;
+		}		
+		testMode = false;
+		stop();
+		throw new AssertionError();
+	}
+	
+	/** 
+	 * update loop called every frame by jmonkey
+	 * only used for automatic testing
+	 */	
+	@Override
+	public void update() {
+		super.update();
+		if (!testMode) {
+			return;
+		}
+		switch (testIteration) {
+			case 20:
+				userSelect();
+				break;
+			case 50:
+				localAssert(!isInOverview());
+				toggleMouse();
+				toggleOverviewCam();
+				break;
+			case 100:
+				localAssert(isInOverview());
+				localAssert(inputManager.isCursorVisible());
+				break;
+			case 150:				
+				toggleMouse();
+				localAssert(!inputManager.isCursorVisible());
+				break;
+			case 200:
+				controller.onAction("Left", false, 20);
+				controller.onAction("Right", false, 20);
+				controller.onAction("Up", false, 20);
+				controller.onAction("Down", false, 20);
+				controller.onAction("Jump", false, 20);
+				controller.onAction("fooanfqirflajnsoinqeflkn", false, 20);
+				controller.onAction("toggleMouse", false, 20);
+				localAssert(inputManager.isCursorVisible());
+				controller.onAction("toggleMouse", false, 20);
+				localAssert(!inputManager.isCursorVisible());
+				
+				
+				//DIsable heater and WIndow plugin
+				controller.plugincheckboxPressed("Pluginchecbox_vision.view.HeaterPlugin", new CheckBoxStateChangedEvent(null, false));
+				controller.plugincheckboxPressed("Pluginchecbox_vision.view.WindowPlugin", new CheckBoxStateChangedEvent(null, false));
+				
+				localAssert(stateManager.getState(HeaterPlugin.class) == null);
+				localAssert(stateManager.getState(WindowPlugin.class) == null);
+				break;
+			case 250:
+				controller.plugincheckboxPressed("Pluginchecbox_vision.view.HeaterPlugin", new CheckBoxStateChangedEvent(null, true));
+				controller.plugincheckboxPressed("Pluginchecbox_vision.view.WindowPlugin", new CheckBoxStateChangedEvent(null, true));
+				
+				localAssert(stateManager.getState(HeaterPlugin.class) != null);
+				localAssert(stateManager.getState(WindowPlugin.class) != null);
+				
+				userPick();
+				
+			case 1000:
+				testSuccessful = true;
+				stop();
+				break;
+				
+		}
+		testIteration++;		
+	}
 
 	public void userPick() {
 		CollisionResults results = new CollisionResults();		
@@ -276,5 +360,18 @@ public class View extends SimpleApplication {
 	 */
 	public void enablePostProcessingEffects(boolean enable) {
 		bloomFilter.setEnabled(enable);
+	}
+
+
+	/**
+	 * enables automatic testing
+	 * @param b
+	 */
+	public void setTestModeEnabled(boolean b) {
+		testMode = b;
+	}
+
+	public boolean getTestSucceeded() {
+		return testSuccessful;
 	}
 }

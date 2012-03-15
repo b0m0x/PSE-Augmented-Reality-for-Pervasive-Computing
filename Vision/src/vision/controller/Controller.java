@@ -139,6 +139,10 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	public final View getView() {
 		return view;
 	}
+	
+	public Nifty getNifty() {
+		return nifty;
+	}
 
 	/**
 	 * Setter of the property <tt>view</tt>.
@@ -183,7 +187,6 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 */
 	@NiftyEventSubscriber(id = "btn_manageplugins")
 	public final void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
-	
 		view.getGuiAppState().managePluginsPopupMenu();
 	}
 
