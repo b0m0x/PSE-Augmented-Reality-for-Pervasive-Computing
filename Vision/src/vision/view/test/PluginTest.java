@@ -9,11 +9,16 @@ import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
+import net.java.games.util.plugins.Plugin;
+
 import org.junit.Test;
 
+import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.AppStateManager;
 
 import vision.model.Model;
+import vision.model.Position;
 import vision.model.Sample;
 import vision.model.Sensor;
 import vision.view.HeaterPlugin;
@@ -22,15 +27,7 @@ import vision.view.View;
 public class PluginTest {
 
 	@Test
-	public void test() {
-		SimpleApplication app = new SimpleApplication() {
-
-			@Override
-			public void simpleInitApp() {
-				// TODO Auto-generated method stub
-
-			}
-		};
+	public void testHeaterPluginInitialize() {
 		Model m = null;
 		View v = null;
 		try {
@@ -39,25 +36,49 @@ public class PluginTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Sample sensor1Sample = new Sample("Temperatur", "Celsius", 20, 1);
-		List<Sample> sensor1Messwerte = new ArrayList<Sample>();
-		sensor1Messwerte.add(sensor1Sample);
-		Sample sensor2Sample = new Sample("Temperatur", "Celsius", 22, 2);
-		List<Sample> sensor2Messwerte = new ArrayList<Sample>();
-		sensor2Messwerte.add(sensor2Sample);
-		Sensor sensor1 = new Sensor("0001", 0, sensor1Messwerte);
-		Sensor sensor2 = new Sensor("0002", 0, sensor2Messwerte);
-		HeaterPlugin p = new HeaterPlugin(m, null);
-		//p.update(app);
-
-		List<Sensor> sl = new ArrayList<Sensor>();
-		sl.add(new Sensor("test", 100, Collections.EMPTY_LIST));
-
-		m.setSensor(sl);
-
-		//p.update(app);
-
-		assertEquals(1, 1);
+		
+		Application app = new Application();
+		AppStateManager stateManager = new AppStateManager(app);
+		HeaterPlugin heaterPlugin = new HeaterPlugin(m, v);
+		heaterPlugin.initialize(stateManager, app);
+		
+		assertNotNull(heaterPlugin);
+	}
+	
+	@Test
+	public void testHeaterPLugin(){
+		Sample sample1 = new Sample("heater", "celsius", 20, 0);
+		Sample sample2 = new Sample("heater", "celsius", 21, 0);
+		Model m = null;
+		View v = new View();
+		try {
+			m = new Model(v);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		List<Sensor> list = new ArrayList<Sensor>();
+		List<Sample> sensor1list = new ArrayList<Sample>();
+		sensor1list.add(sample1);
+		Sensor sensor1 = new Sensor("sensor1", 0, sensor1list);
+		List<Sample> sensor2list = new ArrayList<Sample>();
+		sensor2list.add(sample2);
+		Sensor sensor2 = new Sensor("sensor2", 0, sensor2list);
+		list.add(sensor1);
+		list.add(sensor2);
+		m.setSensor(list);
+		Position sensor1pos = new Position(0, 0, 0);
+		sensor1.setPosition(sensor1pos);
+		Position sensor2pos = new Position(10, 1, 1);
+		sensor2.setPosition(sensor2pos);
+		HeaterPlugin heaterPlugin = new HeaterPlugin(m, v);
+		Application app = new Application();
+		AppStateManager stateManager = new AppStateManager(app);
+		heaterPlugin.initialize(stateManager, app);
+		heaterPlugin.setDaten(m);
+		heaterPlugin.update(20);
+		
+		assertNotNull(m);
+		assertNotNull(v);
 	}
 
 }
