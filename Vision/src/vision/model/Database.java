@@ -151,7 +151,6 @@ public class Database {
 			}
 			return samples;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			LOG.warning("Error getting all Sensor Data");
 			// System.exit(0);
 			return null;

@@ -94,7 +94,8 @@ public class MaterialHelper {
 		if (heaterMaterial == null) {
 			createColoredMaterial(am);
 		}
-		ColorRGBA col = new ColorRGBA(temperature / 50f, 0, 1f - temperature / 50f, 1f);
+		float rel = (temperature - 15) / 10f;
+		ColorRGBA col = new ColorRGBA(rel, 0, 1f - rel, 1f);
 		Material m = heaterMaterial.clone();
 		//m.setColor("Diffuse", col);
 		m.setColor("Ambient", col);

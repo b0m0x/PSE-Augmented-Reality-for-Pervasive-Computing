@@ -30,5 +30,5 @@ public class Config {
 	/**
 	 * loglevel.
 	 */
-	public static final Level LOG_LEVEL = Level.WARNING;
+	public static final Level LOG_LEVEL = Level.INFO;
 }
