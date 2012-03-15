@@ -14,6 +14,7 @@ public class ContollerTest extends TestCase {
 
 	@Test
 	public void testContoller() {
+		
 		View view = new View();
 		Model model = null;
 		try {
@@ -22,15 +23,13 @@ public class ContollerTest extends TestCase {
 			e.printStackTrace();
 		}
 
-		Controller controller = null;
-		controller = new Controller(view, model);
+		Controller controller = new Controller(view, model);
 		
 		controller.bind(null, null);
 		
 		assertEquals(null, controller.getPluginController());
 		
-		
-		assertNotNull(controller);
+			
 	}
 
 }

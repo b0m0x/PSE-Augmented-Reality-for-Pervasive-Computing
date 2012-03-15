@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WindowPlugin.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">WindowPlugin.java</span></div><h1>WindowPlugin.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package vision.view;</span>
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.logging.Logger;
+
+import javax.vecmath.Quat4f;
+
+import vision.controller.WindowController;
+import vision.model.HoleAdapter;
+import vision.model.Model;
+import vision.model.Position;
+import vision.model.Sample;
+import vision.model.Sensor;
+import vision.model.WallAdapter;
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
+import com.bulletphysics.linearmath.QuaternionUtil;
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.bullet.util.Converter;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.SceneGraphVisitor;
+import com.jme3.scene.Spatial;
+
+public class WindowPlugin extends Plugin {
+
+	/**
+	 * @uml.property name=&quot;windows&quot;
+	 */
+<span class="fc" id="L35">	private Map&lt;String, Spatial&gt; windows = new HashMap&lt;String, Spatial&gt;();</span>
+	private Spatial windowSpatial;
+	private Spatial windowopen;
+	private Spatial windowclosed;
+	private Model model;
+	private View view;
+<span class="fc" id="L41">	Logger log = Logger.getLogger(WindowPlugin.class.getName());</span>
+
+	public WindowPlugin(Model model, View view) {
+<span class="fc" id="L44">		super(model, new String[] { &quot;window&quot; });</span>
+<span class="fc" id="L45">		this.model = model;</span>
+<span class="fc" id="L46">		this.view = view;</span>
+<span class="fc" id="L47">	}</span>
+
+	@Override
+	public void initialize(AppStateManager stateManager, Application app) {
+<span class="fc" id="L51">		super.initialize(stateManager, app);</span>
+<span class="fc" id="L52">	}</span>
+
+	@Override
+	public void stateDetached(AppStateManager stateManager) {
+<span class="fc" id="L56">		super.stateDetached(stateManager);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">		for (Spatial s : windows.values()) {</span>
+<span class="fc" id="L58">			view.getRootNode().detachChild(s);</span>
+		}
+<span class="fc" id="L60">		view.getRootNode().detachChild(windowSpatial);</span>
+<span class="fc" id="L61">		windowSpatial = null;</span>
+<span class="fc" id="L62">		windows.clear();</span>
+<span class="fc" id="L63">	}</span>
+
+	private void initwindows(Application app) {
+<span class="fc" id="L66">		windowclosed = app.getAssetManager().loadModel(</span>
+<span class="fc" id="L67">				&quot;Models/window.j3o&quot;);</span>
+<span class="fc" id="L68">		windowopen = app.getAssetManager().loadModel(</span>
+<span class="fc" id="L69">				&quot;Models/windowopen.j3o&quot;);</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">		for (Wall w : model.getGroundplan().getWalls()) {</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">			for (Hole h : w.getHole()) {</span>
+<span class="fc" id="L72">				WallAdapter wallAdapter = new WallAdapter(w);</span>
+<span class="fc" id="L73">				HoleAdapter holeAdapter = new HoleAdapter(h);</span>
+<span class="fc" id="L74">				Vector3f vec = getWorldPosition(wallAdapter, holeAdapter);</span>
+<span class="fc" id="L75">				boolean empty = true;</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">				for (Spatial windowSpatial : windows.values()) {</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">					if (windowSpatial.getLocalTranslation().distance(vec) &lt; 0.1f) {</span>
+<span class="fc" id="L78">						empty = false;</span>
+					}
+				}
+<span class="fc bfc" id="L81" title="All 2 branches covered.">				if (empty) {</span>
+<span class="fc" id="L82">					createDummy(vec, app);</span>
+				}
+			}
+		}
+<span class="fc" id="L86">		updatewindows();</span>
+<span class="fc" id="L87">	}</span>
+
+	protected void clientUpdate(Application application, boolean changed) {
+<span class="fc bfc" id="L90" title="All 2 branches covered.">		if (windowSpatial == null) {</span>
+<span class="fc" id="L91">			initwindows(application);</span>
+		}
+<span class="fc bfc" id="L93" title="All 2 branches covered.">		if (changed) {</span>
+<span class="fc" id="L94">			updatewindows();</span>
+		}
+<span class="fc" id="L96">	}</span>
+
+	private void updatewindows() {
+<span class="fc bfc" id="L99" title="All 2 branches covered.">		for (Sensor s : getSensors()) {</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">			if (!windows.containsKey(s.getId())) {</span>
+<span class="fc" id="L101">				Spatial dummy = windowclosed.clone();</span>
+<span class="fc" id="L102">				dummy.setLocalTranslation(s.getPosition().getX(), s</span>
+<span class="fc" id="L103">						.getPosition().getY(), s.getPosition().getZ());</span>
+<span class="fc" id="L104">				dummy = fitInHole(dummy);</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">				for (Spatial window : windows.values()) {</span>
+<span class="fc" id="L106">					if (window.getLocalTranslation().distance(</span>
+<span class="pc bpc" id="L107" title="1 of 4 branches missed.">							dummy.getLocalTranslation()) &lt; 0.1f &amp;&amp; window.getUserData(&quot;sid&quot;).equals(&quot;Dummy&quot;)) {</span>
+<span class="fc" id="L108">						windows.remove(window);</span>
+<span class="fc" id="L109">						view.getRootNode().detachChild(window);</span>
+						
+					}
+				}
+<span class="fc" id="L113">				addwindowSpatial(s);</span>
+			} else {
+<span class="nc bnc" id="L115" title="All 2 branches missed.">			for (Sample samp : s.getSamples()) {</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">				if (samp.getType().equals(&quot;window&quot;)) {</span>
+<span class="nc" id="L117">					view.getRootNode().detachChild(windows.get(s.getId()));</span>
+<span class="nc" id="L118">					windows.remove(s.getId());</span>
+<span class="nc" id="L119">					addwindowSpatial(s);</span>
+				}
+<span class="nc bnc" id="L121" title="All 2 branches missed.">				if (samp.getType().equals(&quot;light&quot;)) {</span>
+<span class="nc" id="L122">					view.getRootNode().detachChild(windows.get(s.getId()));</span>
+<span class="nc" id="L123">					windows.remove(s.getId());</span>
+<span class="nc" id="L124">					addwindowSpatial(s);</span>
+				}
+			}
+			}
+		}
+<span class="fc" id="L129">	}</span>
+
+	private void addwindowSpatial(final Sensor sensor) {
+<span class="fc" id="L132">		windowSpatial = null;</span>
+<span class="fc" id="L133">		float status = 0;</span>
+<span class="fc" id="L134">		float limit = 0;</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">		for (Sample sample : sensor.getSamples()) {</span>
+
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">			if (sample.getType().equals(&quot;window&quot;)) {</span>
+<span class="fc" id="L138">				status = sample.getValue();</span>
+<span class="fc" id="L139">				limit = 0;</span>
+<span class="fc" id="L140">				break;</span>
+			}
+<span class="nc bnc" id="L142" title="All 2 branches missed.">			if (sample.getType().equals(&quot;light&quot;)) {</span>
+<span class="nc" id="L143">				status = sample.getValue();</span>
+<span class="nc" id="L144">				limit = 50;</span>
+<span class="nc" id="L145">				break;</span>
+			}
+		}
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">		if (status &gt; limit) {</span>
+<span class="nc" id="L149">			windowSpatial = windowopen.clone();</span>
+		} else {
+<span class="fc" id="L151">			windowSpatial = windowclosed.clone();</span>
+		}
+<span class="fc" id="L153">		windowSpatial.setLocalTranslation(sensor.getPosition().getX(), sensor</span>
+<span class="fc" id="L154">				.getPosition().getY(), sensor.getPosition().getZ());</span>
+<span class="fc" id="L155">		windowSpatial = fitInHole(windowSpatial);</span>
+<span class="fc" id="L156">		windowSpatial.setUserData(&quot;sid&quot;, sensor.getId());</span>
+<span class="fc" id="L157">		windowSpatial.depthFirstTraversal(new SceneGraphVisitor() {</span>
+
+			@Override
+			public void visit(Spatial arg0) {
+<span class="fc" id="L161">				arg0.setName(sensor.getId() + &quot;id&quot;);</span>
+
+<span class="fc" id="L163">			}</span>
+		});
+<span class="fc" id="L165">		windows.put(sensor.getId(), windowSpatial);</span>
+<span class="fc" id="L166">		view.getRootNode().attachChild(windowSpatial);</span>
+<span class="fc" id="L167">	}</span>
+
+	private Spatial fitInHole(Spatial windowSpatial) {
+<span class="fc" id="L170">		List&lt;Wall&gt; walls = model.getGroundplan().getWalls();</span>
+<span class="fc" id="L171">		Vector3f windowSpatialpos = windowSpatial.getLocalTranslation();</span>
+<span class="fc" id="L172">		Hole smallestHole = walls.get(0).getHole().get(0);</span>
+<span class="fc" id="L173">		Wall smallestWall = walls.get(0);</span>
+<span class="fc" id="L174">		float distance = 10000000.00f;</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">		for (Wall w : walls) {</span>
+<span class="fc" id="L176">			List&lt;Hole&gt; holes = w.getHole();</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">			for (Hole h : holes) {</span>
+<span class="fc" id="L178">				HoleAdapter holeAdapter = new HoleAdapter(h);</span>
+<span class="fc" id="L179">				WallAdapter wallAdapter = new WallAdapter(w);</span>
+<span class="fc" id="L180">				Vector3f HoleVec3 = new Vector3f(getWorldPosition(wallAdapter,</span>
+<span class="fc" id="L181">						holeAdapter));</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">				if (HoleVec3.distance(windowSpatialpos) &lt; distance</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">						&amp;&amp; h.getPositionY1() &gt; 0) {</span>
+<span class="fc" id="L184">					smallestHole = h;</span>
+<span class="fc" id="L185">					smallestWall = w;</span>
+<span class="fc" id="L186">					distance = HoleVec3.distance(windowSpatialpos);</span>
+				}
+			}
+		}
+<span class="fc" id="L190">		HoleAdapter holeAdapter = new HoleAdapter(smallestHole);</span>
+<span class="fc" id="L191">		WallAdapter wallAdapter = new WallAdapter(smallestWall);</span>
+<span class="fc" id="L192">		float rotation = wallAdapter.getRotation();</span>
+<span class="fc" id="L193">		Vector3f HoleVec3f = new Vector3f(</span>
+<span class="fc" id="L194">				getWorldPosition(wallAdapter, holeAdapter));</span>
+<span class="fc" id="L195">		windowSpatial.setLocalTranslation(HoleVec3f);</span>
+<span class="fc" id="L196">		Quat4f rot = new Quat4f();</span>
+<span class="fc" id="L197">		QuaternionUtil.setRotation(rot, new javax.vecmath.Vector3f(0, 1, 0),</span>
+<span class="fc" id="L198">				(float) (rotation + Math.PI / 2));</span>
+<span class="fc" id="L199">		windowSpatial.setLocalRotation(Converter.convert(rot));</span>
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">		if (windowSpatial.equals(windowopen)) {</span>
+<span class="nc" id="L201">			windowSpatial.setLocalScale(wallAdapter.getDepth(), holeAdapter</span>
+<span class="nc" id="L202">					.getSize().getX(), holeAdapter.getSize().getY());</span>
+		} else {
+<span class="fc" id="L204">			windowSpatial.setLocalScale(wallAdapter.getDepth() * 2, holeAdapter</span>
+<span class="fc" id="L205">					.getSize().getX(), holeAdapter.getSize().getY());</span>
+		}
+<span class="fc" id="L207">		return windowSpatial;</span>
+	}
+
+	private Vector3f getWorldPosition(WallAdapter wallAdapter,
+			HoleAdapter holeAdapter) {
+<span class="fc" id="L212">		float newX = -(float) (Math.sin(-Math.PI / 2</span>
+<span class="fc" id="L213">				+ wallAdapter.getRotation()) * holeAdapter.getPosition().x)</span>
+<span class="fc" id="L214">				+ wallAdapter.getEnd().getX();</span>
+<span class="fc" id="L215">		float newY = (float) (holeAdapter.getPosition().getY() - wallAdapter</span>
+<span class="fc" id="L216">				.getHeight() / 2);</span>
+<span class="fc" id="L217">		float newZ = -(float) (Math.cos(-Math.PI / 2</span>
+<span class="fc" id="L218">				+ wallAdapter.getRotation()) * holeAdapter.getPosition().x)</span>
+<span class="fc" id="L219">				+ wallAdapter.getEnd().getY();</span>
+<span class="fc" id="L220">		Vector3f HoleVec3 = new Vector3f(newX, newY, newZ);</span>
+<span class="fc" id="L221">		return HoleVec3;</span>
+	}
+
+	private void createDummy(Vector3f vec, Application app) {
+<span class="fc" id="L225">		windowSpatial = windowclosed.clone();</span>
+<span class="fc" id="L226">		windowSpatial.setLocalTranslation(vec);</span>
+<span class="fc" id="L227">		windowSpatial = fitInHole(windowSpatial);</span>
+<span class="fc" id="L228">		windowSpatial.setUserData(&quot;sid&quot;, &quot;Dummy&quot;);</span>
+		
+<span class="fc" id="L230">		windows.put(UUID.randomUUID().toString(), windowSpatial); // put it in so we can detach them later</span>
+<span class="fc" id="L231">		view.getRootNode().attachChild(windowSpatial);</span>
+<span class="fc" id="L232">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

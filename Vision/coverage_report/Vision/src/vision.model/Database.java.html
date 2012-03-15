@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Database.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Database.java</span></div><h1>Database.java</h1><pre class="source lang-java linenums">package vision.model;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Logger;
+
+import org.h2.jdbc.JdbcSQLException;
+
+/**
+ * This class manages the database connection and saves sensordata.
+ */
+<span class="fc" id="L20">public class Database {</span>
+
+	private static final String CREATE_STATEMENT = &quot;CREATE TABLE Samples (&quot;
+			+ &quot;id VARCHAR(30), &quot; + &quot;Zeitpunkt LONG, &quot; + &quot;Type VARCHAR(30), &quot;
+			+ &quot;Unit VARCHAR(30), &quot; + &quot;Updated LONG, &quot; + &quot;Value FLOAT, &quot;
+			+ &quot;Tags OBJECT)&quot;;
+	
+	private static final String DROP_STATEMENT = &quot;DROP TABLE Samples IF EXISTS&quot;;
+	
+	private static final String FETCH_ALL_QUERY = &quot;SELECT * FROM Samples&quot;;
+
+	private static final String COUNT_QUERY = &quot;SELECT COUNT(*) AS rowcount FROM Samples&quot;;
+
+<span class="fc" id="L33">	private static final Logger LOG = Logger</span>
+<span class="fc" id="L34">			.getLogger(Database.class.getName());</span>
+
+
+	private Connection conn;
+<span class="fc" id="L38">	private boolean inUse = false;</span>
+
+	/**
+	 * delete all samples
+	 */
+	public void dropTable() {
+		Statement st;
+		try {
+<span class="fc" id="L46">			st = conn.createStatement();</span>
+<span class="fc" id="L47">			st.execute(DROP_STATEMENT);</span>
+<span class="nc" id="L48">		} catch (SQLException e) {</span>
+<span class="nc" id="L49">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L51">	}</span>
+
+	private boolean tableExists(String tableName) {
+		try {
+<span class="fc" id="L55">			DatabaseMetaData dbm = conn.getMetaData();</span>
+<span class="fc" id="L56">			ResultSet rs = dbm.getTables(null, null, tableName, null);</span>
+<span class="fc" id="L57">			return rs.next();</span>
+<span class="nc" id="L58">		} catch (SQLException e) {</span>
+<span class="nc" id="L59">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L61">		return false;</span>
+	}
+
+	/**
+	 * saves a sensor object in the database
+	 */
+	public final void updateSensors(String id, long zeitpunkt,
+			Sample messwerte, List&lt;String&gt; tags) {
+
+		try {
+<span class="fc" id="L71">			String insert = &quot;INSERT INTO SAMPLES VALUES(?, ?, ?, ?, ?, ?, ?)&quot;;</span>
+			PreparedStatement pst;
+<span class="fc" id="L73">			Statement st = null;</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">			if (!inUse) {</span>
+<span class="fc" id="L75">				st = conn.createStatement();</span>
+			} else {
+<span class="nc" id="L77">				return;</span>
+			}
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">			if (!tableExists(&quot;SAMPLES&quot;)) {</span>
+<span class="fc" id="L81">				st.execute(CREATE_STATEMENT);</span>
+			}
+			//Set parameters for the database statement
+<span class="fc" id="L84">			pst = conn.prepareStatement(insert);</span>
+<span class="fc" id="L85">			pst.setString(1, id);</span>
+<span class="fc" id="L86">			pst.setLong(2, zeitpunkt);</span>
+<span class="fc" id="L87">			pst.setString(3, messwerte.getType());</span>
+<span class="fc" id="L88">			pst.setString(4, messwerte.getUnit());</span>
+<span class="fc" id="L89">			pst.setLong(5, messwerte.getUpdate());</span>
+<span class="fc" id="L90">			pst.setFloat(6, messwerte.getValue());</span>
+<span class="fc" id="L91">			pst.setObject(7, tags);</span>
+			
+			//execute statement
+<span class="fc" id="L94">			pst.executeUpdate();</span>
+			
+<span class="fc" id="L96">			LOG.info(&quot;Stored: &quot; + id + &quot; &quot;);</span>
+<span class="nc" id="L97">		} catch (SQLException e1) {</span>
+<span class="nc" id="L98">			e1.printStackTrace();</span>
+		}
+
+<span class="fc" id="L101">	}</span>
+
+	/**
+	 * fetches the sensor samples collected.
+	 * 
+	 * @return samples
+	 */
+	public List&lt;Sample&gt; getSensordata(String id, long zeitpunkt) {
+<span class="fc" id="L109">		List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
+		try {
+<span class="fc" id="L111">			Statement st = conn.createStatement();</span>
+<span class="fc" id="L112">			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">				if (rs.getString(&quot;id&quot;).equals(id)</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) == zeitpunkt) {</span>
+<span class="fc" id="L116">					Sample sample = new Sample();</span>
+<span class="fc" id="L117">					sample.setType(rs.getString(&quot;Type&quot;));</span>
+<span class="fc" id="L118">					sample.setUnit(rs.getString(&quot;Unit&quot;));</span>
+<span class="fc" id="L119">					sample.setUpdate(rs.getLong(&quot;Updated&quot;));</span>
+<span class="fc" id="L120">					sample.setValue(rs.getFloat(&quot;Value&quot;));</span>
+<span class="fc" id="L121">					samples.add(sample);</span>
+				}
+			}
+
+<span class="fc" id="L125">			return samples;</span>
+
+<span class="nc" id="L127">		} catch (SQLException e) {</span>
+<span class="nc" id="L128">			LOG.warning(&quot;Error getting Sensor Data!&quot;);</span>
+<span class="nc" id="L129">			return null;</span>
+		}
+	}
+
+	/**
+	 * returns all stored samples of a sensor. 
+	 * @param id id of the sensor	 * 
+	 * @return a list of all sensor samples belonging to the given sensor
+	 */
+	public final List&lt;Sample&gt; getAllSensorData(String id) {
+<span class="fc" id="L139">		List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
+		try {
+<span class="fc" id="L141">			Statement st = conn.createStatement();</span>
+<span class="fc" id="L142">			ResultSet rs = st.executeQuery(&quot;SELECT * FROM Samples WHERE id = '&quot;</span>
+<span class="fc" id="L143">					+ id + &quot;'&quot;);</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc" id="L145">				Sample sample = new Sample();</span>
+<span class="fc" id="L146">				sample.setType(rs.getString(&quot;Type&quot;));</span>
+<span class="fc" id="L147">				sample.setUnit(rs.getString(&quot;Unit&quot;));</span>
+<span class="fc" id="L148">				sample.setUpdate(rs.getLong(&quot;Updated&quot;));</span>
+<span class="fc" id="L149">				sample.setValue(rs.getFloat(&quot;Value&quot;));</span>
+<span class="fc" id="L150">				samples.add(sample);</span>
+			}
+<span class="fc" id="L152">			return samples;</span>
+<span class="nc" id="L153">		} catch (SQLException e) {</span>
+<span class="nc" id="L154">			LOG.warning(&quot;Error getting all Sensor Data&quot;);</span>
+			// System.exit(0);
+<span class="nc" id="L156">			return null;</span>
+		}
+
+	}
+
+	/**
+	 * returns all samples of a sensor inbetween a given interval.
+	 * 
+	 * @param id
+	 *            id of the sensor
+	 * @param from
+	 *            timestamp of beginning
+	 * @param to
+	 *            timestamp of the end of the interval
+	 * @return a list of all sensor samples belonging to the given sensor
+	 */
+	public List&lt;Sample&gt; getSensorDataInterval(final String id, final long from,
+			final long to) {
+<span class="fc" id="L174">		List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
+		try {
+<span class="fc" id="L176">			Statement st = conn.createStatement();</span>
+<span class="fc" id="L177">			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">			while (rs.next()) {</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">				if (rs.getString(&quot;id&quot;).equals(id)</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) &gt;= from</span>
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) &lt;= to) {</span>
+<span class="fc" id="L182">					Sample sample = new Sample();</span>
+<span class="fc" id="L183">					sample.setType(rs.getString(&quot;Type&quot;));</span>
+<span class="fc" id="L184">					sample.setUnit(rs.getString(&quot;Unit&quot;));</span>
+<span class="fc" id="L185">					sample.setUpdate(rs.getLong(&quot;Updated&quot;));</span>
+<span class="fc" id="L186">					sample.setValue(rs.getFloat(&quot;Value&quot;));</span>
+<span class="fc" id="L187">					samples.add(sample);</span>
+				}
+			}
+<span class="fc" id="L190">			return samples;</span>
+<span class="nc" id="L191">		} catch (SQLException e) {</span>
+<span class="nc" id="L192">			LOG.severe(&quot;Error getting data from Interval&quot;);</span>
+<span class="nc" id="L193">			return Collections.emptyList();</span>
+		}
+	}
+
+	/**
+	 * returns the number of stored samples
+	 * @return the number of stored samples, 0 in case of error
+	 */
+	public int size() {
+		try {
+<span class="fc" id="L203">			Statement st = conn.createStatement();</span>
+<span class="fc" id="L204">			ResultSet rs = st.executeQuery(COUNT_QUERY);</span>
+<span class="fc" id="L205">			rs.next();</span>
+<span class="fc" id="L206">			return rs.getInt(&quot;rowcount&quot;);</span>
+<span class="fc" id="L207">		} catch (SQLException e) {</span>
+<span class="fc" id="L208">			return 0;</span>
+		}
+	}
+
+	/**
+	 * 
+	 * @param bg
+	 */
+	public synchronized void connect(UpdateThread bg) {
+		try {
+			// Class.forName(&quot;org.h2.Driver&quot;);
+			try {
+<span class="fc" id="L220">				wait(500);</span>
+<span class="nc" id="L221">			} catch (InterruptedException e) {</span>
+<span class="nc" id="L222">				e.printStackTrace();</span>
+			}
+			try {
+<span class="fc" id="L225">				conn = DriverManager.getConnection(&quot;jdbc:h2:database/db&quot;,</span>
+<span class="fc" id="L226">						&quot;user&quot;, &quot;pw&quot;);</span>
+<span class="nc" id="L227">			} catch (JdbcSQLException e) {</span>
+<span class="nc" id="L228">				inUse = true;</span>
+<span class="nc" id="L229">				LOG.warning(&quot;Database already in use. Please close all instances of \&quot;Vision\&quot;...&quot;);</span>
+			}
+<span class="nc" id="L231">		} catch (SQLException e) {</span>
+<span class="nc" id="L232">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L234">	}</span>
+
+	/**
+	 * 
+	 */
+	public void disconnect() {
+		try {
+<span class="pc bpc" id="L241" title="1 of 2 branches missed.">			if (!inUse) {</span>
+<span class="fc" id="L242">				conn.close();</span>
+			}
+<span class="nc" id="L244">		} catch (SQLException e) {</span>
+<span class="nc" id="L245">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L247">	}</span>
+
+	/**
+	 * gets the connection.
+	 * 
+	 * @return
+	 */
+	public Connection getConn() {
+<span class="nc" id="L255">		return this.conn;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

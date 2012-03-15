@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>HeaterPlugin.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">HeaterPlugin.java</span></div><h1>HeaterPlugin.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package vision.view;</span>
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
+
+
+
+import vision.model.HoleAdapter;
+import vision.model.MaterialHelper;
+import vision.model.Model;
+import vision.model.Sample;
+import vision.model.Sensor;
+import vision.model.WallAdapter;
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.light.Light;
+import com.jme3.light.PointLight;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.SceneGraphVisitor;
+import com.jme3.scene.Spatial;
+
+/**
+ * This class represents the plugins of the heater
+ */
+<span class="fc" id="L33">public class HeaterPlugin extends Plugin {</span>
+
+	/**
+	 * @uml.property name=&quot;heaters&quot;
+	 */
+	private Spatial heaterSpatial;
+	private final Model model;
+<span class="fc" id="L40">	private static final Logger LOG = Logger.getLogger(HeaterPlugin.class.getName());</span>
+	private View view;
+<span class="fc" id="L42">	private Map&lt;String, Spatial&gt; heaters = new HashMap&lt;String, Spatial&gt;();</span>
+<span class="fc" id="L43">	private Map&lt;String, Light&gt; heaterLights = new HashMap&lt;String, Light&gt;();</span>
+
+	/**
+	 * Constructs the Heaterplugin.
+	 */
+	public HeaterPlugin(Model model, View v) {
+<span class="fc" id="L49">		super(model, new String[] { &quot;heater&quot; });</span>
+<span class="fc" id="L50">		this.model = model;</span>
+<span class="fc" id="L51">		view = v;</span>
+<span class="fc" id="L52">	}</span>
+
+	@Override
+	public void initialize(AppStateManager stateManager, Application app) {
+<span class="fc" id="L56">		super.initialize(stateManager, app);		</span>
+<span class="fc" id="L57">	}</span>
+	
+	/**
+	 * align the heaters along walls
+	 */
+	private void alignHeater(Spatial g) {
+<span class="fc" id="L63">		moveToClosestHole(g);</span>
+<span class="fc" id="L64">	}</span>
+
+	private void initHeaters(Application app) {
+<span class="fc" id="L67">		heaterSpatial = app.getAssetManager()</span>
+<span class="fc" id="L68">				.loadModel(&quot;Models/heater1.j3o&quot;);</span>
+		
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">		for (Sensor s : getSensors()) {</span>
+<span class="nc" id="L71">			addHeaterSpatial(s);</span>
+		}
+<span class="fc" id="L73">		updateHeaters();</span>
+<span class="fc" id="L74">	}</span>
+	
+	@Override
+	public void stateDetached(AppStateManager stateManager) {
+<span class="fc" id="L78">		super.stateDetached(stateManager);</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">		for (Spatial s : heaters.values()) {</span>
+<span class="fc" id="L80">			view.getRootNode().detachChild(s);</span>
+		}
+<span class="fc" id="L82">		view.getRootNode().detachChild(heaterSpatial);</span>
+<span class="fc" id="L83">		heaterSpatial = null;</span>
+<span class="fc" id="L84">		heaters.clear();</span>
+		
+<span class="fc bfc" id="L86" title="All 2 branches covered.">		for (Light l : heaterLights.values()) {</span>
+<span class="fc" id="L87">			view.getRootNode().removeLight(l);</span>
+		}
+<span class="fc" id="L89">		heaterLights.clear();</span>
+<span class="fc" id="L90">	}</span>
+	
+	
+
+	private void updateHeaters() {
+<span class="fc" id="L95">		LOG.info(&quot;Sensor state changed. Updating heater Objects.&quot;);</span>
+
+<span class="fc bfc" id="L97" title="All 2 branches covered.">		if (getSensors().size() &gt; heaters.size()) {</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">			for (Sensor s : getSensors()) {</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">				if (!heaters.containsKey(s.getId())) {</span>
+<span class="fc" id="L100">					addHeaterSpatial(s);</span>
+				}
+			}
+		}
+
+<span class="fc bfc" id="L105" title="All 2 branches covered.">		for (Sensor s : getSensors()) {</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">			for (Sample sp : s.getSamples()) {</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">				if (sp.getType().equals(&quot;temperature&quot;)) {</span>
+<span class="fc" id="L108">					final float temperature = sp.getValue();</span>
+
+<span class="fc" id="L110">					final Material m = MaterialHelper.getInstance()</span>
+<span class="fc" id="L111">							.getColoredMaterial(getApp().getAssetManager(),</span>
+<span class="fc" id="L112">									temperature);</span>
+<span class="fc" id="L113">					LOG.info(&quot;Temperature for Heater with sensor id &quot;</span>
+<span class="fc" id="L114">							+ s.getId() + &quot; is &quot; + temperature + sp.getUnit());</span>
+
+<span class="fc" id="L116">					Spatial h3d = heaters.get(s.getId());</span>
+					
+<span class="fc" id="L118">					ColorRGBA col = new ColorRGBA();</span>
+<span class="fc" id="L119">					col.set(temperature / 50f, 0, 1 - temperature / 50f, 1);</span>
+<span class="fc" id="L120">					Light l = heaterLights.get(s.getId());</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">					if (l != null) {</span>
+<span class="fc" id="L122">						l.setColor(col);</span>
+					}
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">					if (h3d == null) {</span>
+<span class="nc" id="L125">						continue;</span>
+					}
+					
+<span class="fc" id="L128">					h3d.depthFirstTraversal(</span>
+<span class="fc" id="L129">							new SceneGraphVisitor() {</span>
+
+								@Override
+								public void visit(Spatial s) {
+<span class="fc bfc" id="L133" title="All 2 branches covered.">									if (s instanceof Geometry) {</span>
+<span class="fc" id="L134">										((Geometry) s).setMaterial(m);</span>
+<span class="fc" id="L135">										LOG.info(&quot;Setting a color&quot;);</span>
+									}
+<span class="fc" id="L137">								}</span>
+							});
+				}
+			}
+
+		}
+<span class="fc" id="L143">	}</span>
+	
+	/**
+	 * moves the heater under the closest window hole
+	 * @param g the heater to move
+	 */
+	private void moveToClosestHole(Spatial g) {
+<span class="fc" id="L150">		Vector3f pos = g.getLocalTranslation();</span>
+<span class="fc" id="L151">		Vector3f closestHole = new Vector3f();</span>
+<span class="fc" id="L152">		WallAdapter closestWall = null;</span>
+<span class="fc" id="L153">		float distance = 10000.0f;</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">		for (Wall w : model.getGroundplan().getWalls()) {</span>
+<span class="fc" id="L155">			WallAdapter wall = new WallAdapter(w);</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">			for (Hole h : wall.getHoles()) {</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">				if (h.getPositionY1() &lt; 0.0001f) {</span>
+<span class="fc" id="L158">					continue; //ignore doors</span>
+				}
+<span class="fc" id="L160">				HoleAdapter hole = new HoleAdapter(h);</span>
+<span class="fc" id="L161">				float xAbs = - (float) (Math.sin(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getX();</span>
+<span class="fc" id="L162">				float zAbs = - (float) (Math.cos(- Math.PI / 2 + wall.getRotation()) * hole.getPosition().x) + wall.getEnd().getY();</span>
+<span class="fc" id="L163">				float yAbs = h.getPositionY1() - wall.getHeight() / 2f - 0.30f;</span>
+				
+<span class="fc" id="L165">				Vector3f holeWorldPosition = new Vector3f(xAbs, yAbs, zAbs);</span>
+<span class="fc" id="L166">				float curDist = holeWorldPosition.distanceSquared(pos);</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">				if(curDist &lt; distance) {</span>
+<span class="fc" id="L168">					distance = curDist;</span>
+<span class="fc" id="L169">					closestHole = holeWorldPosition;</span>
+<span class="fc" id="L170">					closestWall = wall;</span>
+				}
+			}
+		}
+<span class="fc" id="L174">		g.setLocalRotation(new Quaternion(new float[] {0, closestWall.getRotation(), 0}));</span>
+<span class="fc" id="L175">		Vector3f diff = closestHole.subtract(g.getLocalTranslation());</span>
+<span class="fc" id="L176">		Vector3f wallNormal = new Vector3f(closestWall.getEnd().getX() - closestWall.getStart().getX(), 0 , closestWall.getEnd().getY() - closestWall.getStart().getY()).cross(Vector3f.UNIT_Y);</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">		if (wallNormal.dot(diff) &gt; 0) {</span>
+<span class="nc" id="L178">			wallNormal.negateLocal();</span>
+		}
+<span class="fc" id="L180">		wallNormal.normalizeLocal();</span>
+		
+<span class="fc" id="L182">		g.setLocalTranslation(closestHole.add(wallNormal.mult(0.3f)));</span>
+
+<span class="fc" id="L184">	}</span>
+
+	/**
+	 * adds a heater object and a light to the scene graph, using the data of the sensor
+	 * @param s the sensor to use (position and samples will be used)
+	 */
+	private void addHeaterSpatial(final Sensor s) {
+<span class="fc" id="L191">		heaterSpatial.setLocalTranslation(new Vector3f(s.getPosition().getX(), s.getPosition()</span>
+<span class="fc" id="L192">				.getY() - 1.0f, s.getPosition().getZ()));</span>
+<span class="fc" id="L193">		heaterSpatial.setUserData(&quot;sensorid&quot;, s.getId());</span>
+<span class="fc" id="L194">		Spatial h = heaterSpatial.clone();</span>
+<span class="fc" id="L195">		h.breadthFirstTraversal(new SceneGraphVisitor() {</span>
+			
+			@Override
+			public void visit(Spatial arg0) {
+<span class="fc" id="L199">				arg0.setName(s.getId() + &quot;id&quot;);				</span>
+<span class="fc" id="L200">			}</span>
+		});
+<span class="fc" id="L202">		heaters.put(s.getId(), h);</span>
+<span class="fc" id="L203">		alignHeater(h);</span>
+<span class="fc" id="L204">		view.getRootNode().attachChild(h);</span>
+		
+<span class="fc" id="L206">		PointLight l = createHeaterLight(); </span>
+<span class="fc" id="L207">		heaterLights.put(s.getId(), l);</span>
+<span class="fc" id="L208">		l.setPosition(h.getLocalTranslation());</span>
+<span class="fc" id="L209">		view.getRootNode().addLight(l);</span>
+<span class="fc" id="L210">	}</span>
+	
+	PointLight createHeaterLight() {
+<span class="fc" id="L213">		PointLight pl = new PointLight();</span>
+<span class="fc" id="L214">		pl.setName(&quot;heaterlight&quot;);</span>
+<span class="fc" id="L215">		pl.setRadius(4.f);</span>
+<span class="fc" id="L216">		return pl;</span>
+	}
+
+	/**
+	 * updates the client
+	 */
+	protected void clientUpdate(Application application, boolean changed) {
+<span class="fc bfc" id="L223" title="All 2 branches covered.">		if (heaterSpatial == null)</span>
+<span class="fc" id="L224">			initHeaters(application);</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">		if (changed) {</span>
+<span class="fc" id="L226">			updateHeaters();</span>
+		}
+<span class="fc" id="L228">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

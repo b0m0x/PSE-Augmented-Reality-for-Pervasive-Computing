@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>FloorCeiling.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model.xml</a> &gt; <span class="el_source">FloorCeiling.java</span></div><h1>FloorCeiling.java</h1><pre class="source lang-java linenums">package vision.model.xml;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * &lt;p&gt;Java class for anonymous complex type.
+ * 
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * 
+ * &lt;pre&gt;
+ * &amp;lt;complexType&gt;
+ *   &amp;lt;complexContent&gt;
+ *     &amp;lt;restriction base=&quot;{http://www.w3.org/2001/XMLSchema}anyType&quot;&gt;
+ *       &amp;lt;sequence&gt;
+ *         &amp;lt;element ref=&quot;{}benchmarks&quot; maxOccurs=&quot;unbounded&quot;/&gt;
+ *         &amp;lt;element ref=&quot;{}ceilingHeight&quot;/&gt;
+ *       &amp;lt;/sequence&gt;
+ *     &amp;lt;/restriction&gt;
+ *   &amp;lt;/complexContent&gt;
+ * &amp;lt;/complexType&gt;
+ * &lt;/pre&gt;
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = &quot;&quot;, propOrder = {
+    &quot;benchmarks&quot;,
+    &quot;ceilingHeight&quot;
+})
+@XmlRootElement(name = &quot;floorCeiling&quot;)
+<span class="fc" id="L36">public class FloorCeiling {</span>
+
+    @XmlElement(required = true)
+    protected List&lt;Benchmarks&gt; benchmarks;
+    protected float ceilingHeight;
+
+    /**
+     * Gets the value of the benchmarks property.
+     * 
+     * &lt;p&gt;
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the benchmarks property.
+     * &lt;p&gt;
+     * For example, to add a new item, do as follows:
+     * &lt;pre&gt;
+     *    getBenchmarks().add(newItem);
+     * &lt;/pre&gt;
+     * &lt;p&gt;
+     * Objects of the following type(s) are allowed in the list
+     * {@link Benchmarks }
+
+     */
+    public List&lt;Benchmarks&gt; getBenchmarks() {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (benchmarks == null) {</span>
+<span class="nc" id="L62">            benchmarks = new ArrayList&lt;Benchmarks&gt;();</span>
+        }
+<span class="fc" id="L64">        return this.benchmarks;</span>
+    }
+
+    /**
+     * Gets the value of the ceilingHeight property.
+     * 
+     */
+    public float getCeilingHeight() {
+<span class="fc" id="L72">        return ceilingHeight;</span>
+    }
+
+    /**
+     * Sets the value of the ceilingHeight property.
+     * 
+     */
+    public void setCeilingHeight(float value) {
+<span class="nc" id="L80">        this.ceilingHeight = value;</span>
+<span class="nc" id="L81">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

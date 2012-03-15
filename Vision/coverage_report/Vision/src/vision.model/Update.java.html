@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Update.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Update.java</span></div><h1>Update.java</h1><pre class="source lang-java linenums">package vision.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
+/**
+ * manages the server connection and fetches the sensor data.
+ */
+<span class="fc" id="L10">public class Update {</span>
+<span class="fc" id="L11">	private static final Logger LOG = Logger.getLogger(Update.class.getName());</span>
+	/**
+	 * The constructor of the class.
+	 * @param model
+	 */
+<span class="fc" id="L16">	public Update(Model model) {</span>
+<span class="fc" id="L17">		this.database = new Database();</span>
+<span class="fc" id="L18">		this.jsonConverter = new JSONConverter(model);</span>
+<span class="fc" id="L19">		this.daten = model;</span>
+<span class="fc" id="L20">	}</span>
+
+
+	
+	/**
+	 * provides a facade for all objects belonging to the model
+	 */
+
+	private Model daten;
+
+	/**
+	 * Getter of the property &lt;tt&gt;daten&lt;/tt&gt;.
+	 * @return Returns the daten.arg0
+	 * @uml.property name=&quot;daten&quot;
+	 */
+	public final Model getDaten() {
+<span class="nc" id="L36">		return daten;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;daten&lt;/tt&gt;.
+	 * @param daten
+	 *            The daten to set.
+	 * @uml.property name=&quot;daten&quot;
+	 */
+	public final void setDaten(Model daten) {
+<span class="nc" id="L46">		this.daten = daten;</span>
+<span class="nc" id="L47">	}</span>
+
+	/**
+	 * @uml.property name=&quot;jSONConverter&quot;
+	 * @uml.associationEnd inverse=&quot;update:vision.model.JSONConverter&quot;
+	 */
+	private JSONConverter jsonConverter;
+
+	/**
+	 * Getter of the property &lt;tt&gt;jSONConverter&lt;/tt&gt;
+	 * @return Returns the jsonConverter.
+	 * @uml.property name=&quot;jSONConverter&quot;
+	 */
+	public final JSONConverter getJSONConverter() {
+<span class="nc" id="L61">		return jsonConverter;</span>
+	}
+
+
+	/**
+	 * Setter of the property &lt;tt&gt;jSONConverter&lt;/tt&gt;.
+	 * @param jsonConverter  the jsonConverter to set.
+	 */
+	public final void setJSONConverter(JSONConverter jsonConverter) {
+<span class="nc" id="L70">		this.jsonConverter = jsonConverter;</span>
+<span class="nc" id="L71">	}</span>
+
+	/**
+	 * @uml.property name=&quot;database&quot;
+	 * @uml.associationEnd inverse=&quot;update:vision.model.Database&quot;
+	 */
+	private Database database;
+
+	/**
+	 * Getter of the property &lt;tt&gt;database&lt;/tt&gt;.
+	 * @return Returns the database.
+	 * @uml.property name=&quot;database&quot;
+	 */
+	public final Database getDatabase() {
+<span class="fc" id="L85">		return database;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;database&lt;/tt&gt;.
+	 * @param database
+	 *            The database to set.
+	 * @uml.property name=&quot;database&quot;
+	 */
+	public final void setDatabase(Database database) {
+<span class="nc" id="L95">		this.database = database;</span>
+<span class="nc" id="L96">	}</span>
+
+	/**
+	 * stores all the Data from the JSON-Stream into the database.
+	 * @param l
+	 *            the current time of when the data was stored
+	 */
+	public final void store(long l) {
+
+<span class="fc" id="L105">		jsonConverter.convert();</span>
+<span class="fc" id="L106">		List&lt;Sensor&gt; sensorlist = new ArrayList&lt;Sensor&gt;();</span>
+<span class="fc" id="L107">		sensorlist = jsonConverter.getSensorList();</span>
+
+<span class="fc" id="L109">		daten.setSensor(sensorlist);</span>
+<span class="fc" id="L110">		int samplecounter = 1;</span>
+
+<span class="fc bfc" id="L112" title="All 2 branches covered.">		for (int i = 0; i &lt; sensorlist.size(); i++) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">			for (int j = 0; j &lt; sensorlist.get(i).getSamples().size(); j++) {</span>
+<span class="fc" id="L114">				database.updateSensors(sensorlist.get(i).getId(), l, sensorlist</span>
+<span class="fc" id="L115">						.get(i).getSamples().get(j), sensorlist.get(i)</span>
+<span class="fc" id="L116">						.getTags());</span>
+<span class="fc" id="L117">				LOG.info(&quot;Sample &quot; + (j + 1));</span>
+<span class="fc" id="L118">				samplecounter++;</span>
+			}
+		}
+<span class="fc" id="L121">		LOG.info(&quot;Sensors stored: &quot; + (sensorlist.size() + 1)</span>
+<span class="fc" id="L122">				+ &quot;; Samples stored: &quot; + samplecounter);</span>
+<span class="fc" id="L123">		jsonConverter.resetList();</span>
+<span class="fc" id="L124">	}</span>
+
+	/**
+	 * gets all the Data.
+	 */
+	public final void getAllData() {
+<span class="nc" id="L130">		jsonConverter.convert();</span>
+<span class="nc" id="L131">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

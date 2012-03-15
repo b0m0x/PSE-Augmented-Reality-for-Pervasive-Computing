@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>MainAppState.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">MainAppState.java</span></div><h1>MainAppState.java</h1><pre class="source lang-java linenums"><span class="pc" id="L1">package vision.view;</span>
+
+import com.jme3.animation.LoopMode;
+import com.jme3.app.Application;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.bullet.BulletAppState;
+import com.jme3.bullet.PhysicsSpace;
+import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
+import com.jme3.bullet.control.CharacterControl;
+import com.jme3.cinematic.MotionPath;
+import com.jme3.cinematic.MotionPathListener;
+import com.jme3.cinematic.events.MotionTrack;
+import com.jme3.cinematic.events.MotionTrack.Direction;
+import com.jme3.collision.CollisionResults;
+import com.jme3.input.InputManager;
+import com.jme3.input.KeyInput;
+import com.jme3.input.MouseInput;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.input.controls.MouseButtonTrigger;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.PointLight;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Ray;
+import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
+import com.jme3.renderer.ViewPort;
+import com.jme3.scene.CameraNode;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import com.jme3.scene.Spatial.CullHint;
+import com.jme3.scene.control.CameraControl.ControlDirection;
+import com.jme3.texture.Texture;
+import com.jme3.util.SkyFactory;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+import vision.controller.Controller;
+import vision.model.Model;
+import vision.model.xml.Light;
+
+/**
+ * Renders all static objects and rooms
+ */
+<span class="fc" id="L47">public class MainAppState extends AbstractAppState {</span>
+	
+	private Camera miniMapCam;
+	private ViewPort miniMapViewPort;
+	
+	private CameraNode camNode;
+	private final Controller controller;
+	private View app;
+	private final Model model;
+	private Node mainGeometryNode;
+	private boolean overviewCam;
+<span class="fc" id="L58">	private static final Logger LOG = Logger.getLogger(MainAppState.class.getName());</span>
+	private CharacterControl player;
+	
+	private boolean moveLeft;
+	private boolean moveRight;
+	private boolean moveForward;
+	private boolean moveBack;
+<span class="fc" id="L65">	private Node miniMapNode = new Node(&quot;Minimap&quot;);</span>
+	private final static float playerHeight = 1.7f;
+
+	
+<span class="fc" id="L69">	public MainAppState(Model model, Controller controller) {</span>
+<span class="fc" id="L70">		this.model = model;</span>
+<span class="fc" id="L71">		this.overviewCam = false;</span>
+<span class="fc" id="L72">		this.controller = controller;</span>
+<span class="fc" id="L73">	}</span>
+
+	@Override
+	public void initialize(AppStateManager stateManager, Application app) {
+<span class="fc" id="L77">		super.initialize(stateManager, app);</span>
+<span class="fc" id="L78">		this.app = (View) app;</span>
+		
+<span class="fc" id="L80">		final BulletAppState bas = stateManager.getState(BulletAppState.class);</span>
+<span class="fc" id="L81">		PhysicsSpace pSpace = new PhysicsSpace();</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if (bas == null) {</span>
+<span class="nc" id="L83">			LOG.warning(&quot;No BulletAppState has been attached - continuing without physics&quot;);</span>
+		} else {
+<span class="fc" id="L85">			pSpace = bas.getPhysicsSpace();</span>
+<span class="fc" id="L86">			pSpace.setAccuracy(0.0001f);</span>
+		}
+		
+<span class="fc" id="L89">		mainGeometryNode = new Node(&quot;static&quot;);</span>
+<span class="fc" id="L90">		miniMapNode = new Node(&quot;minimap&quot;);</span>
+<span class="fc" id="L91">		final List&lt;Spatial&gt; staticObjects = model.getStaticGeometry();</span>
+
+<span class="fc bfc" id="L93" title="All 2 branches covered.">		for (Spatial g : staticObjects) {</span>
+<span class="fc" id="L94">			mainGeometryNode.attachChild(g);</span>
+			
+			//add physics control
+<span class="fc bfc" id="L97" title="All 2 branches covered.">			if (g.getNumControls() &gt; 0) {</span>
+<span class="fc" id="L98">				pSpace.add(g.getControl(0));</span>
+			}
+			//we dont want the ceiling in our minimap
+<span class="fc bfc" id="L101" title="All 4 branches covered.">			if (!g.getName().equals(&quot;ceiling&quot;) &amp;&amp; !g.getName().equals(&quot;floor&quot;)) {</span>
+<span class="fc" id="L102">				miniMapNode.attachChild(g);</span>
+			}
+		}
+		
+<span class="fc" id="L106">		CapsuleCollisionShape pcs = new CapsuleCollisionShape(0.1f, playerHeight, 1);		</span>
+<span class="fc" id="L107">		player = new CharacterControl(pcs, 0.02f);</span>
+<span class="fc" id="L108">		player.setFallSpeed(20f);</span>
+<span class="fc" id="L109">		player.setGravity(20f);</span>
+<span class="fc" id="L110">		player.setJumpSpeed(20);</span>
+<span class="fc" id="L111">		player.setPhysicsLocation(new Vector3f(4,1,5));</span>
+<span class="fc" id="L112">		pSpace.add(player);</span>
+				
+<span class="fc" id="L114">		this.app.getRootNode().attachChild(mainGeometryNode);</span>
+<span class="fc" id="L115">		this.app.getRootNode().attachChild(miniMapNode);</span>
+		
+		// load skybox
+<span class="fc" id="L118">		Spatial sb = loadSkyBox();</span>
+
+<span class="fc" id="L120">		this.app.getRootNode().attachChild(sb);</span>
+		
+<span class="fc" id="L122">		this.app.getRootNode().setCullHint(CullHint.Dynamic);</span>
+	
+<span class="fc" id="L124">		setUpCamera();</span>
+		
+<span class="fc" id="L126">		setUpLights();</span>
+<span class="fc" id="L127">		setUpKeys();</span>
+		
+<span class="fc" id="L129">		initMiniMap();</span>
+		
+<span class="fc" id="L131">		toggleOverviewCam();</span>
+<span class="fc" id="L132">	}</span>
+
+	private void setUpCamera() {
+<span class="fc" id="L135">		app.getFlyByCamera().setEnabled(true);</span>
+<span class="fc" id="L136">		camNode = new CameraNode(&quot;maincam&quot;, app.getCamera());</span>
+<span class="fc" id="L137">		app.getRootNode().attachChild(camNode);</span>
+<span class="fc" id="L138">		camNode.setControlDir(ControlDirection.SpatialToCamera);</span>
+<span class="fc" id="L139">	    camNode.getControl(0).setEnabled(false);</span>
+<span class="fc" id="L140">	}</span>
+
+	
+	private void initMiniMap() {
+
+<span class="fc" id="L145">		miniMapCam = app.getCamera().clone();</span>
+<span class="fc" id="L146">		miniMapCam.setViewPort(0.8f, 1.0f, 0.8f, 1.0f);</span>
+<span class="fc" id="L147">		miniMapViewPort = app.getRenderManager().createMainView(&quot;minimap&quot;, miniMapCam);</span>
+<span class="fc" id="L148">		miniMapViewPort.setClearFlags(true, true, true);</span>
+<span class="fc" id="L149">		miniMapViewPort.attachScene(miniMapNode);</span>
+		
+<span class="fc" id="L151">		miniMapCam.setLocation(getPlayerPosition().add(new Vector3f(0, 50, 0)));</span>
+<span class="fc" id="L152">		miniMapCam.lookAt(getPlayerPosition(), new Vector3f(0, 1, 0));</span>
+<span class="fc" id="L153">	}</span>
+	
+	private void setUpLights() {
+<span class="fc bfc" id="L156" title="All 2 branches covered.">		for (Light l : model.getLights()) {</span>
+<span class="fc" id="L157">			PointLight lamp_light = new PointLight();</span>
+<span class="fc" id="L158">			lamp_light.setColor(ColorRGBA.White);</span>
+<span class="fc" id="L159">			lamp_light.setRadius(10f);</span>
+<span class="fc" id="L160">			lamp_light.setPosition(new Vector3f(l.getPositionX(), 3f, l.getPositionY()));</span>
+<span class="fc" id="L161">			app.getRootNode().addLight(lamp_light);</span>
+		}
+		//add light
+		
+<span class="fc" id="L165">		AmbientLight al = new AmbientLight();</span>
+<span class="fc" id="L166">		al.setColor(ColorRGBA.White.mult(1.3f));</span>
+<span class="fc" id="L167">		app.getRootNode().addLight(al);</span>
+		
+		
+<span class="fc" id="L170">	}</span>
+
+	private void setUpKeys() {
+<span class="fc" id="L173">		InputManager inputManager = app.getInputManager();</span>
+<span class="fc" id="L174">		inputManager.addMapping(&quot;zoom&quot;, new KeyTrigger(KeyInput.KEY_O));</span>
+<span class="fc" id="L175">		inputManager.addListener(controller, new String[] { &quot;zoom&quot;, &quot;select&quot; });</span>
+<span class="fc" id="L176">		inputManager.addMapping(&quot;Left&quot;, new KeyTrigger(KeyInput.KEY_A));</span>
+<span class="fc" id="L177">	    inputManager.addMapping(&quot;Right&quot;, new KeyTrigger(KeyInput.KEY_D));</span>
+<span class="fc" id="L178">	    inputManager.addMapping(&quot;Up&quot;, new KeyTrigger(KeyInput.KEY_W));</span>
+<span class="fc" id="L179">	    inputManager.addMapping(&quot;Down&quot;, new KeyTrigger(KeyInput.KEY_S));</span>
+<span class="fc" id="L180">	    inputManager.addMapping(&quot;Jump&quot;, new KeyTrigger(KeyInput.KEY_SPACE));</span>
+<span class="fc" id="L181">	    inputManager.addMapping(&quot;toggleMouse&quot;, new KeyTrigger(KeyInput.KEY_M));</span>
+<span class="fc" id="L182">	    inputManager.addMapping(&quot;userPick&quot;, new MouseButtonTrigger(MouseInput.BUTTON_LEFT));</span>
+	    
+<span class="fc" id="L184">	    inputManager.addListener(controller, &quot;userPick&quot;);</span>
+<span class="fc" id="L185">	    inputManager.addListener(controller, &quot;Left&quot;);</span>
+<span class="fc" id="L186">	    inputManager.addListener(controller, &quot;Right&quot;);</span>
+<span class="fc" id="L187">	    inputManager.addListener(controller, &quot;Up&quot;);</span>
+<span class="fc" id="L188">	    inputManager.addListener(controller, &quot;Down&quot;);</span>
+<span class="fc" id="L189">	    inputManager.addListener(controller, &quot;Jump&quot;);</span>
+<span class="fc" id="L190">	    inputManager.addListener(controller, &quot;toggleMouse&quot;);</span>
+<span class="fc" id="L191">	}</span>
+	
+	@Override
+	public void update(float tpf) {
+<span class="fc" id="L195">		super.update(tpf);</span>
+<span class="fc" id="L196">		Camera cam = app.getCamera();</span>
+<span class="fc" id="L197">	    Vector3f camDir = cam.getDirection().clone().multLocal(0.8f);</span>
+<span class="fc" id="L198">	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.5f);</span>
+<span class="fc" id="L199">	    Vector3f walkDirection = new Vector3f(0, 0, 0);</span>
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">	    if (moveLeft)  { walkDirection.addLocal(camLeft); }</span>
+<span class="pc bpc" id="L201" title="1 of 2 branches missed.">	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">	    if (moveForward)    { walkDirection.addLocal(camDir); }</span>
+<span class="pc bpc" id="L203" title="1 of 2 branches missed.">	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }</span>
+<span class="fc" id="L204">	    player.setWalkDirection(walkDirection.mult(tpf));</span>
+	    
+<span class="fc bfc" id="L206" title="All 2 branches covered.">	    if (!overviewCam) {</span>
+<span class="fc" id="L207">	    	app.getCamera().setLocation(player.getPhysicsLocation().add(0, 0.5f, 0));</span>
+	    }
+	    
+	    //vermeidung von freiem fall
+<span class="fc" id="L211">	    float lowestPoint = -(model.getGroundplan().getWalls().get(0).getHeight()/2) + (playerHeight/2);</span>
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">	    if(player.getPhysicsLocation().getY() &lt; lowestPoint)</span>
+	    {
+<span class="nc" id="L214">	    	player.setPhysicsLocation(new Vector3f(player.getPhysicsLocation().getX(), lowestPoint, player.getPhysicsLocation().getZ()));</span>
+	    }
+<span class="fc" id="L216">		updateMiniMap();</span>
+<span class="fc" id="L217">	}</span>
+	
+	private void updateMiniMap() {
+<span class="fc" id="L220">		miniMapCam.setLocation(player.getPhysicsLocation().add(new Vector3f(0, 50, 0)));</span>
+<span class="fc" id="L221">		float[] rot = app.getCamera().getRotation().toAngles(null);</span>
+<span class="fc" id="L222">		Quaternion q = new Quaternion().fromAngles(new float[] {(float) (Math.PI / 2), rot[1], 0});</span>
+<span class="fc" id="L223">		miniMapCam.setRotation(q);</span>
+<span class="fc" id="L224">	}</span>
+	
+	@Override
+	public void stateDetached(AppStateManager stateManager) {
+<span class="nc" id="L228">		super.stateDetached(stateManager);</span>
+<span class="nc" id="L229">		app.getRootNode().detachChild(mainGeometryNode);</span>
+<span class="nc" id="L230">	}</span>
+	
+	private Spatial loadSkyBox() {
+<span class="fc" id="L233">		Texture up = app.getAssetManager().loadTexture(</span>
+<span class="fc" id="L234">				&quot;Texture/Skybox/up.bmp&quot;);</span>
+<span class="fc" id="L235">		Texture dn = app.getAssetManager().loadTexture(</span>
+<span class="fc" id="L236">				&quot;Texture/Skybox/down.bmp&quot;);</span>
+<span class="fc" id="L237">		Texture lt = app.getAssetManager().loadTexture(</span>
+<span class="fc" id="L238">				&quot;Texture/Skybox/left.bmp&quot;);</span>
+<span class="fc" id="L239">		Texture rt = app.getAssetManager().loadTexture(</span>
+<span class="fc" id="L240">				&quot;Texture/Skybox/right.bmp&quot;);</span>
+<span class="fc" id="L241">		Texture ft = app.getAssetManager().loadTexture(</span>
+<span class="fc" id="L242">				&quot;Texture/Skybox/front.bmp&quot;);</span>
+<span class="fc" id="L243">		Texture bk = app.getAssetManager().loadTexture(</span>
+<span class="fc" id="L244">				&quot;Texture/Skybox/back.bmp&quot;);</span>
+<span class="fc" id="L245">		return SkyFactory.createSky(app.getAssetManager(), rt, lt, bk,</span>
+<span class="fc" id="L246">				ft, up, dn);</span>
+	}
+	
+	private MotionPath createCamZoomInPath() {
+		MotionPath path;
+<span class="nc" id="L251">		path = new MotionPath();</span>
+	    
+<span class="nc" id="L253">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 5, 0)).clone());</span>
+	    
+<span class="nc" id="L255">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 20, 0)).clone());</span>
+
+<span class="nc" id="L257">	    path.addWayPoint(player.getPhysicsLocation().clone());</span>
+
+	    
+<span class="nc" id="L260">	    path.setCurveTension(0.05f);</span>
+	    
+	    
+<span class="nc" id="L263">	    path.addListener(new MotionPathListener() {</span>
+			
+			@Override
+			public void onWayPointReach(MotionTrack mtr, int waypoint) {
+<span class="nc bnc" id="L267" title="All 2 branches missed.">				if (waypoint &gt;= 2) {</span>
+<span class="nc" id="L268">					camNode.getControl(0).setEnabled(false);</span>
+<span class="nc" id="L269">					mtr.stop();</span>
+<span class="nc" id="L270">					mainGeometryNode.getChild(&quot;ceiling&quot;).setCullHint(CullHint.Dynamic);</span>
+				}
+				
+<span class="nc" id="L273">			}</span>
+		});
+	    
+<span class="nc" id="L276">	    return path;</span>
+	}
+	
+	private MotionPath createCamZoomOutPath() {
+		MotionPath path;
+<span class="fc" id="L281">		path = new MotionPath();</span>
+		
+<span class="fc" id="L283">		app.getCamera().getLocation().addLocal(0, 50, 0);</span>
+
+<span class="fc" id="L285">	    path.addWayPoint(player.getPhysicsLocation().clone());</span>
+
+<span class="fc" id="L287">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 20, 0)).clone());</span>
+	    
+<span class="fc" id="L289">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 5, 0)).clone());</span>
+	    
+<span class="fc" id="L291">	    path.setCurveTension(0.05f);</span>
+	    
+	    
+<span class="fc" id="L294">	    path.addListener(new MotionPathListener() {</span>
+			
+			@Override
+			public void onWayPointReach(MotionTrack mtr, int waypoint) {
+<span class="fc bfc" id="L298" title="All 2 branches covered.">				if (waypoint &gt;= 2) {</span>
+<span class="fc" id="L299">					camNode.getControl(0).setEnabled(false);</span>
+<span class="fc" id="L300">					mtr.stop();</span>
+				}
+				
+<span class="fc" id="L303">			}</span>
+		});
+	    
+<span class="fc" id="L306">	    return path;</span>
+	}
+	
+	private void animateCamZoom(boolean zoomIn) {
+<span class="fc" id="L310">		Vector3f playerPos = player.getPhysicsLocation();</span>
+		
+	    MotionPath path ;
+<span class="pc bpc" id="L313" title="1 of 2 branches missed.">	    if (zoomIn) {</span>
+<span class="nc" id="L314">	    	path = createCamZoomInPath();</span>
+	    } else {
+<span class="fc" id="L316">	    	path = createCamZoomOutPath();</span>
+	    }
+	    Vector3f lookAt;
+<span class="pc bpc" id="L319" title="1 of 2 branches missed.">	    if (zoomIn) {</span>
+<span class="nc" id="L320">		    lookAt = playerPos.subtract(camNode.getLocalTranslation()).clone().normalize();</span>
+<span class="nc" id="L321">		    lookAt.setY(0.2f);</span>
+<span class="nc" id="L322">		    lookAt.addLocal(playerPos);</span>
+	    } else {
+<span class="fc" id="L324">	    	lookAt = playerPos;</span>
+	    }
+<span class="fc" id="L326">	    MotionTrack mctrl = new MotionTrack(camNode, path);</span>
+<span class="fc" id="L327">	    mctrl.setDirectionType(Direction.LookAt);</span>
+<span class="fc" id="L328">	    mctrl.setLookAt(lookAt, Vector3f.UNIT_Y);</span>
+<span class="fc" id="L329">	    mctrl.setLoopMode(LoopMode.DontLoop);</span>
+	    
+<span class="pc bpc" id="L331" title="1 of 2 branches missed.">	    if (zoomIn) {</span>
+<span class="nc" id="L332">	    	mctrl.setSpeed(2.5f);</span>
+	    } else {
+<span class="fc" id="L334">	    	mctrl.setSpeed(4.5f);</span>
+	    }
+	    
+<span class="fc" id="L337">	    camNode.getControl(0).setEnabled(true);</span>
+<span class="fc" id="L338">	    mctrl.play();</span>
+
+<span class="fc" id="L340">	}</span>
+
+
+	public void toggleOverviewCam() {
+<span class="pc bpc" id="L344" title="1 of 2 branches missed.">		if (camNode.getControl(0).isEnabled()) {</span>
+<span class="nc" id="L345">			return;</span>
+		}
+<span class="fc" id="L347">		animateCamZoom(overviewCam);</span>
+<span class="pc bpc" id="L348" title="1 of 2 branches missed.">		if (!overviewCam) {</span>
+<span class="fc" id="L349">			mainGeometryNode.getChild(&quot;ceiling&quot;).setCullHint(CullHint.Always);</span>
+		}
+<span class="fc" id="L351">		player.setEnabled(overviewCam);</span>
+<span class="pc bpc" id="L352" title="1 of 2 branches missed.">		app.setMouseEnabled(!overviewCam);</span>
+
+<span class="fc" id="L354">		overviewCam ^= true;</span>
+<span class="fc" id="L355">	}</span>
+
+	
+	public void userSelect() {
+<span class="fc" id="L359">		CollisionResults results = new CollisionResults();</span>
+<span class="fc" id="L360">		Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera()</span>
+<span class="fc" id="L361">				.getDirection());</span>
+<span class="fc" id="L362">		mainGeometryNode.collideWith(ray, results);</span>
+<span class="fc bfc" id="L363" title="All 2 branches covered.">		for (int i = 0; i &lt; results.size(); i++) {</span>
+<span class="fc" id="L364">			Vector3f pt = results.getCollision(i).getContactPoint();</span>
+<span class="fc" id="L365">			String hit = results.getCollision(i).getGeometry().getName();</span>
+<span class="fc bfc" id="L366" title="All 2 branches covered.">			if (&quot;floor&quot;.equals(hit)) {</span>
+<span class="fc" id="L367">				app.getCamera().setLocation(</span>
+<span class="fc" id="L368">						pt.add(Vector3f.UNIT_Z));</span>
+<span class="fc" id="L369">				overviewCam = false;</span>
+			}
+		}		
+<span class="fc" id="L372">	}</span>
+
+	/**
+	 * gets called if the user presses or releases a button to move
+	 * @param name
+	 * @param keyPressed
+	 */
+	public void userMoveAction(String name, boolean keyPressed) {
+<span class="fc bfc" id="L380" title="All 2 branches covered.">		if (name.equals(&quot;Left&quot;)) {</span>
+<span class="fc" id="L381">			moveLeft = keyPressed;</span>
+<span class="fc bfc" id="L382" title="All 2 branches covered.">		} else if (name.equals(&quot;Right&quot;)) {</span>
+<span class="fc" id="L383">			moveRight = keyPressed;</span>
+<span class="fc bfc" id="L384" title="All 2 branches covered.">		} else if (name.equals(&quot;Up&quot;)) {</span>
+<span class="fc" id="L385">			moveForward = keyPressed;</span>
+<span class="fc bfc" id="L386" title="All 2 branches covered.">		} else if (name.equals(&quot;Down&quot;)) {</span>
+<span class="fc" id="L387"> 			moveBack = keyPressed;</span>
+<span class="pc bpc" id="L388" title="1 of 2 branches missed.">		} else if (name.equals(&quot;Jump&quot;)) {</span>
+<span class="fc" id="L389">			player.jump();</span>
+		}
+<span class="fc" id="L391">	}</span>
+
+	public Vector3f getPlayerPosition() {
+<span class="fc" id="L394">		return player.getPhysicsLocation();</span>
+	}
+
+	public boolean isInOverview() {
+<span class="fc" id="L398">		return overviewCam;	</span>
+	}
+
+	/**
+	 * gets called if the user selected a position from overview perspective
+	 * @param contactPoint the point in global coords
+	 */
+	public void overviewSelect(Vector3f contactPoint) {		
+<span class="nc" id="L406">		player.setPhysicsLocation(contactPoint.addLocal(0, 1, 0));		</span>
+<span class="nc" id="L407">		toggleOverviewCam();</span>
+<span class="nc" id="L408">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

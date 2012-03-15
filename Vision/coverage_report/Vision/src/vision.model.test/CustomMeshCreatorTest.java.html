@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CustomMeshCreatorTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model.test</a> &gt; <span class="el_source">CustomMeshCreatorTest.java</span></div><h1>CustomMeshCreatorTest.java</h1><pre class="source lang-java linenums">package vision.model.test;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import vision.model.CustomMeshCreator;
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
+import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
+
+<span class="fc" id="L21">public class CustomMeshCreatorTest {</span>
+
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L25">	}</span>
+
+	@Test
+	public void testConvertWall1() {
+<span class="fc" id="L29">		Wall wall = new Wall();</span>
+<span class="fc" id="L30">		wall.setPositionX1(1f);</span>
+<span class="fc" id="L31">		wall.setPositionY1(1f);</span>
+
+<span class="fc" id="L33">		wall.setPositionX2(0f);</span>
+<span class="fc" id="L34">		wall.setPositionY2(0f);</span>
+
+<span class="fc" id="L36">		CustomMeshCreator c = new CustomMeshCreator();</span>
+<span class="fc" id="L37">		Spatial g = c.convert(wall);</span>
+		
+<span class="fc" id="L39">		RigidBodyControl ctrl = ((RigidBodyControl)g.getControl(0));</span>
+
+<span class="fc" id="L41">		assertEquals(Math.PI / 4, ctrl.getPhysicsRotation().toAngleAxis(</span>
+<span class="fc" id="L42">				new Vector3f(0f, 1f, 0f)), 0.01f);</span>
+<span class="fc" id="L43">		assertEquals(new Vector3f(0.5f, 0f, 0.5f), ((RigidBodyControl)g.getControl(0)).getPhysicsLocation());</span>
+<span class="fc" id="L44">	}</span>
+
+	@Test
+	public void testConvertWall2() {
+<span class="fc" id="L48">		Wall wall = new Wall();</span>
+<span class="fc" id="L49">		wall.setPositionX1(-1f);</span>
+<span class="fc" id="L50">		wall.setPositionY1(-1f);</span>
+
+<span class="fc" id="L52">		wall.setPositionX2(0f);</span>
+<span class="fc" id="L53">		wall.setPositionY2(0f);</span>
+
+<span class="fc" id="L55">		CustomMeshCreator c = new CustomMeshCreator();</span>
+<span class="fc" id="L56">		Spatial g = c.convert(wall);</span>
+
+<span class="fc" id="L58">		RigidBodyControl ctrl = ((RigidBodyControl)g.getControl(0));</span>
+		
+<span class="fc" id="L60">		assertEquals(Math.PI / 2 + Math.PI / 4, ctrl.getPhysicsRotation()</span>
+<span class="fc" id="L61">				.toAngleAxis(new Vector3f(0f, 1f, 0f)), 0.01f);</span>
+<span class="fc" id="L62">		assertEquals(new Vector3f(-0.5f, 0f, -0.5f), ctrl.getPhysicsLocation());</span>
+<span class="fc" id="L63">	}</span>
+
+	/**
+	 * Same as Test 2, but with translation applied to test wall
+	 */
+	@Test
+	public void testConvertWall2WithTranslation() {
+<span class="fc" id="L70">		Wall wall = new Wall();</span>
+<span class="fc" id="L71">		wall.setPositionX1(1f);</span>
+<span class="fc" id="L72">		wall.setPositionY1(0f);</span>
+
+<span class="fc" id="L74">		wall.setPositionX2(2f);</span>
+<span class="fc" id="L75">		wall.setPositionY2(1f);</span>
+
+<span class="fc" id="L77">		CustomMeshCreator c = new CustomMeshCreator();</span>
+<span class="fc" id="L78">		Spatial g = c.convert(wall);</span>
+		
+
+<span class="fc" id="L81">		RigidBodyControl ctrl = ((RigidBodyControl)g.getControl(0));</span>
+
+<span class="fc" id="L83">		assertEquals(Math.PI / 2 + Math.PI / 4, ctrl.getPhysicsRotation()</span>
+<span class="fc" id="L84">				.toAngleAxis(new Vector3f(0f, 1f, 0f)), 0.01f);</span>
+<span class="fc" id="L85">		assertEquals(new Vector3f(1.5f, 0f, 0.5f), ctrl.getPhysicsLocation());</span>
+<span class="fc" id="L86">	}</span>
+
+	/**
+	 * Same as Test 3, but with 1 hole
+	 */
+	@Test
+	public void testConvertWall2WithTranslationAndHole() {
+<span class="fc" id="L93">		Wall wall = new Wall();</span>
+<span class="fc" id="L94">		wall.setPositionX1(1f);</span>
+<span class="fc" id="L95">		wall.setPositionY1(0f);</span>
+
+<span class="fc" id="L97">		wall.setPositionX2(2f);</span>
+<span class="fc" id="L98">		wall.setPositionY2(1f);</span>
+
+<span class="fc" id="L100">		List&lt;Hole&gt; holes = new ArrayList&lt;Hole&gt;();</span>
+
+<span class="fc" id="L102">		Hole h1 = new Hole();</span>
+<span class="fc" id="L103">		h1.setPositionX1(1f);</span>
+<span class="fc" id="L104">		h1.setPositionY1(1f);</span>
+<span class="fc" id="L105">		h1.setPositionX2(2f);</span>
+<span class="fc" id="L106">		h1.setPositionY2(2f);</span>
+<span class="fc" id="L107">		holes.add(h1);</span>
+
+<span class="fc" id="L109">		wall.setHole(holes);</span>
+
+<span class="fc" id="L111">		CustomMeshCreator c = new CustomMeshCreator();</span>
+<span class="fc" id="L112">		Spatial g = c.convert(wall);</span>
+
+<span class="fc" id="L114">		assertEquals(Math.PI / 2 + Math.PI / 4, ((RigidBodyControl) g.getControl(0)).getPhysicsRotation().toAngleAxis(Vector3f.UNIT_Y), 0.01f);</span>
+<span class="fc" id="L115">		assertEquals(new Vector3f(1.5f, 0f, 0.5f), ((RigidBodyControl) g.getControl(0)).getPhysicsLocation());</span>
+<span class="fc" id="L116">	}</span>
+
+	/**
+	 * Same as Test 4, but with 2 Holes
+	 */
+	@Test
+	public void testConvertWall2WithTranslationAndHoles() {
+<span class="fc" id="L123">		Wall wall = new Wall();</span>
+<span class="fc" id="L124">		wall.setPositionX1(1f);</span>
+<span class="fc" id="L125">		wall.setPositionY1(0f);</span>
+
+<span class="fc" id="L127">		wall.setPositionX2(2f);</span>
+<span class="fc" id="L128">		wall.setPositionY2(1f);</span>
+
+<span class="fc" id="L130">		List&lt;Hole&gt; holes = new ArrayList&lt;Hole&gt;();</span>
+
+<span class="fc" id="L132">		Hole h1 = new Hole();</span>
+<span class="fc" id="L133">		h1.setPositionX1(1f);</span>
+<span class="fc" id="L134">		h1.setPositionY1(1f);</span>
+<span class="fc" id="L135">		h1.setPositionX2(2f);</span>
+<span class="fc" id="L136">		h1.setPositionY2(2f);</span>
+<span class="fc" id="L137">		holes.add(h1);</span>
+
+<span class="fc" id="L139">		Hole h2 = new Hole();</span>
+<span class="fc" id="L140">		h2.setPositionX1(3f);</span>
+<span class="fc" id="L141">		h2.setPositionY1(0f);</span>
+<span class="fc" id="L142">		h2.setPositionX2(3f);</span>
+<span class="fc" id="L143">		h2.setPositionY2(2f);</span>
+<span class="fc" id="L144">		holes.add(h2);</span>
+
+<span class="fc" id="L146">		wall.setHole(holes);</span>
+
+<span class="fc" id="L148">		CustomMeshCreator c = new CustomMeshCreator();</span>
+<span class="fc" id="L149">		Spatial g = c.convert(wall);</span>
+
+<span class="fc" id="L151">		assertEquals(Math.PI / 2 + Math.PI / 4, ((RigidBodyControl) g.getControl(0)).getPhysicsRotation().toAngleAxis(Vector3f.UNIT_Y), 0.01f);</span>
+<span class="fc" id="L152">		assertEquals(new Vector3f(1.5f, 0f, 0.5f), ((RigidBodyControl) g.getControl(0)).getPhysicsLocation());</span>
+<span class="fc" id="L153">	}</span>
+	
+	@Test
+	public void createCeilingAndFloor() {
+<span class="fc" id="L157">		CustomMeshCreator c = new CustomMeshCreator();</span>
+<span class="fc" id="L158">		Spatial ceiling = c.createCeiling(new Vector3f(1,1,1), new Vector3f(1, 2, 3));</span>
+<span class="fc" id="L159">		assertEquals(new Vector3f(1,1,1), ceiling.getControl(RigidBodyControl.class).getPhysicsLocation());</span>
+<span class="fc" id="L160">		assertEquals(1, ((Box) ((Geometry) ceiling).getMesh()).getXExtent(), 0.0001f);</span>
+<span class="fc" id="L161">		assertEquals(2, ((Box) ((Geometry) ceiling).getMesh()).getYExtent(), 0.0001f);</span>
+<span class="fc" id="L162">		assertEquals(3, ((Box) ((Geometry) ceiling).getMesh()).getZExtent(), 0.0001f);</span>
+		
+<span class="fc" id="L164">		Spatial floor = c.createFloor(new Vector3f(1,1,1), new Vector3f(1, 2, 3));</span>
+<span class="fc" id="L165">		assertEquals(new Vector3f(1,1,1), floor.getControl(RigidBodyControl.class).getPhysicsLocation());</span>
+<span class="fc" id="L166">		assertEquals(1, ((Box) ((Geometry) floor).getMesh()).getXExtent(), 0.0001f);</span>
+<span class="fc" id="L167">		assertEquals(2, ((Box) ((Geometry) floor).getMesh()).getYExtent(), 0.0001f);</span>
+<span class="fc" id="L168">		assertEquals(3, ((Box) ((Geometry) floor).getMesh()).getZExtent(), 0.0001f);</span>
+		
+<span class="fc" id="L170">	}</span>
+	
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
