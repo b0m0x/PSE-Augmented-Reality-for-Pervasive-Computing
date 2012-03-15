@@ -30,7 +30,7 @@ import vision.Config;
  *         &lt;element ref="{}reference" maxOccurs="unbounded"/>
  *         &lt;element ref="{}staticGeometry" maxOccurs="unbounded"/>
  *         &lt;element ref="{}light" maxOccurs="unbounded"/>
- *         &lt;element ref="{}floorCeiling"/>
+ *         &lt;element ref="{}floorCeiling" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -75,19 +75,25 @@ public class Groundplan {
 
     /**
      * Gets the value of the wall property.
+     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the wall property.
-     *      * <p>
+     * 
+     * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getWall().add(newItem);
      * </pre>
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Wall }
+     * 
+     * 
      */
     public List<Wall> getWalls() {
         if (wall == null) {
@@ -98,21 +104,27 @@ public class Groundplan {
 
     /**
      * Gets the value of the reference property.
+     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the reference property.
+     * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getReference().add(newItem);
      * </pre>
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Reference }
+     * 
+     * 
      */
-    public final List<Reference> getReferencePoints() {
+    public List<Reference> getReferencePoints() {
         if (reference == null) {
             reference = new ArrayList<Reference>();
         }
@@ -133,12 +145,15 @@ public class Groundplan {
      * <pre>
      *    getStaticGeometry().add(newItem);
      * </pre>
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link StaticGeometry }
-
+     * 
+     * 
      */
-    public final List<StaticGeometry> getStaticGeometries() {
+    public List<StaticGeometry> getStaticGeometries() {
         if (staticGeometry == null) {
             staticGeometry = new ArrayList<StaticGeometry>();
         }
@@ -167,7 +182,7 @@ public class Groundplan {
      * 
      * 
      */
-    public final List<Light> getLights() {
+    public List<Light> getLights() {
         if (light == null) {
             light = new ArrayList<Light>();
         }
@@ -177,14 +192,32 @@ public class Groundplan {
     /**
      * Gets the value of the floorCeiling property.
      * 
-     * @return
-     *     possible object is
-     *     {@link FloorCeiling }
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the floorCeiling property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getFloorCeiling().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link FloorCeiling }
+     * 
+     * 
      */
-    public final List<FloorCeiling> getFloorAndCeilings() {
-        return floorCeiling;
+    public List<FloorCeiling> getFloorAndCeilings() {
+        if (floorCeiling == null) {
+            floorCeiling = new ArrayList<FloorCeiling>();
+        }
+        return this.floorCeiling;
     }
-
+    
     /**
      * Sets the value of the floorCeiling property.
      * 

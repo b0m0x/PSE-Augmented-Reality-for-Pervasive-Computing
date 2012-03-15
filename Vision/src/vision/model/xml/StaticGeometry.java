@@ -9,7 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
+ * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -17,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{}x"/>
  *         &lt;element ref="{}y"/>
+ *         &lt;element ref="{}z"/>
  *         &lt;element ref="{}angle"/>
  *         &lt;element ref="{}path"/>
  *       &lt;/sequence>
@@ -24,11 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "x",
     "y",
+    "z",
     "angle",
     "path"
 })
@@ -37,69 +43,96 @@ public class StaticGeometry {
 
     protected float x;
     protected float y;
+    protected float z;
     protected float angle;
     @XmlElement(required = true)
-    private String path;
+    protected String path;
 
     /**
      * Gets the value of the x property.
+     * 
      */
-    public final float getX() {
+    public float getX() {
         return x;
     }
 
     /**
      * Sets the value of the x property.
+     * 
      */
-    public final void setX(final float value) {
+    public void setX(float value) {
         this.x = value;
     }
 
     /**
      * Gets the value of the y property.
+     * 
      */
-    public final float getY() {
+    public float getY() {
         return y;
     }
 
     /**
      * Sets the value of the y property.
+     * 
      */
-    public final void setY(float value) {
+    public void setY(float value) {
         this.y = value;
     }
 
     /**
-     * Gets the value of the angle property.
+     * Gets the value of the z property.
+     * 
      */
-    public final float getAngle() {
+    public float getZ() {
+        return z;
+    }
+
+    /**
+     * Sets the value of the z property.
+     * 
+     */
+    public void setZ(float value) {
+        this.z = value;
+    }
+
+    /**
+     * Gets the value of the angle property.
+     * 
+     */
+    public float getAngle() {
         return angle;
     }
 
     /**
      * Sets the value of the angle property.
+     * 
      */
-    public final void setAngle(float value) {
+    public void setAngle(float value) {
         this.angle = value;
     }
 
     /**
      * Gets the value of the path property.
+     * 
      * @return
      *     possible object is
      *     {@link String }
+     *     
      */
-    public final String getPath() {
+    public String getPath() {
         return path;
     }
 
     /**
      * Sets the value of the path property.
+     * 
      * @param value
      *     allowed object is
      *     {@link String }
+     *     
      */
-    public final void setPath(String value) {
+    public void setPath(String value) {
         this.path = value;
     }
 

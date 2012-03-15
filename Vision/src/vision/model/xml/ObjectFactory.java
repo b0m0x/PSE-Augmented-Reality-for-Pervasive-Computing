@@ -1,6 +1,5 @@
 package vision.model.xml;
 
-import java.math.BigInteger;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
@@ -39,6 +38,7 @@ public class ObjectFactory {
     private final static QName _PositionX_QNAME = new QName("", "positionX");
     private final static QName _Path_QNAME = new QName("", "path");
     private final static QName _HeightWindow_QNAME = new QName("", "heightWindow");
+    private final static QName _Z_QNAME = new QName("", "z");
     private final static QName _HeightGround_QNAME = new QName("", "heightGround");
     private final static QName _Y_QNAME = new QName("", "y");
     private final static QName _Lat_QNAME = new QName("", "lat");
@@ -126,12 +126,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link int }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "", name = "wallNumber")
-    public JAXBElement<BigInteger> createWallNumber(BigInteger value) {
-        return new JAXBElement<BigInteger>(_WallNumber_QNAME, BigInteger.class, null, value);
+    public JAXBElement<Integer> createWallNumber(int value) {
+        return new JAXBElement<Integer>(_WallNumber_QNAME, int.class, null, value);
     }
 
     /**
@@ -144,12 +144,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link int }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "", name = "number")
-    public JAXBElement<BigInteger> createNumber(BigInteger value) {
-        return new JAXBElement<BigInteger>(_Number_QNAME, BigInteger.class, null, value);
+    public JAXBElement<Integer> createNumber(int value) {
+        return new JAXBElement<Integer>(_Number_QNAME, int.class, null, value);
     }
 
     /**
@@ -162,12 +162,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link int }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "", name = "holeNumber")
-    public JAXBElement<BigInteger> createHoleNumber(BigInteger value) {
-        return new JAXBElement<BigInteger>(_HoleNumber_QNAME, BigInteger.class, null, value);
+    public JAXBElement<Integer> createHoleNumber(int value) {
+        return new JAXBElement<Integer>(_HoleNumber_QNAME, int.class, null, value);
     }
 
     /**
@@ -249,6 +249,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "heightWindow")
     public JAXBElement<Float> createHeightWindow(Float value) {
         return new JAXBElement<Float>(_HeightWindow_QNAME, Float.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Float }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "z")
+    public JAXBElement<Float> createZ(Float value) {
+        return new JAXBElement<Float>(_Z_QNAME, Float.class, null, value);
     }
 
     /**
