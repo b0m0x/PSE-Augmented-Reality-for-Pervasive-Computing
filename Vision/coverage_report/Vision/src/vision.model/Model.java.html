@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Model.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Model.java</span></div><h1>Model.java</h1><pre class="source lang-java linenums">package vision.model;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.xml.bind.JAXBException;
+
+import com.jme3.material.Material;
+import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+
+import vision.Config;
+import vision.controller.PluginController;
+import vision.model.xml.FloorCeiling;
+import vision.model.xml.Groundplan;
+import vision.model.xml.Hole;
+import vision.model.xml.Light;
+import vision.model.xml.Reference;
+import vision.model.xml.StaticGeometry;
+import vision.model.xml.Wall;
+import vision.view.Plugin;
+import vision.view.View;
+
+/**
+ * provides a facade for all objects belonging to the model
+ * 
+ */
+public class Model {
+
+	UpdateThread updater;
+	/**
+	 * @uml.property name=&quot;view&quot;
+	 * @uml.associationEnd inverse=&quot;daten:vision.view.View&quot;
+	 */
+	private View view;
+
+	/**
+	 * @uml.property name=&quot;sensor&quot;
+	 * @uml.associationEnd multiplicity=&quot;(0 -1)&quot;
+	 *                     inverse=&quot;daten:vision.model.Sensor&quot;
+	 */
+	private List&lt;Sensor&gt; sensor;
+	
+	/**
+	 * @uml.property name=&quot;pluginLoader&quot;
+	 * @uml.associationEnd multiplicity=&quot;(1 1)&quot;
+	 *                     inverse=&quot;model:vision.model.PluginLoader&quot;
+	 */
+<span class="fc" id="L54">	private PluginLoader pluginLoader = new vision.model.PluginLoader();</span>
+
+	/**
+	 * @uml.property name=&quot;pluginList&quot;
+	 */
+<span class="fc" id="L59">	private List&lt;Plugin&gt; pluginList = Collections.emptyList();</span>
+
+<span class="fc" id="L61">	private List&lt;PluginController&gt; pluginControllerList = Collections</span>
+<span class="fc" id="L62">			.emptyList();</span>
+
+
+	/**
+	 * @uml.property name=&quot;groundplan&quot;
+	 * @uml.associationEnd multiplicity=&quot;(1 1)&quot;
+	 *                     inverse=&quot;model:vision.model.Groundplan&quot;
+	 */
+	private Groundplan groundplan;
+
+	private List&lt;Spatial&gt; staticGeometries;
+	
+<span class="fc" id="L74">	public Model(View view) throws JAXBException {</span>
+
+
+<span class="fc" id="L77">		this.groundplan = new vision.model.xml.Groundplan().load();</span>
+//		 sensor = createTestSensors();
+<span class="fc" id="L79">		sensor = Collections.emptyList();</span>
+<span class="fc" id="L80">		this.view = view;</span>
+<span class="fc" id="L81">		loadPlugins();</span>
+
+<span class="fc" id="L83">		updater = new UpdateThread(this);</span>
+<span class="fc" id="L84">		updater.start();</span>
+
+<span class="fc" id="L86">		Logger.getLogger(&quot;&quot;).setLevel(Config.LOG_LEVEL);</span>
+
+<span class="fc" id="L88">	}</span>
+
+	private void loadPlugins() {
+<span class="fc" id="L91">		pluginList = pluginLoader.loadPlugins(this, view);</span>
+<span class="fc" id="L92">		pluginControllerList = pluginLoader.getController();</span>
+<span class="fc" id="L93">	}</span>
+
+	/**
+					 */
+	public List&lt;Sample&gt; getSensordata(String id, int time) {
+<span class="nc" id="L98">		return getDatenbank().getSensordata(id, time);</span>
+	}
+
+	/**
+	 * returns a list with all sensors containing one of the tags in the argument array
+	 */
+	public synchronized List&lt;Sensor&gt; getTaggedSensors(String[] tags) {
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">		if (sensor == null) {</span>
+<span class="nc" id="L106">			return Collections.emptyList();</span>
+		}
+<span class="fc" id="L108">		List&lt;Sensor&gt; tagged = new ArrayList&lt;Sensor&gt;();</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">		for (Sensor s : sensor) {</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">			for (String tag : tags) {</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">				if (s.getTags().contains(tag)) {</span>
+<span class="fc" id="L112">					tagged.add(s);</span>
+				}
+			}
+		}
+<span class="fc" id="L116">		return tagged;</span>
+	}
+
+	
+	/**
+	 * Getter of the property &lt;tt&gt;sensor&lt;/tt&gt;
+	 * 
+	 * @return Returns the sensor.
+	 * @uml.property name=&quot;sensor&quot;
+	 */
+	public synchronized List&lt;Sensor&gt; getSensor() {
+<span class="fc" id="L127">		return sensor;</span>
+	}
+
+
+	/**
+	 * Getter of the property &lt;tt&gt;datenbank&lt;/tt&gt;
+	 * 
+	 * @return Returns the datenbank.
+	 * @uml.property name=&quot;datenbank&quot;
+	 */
+	public Database getDatenbank() {
+<span class="nc" id="L138">		return updater.getUpdate().getDatabase();</span>
+	}
+
+
+	/**
+	 * Setter of the property &lt;tt&gt;sensor&lt;/tt&gt;
+	 * 
+	 * @param sensor
+	 *            The sensor to set.
+	 * @uml.property name=&quot;sensor&quot;
+	 */
+	public synchronized void setSensor(List&lt;Sensor&gt; sensor) {
+<span class="fc" id="L150">		this.sensor = sensor;</span>
+<span class="fc" id="L151">	}</span>
+
+	
+	/**
+	 * Getter of the property &lt;tt&gt;pluginList&lt;/tt&gt;
+	 * 
+	 * @return Returns the pluginList.
+	 * @uml.property name=&quot;pluginList&quot;
+	 */
+	public List&lt;Plugin&gt; getPluginList() {
+<span class="fc" id="L161">		return pluginList;</span>
+	}
+
+	public List&lt;PluginController&gt; getPluginControllerList() {
+<span class="fc" id="L165">		return pluginControllerList;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;pluginList&lt;/tt&gt;
+	 * 
+	 * @param pluginList
+	 *            The pluginList to set.
+	 * @uml.property name=&quot;pluginList&quot;
+	 */
+	public void setPluginList(List&lt;Plugin&gt; pluginList) {
+<span class="nc" id="L176">		this.pluginList = pluginList;</span>
+<span class="nc" id="L177">	}</span>
+
+	/**
+		 */
+	private List&lt;Sensor&gt; getAllSensors() {
+<span class="nc" id="L182">		return getSensor();</span>
+	}
+
+	
+
+	/**
+	 * Getter of the property &lt;tt&gt;groundplan&lt;/tt&gt;
+	 * 
+	 * @return Returns the groundplan.
+	 * @uml.property name=&quot;groundplan&quot;
+	 */
+	public Groundplan getGroundplan() {
+<span class="fc" id="L194">		return groundplan;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;groundplan&lt;/tt&gt;
+	 * 
+	 * @param groundplan
+	 *            The groundplan to set.
+	 * @uml.property name=&quot;groundplan&quot;
+	 */
+	public void setGroundplan(Groundplan groundplan) {
+<span class="nc" id="L205">		this.groundplan = groundplan;</span>
+<span class="nc" id="L206">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;view&lt;/tt&gt;
+	 * 
+	 * @return Returns the view.
+	 * @uml.property name=&quot;view&quot;
+	 */
+	public View getView() {
+<span class="nc" id="L215">		return view;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;view&lt;/tt&gt;
+	 * 
+	 * @param view
+	 *            The view to set.
+	 * @uml.property name=&quot;view&quot;
+	 */
+	public void setView(View view) {
+<span class="nc" id="L226">		this.view = view;</span>
+<span class="nc" id="L227">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;pluginLoader&lt;/tt&gt;
+	 * 
+	 * @return Returns the pluginLoader.
+	 * @uml.property name=&quot;pluginLoader&quot;
+	 */
+	public PluginLoader getPluginLoader() {
+<span class="nc" id="L236">		return pluginLoader;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;pluginLoader&lt;/tt&gt;
+	 * 
+	 * @param pluginLoader
+	 *            The pluginLoader to set.
+	 * @uml.property name=&quot;pluginLoader&quot;
+	 */
+	public void setPluginLoader(PluginLoader pluginLoader) {
+<span class="nc" id="L247">		this.pluginLoader = pluginLoader;</span>
+<span class="nc" id="L248">	}</span>
+
+	public List&lt;Spatial&gt; getStaticGeometry() {
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">		if (staticGeometries == null) {</span>
+<span class="fc" id="L252">			createGeometry();</span>
+		}
+<span class="fc" id="L254">		return staticGeometries;</span>
+	}
+
+	public List&lt;Light&gt; getLights() {
+<span class="fc" id="L258">		return groundplan.getLights();</span>
+	}
+
+	private void createGeometry() {
+<span class="fc" id="L262">		staticGeometries = new ArrayList&lt;Spatial&gt;();</span>
+<span class="fc" id="L263">		Material m = MaterialHelper.getInstance().getWallMaterial(</span>
+<span class="fc" id="L264">				view.getAssetManager());</span>
+<span class="fc" id="L265">		Material fm = MaterialHelper.getInstance().getFloorMaterial(</span>
+<span class="fc" id="L266">				view.getAssetManager());</span>
+
+<span class="fc" id="L268">		CustomMeshCreator meshCreator = new CustomMeshCreator();</span>
+
+<span class="fc bfc" id="L270" title="All 2 branches covered.">		for (Wall w : groundplan.getWalls()) {</span>
+<span class="fc" id="L271">			Spatial g = meshCreator.convert(w);</span>
+<span class="fc" id="L272">			g.setMaterial(m);</span>
+<span class="fc" id="L273">			staticGeometries.add(g);</span>
+		}
+
+<span class="fc bfc" id="L276" title="All 2 branches covered.">		for (StaticGeometry sg : groundplan.getStaticGeometries()) {</span>
+<span class="fc" id="L277">			Spatial geo = view.getAssetManager().loadModel(sg.getPath());</span>
+<span class="fc" id="L278">			geo.rotate(0, sg.getAngle(), 0);</span>
+<span class="fc" id="L279">			geo.setLocalTranslation(sg.getX(), -0.95f, sg.getY());</span>
+<span class="fc" id="L280">			staticGeometries.add(geo);</span>
+		}
+		
+<span class="fc" id="L283">		Node ceilingNode = new Node(&quot;ceiling&quot;);</span>
+
+<span class="fc bfc" id="L285" title="All 2 branches covered.">		for (FloorCeiling fc : groundplan.getFloorAndCeilings()) {</span>
+<span class="fc" id="L286">			float MPX = (fc.getBenchmarks().get(0).getPositionX() + fc</span>
+<span class="fc" id="L287">					.getBenchmarks().get(1).getPositionX()) / 2;</span>
+<span class="fc" id="L288">			float MPY = (fc.getBenchmarks().get(0).getPositionY() + fc</span>
+<span class="fc" id="L289">					.getBenchmarks().get(1).getPositionY()) / 2;</span>
+<span class="fc" id="L290">			float SX = Math.abs((fc.getBenchmarks().get(0).getPositionX() - fc</span>
+<span class="fc" id="L291">					.getBenchmarks().get(1).getPositionX()) / 2);</span>
+<span class="fc" id="L292">			float SY = Math.abs((fc.getBenchmarks().get(0).getPositionY() - fc</span>
+<span class="fc" id="L293">					.getBenchmarks().get(1).getPositionY()) / 2);</span>
+<span class="fc" id="L294">			Geometry ceiling = (Geometry) meshCreator.createCeiling(</span>
+<span class="fc" id="L295">					new Vector3f(MPX, fc.getCeilingHeight(), MPY),</span>
+<span class="fc" id="L296">					new Vector3f(SX, 0.1f, SY));</span>
+<span class="fc" id="L297">			ceiling.setMaterial(m);</span>
+<span class="fc" id="L298">			Geometry floor = (Geometry) meshCreator.createFloor(new Vector3f(</span>
+<span class="fc" id="L299">					MPX, -(fc.getCeilingHeight()), MPY), new Vector3f(SX, 0.1f,</span>
+<span class="fc" id="L300">					SY));</span>
+<span class="fc" id="L301">			floor.setMaterial(fm);</span>
+			
+<span class="fc" id="L303">			ceilingNode.attachChild(ceiling);</span>
+<span class="fc" id="L304">			staticGeometries.add(floor);</span>
+		}
+<span class="fc" id="L306">		staticGeometries.add(ceilingNode);</span>
+<span class="fc" id="L307">	}</span>
+
+	public List&lt;Reference&gt; getReferencePoints() {
+<span class="fc" id="L310">		return groundplan.getReferencePoints();</span>
+	}
+
+	protected List&lt;Sensor&gt; createTestSensors() {
+<span class="nc" id="L314">		List&lt;Sensor&gt; sensors = new ArrayList&lt;Sensor&gt;();</span>
+<span class="nc" id="L315">		Sensor s = new Sensor();</span>
+<span class="nc" id="L316">		s.setId(&quot;testSensor&quot;);</span>
+<span class="nc" id="L317">		s.addToTags(&quot;heater&quot;);</span>
+<span class="nc" id="L318">		s.addToSamples(new Sample(&quot;temperature&quot;, &quot;°C&quot;, 15.0f, System</span>
+<span class="nc" id="L319">				.currentTimeMillis()));</span>
+<span class="nc" id="L320">		s.setPosition(new Position(0, 0, 0));</span>
+<span class="nc" id="L321">		sensors.add(s);</span>
+
+<span class="nc" id="L323">		List&lt;Wall&gt; walls = groundplan.getWalls();</span>
+<span class="nc" id="L324">		int i = 0;</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">		for (Wall w : walls) {</span>
+<span class="nc" id="L326">			List&lt;Hole&gt; holes = w.getHole();</span>
+<span class="nc" id="L327">			WallAdapter wAdapter = new WallAdapter(w);</span>
+<span class="nc bnc" id="L328" title="All 2 branches missed.">			for (Hole h : holes) {</span>
+				
+<span class="nc" id="L330">					Sensor sensor = new Sensor();</span>
+<span class="nc" id="L331">					sensor.addToTags(&quot;window&quot;);</span>
+<span class="nc" id="L332">					sensor.addToSamples(new Sample(&quot;window&quot;, &quot;bool&quot;, 0.0f,</span>
+<span class="nc" id="L333">							System.currentTimeMillis()));</span>
+<span class="nc" id="L334">					HoleAdapter holeAdapter = new HoleAdapter(h);</span>
+<span class="nc" id="L335">					Vector2f holevec2 = holeAdapter.getPosition();</span>
+<span class="nc" id="L336">					sensor.setId(&quot;SensorNr:&quot; + i);</span>
+<span class="nc" id="L337">					float rotation = wAdapter.getRotation();</span>
+<span class="nc" id="L338">					float newX = (float) (holevec2.getX() * Math.cos(rotation) + wAdapter</span>
+<span class="nc" id="L339">							.getStart().getX());</span>
+<span class="nc" id="L340">					float newY = (float) (holeAdapter.getPosition().getY() - wAdapter</span>
+<span class="nc" id="L341">							.getHeight() / 2);</span>
+<span class="nc" id="L342">					float newZ = (float) (holevec2.getX() * Math.sin(rotation) + wAdapter</span>
+<span class="nc" id="L343">							.getStart().getY());</span>
+<span class="nc" id="L344">					Vector3f HoleVec3f = new Vector3f(newX, newY, newZ);</span>
+<span class="nc" id="L345">					sensor.setPosition(new Position(HoleVec3f.getX(), HoleVec3f</span>
+<span class="nc" id="L346">							.getY(), HoleVec3f.getZ()));</span>
+<span class="nc" id="L347">					sensors.add(sensor);</span>
+<span class="nc" id="L348">					i++;</span>
+				
+			}
+		}
+<span class="nc" id="L352">		return sensors;</span>
+	}
+
+	public void close() {
+<span class="pc bpc" id="L356" title="1 of 2 branches missed.">		if (updater != null) {</span>
+<span class="fc" id="L357">			updater.setRunning(false);</span>
+		}
+<span class="fc" id="L359">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

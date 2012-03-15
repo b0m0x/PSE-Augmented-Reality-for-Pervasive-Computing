@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Sensor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Sensor.java</span></div><h1>Sensor.java</h1><pre class="source lang-java linenums">package vision.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * The Sensor class holds all sensor data
+ * 
+ */
+public class Sensor {
+	
+	/**
+	 * @uml.property name=&quot;id&quot;
+	 */
+	private String id;
+
+	/**
+	 * @uml.property name=&quot;tags&quot;
+	 */
+<span class="fc" id="L20">	private List&lt;String&gt; tags = new ArrayList&lt;String&gt;();</span>
+
+	/**
+	 * @uml.property name=&quot;Description&quot;
+	 */
+	private String description;
+
+	/**
+	 * @uml.property name=&quot;update&quot;
+	 */
+	private long update;
+
+	/**
+	 * @uml.property name=&quot;registered&quot;
+	 */
+	private long registered;
+	
+	/**
+	 * @uml.property name=&quot;position&quot;
+	 * @uml.associationEnd inverse=&quot;sensor:vision.model.Position&quot;
+	 */
+	private Position position;
+<span class="fc" id="L42">	private List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
+
+
+
+	
+<span class="fc" id="L47">	public Sensor() {</span>
+<span class="fc" id="L48">	}</span>
+
+<span class="fc" id="L50">	public Sensor(String id, long time, List&lt;Sample&gt; samples) {</span>
+<span class="fc" id="L51">		this.id = id;</span>
+<span class="fc" id="L52">		this.samples = samples;</span>
+<span class="fc" id="L53">		update = time;</span>
+<span class="fc" id="L54">	}</span>
+
+
+	/**
+	 * Getter of the property &lt;tt&gt;id&lt;/tt&gt;
+	 * 
+	 * @return Returns the id.
+	 * @uml.property name=&quot;id&quot;
+	 */
+	public String getId() {
+<span class="fc" id="L64">		return id;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;id&lt;/tt&gt;
+	 * 
+	 * @param id
+	 *            The id to set.
+	 * @uml.property name=&quot;id&quot;
+	 */
+	public void setId(String id) {
+<span class="fc" id="L75">		this.id = id;</span>
+<span class="fc" id="L76">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;tags&lt;/tt&gt;
+	 * 
+	 * @return Returns the tags.
+	 * @uml.property name=&quot;tags&quot;
+	 */
+	public List&lt;String&gt; getTags() {
+<span class="fc" id="L85">		return tags;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;tags&lt;/tt&gt;
+	 * 
+	 * @param tags
+	 *            The tags to set.
+	 * @uml.property name=&quot;tags&quot;
+	 */
+	public void setTags(List&lt;String&gt; tags) {
+<span class="fc" id="L96">		this.tags = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L97">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;Description&lt;/tt&gt;
+	 * 
+	 * @return Returns the description.
+	 * @uml.property name=&quot;Description&quot;
+	 */
+	public String getDescription() {
+<span class="nc" id="L106">		return description;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;Description&lt;/tt&gt;
+	 * 
+	 * @param Description
+	 *            The description to set.
+	 * @uml.property name=&quot;Description&quot;
+	 */
+	public void setDescription(String description) {
+<span class="fc" id="L117">		this.description = description;</span>
+<span class="fc" id="L118">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;update&lt;/tt&gt;
+	 * 
+	 * @return Returns the update.
+	 * @uml.property name=&quot;update&quot;
+	 */
+	public long getUpdate() {
+<span class="fc" id="L127">		return update;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;update&lt;/tt&gt;
+	 * 
+	 * @param update
+	 *            The update to set.
+	 * @uml.property name=&quot;update&quot;
+	 */
+	public void setUpdate(long update) {
+<span class="fc" id="L138">		this.update = update;</span>
+<span class="fc" id="L139">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;registered&lt;/tt&gt;
+	 * 
+	 * @return Returns the registered.
+	 * @uml.property name=&quot;registered&quot;
+	 */
+	public long registeredTime() {
+<span class="nc" id="L148">		return registered;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;registered&lt;/tt&gt;
+	 * 
+	 * @param registered
+	 *            The registered to set.
+	 * @uml.property name=&quot;registered&quot;
+	 */
+	public void setRegistered(long registered) {
+<span class="nc" id="L159">		this.registered = registered;</span>
+<span class="nc" id="L160">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;messwerte&lt;/tt&gt;
+	 * 
+	 * @return Returns the messwerte.
+	 * @uml.property name=&quot;messwerte&quot;
+	 */
+	public List&lt;Sample&gt; getSamples() {
+<span class="fc" id="L169">		return samples;</span>
+	}
+
+
+	public void addToSamples(Sample s) {
+<span class="fc" id="L174">		this.samples.add(s);</span>
+<span class="fc" id="L175">	}</span>
+
+	public void addToTags(String s) {
+<span class="fc" id="L178">		this.tags.add(s);</span>
+<span class="fc" id="L179">	}</span>
+
+	/**
+	 * adds Sample to List of samples
+	 * 
+	 * @param sample
+	 */
+
+	/**
+	 * Getter of the property &lt;tt&gt;position&lt;/tt&gt;
+	 * 
+	 * @return Returns the position.
+	 * @uml.property name=&quot;position&quot;
+	 */
+	public Position getPosition() {
+<span class="fc" id="L194">		return position;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;position&lt;/tt&gt;
+	 * 
+	 * @param position
+	 *            The position to set.
+	 * @uml.property name=&quot;position&quot;
+	 */
+	public void setPosition(Position position) {
+<span class="fc" id="L205">		this.position = position;</span>
+<span class="fc" id="L206">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

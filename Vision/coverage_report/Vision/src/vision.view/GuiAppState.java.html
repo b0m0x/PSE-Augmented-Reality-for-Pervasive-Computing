@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>GuiAppState.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">GuiAppState.java</span></div><h1>GuiAppState.java</h1><pre class="source lang-java linenums"><span class="pc" id="L1">package vision.view;</span>
+
+import vision.controller.Controller;
+import vision.controller.PluginController;
+import vision.model.Model;
+import vision.model.Sensor;
+
+import com.jme3.app.Application;
+import com.jme3.app.state.AbstractAppState;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.niftygui.NiftyJmeDisplay;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
+import de.lessvoid.nifty.builder.PanelBuilder;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
+import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
+import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
+import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
+import de.lessvoid.nifty.elements.Element;
+
+/**
+ * renders the user interface.
+ */
+public class GuiAppState extends AbstractAppState  {
+
+	private Nifty nifty;
+	private Controller controller;
+	private Model model;
+	private View view;
+	
+	/**
+	 * Creates a new GuiAppState.
+	 * @param controller the controller
+	 * @param model the model
+	 */
+<span class="fc" id="L37">	public GuiAppState(final Controller controller, final Model model) {</span>
+<span class="fc" id="L38">		this.controller = controller;</span>
+<span class="fc" id="L39">		this.model = model;</span>
+<span class="fc" id="L40">	}</span>
+
+	/**
+	 * initializes the user interface.
+	 */
+	@Override
+	public void initialize(AppStateManager stateManager, Application app) {
+		// TODO Auto-generated method stub
+<span class="fc" id="L48">		super.initialize(stateManager, app);</span>
+<span class="fc" id="L49">		this.view = (View) app;</span>
+<span class="fc" id="L50">		NiftyJmeDisplay niftyDisplay = new NiftyJmeDisplay(app.getAssetManager(),</span>
+<span class="fc" id="L51">                app.getInputManager(),</span>
+<span class="fc" id="L52">                app.getAudioRenderer(),</span>
+<span class="fc" id="L53">                app.getGuiViewPort());</span>
+<span class="fc" id="L54">        nifty = niftyDisplay.getNifty();</span>
+<span class="fc" id="L55">		nifty.fromXml(&quot;gui.xml&quot;, &quot;start&quot;, controller);</span>
+<span class="fc" id="L56">		app.getGuiViewPort().addProcessor(niftyDisplay);</span>
+<span class="fc" id="L57">		pluginButtons();</span>
+
+<span class="fc" id="L59">	}</span>
+
+	private boolean loaded;
+
+	/**
+	 * This Method manages the PluginsPopupMenue.
+	 */
+	public final void managePluginsPopupMenu() {
+
+<span class="fc" id="L68">		nifty.gotoScreen(&quot;managePlugins&quot;);</span>
+<span class="fc" id="L69">		Element niftyElement = nifty.getCurrentScreen().findElementByName(&quot;x&quot;);</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">		if (loaded == false) {</span>
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">			for (Plugin p: model.getPluginList()) {</span>
+<span class="fc" id="L73">				PanelBuilder pb = new PanelBuilder() { {</span>
+<span class="fc" id="L74">					alignCenter();</span>
+<span class="fc" id="L75">		            valignCenter();</span>
+<span class="fc" id="L76">		            width(&quot;100%&quot;);</span>
+<span class="fc" id="L77">		            height(&quot;25%&quot;);</span>
+			} };
+<span class="fc" id="L79">			pb.childLayoutHorizontal();</span>
+<span class="fc" id="L80">			Element panel = pb.build(nifty, nifty.getCurrentScreen(), niftyElement);</span>
+
+<span class="fc" id="L82">			LabelBuilder lb = new LabelBuilder() { {</span>
+<span class="fc" id="L83">	            alignLeft();</span>
+<span class="fc" id="L84">	            width(&quot;75%&quot;);</span>
+<span class="fc" id="L85">	            color(&quot;#ff0000&quot;);</span>
+			} };
+<span class="fc" id="L87">			lb.text(p.getClass().getSimpleName());</span>
+<span class="fc" id="L88">			Element el = lb.build(nifty, nifty.getCurrentScreen(), panel);</span>
+
+<span class="fc" id="L90">			CheckboxBuilder chb = new CheckboxBuilder();</span>
+<span class="fc" id="L91">			chb.id(&quot;Pluginchecbox_&quot;+ p.getClass().getName());</span>
+<span class="fc" id="L92">			chb.checked(view.getStateManager().hasState(p));</span>
+<span class="fc" id="L93">			Element b = chb.build(nifty, nifty.getCurrentScreen(), panel);</span>
+<span class="fc" id="L94">			loaded = true;</span>
+		}
+	  }
+<span class="fc" id="L97">	}</span>
+
+	
+	private boolean buttonloaded;
+	
+	/**
+	 * Shows the Buttons of the several Plugins.
+	 */
+	public final void pluginButtons() {
+<span class="fc" id="L106">		Element niftyElement = nifty.getCurrentScreen().findElementByName(&quot;panel_bottom_right&quot;);</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">		if (buttonloaded == false) {</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">			for (PluginController p : model.getPluginControllerList()) {</span>
+				 java.util.Map&lt;String, String&gt; m;
+<span class="fc" id="L110">				 m = p.createButtons();</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">				 for (String id : m.keySet()) {</span>
+<span class="nc" id="L112">					String text = m.get(id);</span>
+<span class="nc" id="L113">					ButtonBuilder bb = new ButtonBuilder(&quot;ButtonOf_&quot;+p.getClass().getName()+id, text) { {</span>
+<span class="nc" id="L114">						 	alignCenter();</span>
+<span class="nc" id="L115">				            valignCenter();</span>
+<span class="nc" id="L116">				            width(&quot;100%&quot;);</span>
+<span class="nc" id="L117">				            height(&quot;25%&quot;);</span>
+ 					 } }; 
+<span class="nc" id="L119">					bb.build(nifty, nifty.getCurrentScreen(), niftyElement);</span>
+<span class="nc" id="L120">					buttonloaded = true;</span>
+				}
+			}
+		}
+
+<span class="fc" id="L125">	}</span>
+	/**
+	 * shows the State of the sensors.
+	 * @param sensorid
+	 */
+	public final void showState(final String sensorid) {
+<span class="nc" id="L131">		DrawDiagram.samples = model.getDatenbank().getAllSensorData(sensorid);</span>
+<span class="nc" id="L132">		nifty.gotoScreen(&quot;draw&quot;);</span>
+<span class="nc" id="L133">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

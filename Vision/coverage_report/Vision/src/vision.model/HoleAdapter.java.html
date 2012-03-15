@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>HoleAdapter.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">HoleAdapter.java</span></div><h1>HoleAdapter.java</h1><pre class="source lang-java linenums">package vision.model;
+
+import vision.model.xml.Hole;
+
+import com.jme3.math.Vector2f;
+
+public class HoleAdapter {
+	private Hole hole;
+	/**
+	 * Constructs the HoleAdapter.
+	 * @param hole
+	 */
+<span class="fc" id="L13">	public HoleAdapter(Hole hole) {</span>
+<span class="fc" id="L14">		this.hole = hole;</span>
+<span class="fc" id="L15">	}</span>
+
+	/**
+	 * returns the position of the hole.
+	 * @return the position of the center of the hole. the position is relative
+	 *         to the lower left corner of the wall, in x, y coordinates, z is
+	 *         set to 0
+	 */
+	public final Vector2f getPosition() {
+<span class="fc" id="L24">		return new Vector2f((hole.getPositionX1() + hole.getPositionX2()) / 2,</span>
+<span class="fc" id="L25">				(hole.getPositionY1() + hole.getPositionY2()) / 2);</span>
+	}
+
+	/**
+	 * returns the size of the hole.
+	 * @return the size of the hole. x and y are local coordinates
+	 */
+	public final Vector2f getSize() {
+<span class="fc" id="L33">		return new Vector2f(hole.getPositionX2() - hole.getPositionX1(), hole</span>
+<span class="fc" id="L34">				.getPositionY2() - hole.getPositionY1());</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

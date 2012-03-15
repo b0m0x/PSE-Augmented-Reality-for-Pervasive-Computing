@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Reference.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model.xml</a> &gt; <span class="el_source">Reference.java</span></div><h1>Reference.java</h1><pre class="source lang-java linenums">package vision.model.xml;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+/**
+ * &lt;p&gt;Java class for anonymous complex type.
+ * 
+ * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
+ * &lt;pre&gt;
+ * &amp;lt;complexType&gt;
+ *   &amp;lt;complexContent&gt;
+ *     &amp;lt;restriction base=&quot;{http://www.w3.org/2001/XMLSchema}anyType&quot;&gt;
+ *       &amp;lt;sequence&gt;
+ *         &amp;lt;element ref=&quot;{}x&quot;/&gt;
+ *         &amp;lt;element ref=&quot;{}y&quot;/&gt;
+ *         &amp;lt;element ref=&quot;{}lat&quot;/&gt;
+ *         &amp;lt;element ref=&quot;{}lon&quot;/&gt;
+ *       &amp;lt;/sequence&gt;
+ *     &amp;lt;/restriction&gt;
+ *   &amp;lt;/complexContent&gt;
+ * &amp;lt;/complexType&gt;
+ * &lt;/pre&gt;
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = &quot;&quot;, propOrder = {
+    &quot;x&quot;,
+    &quot;y&quot;,
+    &quot;lat&quot;,
+    &quot;lon&quot;
+})
+@XmlRootElement(name = &quot;reference&quot;)
+<span class="fc" id="L36">public class Reference {</span>
+
+    protected float x;
+    protected float y;
+    protected double lat;
+    protected double lon;
+
+    /**
+     * Gets the value of the x property.
+     */
+    public final float getX() {
+<span class="fc" id="L47">        return x;</span>
+    }
+
+    /**
+     * Sets the value of the x property.
+     */
+    public final void setX(float value) {
+<span class="nc" id="L54">        this.x = value;</span>
+<span class="nc" id="L55">    }</span>
+
+    /**
+     * Gets the value of the y property.
+     */
+    public final float getY() {
+<span class="fc" id="L61">        return y;</span>
+    }
+
+    /**
+     * Sets the value of the y property.
+     */
+    public final void setY(float value) {
+<span class="nc" id="L68">        this.y = value;</span>
+<span class="nc" id="L69">    }</span>
+
+    /**
+     * Gets the value of the lat property.
+     */
+    public final double getLat() {
+<span class="fc" id="L75">        return lat;</span>
+    }
+
+    /**
+     * Sets the value of the lat property.
+     */
+    public final void setLat(double value) {
+<span class="nc" id="L82">        this.lat = value;</span>
+<span class="nc" id="L83">    }</span>
+
+    /**
+     * Gets the value of the lon property.
+     */
+    public final double getLon() {
+<span class="fc" id="L89">        return lon;</span>
+    }
+
+    /**
+     * Sets the value of the lon property.
+     */
+    public final void setLon(double value) {
+<span class="nc" id="L96">        this.lon = value;</span>
+<span class="nc" id="L97">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

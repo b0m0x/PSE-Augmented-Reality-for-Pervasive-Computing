@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Controller.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.controller</a> &gt; <span class="el_source">Controller.java</span></div><h1>Controller.java</h1><pre class="source lang-java linenums">package vision.controller;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.builder.PanelBuilder;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
+import de.lessvoid.nifty.controls.CheckBox;
+import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
+import de.lessvoid.nifty.controls.Menu;
+import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
+import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
+import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
+import de.lessvoid.nifty.elements.Element;
+import de.lessvoid.nifty.elements.render.TextRenderer;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
+import de.lessvoid.nifty.tools.SizeValue;
+
+import java.awt.peer.ButtonPeer;
+import java.util.Collection;
+import java.util.logging.Logger;
+
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.AnalogListener;
+import com.jme3.scene.Geometry;
+
+import vision.model.Model;
+import vision.view.Plugin;
+import vision.view.View;
+
+/**
+ * the main controller that passes key presses, user inputs and events to the
+ * subcontrollers and the model.
+ * 
+ */
+<span class="fc" id="L36">public class Controller implements ScreenController, ActionListener, AnalogListener  {</span>
+
+	private Nifty nifty;
+	private Screen screen;
+<span class="fc" id="L40">	private final static Logger LOG = Logger.getLogger(Controller.class.getName());</span>
+
+	/**
+	 * Constructs a new Controller.
+	 * @param view the view
+	 * @param model the model
+	 */
+<span class="fc" id="L47">	public Controller(final View view, final Model model) {</span>
+<span class="fc" id="L48">		this.view = view;</span>
+<span class="fc" id="L49">		this.model = model;</span>
+<span class="fc" id="L50">	}</span>
+
+
+	/**
+	 * binds the nifty instance to this controller.
+	 */
+	@Override
+	public final void bind(final Nifty nifty, Screen screen) {
+<span class="fc" id="L58">		this.nifty = nifty;</span>
+<span class="fc" id="L59">		this.screen = screen;</span>
+<span class="fc" id="L60">	}</span>
+
+	@Override
+	public void onEndScreen() {
+		// TODO Auto-generated method stub
+
+<span class="fc" id="L66">	}</span>
+
+	@Override
+	public void onStartScreen() {
+		// TODO Auto-generated method stub
+
+<span class="fc" id="L72">	}</span>
+
+	/**
+	 * @uml.property name=&quot;pluginController&quot;
+	 * @uml.associationEnd multiplicity=&quot;(0 -1)&quot;
+	 * inverse=&quot;controller:vision.controller.PluginController&quot;
+	 */
+	private Collection&lt;PluginController&gt; pluginController;
+
+	/**
+	 * Getter of the property &lt;tt&gt;pluginController&lt;/tt&gt;.
+	 * @return Returns the pluginController.
+	 * @uml.property name=&quot;pluginController&quot;
+	 */
+	public final Collection&lt;PluginController&gt; getPluginController() {
+<span class="fc" id="L87">		return pluginController;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;pluginController&lt;/tt&gt;.
+	 * @param pluginController
+	 *            The pluginController to set.
+	 * @uml.property name=&quot;pluginController&quot;
+	 */
+	public final void setPluginController(
+			Collection&lt;PluginController&gt; pluginController) {
+<span class="nc" id="L98">		this.pluginController = pluginController;</span>
+<span class="nc" id="L99">	}</span>
+
+	/**
+	 * @uml.property name=&quot;model&quot;
+	 * @uml.associationEnd multiplicity=&quot;(1 1)&quot;
+	 *                     inverse=&quot;controller:vision.model.Model&quot;
+	 */
+	private Model model;
+
+	/**
+	 * Getter of the property &lt;tt&gt;model&lt;/tt&gt;.
+	 * @return Returns the model.
+	 * @uml.property name=&quot;model&quot;
+	 */
+	public final Model getModel() {
+<span class="nc" id="L114">		return model;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;model&lt;/tt&gt;.
+	 * @param model
+	 *            The model to set.
+	 * @uml.property name=&quot;model&quot;
+	 */
+	public final void setModel(final Model model) {
+<span class="nc" id="L124">		this.model = model;</span>
+<span class="nc" id="L125">	}</span>
+
+	/**
+	 * @uml.property name=&quot;view&quot;
+	 * @uml.associationEnd multiplicity=&quot;(1 1)&quot;
+	 *                     inverse=&quot;controller:vision.view.View&quot;
+	 */
+<span class="fc" id="L132">	private View view = new vision.view.View();</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;view&lt;/tt&gt;.
+	 * @return Returns the view.
+	 * @uml.property name=&quot;view&quot;
+	 */
+	public final View getView() {
+<span class="nc" id="L140">		return view;</span>
+	}
+	
+	public Nifty getNifty() {
+<span class="nc" id="L144">		return nifty;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;view&lt;/tt&gt;.
+	 * @param view
+	 *            The view to set.
+	 * @uml.property name=&quot;view&quot;
+	 */
+	public final void setView(View view) {
+<span class="nc" id="L154">		this.view = view;</span>
+<span class="nc" id="L155">	}</span>
+
+	/**
+	 * pluginButton gets called by nifty if a button of a plugin was pressed and
+	 * forwards it to the respective plugin controller.
+	 */
+	@NiftyEventSubscriber(pattern = &quot;ButtonOf_.*&quot;)
+	public final void pluginButton(final String id, ButtonClickedEvent bce) {
+<span class="nc" id="L163">		String s = id.substring(9);</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">		for (PluginController p : model.getPluginControllerList()) {</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">			if (s.startsWith(p.getClass().getName())) {</span>
+<span class="nc" id="L166">				p.buttonPressed(id);</span>
+			}
+		}
+
+<span class="nc" id="L170">	}</span>
+
+
+	/**
+	 * gets called by nifty if a button in the GUI was pressed.
+	 * @param id
+	 *            id of the clicked button
+	 */
+	//@NiftyEventSubscriber(pattern = &quot;.*button.*&quot;)
+	public final void buttonClick(final String id, ButtonClickedEvent bce) {
+<span class="nc" id="L180">		Logger l= Logger.getLogger(&quot;buttonclick&quot;);</span>
+<span class="nc" id="L181">		l.info(&quot;Button was pressed.&quot;);</span>
+<span class="nc" id="L182">	}</span>
+
+
+	/**
+	 * gets called if the user pressed the activate/deactivate button.
+	 */
+	@NiftyEventSubscriber(id = &quot;btn_manageplugins&quot;)
+	public final void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
+<span class="nc" id="L190">		view.getGuiAppState().managePluginsPopupMenu();</span>
+<span class="nc" id="L191">	}</span>
+
+	/**
+	 * gets called if the user pressed the help button. 
+	 * @param id
+	 * @param o
+	 */
+	@NiftyEventSubscriber(id = &quot;btn_Help&quot;)
+	public final void help(final String id, final ButtonClickedEvent bce) {
+<span class="nc" id="L200">		nifty.gotoScreen(&quot;helpPopup&quot;);</span>
+<span class="nc" id="L201">	}</span>
+
+
+	/**
+	 * gets called if the user pressed the settings button.
+	 * @param id
+	 * @param o
+	 */
+	@NiftyEventSubscriber(id = &quot;btn_Settings&quot;)
+	public final void settings(final String id, final ButtonClickedEvent bce) {
+<span class="nc" id="L211">		nifty.gotoScreen(&quot;options&quot;);</span>
+<span class="nc" id="L212">	}</span>
+
+
+	/**
+	 * gets called, when the user clicks the button &quot;overview&quot; then switches to the overview.
+	 * @param id id
+	 * @param o o
+	 */
+	@NiftyEventSubscriber(id = &quot;btn_Overview&quot;)
+	public final void toggleOverview(final String id, final ButtonClickedEvent o) {
+<span class="nc" id="L222">		view.toggleOverviewCam();</span>
+<span class="nc" id="L223">		Logger.getLogger(&quot;here&quot;).warning(&quot;click&quot;);</span>
+<span class="nc" id="L224">	}</span>
+
+	/**
+	 * gets called, when the user clicks to the button to go back to the mainscreen.
+	 */
+	@NiftyEventSubscriber(id = &quot;btn_back&quot;)
+	public final void backToMainScreen(final String id, final ButtonClickedEvent bce) {
+<span class="fc" id="L231">		nifty.gotoScreen(&quot;start&quot;);</span>
+<span class="fc" id="L232">	}</span>
+
+	/**
+	 * gets called if the user checks or unchecks the checkbox for the Debug information.
+	 */
+	@NiftyEventSubscriber(id = &quot;DebugCheckbox&quot;)
+	public void showDebugInformation(final String id, final CheckBoxStateChangedEvent cbsce) {
+<span class="nc" id="L239">		view.setDisplayStatView(cbsce.isChecked());</span>
+<span class="nc" id="L240">	}</span>
+
+	/**
+	 * gets called, if the user choses an effect.
+	 * @param id
+	 * @param cbsce
+	 */
+	@NiftyEventSubscriber(id = &quot;EffektCheckbox&quot;)
+	public final void showEffects(final String id, final CheckBoxStateChangedEvent cbsce) {
+<span class="nc" id="L249">		view.enablePostProcessingEffects(cbsce.isChecked());</span>
+<span class="nc" id="L250">	}</span>
+
+
+	/**
+	 * gets called if a user checked or unchecked a non-plugin defined checkbox.
+	 * 
+	 * @param id
+	 *            the id of the checkbox that was pressed
+	 */
+	@NiftyEventSubscriber(pattern = &quot;Pluginchecbox_.*&quot;)
+	public final void plugincheckboxPressed(String id, CheckBoxStateChangedEvent cbsce) {
+<span class="fc" id="L261">			String s = id.substring(14);</span>
+<span class="fc bfc" id="L262" title="All 2 branches covered.">			for (Plugin p : model.getPluginList()) {</span>
+<span class="fc bfc" id="L263" title="All 2 branches covered.">				if (s.equals(p.getClass().getName())) {</span>
+<span class="fc bfc" id="L264" title="All 2 branches covered.">					if (cbsce.isChecked() == true) {</span>
+<span class="fc" id="L265">						view.enablePlugin(p);</span>
+					} else {
+<span class="fc" id="L267">						view.disablePlugin(p);</span>
+					}
+				}
+			}
+<span class="fc" id="L271">	}</span>
+
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onAction(String name, boolean keyPressed, float tpf) {
+<span class="pc bpc" id="L279" title="3 of 4 branches missed.">		if (name.equals(&quot;zoom&quot;) &amp;&amp; keyPressed) {</span>
+<span class="nc" id="L280">			view.toggleOverviewCam();</span>
+<span class="fc bfc" id="L281" title="All 10 branches covered.">		} else if (name.equals(&quot;Left&quot;) || name.equals(&quot;Right&quot;) || name.equals(&quot;Up&quot;) || name.equals(&quot;Down&quot;) || name.equals(&quot;Jump&quot;)) {</span>
+<span class="fc" id="L282">			view.userMoveAction(name, keyPressed);</span>
+<span class="pc bpc" id="L283" title="1 of 4 branches missed.">		} else if (name.equals(&quot;toggleMouse&quot;) &amp;&amp; !keyPressed) {</span>
+<span class="fc" id="L284">			view.toggleMouse();</span>
+		}
+
+<span class="fc" id="L287">	}</span>
+	
+/**
+ * 
+ */
+	@Override
+	public void onAnalog(String name, float intensity, float tpf) {
+<span class="nc bnc" id="L294" title="All 2 branches missed.">		if (name.equals(&quot;userPick&quot;)) {</span>
+<span class="nc" id="L295">			view.userPick();</span>
+		}
+<span class="nc" id="L297">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

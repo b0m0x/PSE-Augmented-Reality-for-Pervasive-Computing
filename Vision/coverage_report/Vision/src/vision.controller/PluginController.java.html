@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>PluginController.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.controller</a> &gt; <span class="el_source">PluginController.java</span></div><h1>PluginController.java</h1><pre class="source lang-java linenums">package vision.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
+
+import vision.model.Model;
+import vision.view.Plugin;
+
+/**
+ * abstract superclass for all plugin controllers.
+
+ */
+public abstract class PluginController {
+
+	/**
+	 * constructs a new PluginController
+	 * @param model
+	 *            the model
+	 * @param plugin
+	 *            the plugin to manage
+	 */
+<span class="fc" id="L23">	public PluginController(final Model model, Plugin plugin) {</span>
+<span class="fc" id="L24">		this.model = model;</span>
+<span class="fc" id="L25">		this.plugin = plugin;</span>
+<span class="fc" id="L26">	}</span>
+
+	/**
+	 * @uml.property name=&quot;model&quot;
+	 * @uml.associationEnd multiplicity=&quot;(1 1)&quot;
+	 *                     inverse=&quot;pluginController:vision.model.Model&quot;
+	 */
+	private Model model;
+	
+	private Plugin plugin;
+
+	/**
+	 * Getter of the property &lt;tt&gt;model&lt;/tt&gt;.
+	 * @return Returns the model.
+	 * @uml.property name=&quot;model&quot;
+	 */
+	public final Model getModel() {
+<span class="nc" id="L43">		return model;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;model&lt;/tt&gt;.
+	 * @param model
+	 *            The model to set.
+	 * @uml.property name=&quot;model&quot;
+	 */
+	public final void setModel(Model model) {
+<span class="nc" id="L53">		this.model = model;</span>
+<span class="nc" id="L54">	}</span>
+
+	/**
+	 * callback function that gets called by the main controller if the user
+	 * clicks on a plugin buttons.
+	 * @param id
+	 *            the id of the button
+	 */
+	public final void buttonPressed(String id) {
+<span class="nc" id="L63">		Logger l= Logger.getLogger(&quot;PluginController&quot;);</span>
+<span class="nc" id="L64">		l.warning(&quot;Button was pressed.&quot;);</span>
+<span class="nc" id="L65">	}</span>
+
+	/**
+	 * returns a List of plugin-defined buttons that the main system creates for
+	 * the plugin.
+	 * @return a Map of button ids and their Text
+	 */
+	public final Map&lt;String, String&gt; createButtons() {
+		//throw new UnsupportedOperationException();
+<span class="fc" id="L74">		Map&lt;String, String&gt; m = new HashMap&lt;String, String&gt;();</span>
+<span class="fc" id="L75">		return m;</span>
+	}
+
+	/**
+	 * returns a List of plugin-defined checkboxes (options) that the main
+	 * system creates for the plugin.
+	 * @return a Map of checkbox ids and their texts
+	 */
+	public final Map&lt;String, String&gt; createCheckBoxes() {
+<span class="nc" id="L84">		throw new UnsupportedOperationException();</span>
+	}
+
+
+	/**
+	 * Getter of the property &lt;tt&gt;plugin1&lt;/tt&gt;.
+	 * @return Returns the plugin1.
+	 * @uml.property name=&quot;plugin1&quot;
+	 */
+	public final Plugin getPlugin() {
+<span class="nc" id="L94">		return plugin;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;plugin1&lt;/tt&gt;.
+	 * @param plugin1
+	 *            The plugin1 to set.
+	 * @uml.property name=&quot;plugin1&quot;
+	 */
+	public final void setPlugin(Plugin plugin) {
+<span class="nc" id="L104">		this.plugin = plugin;</span>
+<span class="nc" id="L105">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
