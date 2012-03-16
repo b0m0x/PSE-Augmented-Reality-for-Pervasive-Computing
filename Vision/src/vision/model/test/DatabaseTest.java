@@ -21,6 +21,10 @@ public class DatabaseTest {
 		db.connect(null);
 	}
 	
+	/**
+	 * Tests the Database class with random and different values/sensor types/ids
+	 * 
+	 */
 	@Test
 	public void insertTestData() {
 		db.dropTable();
