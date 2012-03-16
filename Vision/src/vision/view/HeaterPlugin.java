@@ -51,6 +51,9 @@ public class HeaterPlugin extends Plugin {
 		view = v;
 	}
 
+	/**
+	 * initialization of HeaterPlugin
+	 */
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);		
@@ -63,6 +66,12 @@ public class HeaterPlugin extends Plugin {
 		moveToClosestHole(g);
 	}
 
+	/**
+	 * loads Heater model from file, saves in in heaterSpacial
+	 * and adds as many spatials as many sensors are tagged with heater
+	 * 
+	 * @param app the application
+	 */
 	private void initHeaters(Application app) {
 		heaterSpatial = app.getAssetManager()
 				.loadModel("Models/heater1.j3o");
@@ -91,9 +100,13 @@ public class HeaterPlugin extends Plugin {
 	
 	
 
+	/**
+	 * update of all heaters in sensor list
+	 */
 	private void updateHeaters() {
 		LOG.info("Sensor state changed. Updating heater Objects.");
 
+		//checks if new heaters have been added
 		if (getSensors().size() > heaters.size()) {
 			for (Sensor s : getSensors()) {
 				if (!heaters.containsKey(s.getId())) {
@@ -102,6 +115,7 @@ public class HeaterPlugin extends Plugin {
 			}
 		}
 
+		//configure heaters with color and light
 		for (Sensor s : getSensors()) {
 			for (Sample sp : s.getSamples()) {
 				if (sp.getType().equals("temperature")) {
@@ -151,6 +165,7 @@ public class HeaterPlugin extends Plugin {
 		Vector3f closestHole = new Vector3f();
 		WallAdapter closestWall = null;
 		float distance = 10000.0f;
+		//find closest hole
 		for (Wall w : model.getGroundplan().getWalls()) {
 			WallAdapter wall = new WallAdapter(w);
 			for (Hole h : wall.getHoles()) {
@@ -171,6 +186,7 @@ public class HeaterPlugin extends Plugin {
 				}
 			}
 		}
+		//setting translation of heater under closest hole
 		g.setLocalRotation(new Quaternion(new float[] {0, closestWall.getRotation(), 0}));
 		Vector3f diff = closestHole.subtract(g.getLocalTranslation());
 		Vector3f wallNormal = new Vector3f(closestWall.getEnd().getX() - closestWall.getStart().getX(), 0 , closestWall.getEnd().getY() - closestWall.getStart().getY()).cross(Vector3f.UNIT_Y);

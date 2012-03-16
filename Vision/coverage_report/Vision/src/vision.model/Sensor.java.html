@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Sensor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Sensor.java</span></div><h1>Sensor.java</h1><pre class="source lang-java linenums">package vision.model;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Sensor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Vision (16.03.2012 17:11:45)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Sensor.java</span></div><h1>Sensor.java</h1><pre class="source lang-java linenums">package vision.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Sensor {
 	/**
 	 * @uml.property name=&quot;tags&quot;
 	 */
-<span class="fc" id="L20">	private List&lt;String&gt; tags = new ArrayList&lt;String&gt;();</span>
+<span class="pc" id="L20">	private List&lt;String&gt; tags = new ArrayList&lt;String&gt;();</span>
 
 	/**
 	 * @uml.property name=&quot;Description&quot;
@@ -39,7 +39,7 @@ public class Sensor {
 	 * @uml.associationEnd inverse=&quot;sensor:vision.model.Position&quot;
 	 */
 	private Position position;
-<span class="fc" id="L42">	private List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
+<span class="pc" id="L42">	private List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
 
 
 
@@ -47,11 +47,11 @@ public class Sensor {
 <span class="fc" id="L47">	public Sensor() {</span>
 <span class="fc" id="L48">	}</span>
 
-<span class="fc" id="L50">	public Sensor(String id, long time, List&lt;Sample&gt; samples) {</span>
-<span class="fc" id="L51">		this.id = id;</span>
-<span class="fc" id="L52">		this.samples = samples;</span>
-<span class="fc" id="L53">		update = time;</span>
-<span class="fc" id="L54">	}</span>
+<span class="nc" id="L50">	public Sensor(String id, long time, List&lt;Sample&gt; samples) {</span>
+<span class="nc" id="L51">		this.id = id;</span>
+<span class="nc" id="L52">		this.samples = samples;</span>
+<span class="nc" id="L53">		update = time;</span>
+<span class="nc" id="L54">	}</span>
 
 
 	/**
@@ -93,8 +93,8 @@ public class Sensor {
 	 * @uml.property name=&quot;tags&quot;
 	 */
 	public void setTags(List&lt;String&gt; tags) {
-<span class="fc" id="L96">		this.tags = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L97">	}</span>
+<span class="nc" id="L96">		this.tags = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L97">	}</span>
 
 	/**
 	 * Getter of the property &lt;tt&gt;Description&lt;/tt&gt;
@@ -124,7 +124,7 @@ public class Sensor {
 	 * @uml.property name=&quot;update&quot;
 	 */
 	public long getUpdate() {
-<span class="fc" id="L127">		return update;</span>
+<span class="nc" id="L127">		return update;</span>
 	}
 
 	/**
@@ -206,4 +206,4 @@ public class Sensor {
 <span class="fc" id="L206">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>Vision (16.03.2012 17:11:45)</div></body></html>
