@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ContollerTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.controller.test</a> &gt; <span class="el_source">ContollerTest.java</span></div><h1>ContollerTest.java</h1><pre class="source lang-java linenums">package vision.controller.test;
+
+
+import javax.xml.bind.JAXBException;
+
+import org.junit.Test;
+
+import vision.controller.Controller;
+import vision.model.Model;
+import vision.view.View;
+import junit.framework.TestCase;
+
+<span class="nc" id="L13">public class ContollerTest extends TestCase {</span>
+
+	@Test
+	public void testContoller() {
+		
+<span class="nc" id="L18">		View view = new View();</span>
+<span class="nc" id="L19">		Model model = null;</span>
+		try {
+<span class="nc" id="L21">			model = new Model(view);</span>
+<span class="nc" id="L22">		} catch (JAXBException e) {</span>
+<span class="nc" id="L23">			e.printStackTrace();</span>
+		}
+
+<span class="nc" id="L26">		Controller controller = new Controller(view, model);</span>
+		
+<span class="nc" id="L28">		controller.bind(null, null);</span>
+		
+<span class="nc" id="L30">		assertEquals(null, controller.getPluginController());</span>
+			
+<span class="nc" id="L32">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

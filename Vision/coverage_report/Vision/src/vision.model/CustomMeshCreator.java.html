@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CustomMeshCreator.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">CustomMeshCreator.java</span></div><h1>CustomMeshCreator.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package vision.model;</span>
+
+import java.nio.FloatBuffer;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.vecmath.Quat4f;
+
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
+
+import com.bulletphysics.linearmath.QuaternionUtil;
+import com.jme3.bullet.collision.shapes.BoxCollisionShape;
+import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.control.RigidBodyControl;
+import com.jme3.bullet.util.CollisionShapeFactory;
+import com.jme3.bullet.util.Converter;
+import com.jme3.material.Material;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+import com.jme3.scene.VertexBuffer.Type;
+import com.jme3.scene.debug.Arrow;
+import com.jme3.scene.shape.Box;
+
+/**
+ * converts a wall object to a renderable mesh.
+ */
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">public class CustomMeshCreator {</span>
+	
+	private static final float TEXTURE_SIZE = 1f;
+	
+	private void setTexCoords(Box box, float textureSize) {
+<span class="fc" id="L36">		float x = box.xExtent / textureSize;</span>
+<span class="fc" id="L37">        float y = box.yExtent / textureSize;</span>
+<span class="fc" id="L38">        float z = box.zExtent / textureSize;</span>
+        
+<span class="fc" id="L40">        float[] texCoordinates = { x, 0, 0, 0, 0, y, x, y, // back</span>
+<span class="fc" id="L41">                z, 0, 0, 0, 0, y, z, y, // right</span>
+<span class="fc" id="L42">                x, 0, 0, 0, 0, y, x, y, // front</span>
+<span class="fc" id="L43">                z, 0, 0, 0, 0, y, z, y, // left</span>
+<span class="fc" id="L44">                z, 0, 0, 0, 0, x, z, x, // top</span>
+<span class="fc" id="L45">                z, 0, 0, 0, 0, x, z, x // bottom</span>
+     
+          };
+<span class="fc" id="L48">        final FloatBuffer buffer = box.getFloatBuffer(Type.TexCoord);</span>
+<span class="fc" id="L49">        buffer.rewind();</span>
+<span class="fc" id="L50">        buffer.put(texCoordinates);</span>
+<span class="fc" id="L51">	}</span>
+	
+	/**
+	 * This method creates the floor.
+	 * @param position
+	 * @param size
+	 * @return
+	 */
+	public Spatial createFloor(Vector3f position, Vector3f size) {
+<span class="fc" id="L60">		Geometry floor = new Geometry(&quot;floor&quot;);</span>
+<span class="fc" id="L61">		Box box = new Box(size.x, size.y, size.z);</span>
+<span class="fc" id="L62">		setTexCoords(box, TEXTURE_SIZE);</span>
+<span class="fc" id="L63">		floor.setMesh(box);</span>
+<span class="fc" id="L64">		RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(size), 0);</span>
+<span class="fc" id="L65">		floor.addControl(ctrl);</span>
+<span class="fc" id="L66">		ctrl.setPhysicsLocation(position);</span>
+<span class="fc" id="L67">		return floor;</span>
+	}
+	
+	/**
+	 * This method creates the ceiling.
+	 * @param position
+	 * @param size
+	 * @return
+	 */
+	public Spatial createCeiling(Vector3f position, Vector3f size) {
+<span class="fc" id="L77">		Spatial ceiling = createFloor(position, size);</span>
+<span class="fc" id="L78">		ceiling.setName(&quot;ceiling&quot;);</span>
+<span class="fc" id="L79">		return ceiling;</span>
+	}
+	
+	/**
+	 * creates a mesh off of a wall object. builds in holes for windows if
+	 * necessary.
+	 * @return
+	 */
+	public Spatial convert(Wall w) {
+<span class="fc" id="L88">		WallAdapter wall = new WallAdapter(w);</span>
+<span class="pc bpc" id="L89" title="3 of 4 branches missed.">		assert (wall.getDepth() != 0);</span>
+		
+<span class="fc" id="L91">		Node wallMesh = new Node(&quot;Wall&quot;);</span>
+		
+<span class="fc" id="L93">		boolean hasDoor = false;</span>
+		
+<span class="fc bfc" id="L95" title="All 2 branches covered.">		for (Hole hole : wall.getHoles()) {</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">			if (hole.getPositionY1() == 0) {</span>
+<span class="fc" id="L97">				hasDoor = true;</span>
+			}
+<span class="fc" id="L99">			HoleAdapter h = new HoleAdapter(hole);</span>
+<span class="fc" id="L100">			float width = h.getSize().getX() / 2;</span>
+<span class="fc" id="L101">			float lowerHeight = h.getPosition().getY() - h.getSize().getY() / 2;</span>
+<span class="fc" id="L102">			float upperHeight = (w.getHeight() - (h.getPosition().getY() + h.getSize().getY() / 2));</span>
+			
+			// plane under hole
+<span class="fc" id="L105">			addWallBlock(wallMesh, new Vector3f(h.getPosition().getX() - wall.getWidth() / 2, - wall.getHeight()/2 + (h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0), </span>
+<span class="fc" id="L106">					new Vector3f(width, lowerHeight / 2, wall.getDepth() / 2));</span>
+			
+			//plane over hole
+<span class="fc" id="L109">			addWallBlock(wallMesh, new Vector3f(h.getPosition().getX() - wall.getWidth() / 2,  wall.getHeight()/2 - (w.getHeight() - h.getPosition().getY() - h.getSize().getY() / 2) / 2, 0), </span>
+<span class="fc" id="L110">					new Vector3f(width, upperHeight /2 , wall.getDepth() / 2));</span>
+			
+		}
+		
+<span class="fc" id="L114">		Collections.sort(wall.getHoles(), new Comparator&lt;Hole&gt;() {</span>
+
+			@Override
+			public int compare(Hole a, Hole b) {
+<span class="fc" id="L118">				return (int) Math.signum(a.getPositionX1() - b.getPositionX1());</span>
+			}
+		});
+
+<span class="fc" id="L122">		float lastHRightBound = 0;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">		for (Hole hole : wall.getHoles()) {</span>
+<span class="fc" id="L124">			HoleAdapter h = new HoleAdapter(hole);</span>
+<span class="fc" id="L125">			float hLeftBound = h.getPosition().getX() - h.getSize().getX() / 2;</span>
+<span class="fc" id="L126">			Vector3f position = new Vector3f((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0);</span>
+
+<span class="fc" id="L128">			addWallBlock(wallMesh, position, new Vector3f((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));</span>
+<span class="fc" id="L129">			lastHRightBound = hLeftBound + h.getSize().getX();</span>
+		}
+
+<span class="fc" id="L132">		float hLeftBound = wall.getWidth();</span>
+		
+<span class="fc" id="L134">		addWallBlock(wallMesh, new Vector3f((hLeftBound + lastHRightBound - wall.getWidth()) / 2, 0, 0), new Vector3f((hLeftBound - lastHRightBound) / 2, wall.getHeight() / 2, wall.getDepth() /2));</span>
+
+		
+<span class="fc bfc" id="L137" title="All 2 branches covered.">		if (!hasDoor) {</span>
+<span class="fc" id="L138">			RigidBodyControl ctrl = new RigidBodyControl(new BoxCollisionShape(new Vector3f(wall.getWidth() / 2f, wall.getHeight() / 2f, wall.getDepth() /2f)), 0f);</span>
+<span class="fc" id="L139">			ctrl.setKinematic(false);</span>
+<span class="fc" id="L140">			wallMesh.addControl(ctrl);</span>
+		} else {
+<span class="fc" id="L142">			CollisionShape sceneShape = CollisionShapeFactory.createMeshShape(wallMesh);</span>
+<span class="fc" id="L143">			RigidBodyControl ctrl = new RigidBodyControl(sceneShape, 0);</span>
+<span class="fc" id="L144">			ctrl.setKinematic(false);</span>
+<span class="fc" id="L145">			wallMesh.addControl(ctrl);</span>
+		}
+		
+<span class="fc" id="L148">		transformCoordinates(wallMesh, wall);</span>
+		
+<span class="fc" id="L150">		return wallMesh;</span>
+	}
+	
+	private void addWallBlock(Node node, Vector3f position, Vector3f halfExtends) {
+<span class="fc" id="L154">		Geometry g = new Geometry(&quot;wallblock&quot;);</span>
+<span class="fc" id="L155">		Box box = new Box(position, halfExtends.getX(), halfExtends.getY(), halfExtends.getZ());</span>
+<span class="fc" id="L156">		setTexCoords(box, TEXTURE_SIZE);</span>
+<span class="fc" id="L157">		g.setMesh(box);</span>
+<span class="fc" id="L158">		node.attachChild(g);</span>
+		
+<span class="fc" id="L160">	}</span>
+
+	private void transformCoordinates(Spatial wallGeometry, WallAdapter wall) {
+<span class="fc" id="L163">		RigidBodyControl ctrl = (RigidBodyControl) wallGeometry.getControl(0);</span>
+<span class="fc" id="L164">		float a = wall.getRotation();</span>
+		
+<span class="fc" id="L166">		ctrl.setPhysicsRotation(new Quaternion(new float[] {0, a, 0}));</span>
+<span class="fc" id="L167">		wallGeometry.setMaterial(new Material()); // TODO: set unshaded</span>
+													// material. requires
+													// reference to an asset
+													// manager
+
+<span class="fc" id="L172">		ctrl.setPhysicsLocation(new Vector3f(wall.getPosition().getX(),</span>
+<span class="fc" id="L173">				0, wall.getPosition().getY()));</span>
+<span class="fc" id="L174">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

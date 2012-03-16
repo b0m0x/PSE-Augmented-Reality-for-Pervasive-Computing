@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Sample.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Sample.java</span></div><h1>Sample.java</h1><pre class="source lang-java linenums">package vision.model;
+
+/**
+ * holds a sensor measurement and the time it was taken
+ * 
+ */
+public class Sample {
+
+	/**
+	 * @uml.property name=&quot;typ&quot;
+	 */
+	private String type;
+	
+
+	/**
+	 * @uml.property name=&quot;unit&quot;
+	 */
+	private String unit;
+
+
+	/**
+	 * @uml.property name=&quot;value&quot;
+	 */
+	private float value;
+
+
+	/**
+	 * @uml.property name=&quot;update&quot;
+	 */
+	private long update;
+
+	
+<span class="fc" id="L33">	public Sample() {</span>
+
+<span class="fc" id="L35">	}</span>
+	
+<span class="fc" id="L37">	public Sample(String typ, String unit, float value, long update) {</span>
+<span class="fc" id="L38">		this.type = typ;</span>
+<span class="fc" id="L39">		this.unit = unit;</span>
+<span class="fc" id="L40">		this.value = value;</span>
+<span class="fc" id="L41">		this.update = update;</span>
+<span class="fc" id="L42">	}</span>
+
+	
+	/**
+	 * Getter of the property &lt;tt&gt;typ&lt;/tt&gt;
+	 * 
+	 * @return Returns the typ.
+	 * @uml.property name=&quot;typ&quot;
+	 */
+	public String getType() {
+<span class="fc" id="L52">		return type;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;typ&lt;/tt&gt;
+	 * 
+	 * @param typ
+	 *            The typ to set.
+	 * @uml.property name=&quot;typ&quot;
+	 */
+	public void setType(String type) {
+<span class="fc" id="L63">		this.type = type;</span>
+<span class="fc" id="L64">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;unit&lt;/tt&gt;
+	 * 
+	 * @return Returns the unit.
+	 * @uml.property name=&quot;unit&quot;
+	 */
+	public String getUnit() {
+<span class="fc" id="L73">		return unit;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;unit&lt;/tt&gt;
+	 * 
+	 * @param unit
+	 *            The unit to set.
+	 * @uml.property name=&quot;unit&quot;
+	 */
+	public void setUnit(String unit) {
+<span class="fc" id="L84">		this.unit = unit;</span>
+<span class="fc" id="L85">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;value&lt;/tt&gt;
+	 * 
+	 * @return Returns the value.
+	 * @uml.property name=&quot;value&quot;
+	 */
+	public float getValue() {
+<span class="fc" id="L94">		return value;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;value&lt;/tt&gt;
+	 * 
+	 * @param value
+	 *            The value to set.
+	 * @uml.property name=&quot;value&quot;
+	 */
+	public void setValue(float value) {
+<span class="fc" id="L105">		this.value = value;</span>
+<span class="fc" id="L106">	}</span>
+
+	/**
+	 * Getter of the property &lt;tt&gt;update&lt;/tt&gt;
+	 * 
+	 * @return Returns the update.
+	 * @uml.property name=&quot;update&quot;
+	 */
+	public long getUpdate() {
+<span class="fc" id="L115">		return update;</span>
+	}
+
+	/**
+	 * Setter of the property &lt;tt&gt;update&lt;/tt&gt;
+	 * 
+	 * @param l
+	 *            The update to set.
+	 * @uml.property name=&quot;update&quot;
+	 */
+	public void setUpdate(long l) {
+<span class="fc" id="L126">		this.update = l;</span>
+<span class="fc" id="L127">	}</span>
+
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

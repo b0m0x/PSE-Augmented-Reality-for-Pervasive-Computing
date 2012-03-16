@@ -139,6 +139,10 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	public final View getView() {
 		return view;
 	}
+	
+	public Nifty getNifty() {
+		return nifty;
+	}
 
 	/**
 	 * Setter of the property <tt>view</tt>.
@@ -166,16 +170,6 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	}
 
 
-	/**
-	 * gets called by nifty if a button in the GUI was pressed.
-	 * @param id
-	 *            id of the clicked button
-	 */
-	//@NiftyEventSubscriber(pattern = ".*button.*")
-	public final void buttonClick(final String id, ButtonClickedEvent bce) {
-		Logger l= Logger.getLogger("buttonclick");
-		l.info("Button was pressed.");
-	}
 
 
 	/**
@@ -183,7 +177,6 @@ public class Controller implements ScreenController, ActionListener, AnalogListe
 	 */
 	@NiftyEventSubscriber(id = "btn_manageplugins")
 	public final void createManagePluginsPopupMenu(String id, ButtonClickedEvent bce) {
-	
 		view.getGuiAppState().managePluginsPopupMenu();
 	}
 

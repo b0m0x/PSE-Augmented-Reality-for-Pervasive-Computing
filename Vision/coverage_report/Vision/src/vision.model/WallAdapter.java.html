@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WallAdapter.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">WallAdapter.java</span></div><h1>WallAdapter.java</h1><pre class="source lang-java linenums">package vision.model;
+
+import java.util.List;
+
+import vision.model.xml.Hole;
+import vision.model.xml.Wall;
+
+import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
+
+public class WallAdapter {
+
+	private final Wall wall;
+	
+	/**
+	 * Contructs a WallAdapter.
+	 * @param wall
+	 */
+<span class="fc" id="L19">	public WallAdapter(Wall wall) {</span>
+<span class="fc" id="L20">		this.wall = wall;</span>
+<span class="fc" id="L21">	}</span>
+	
+	/**
+	 * gets the position.
+	 * @return
+	 */
+	public Position getPosition() {
+<span class="fc" id="L28">		return new Position((wall.getPositionX1() + wall.getPositionX2()) / 2,</span>
+<span class="fc" id="L29">				(wall.getPositionY1() + wall.getPositionY2()) / 2, 0);</span>
+	}
+	
+	/**
+	 * gets the startposition.
+	 * @return
+	 */
+	public Position getStart() {
+<span class="fc" id="L37">		return new Position(wall.getPositionX1(), wall.getPositionY1(), 0);</span>
+	}
+	/**
+	 * gets the endposition.
+	 * @return
+	 */
+	public Position getEnd() {
+<span class="fc" id="L44">		return new Position(wall.getPositionX2(), wall.getPositionY2(), 0);</span>
+	}
+	
+	/**
+	 * gets the size.
+	 * @return
+	 */
+	public Size3D getSize() {
+<span class="fc" id="L52">		return new Size3D(getWidth(), getHeight(), getDepth());</span>
+	}
+	/**
+	 * gets a list of holes.
+	 * @return
+	 */
+	public List&lt;Hole&gt; getHoles() {
+<span class="fc" id="L59">		return wall.getHole();</span>
+	}
+	
+	/**
+	 * gets the width
+	 * @return
+	 */
+	public float getWidth() {
+<span class="fc" id="L67">		Vector3f d = new Vector3f(wall.getPositionX2() - wall.getPositionX1(),</span>
+<span class="fc" id="L68">				wall.getPositionY2() - wall.getPositionY1(), 0);</span>
+<span class="fc" id="L69">		return d.length();</span>
+	}
+	
+	/**
+	 * gets the height.
+	 * @return
+	 */
+	public float getHeight() {
+<span class="fc" id="L77">		return wall.getHeight();</span>
+	}
+	/**
+	 * gets the depth.
+	 * @return
+	 */
+	public float getDepth() {
+<span class="fc" id="L84">		return wall.getWide();</span>
+	}
+	/**
+	 * gets the rotation.
+	 * @return
+	 */
+	public float getRotation() {
+<span class="fc" id="L91">		final Vector2f wallDir = new Vector2f(getStart().getX()</span>
+<span class="fc" id="L92">				- getEnd().getX(), getStart().getY()</span>
+<span class="fc" id="L93">				- getEnd().getY());</span>
+<span class="fc" id="L94">		return wallDir.angleBetween(new Vector2f(1f, 0f));</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

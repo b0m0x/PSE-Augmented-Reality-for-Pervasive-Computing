@@ -71,6 +71,10 @@ public class Model {
 
 	private List<Spatial> staticGeometries;
 	
+	public Model() {
+		
+	}
+	
 	public Model(View view) throws JAXBException {
 
 

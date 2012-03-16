@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WallAdapterTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model.test</a> &gt; <span class="el_source">WallAdapterTest.java</span></div><h1>WallAdapterTest.java</h1><pre class="source lang-java linenums">package vision.model.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import vision.model.Position;
+import vision.model.WallAdapter;
+import vision.model.xml.Wall;
+
+<span class="fc" id="L11">public class WallAdapterTest {</span>
+
+	@Test
+	public void testGetSize() {
+<span class="fc" id="L15">		Wall w = new Wall();</span>
+<span class="fc" id="L16">		w.setPositionX1(0);</span>
+<span class="fc" id="L17">		w.setPositionX2(0);</span>
+<span class="fc" id="L18">		w.setPositionY1(1);</span>
+<span class="fc" id="L19">		w.setPositionY2(0);</span>
+<span class="fc" id="L20">		w.setHeight(2.5f);</span>
+<span class="fc" id="L21">		WallAdapter wall = new WallAdapter(w);</span>
+<span class="fc" id="L22">		assertEquals(1.f, wall.getSize().getX(), 0.0001f);</span>
+
+<span class="fc" id="L24">		assertEquals(2.5f, wall.getSize().getY(), 0.0001f);</span>
+<span class="fc" id="L25">	}</span>
+
+
+	@Test
+	public void testGetRotation() {
+<span class="fc" id="L30">		Wall w = new Wall();</span>
+<span class="fc" id="L31">		w.setPositionX1(0);</span>
+<span class="fc" id="L32">		w.setPositionY1(1);</span>
+		
+<span class="fc" id="L34">		w.setPositionX2(0);</span>
+<span class="fc" id="L35">		w.setPositionY2(0);</span>
+		
+<span class="fc" id="L37">		WallAdapter wall = new WallAdapter(w);</span>
+<span class="fc" id="L38">		assertEquals(-Math.PI/2 , wall.getRotation(), 0.0001f);</span>
+<span class="fc" id="L39">		assertEquals(0, wall.getPosition().getX(), 0.00f);</span>
+<span class="fc" id="L40">		assertEquals(0.5f, wall.getPosition().getY(), 0.00f);</span>
+<span class="fc" id="L41">		assertEquals(0, wall.getPosition().getZ(), 0.00f);</span>
+		
+<span class="fc" id="L43">		w.setPositionX1(0);</span>
+<span class="fc" id="L44">		w.setPositionY1(2);</span>
+		
+<span class="fc" id="L46">		w.setPositionX2(0);</span>
+<span class="fc" id="L47">		w.setPositionY2(0);</span>
+		
+<span class="fc" id="L49">		assertEquals(-Math.PI/2 , wall.getRotation(), 0.0001f);</span>
+		
+		
+<span class="fc" id="L52">		w.setPositionX1(1);</span>
+<span class="fc" id="L53">		w.setPositionY1(2);</span>
+		
+<span class="fc" id="L55">		w.setPositionX2(1);</span>
+<span class="fc" id="L56">		w.setPositionY2(0);</span>
+		
+<span class="fc" id="L58">		assertEquals(-Math.PI/2 , wall.getRotation(), 0.0001f);</span>
+		
+		
+<span class="fc" id="L61">		w.setPositionX1(0);</span>
+<span class="fc" id="L62">		w.setPositionY1(0);</span>
+		
+<span class="fc" id="L64">		w.setPositionX2(1);</span>
+<span class="fc" id="L65">		w.setPositionY2(1);</span>
+		
+<span class="fc" id="L67">		assertEquals(Math.PI / 2 + Math.PI/4 , wall.getRotation(), 0.0001f);</span>
+		
+<span class="fc" id="L69">		assertEquals(true, wall.getHoles().isEmpty());</span>
+<span class="fc" id="L70">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>

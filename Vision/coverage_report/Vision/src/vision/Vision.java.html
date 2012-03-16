@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Vision.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision</a> &gt; <span class="el_source">Vision.java</span></div><h1>Vision.java</h1><pre class="source lang-java linenums">package vision;
+
+import javax.xml.bind.JAXBException;
+
+import com.jme3.system.AppSettings;
+
+import vision.controller.Controller;
+
+import vision.model.Model;
+
+import vision.view.View;
+
+/**
+ * Main class starts up the whole software.
+ */
+<span class="nc" id="L16">public class Vision {</span>
+
+	public static void main(String[] args) {
+<span class="nc" id="L19">		AppSettings settings = new AppSettings(true);</span>
+<span class="nc" id="L20">		settings.setTitle(&quot;Vision - Augmented Reality for Pervasive Computing&quot;);</span>
+<span class="nc" id="L21">		settings.setSettingsDialogImage(&quot;9.jpg&quot;);</span>
+<span class="nc" id="L22">		View mainView = new View();</span>
+<span class="nc" id="L23">		Model mainModel = null;</span>
+		try {
+<span class="nc" id="L25">			mainModel = new Model(mainView);</span>
+<span class="nc" id="L26">		} catch (JAXBException e) {</span>
+<span class="nc" id="L27">			e.printStackTrace();</span>
+<span class="nc" id="L28">			return;</span>
+		}
+<span class="nc" id="L30">		Controller mainController = new Controller(mainView, mainModel);</span>
+<span class="nc" id="L31">		mainView.setSettings(settings);</span>
+<span class="nc" id="L32">		mainView.setController(mainController);</span>
+<span class="nc" id="L33">		mainView.setDaten(mainModel);</span>
+<span class="nc" id="L34">		mainView.start();</span>
+<span class="nc" id="L35">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
