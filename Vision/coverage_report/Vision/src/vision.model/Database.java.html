@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Database.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Database.java</span></div><h1>Database.java</h1><pre class="source lang-java linenums">package vision.model;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Database.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Vision (16.03.2012 17:11:45)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.model</a> &gt; <span class="el_source">Database.java</span></div><h1>Database.java</h1><pre class="source lang-java linenums">package vision.model;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -43,12 +43,12 @@ import org.h2.jdbc.JdbcSQLException;
 	public void dropTable() {
 		Statement st;
 		try {
-<span class="fc" id="L46">			st = conn.createStatement();</span>
-<span class="fc" id="L47">			st.execute(DROP_STATEMENT);</span>
+<span class="nc" id="L46">			st = conn.createStatement();</span>
+<span class="nc" id="L47">			st.execute(DROP_STATEMENT);</span>
 <span class="nc" id="L48">		} catch (SQLException e) {</span>
 <span class="nc" id="L49">			e.printStackTrace();</span>
 		}
-<span class="fc" id="L51">	}</span>
+<span class="nc" id="L51">	}</span>
 
 	private boolean tableExists(String tableName) {
 		try {
@@ -77,8 +77,8 @@ import org.h2.jdbc.JdbcSQLException;
 <span class="nc" id="L77">				return;</span>
 			}
 
-<span class="fc bfc" id="L80" title="All 2 branches covered.">			if (!tableExists(&quot;SAMPLES&quot;)) {</span>
-<span class="fc" id="L81">				st.execute(CREATE_STATEMENT);</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">			if (!tableExists(&quot;SAMPLES&quot;)) {</span>
+<span class="nc" id="L81">				st.execute(CREATE_STATEMENT);</span>
 			}
 			//Set parameters for the database statement
 <span class="fc" id="L84">			pst = conn.prepareStatement(insert);</span>
@@ -106,23 +106,23 @@ import org.h2.jdbc.JdbcSQLException;
 	 * @return samples
 	 */
 	public List&lt;Sample&gt; getSensordata(String id, long zeitpunkt) {
-<span class="fc" id="L109">		List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
+<span class="nc" id="L109">		List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
 		try {
-<span class="fc" id="L111">			Statement st = conn.createStatement();</span>
-<span class="fc" id="L112">			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);</span>
-<span class="fc bfc" id="L113" title="All 2 branches covered.">			while (rs.next()) {</span>
-<span class="fc bfc" id="L114" title="All 2 branches covered.">				if (rs.getString(&quot;id&quot;).equals(id)</span>
-<span class="pc bpc" id="L115" title="1 of 2 branches missed.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) == zeitpunkt) {</span>
-<span class="fc" id="L116">					Sample sample = new Sample();</span>
-<span class="fc" id="L117">					sample.setType(rs.getString(&quot;Type&quot;));</span>
-<span class="fc" id="L118">					sample.setUnit(rs.getString(&quot;Unit&quot;));</span>
-<span class="fc" id="L119">					sample.setUpdate(rs.getLong(&quot;Updated&quot;));</span>
-<span class="fc" id="L120">					sample.setValue(rs.getFloat(&quot;Value&quot;));</span>
-<span class="fc" id="L121">					samples.add(sample);</span>
+<span class="nc" id="L111">			Statement st = conn.createStatement();</span>
+<span class="nc" id="L112">			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">			while (rs.next()) {</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">				if (rs.getString(&quot;id&quot;).equals(id)</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) == zeitpunkt) {</span>
+<span class="nc" id="L116">					Sample sample = new Sample();</span>
+<span class="nc" id="L117">					sample.setType(rs.getString(&quot;Type&quot;));</span>
+<span class="nc" id="L118">					sample.setUnit(rs.getString(&quot;Unit&quot;));</span>
+<span class="nc" id="L119">					sample.setUpdate(rs.getLong(&quot;Updated&quot;));</span>
+<span class="nc" id="L120">					sample.setValue(rs.getFloat(&quot;Value&quot;));</span>
+<span class="nc" id="L121">					samples.add(sample);</span>
 				}
 			}
 
-<span class="fc" id="L125">			return samples;</span>
+<span class="nc" id="L125">			return samples;</span>
 
 <span class="nc" id="L127">		} catch (SQLException e) {</span>
 <span class="nc" id="L128">			LOG.warning(&quot;Error getting Sensor Data!&quot;);</span>
@@ -171,23 +171,23 @@ import org.h2.jdbc.JdbcSQLException;
 	 */
 	public List&lt;Sample&gt; getSensorDataInterval(final String id, final long from,
 			final long to) {
-<span class="fc" id="L174">		List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
+<span class="nc" id="L174">		List&lt;Sample&gt; samples = new ArrayList&lt;Sample&gt;();</span>
 		try {
-<span class="fc" id="L176">			Statement st = conn.createStatement();</span>
-<span class="fc" id="L177">			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);</span>
-<span class="fc bfc" id="L178" title="All 2 branches covered.">			while (rs.next()) {</span>
-<span class="fc bfc" id="L179" title="All 2 branches covered.">				if (rs.getString(&quot;id&quot;).equals(id)</span>
-<span class="fc bfc" id="L180" title="All 2 branches covered.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) &gt;= from</span>
-<span class="pc bpc" id="L181" title="1 of 2 branches missed.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) &lt;= to) {</span>
-<span class="fc" id="L182">					Sample sample = new Sample();</span>
-<span class="fc" id="L183">					sample.setType(rs.getString(&quot;Type&quot;));</span>
-<span class="fc" id="L184">					sample.setUnit(rs.getString(&quot;Unit&quot;));</span>
-<span class="fc" id="L185">					sample.setUpdate(rs.getLong(&quot;Updated&quot;));</span>
-<span class="fc" id="L186">					sample.setValue(rs.getFloat(&quot;Value&quot;));</span>
-<span class="fc" id="L187">					samples.add(sample);</span>
+<span class="nc" id="L176">			Statement st = conn.createStatement();</span>
+<span class="nc" id="L177">			ResultSet rs = st.executeQuery(FETCH_ALL_QUERY);</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">			while (rs.next()) {</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">				if (rs.getString(&quot;id&quot;).equals(id)</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) &gt;= from</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">						&amp;&amp; rs.getInt(&quot;zeitpunkt&quot;) &lt;= to) {</span>
+<span class="nc" id="L182">					Sample sample = new Sample();</span>
+<span class="nc" id="L183">					sample.setType(rs.getString(&quot;Type&quot;));</span>
+<span class="nc" id="L184">					sample.setUnit(rs.getString(&quot;Unit&quot;));</span>
+<span class="nc" id="L185">					sample.setUpdate(rs.getLong(&quot;Updated&quot;));</span>
+<span class="nc" id="L186">					sample.setValue(rs.getFloat(&quot;Value&quot;));</span>
+<span class="nc" id="L187">					samples.add(sample);</span>
 				}
 			}
-<span class="fc" id="L190">			return samples;</span>
+<span class="nc" id="L190">			return samples;</span>
 <span class="nc" id="L191">		} catch (SQLException e) {</span>
 <span class="nc" id="L192">			LOG.severe(&quot;Error getting data from Interval&quot;);</span>
 <span class="nc" id="L193">			return Collections.emptyList();</span>
@@ -200,12 +200,12 @@ import org.h2.jdbc.JdbcSQLException;
 	 */
 	public int size() {
 		try {
-<span class="fc" id="L203">			Statement st = conn.createStatement();</span>
-<span class="fc" id="L204">			ResultSet rs = st.executeQuery(COUNT_QUERY);</span>
-<span class="fc" id="L205">			rs.next();</span>
-<span class="fc" id="L206">			return rs.getInt(&quot;rowcount&quot;);</span>
-<span class="fc" id="L207">		} catch (SQLException e) {</span>
-<span class="fc" id="L208">			return 0;</span>
+<span class="nc" id="L203">			Statement st = conn.createStatement();</span>
+<span class="nc" id="L204">			ResultSet rs = st.executeQuery(COUNT_QUERY);</span>
+<span class="nc" id="L205">			rs.next();</span>
+<span class="nc" id="L206">			return rs.getInt(&quot;rowcount&quot;);</span>
+<span class="nc" id="L207">		} catch (SQLException e) {</span>
+<span class="nc" id="L208">			return 0;</span>
 		}
 	}
 
@@ -256,4 +256,4 @@ import org.h2.jdbc.JdbcSQLException;
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>Vision (16.03.2012 17:11:45)</div></body></html>

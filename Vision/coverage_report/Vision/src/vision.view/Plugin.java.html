@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Plugin.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">Plugin.java</span></div><h1>Plugin.java</h1><pre class="source lang-java linenums">package vision.view;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Plugin.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Vision (16.03.2012 17:11:45)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">Plugin.java</span></div><h1>Plugin.java</h1><pre class="source lang-java linenums">package vision.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,16 +48,18 @@ import vision.controller.PluginController;
 	private PluginController pluginController;
 
 	private int lastSensorHashCode;
-	
-	
+		
 	/**
 	 * Creates the Plugin
 	 */
-<span class="fc" id="L56">	public Plugin(Model model, String[] tags) {</span>
-<span class="fc" id="L57">		setTags(tags);</span>
-<span class="fc" id="L58">		setDaten(model);</span>
-<span class="fc" id="L59">		updateSensors();</span>
-<span class="fc" id="L60">	}</span>
+<span class="fc" id="L55">	public Plugin(Model model, String[] tags) {</span>
+<span class="fc" id="L56">		setTags(tags);</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">		if (model == null) {</span>
+<span class="nc" id="L58">			return;</span>
+		}
+<span class="fc" id="L60">		setDaten(model);</span>
+<span class="fc" id="L61">		updateSensors();</span>
+<span class="fc" id="L62">	}</span>
 	
 
 	/**
@@ -66,7 +68,7 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;sensors&quot;
 	 */
 	public final List&lt;Sensor&gt; getSensors() {
-<span class="fc" id="L69">		return sensors;</span>
+<span class="fc" id="L71">		return sensors;</span>
 	}
 
 	/**
@@ -75,11 +77,11 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;tags&quot;
 	 */
 	public final String[] getTags() {
-<span class="fc" id="L78">		return tags;</span>
+<span class="nc" id="L80">		return tags;</span>
 	}
 
 	public String getTag(int index) {
-<span class="nc" id="L82">		return tags[index];</span>
+<span class="nc" id="L84">		return tags[index];</span>
 	}
 
 	/**
@@ -89,8 +91,8 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;tags&quot;
 	 */
 	public final void setTags(String[] tags) {
-<span class="fc" id="L92">		this.tags = tags;</span>
-<span class="fc" id="L93">	}</span>
+<span class="fc" id="L94">		this.tags = tags;</span>
+<span class="fc" id="L95">	}</span>
 
 
 	/**
@@ -102,40 +104,40 @@ import vision.controller.PluginController;
 			boolean changed);
 
 	private void updateSensors() {
-<span class="fc" id="L105">		List&lt;Sensor&gt; sensors = new ArrayList&lt;Sensor&gt;();</span>
-<span class="fc" id="L106">		sensors = daten.getTaggedSensors(tags);</span>
-<span class="fc" id="L107">		setSensors(sensors);</span>
-<span class="fc" id="L108">		lastSensorHashCode = daten.getSensor().hashCode();</span>
-<span class="fc" id="L109">	}</span>
+<span class="fc" id="L107">		List&lt;Sensor&gt; sensors = new ArrayList&lt;Sensor&gt;();</span>
+<span class="fc" id="L108">		sensors = daten.getTaggedSensors(tags);</span>
+<span class="fc" id="L109">		setSensors(sensors);</span>
+<span class="fc" id="L110">		lastSensorHashCode = daten.getSensor().hashCode();</span>
+<span class="fc" id="L111">	}</span>
 	/**
 	 * update method.
 	 */
 	@Override
 	public void update(final float tpf) {
-<span class="fc" id="L115">		super.update(tpf);</span>
-<span class="fc" id="L116">		update(app);</span>
-<span class="fc" id="L117">	}</span>
+<span class="fc" id="L117">		super.update(tpf);</span>
+<span class="fc" id="L118">		update(app);</span>
+<span class="fc" id="L119">	}</span>
 	
 	/**
 	 * This method updates sensord of the application.
 	 * @param application
 	 */
 	public void update(Application application) {
-<span class="fc" id="L124">		boolean changed = sensorsChanged();</span>
-<span class="fc bfc" id="L125" title="All 2 branches covered.">		if (changed) {</span>
-<span class="fc" id="L126">			updateSensors();</span>
+<span class="fc" id="L126">		boolean changed = sensorsChanged();</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">		if (changed) {</span>
+<span class="fc" id="L128">			updateSensors();</span>
 		}
-<span class="fc" id="L128">		clientUpdate(application, changed);</span>
-<span class="fc" id="L129">	}</span>
+<span class="fc" id="L130">		clientUpdate(application, changed);</span>
+<span class="fc" id="L131">	}</span>
 
 	private boolean sensorsChanged() {
-<span class="fc bfc" id="L132" title="All 2 branches covered.">		return daten.getSensor().hashCode() != lastSensorHashCode;</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">		return daten.getSensor().hashCode() != lastSensorHashCode;</span>
 	}
 
 	/**
 	 */
 	protected Application getApplication() {
-<span class="nc" id="L138">		return null;</span>
+<span class="nc" id="L140">		return null;</span>
 	}
 
 	/**
@@ -144,7 +146,7 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;daten&quot;
 	 */
 	public final Model getDaten() {
-<span class="nc" id="L147">		return daten;</span>
+<span class="nc" id="L149">		return daten;</span>
 	}
 
 	/**
@@ -154,15 +156,15 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;daten&quot;
 	 */
 	public final void setDaten(Model daten) {
-<span class="fc" id="L157">		this.daten = daten;</span>
-<span class="fc" id="L158">	}</span>
+<span class="fc" id="L159">		this.daten = daten;</span>
+<span class="fc" id="L160">	}</span>
 
 	/**
 	 * initializes the app.
 	 */
 	public void initialize(AppStateManager stateManager, Application app) {
-<span class="fc" id="L164">		this.app = app;</span>
-<span class="fc" id="L165">	}</span>
+<span class="fc" id="L166">		this.app = app;</span>
+<span class="fc" id="L167">	}</span>
 
 	/**
 	 * Getter of the property &lt;tt&gt;app&lt;/tt&gt;.
@@ -170,7 +172,7 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;app&quot;
 	 */
 	public Application getApp() {
-<span class="fc" id="L173">		return app;</span>
+<span class="fc" id="L175">		return app;</span>
 	}
 
 	/**
@@ -180,8 +182,8 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;sensors&quot;
 	 */
 	public void setSensors(List&lt;Sensor&gt; sensors) {
-<span class="fc" id="L183">		this.sensors = sensors;</span>
-<span class="fc" id="L184">	}</span>
+<span class="fc" id="L185">		this.sensors = sensors;</span>
+<span class="fc" id="L186">	}</span>
 
 	/**
 	 * Getter of the property &lt;tt&gt;pluginController&lt;/tt&gt;.
@@ -189,7 +191,7 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;pluginController&quot;
 	 */
 	public final PluginController getPluginController() {
-<span class="nc" id="L192">		return pluginController;</span>
+<span class="nc" id="L194">		return pluginController;</span>
 	}
 
 	/**
@@ -199,22 +201,22 @@ import vision.controller.PluginController;
 	 * @uml.property name=&quot;pluginController&quot;
 	 */
 	public final void setPluginController(PluginController pluginController) {
-<span class="nc" id="L202">		this.pluginController = pluginController;</span>
-<span class="nc" id="L203">	}</span>
+<span class="nc" id="L204">		this.pluginController = pluginController;</span>
+<span class="nc" id="L205">	}</span>
 	/**
 	 * 
 	 */
 	@Override
 	public void stateDetached(AppStateManager stateManager) {
-<span class="fc" id="L209">		super.stateDetached(stateManager);</span>
-<span class="fc" id="L210">	}</span>
+<span class="fc" id="L211">		super.stateDetached(stateManager);</span>
+<span class="fc" id="L212">	}</span>
 	/**
 	 * 
 	 */
 	@Override
 	public void stateAttached(AppStateManager stateManager) {
-<span class="fc" id="L216">		super.stateAttached(stateManager);</span>
-<span class="fc" id="L217">		lastSensorHashCode = 0;</span>
-<span class="fc" id="L218">	}</span>
+<span class="fc" id="L218">		super.stateAttached(stateManager);</span>
+<span class="fc" id="L219">		lastSensorHashCode = 0;</span>
+<span class="fc" id="L220">	}</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>Vision (16.03.2012 17:11:45)</div></body></html>

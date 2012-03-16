@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>MainAppState.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">MainAppState.java</span></div><h1>MainAppState.java</h1><pre class="source lang-java linenums"><span class="pc" id="L1">package vision.view;</span>
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>MainAppState.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Vision (16.03.2012 17:11:45)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view</a> &gt; <span class="el_source">MainAppState.java</span></div><h1>MainAppState.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package vision.view;</span>
 
 import com.jme3.animation.LoopMode;
 import com.jme3.app.Application;
@@ -197,10 +197,10 @@ import vision.model.xml.Light;
 <span class="fc" id="L197">	    Vector3f camDir = cam.getDirection().clone().multLocal(0.8f);</span>
 <span class="fc" id="L198">	    Vector3f camLeft = cam.getLeft().clone().multLocal(0.5f);</span>
 <span class="fc" id="L199">	    Vector3f walkDirection = new Vector3f(0, 0, 0);</span>
-<span class="pc bpc" id="L200" title="1 of 2 branches missed.">	    if (moveLeft)  { walkDirection.addLocal(camLeft); }</span>
-<span class="pc bpc" id="L201" title="1 of 2 branches missed.">	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }</span>
-<span class="pc bpc" id="L202" title="1 of 2 branches missed.">	    if (moveForward)    { walkDirection.addLocal(camDir); }</span>
-<span class="pc bpc" id="L203" title="1 of 2 branches missed.">	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }</span>
+<span class="fc bfc" id="L200" title="All 2 branches covered.">	    if (moveLeft)  { walkDirection.addLocal(camLeft); }</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">	    if (moveRight) { walkDirection.addLocal(camLeft.negate()); }</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">	    if (moveForward)    { walkDirection.addLocal(camDir); }</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">	    if (moveBack)  { walkDirection.addLocal(camDir.negate()); }</span>
 <span class="fc" id="L204">	    player.setWalkDirection(walkDirection.mult(tpf));</span>
 	    
 <span class="fc bfc" id="L206" title="All 2 branches covered.">	    if (!overviewCam) {</span>
@@ -209,9 +209,9 @@ import vision.model.xml.Light;
 	    
 	    //vermeidung von freiem fall
 <span class="fc" id="L211">	    float lowestPoint = -(model.getGroundplan().getWalls().get(0).getHeight()/2) + (playerHeight/2);</span>
-<span class="pc bpc" id="L212" title="1 of 2 branches missed.">	    if(player.getPhysicsLocation().getY() &lt; lowestPoint)</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">	    if(player.getPhysicsLocation().getY() &lt; lowestPoint)</span>
 	    {
-<span class="nc" id="L214">	    	player.setPhysicsLocation(new Vector3f(player.getPhysicsLocation().getX(), lowestPoint, player.getPhysicsLocation().getZ()));</span>
+<span class="fc" id="L214">	    	player.setPhysicsLocation(new Vector3f(player.getPhysicsLocation().getX(), lowestPoint, player.getPhysicsLocation().getZ()));</span>
 	    }
 <span class="fc" id="L216">		updateMiniMap();</span>
 <span class="fc" id="L217">	}</span>
@@ -248,32 +248,32 @@ import vision.model.xml.Light;
 	
 	private MotionPath createCamZoomInPath() {
 		MotionPath path;
-<span class="nc" id="L251">		path = new MotionPath();</span>
+<span class="fc" id="L251">		path = new MotionPath();</span>
 	    
-<span class="nc" id="L253">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 5, 0)).clone());</span>
+<span class="fc" id="L253">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 5, 0)).clone());</span>
 	    
-<span class="nc" id="L255">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 20, 0)).clone());</span>
+<span class="fc" id="L255">		path.addWayPoint(app.getCamera().getLocation().subtract(new Vector3f(0, 20, 0)).clone());</span>
 
-<span class="nc" id="L257">	    path.addWayPoint(player.getPhysicsLocation().clone());</span>
+<span class="fc" id="L257">	    path.addWayPoint(player.getPhysicsLocation().clone());</span>
 
 	    
-<span class="nc" id="L260">	    path.setCurveTension(0.05f);</span>
+<span class="fc" id="L260">	    path.setCurveTension(0.05f);</span>
 	    
 	    
-<span class="nc" id="L263">	    path.addListener(new MotionPathListener() {</span>
+<span class="fc" id="L263">	    path.addListener(new MotionPathListener() {</span>
 			
 			@Override
 			public void onWayPointReach(MotionTrack mtr, int waypoint) {
-<span class="nc bnc" id="L267" title="All 2 branches missed.">				if (waypoint &gt;= 2) {</span>
-<span class="nc" id="L268">					camNode.getControl(0).setEnabled(false);</span>
-<span class="nc" id="L269">					mtr.stop();</span>
-<span class="nc" id="L270">					mainGeometryNode.getChild(&quot;ceiling&quot;).setCullHint(CullHint.Dynamic);</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">				if (waypoint &gt;= 2) {</span>
+<span class="fc" id="L268">					camNode.getControl(0).setEnabled(false);</span>
+<span class="fc" id="L269">					mtr.stop();</span>
+<span class="fc" id="L270">					mainGeometryNode.getChild(&quot;ceiling&quot;).setCullHint(CullHint.Dynamic);</span>
 				}
 				
-<span class="nc" id="L273">			}</span>
+<span class="fc" id="L273">			}</span>
 		});
 	    
-<span class="nc" id="L276">	    return path;</span>
+<span class="fc" id="L276">	    return path;</span>
 	}
 	
 	private MotionPath createCamZoomOutPath() {
@@ -310,16 +310,16 @@ import vision.model.xml.Light;
 <span class="fc" id="L310">		Vector3f playerPos = player.getPhysicsLocation();</span>
 		
 	    MotionPath path ;
-<span class="pc bpc" id="L313" title="1 of 2 branches missed.">	    if (zoomIn) {</span>
-<span class="nc" id="L314">	    	path = createCamZoomInPath();</span>
+<span class="fc bfc" id="L313" title="All 2 branches covered.">	    if (zoomIn) {</span>
+<span class="fc" id="L314">	    	path = createCamZoomInPath();</span>
 	    } else {
 <span class="fc" id="L316">	    	path = createCamZoomOutPath();</span>
 	    }
 	    Vector3f lookAt;
-<span class="pc bpc" id="L319" title="1 of 2 branches missed.">	    if (zoomIn) {</span>
-<span class="nc" id="L320">		    lookAt = playerPos.subtract(camNode.getLocalTranslation()).clone().normalize();</span>
-<span class="nc" id="L321">		    lookAt.setY(0.2f);</span>
-<span class="nc" id="L322">		    lookAt.addLocal(playerPos);</span>
+<span class="fc bfc" id="L319" title="All 2 branches covered.">	    if (zoomIn) {</span>
+<span class="fc" id="L320">		    lookAt = playerPos.subtract(camNode.getLocalTranslation()).clone().normalize();</span>
+<span class="fc" id="L321">		    lookAt.setY(0.2f);</span>
+<span class="fc" id="L322">		    lookAt.addLocal(playerPos);</span>
 	    } else {
 <span class="fc" id="L324">	    	lookAt = playerPos;</span>
 	    }
@@ -328,8 +328,8 @@ import vision.model.xml.Light;
 <span class="fc" id="L328">	    mctrl.setLookAt(lookAt, Vector3f.UNIT_Y);</span>
 <span class="fc" id="L329">	    mctrl.setLoopMode(LoopMode.DontLoop);</span>
 	    
-<span class="pc bpc" id="L331" title="1 of 2 branches missed.">	    if (zoomIn) {</span>
-<span class="nc" id="L332">	    	mctrl.setSpeed(2.5f);</span>
+<span class="fc bfc" id="L331" title="All 2 branches covered.">	    if (zoomIn) {</span>
+<span class="fc" id="L332">	    	mctrl.setSpeed(2.5f);</span>
 	    } else {
 <span class="fc" id="L334">	    	mctrl.setSpeed(4.5f);</span>
 	    }
@@ -345,31 +345,31 @@ import vision.model.xml.Light;
 <span class="nc" id="L345">			return;</span>
 		}
 <span class="fc" id="L347">		animateCamZoom(overviewCam);</span>
-<span class="pc bpc" id="L348" title="1 of 2 branches missed.">		if (!overviewCam) {</span>
+<span class="fc bfc" id="L348" title="All 2 branches covered.">		if (!overviewCam) {</span>
 <span class="fc" id="L349">			mainGeometryNode.getChild(&quot;ceiling&quot;).setCullHint(CullHint.Always);</span>
 		}
 <span class="fc" id="L351">		player.setEnabled(overviewCam);</span>
-<span class="pc bpc" id="L352" title="1 of 2 branches missed.">		app.setMouseEnabled(!overviewCam);</span>
+<span class="fc bfc" id="L352" title="All 2 branches covered.">		app.setMouseEnabled(!overviewCam);</span>
 
 <span class="fc" id="L354">		overviewCam ^= true;</span>
 <span class="fc" id="L355">	}</span>
 
 	
 	public void userSelect() {
-<span class="fc" id="L359">		CollisionResults results = new CollisionResults();</span>
-<span class="fc" id="L360">		Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera()</span>
-<span class="fc" id="L361">				.getDirection());</span>
-<span class="fc" id="L362">		mainGeometryNode.collideWith(ray, results);</span>
-<span class="fc bfc" id="L363" title="All 2 branches covered.">		for (int i = 0; i &lt; results.size(); i++) {</span>
-<span class="fc" id="L364">			Vector3f pt = results.getCollision(i).getContactPoint();</span>
-<span class="fc" id="L365">			String hit = results.getCollision(i).getGeometry().getName();</span>
-<span class="fc bfc" id="L366" title="All 2 branches covered.">			if (&quot;floor&quot;.equals(hit)) {</span>
-<span class="fc" id="L367">				app.getCamera().setLocation(</span>
-<span class="fc" id="L368">						pt.add(Vector3f.UNIT_Z));</span>
-<span class="fc" id="L369">				overviewCam = false;</span>
+<span class="nc" id="L359">		CollisionResults results = new CollisionResults();</span>
+<span class="nc" id="L360">		Ray ray = new Ray(app.getCamera().getLocation(), app.getCamera()</span>
+<span class="nc" id="L361">				.getDirection());</span>
+<span class="nc" id="L362">		mainGeometryNode.collideWith(ray, results);</span>
+<span class="nc bnc" id="L363" title="All 2 branches missed.">		for (int i = 0; i &lt; results.size(); i++) {</span>
+<span class="nc" id="L364">			Vector3f pt = results.getCollision(i).getContactPoint();</span>
+<span class="nc" id="L365">			String hit = results.getCollision(i).getGeometry().getName();</span>
+<span class="nc bnc" id="L366" title="All 2 branches missed.">			if (&quot;floor&quot;.equals(hit)) {</span>
+<span class="nc" id="L367">				app.getCamera().setLocation(</span>
+<span class="nc" id="L368">						pt.add(Vector3f.UNIT_Z));</span>
+<span class="nc" id="L369">				overviewCam = false;</span>
 			}
 		}		
-<span class="fc" id="L372">	}</span>
+<span class="nc" id="L372">	}</span>
 
 	/**
 	 * gets called if the user presses or releases a button to move
@@ -383,10 +383,10 @@ import vision.model.xml.Light;
 <span class="fc" id="L383">			moveRight = keyPressed;</span>
 <span class="fc bfc" id="L384" title="All 2 branches covered.">		} else if (name.equals(&quot;Up&quot;)) {</span>
 <span class="fc" id="L385">			moveForward = keyPressed;</span>
-<span class="fc bfc" id="L386" title="All 2 branches covered.">		} else if (name.equals(&quot;Down&quot;)) {</span>
+<span class="pc bpc" id="L386" title="1 of 2 branches missed.">		} else if (name.equals(&quot;Down&quot;)) {</span>
 <span class="fc" id="L387"> 			moveBack = keyPressed;</span>
-<span class="pc bpc" id="L388" title="1 of 2 branches missed.">		} else if (name.equals(&quot;Jump&quot;)) {</span>
-<span class="fc" id="L389">			player.jump();</span>
+<span class="nc bnc" id="L388" title="All 2 branches missed.">		} else if (name.equals(&quot;Jump&quot;)) {</span>
+<span class="nc" id="L389">			player.jump();</span>
 		}
 <span class="fc" id="L391">	}</span>
 
@@ -403,9 +403,9 @@ import vision.model.xml.Light;
 	 * @param contactPoint the point in global coords
 	 */
 	public void overviewSelect(Vector3f contactPoint) {		
-<span class="nc" id="L406">		player.setPhysicsLocation(contactPoint.addLocal(0, 1, 0));		</span>
-<span class="nc" id="L407">		toggleOverviewCam();</span>
-<span class="nc" id="L408">	}</span>
+<span class="fc" id="L406">		player.setPhysicsLocation(contactPoint.addLocal(0, 1, 0));		</span>
+<span class="fc" id="L407">		toggleOverviewCam();</span>
+<span class="fc" id="L408">	}</span>
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>Vision (16.03.2012 17:11:45)</div></body></html>

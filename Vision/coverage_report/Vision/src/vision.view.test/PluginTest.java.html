@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>PluginTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (15.03.2012 22:06:37)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view.test</a> &gt; <span class="el_source">PluginTest.java</span></div><h1>PluginTest.java</h1><pre class="source lang-java linenums">package vision.view.test;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>PluginTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Vision (16.03.2012 17:11:45)</a> &gt; <a href="../../index.html" class="el_group">Vision</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">vision.view.test</a> &gt; <span class="el_source">PluginTest.java</span></div><h1>PluginTest.java</h1><pre class="source lang-java linenums">package vision.view.test;
 
 import static org.junit.Assert.*;
 
@@ -16,6 +16,7 @@ import org.junit.Test;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.DesktopAssetManager;
 
 import vision.model.Model;
 import vision.model.Position;
@@ -24,62 +25,85 @@ import vision.model.Sensor;
 import vision.view.HeaterPlugin;
 import vision.view.View;
 
-<span class="fc" id="L27">public class PluginTest {</span>
-
+<span class="nc" id="L28">public class PluginTest {</span>
+	
 	@Test
 	public void testHeaterPluginInitialize() {
-<span class="fc" id="L31">		Model m = null;</span>
-<span class="fc" id="L32">		View v = null;</span>
+<span class="nc" id="L32">		Model m = null;</span>
+<span class="nc" id="L33">		View v = null;</span>
 		try {
-<span class="fc" id="L34">			m = new Model(v = new View());</span>
-<span class="nc" id="L35">		} catch (JAXBException e) {</span>
+<span class="nc" id="L35">			m = new Model(v = new View());</span>
+<span class="nc" id="L36">		} catch (JAXBException e) {</span>
 			// TODO Auto-generated catch block
-<span class="nc" id="L37">			e.printStackTrace();</span>
+<span class="nc" id="L38">			e.printStackTrace();</span>
 		}
 		
-<span class="fc" id="L40">		Application app = new Application();</span>
-<span class="fc" id="L41">		AppStateManager stateManager = new AppStateManager(app);</span>
-<span class="fc" id="L42">		HeaterPlugin heaterPlugin = new HeaterPlugin(m, v);</span>
-<span class="fc" id="L43">		heaterPlugin.initialize(stateManager, app);</span>
+<span class="nc" id="L41">		Application app = new Application();</span>
+<span class="nc" id="L42">		AppStateManager stateManager = new AppStateManager(app);</span>
+<span class="nc" id="L43">		HeaterPlugin heaterPlugin = new HeaterPlugin(m, v);</span>
+<span class="nc" id="L44">		heaterPlugin.initialize(stateManager, app);</span>
 		
-<span class="fc" id="L45">		assertNotNull(heaterPlugin);</span>
-<span class="fc" id="L46">	}</span>
+<span class="nc" id="L46">		assertNotNull(heaterPlugin);</span>
+<span class="nc" id="L47">	}</span>
 	
 	@Test
 	public void testHeaterPLugin(){
-<span class="fc" id="L50">		Sample sample1 = new Sample(&quot;heater&quot;, &quot;celsius&quot;, 20, 0);</span>
-<span class="fc" id="L51">		Sample sample2 = new Sample(&quot;heater&quot;, &quot;celsius&quot;, 21, 0);</span>
-<span class="fc" id="L52">		Model m = null;</span>
-<span class="fc" id="L53">		View v = new View();</span>
+<span class="nc" id="L51">		Sample sample1 = new Sample(&quot;heater&quot;, &quot;celsius&quot;, 20, 0);</span>
+<span class="nc" id="L52">		Sample sample2 = new Sample(&quot;heater&quot;, &quot;celsius&quot;, 21, 0);</span>
+<span class="nc" id="L53">		Model m = null;</span>
+<span class="nc" id="L54">		View v = new View();</span>
 		try {
-<span class="fc" id="L55">			m = new Model(v);</span>
-<span class="nc" id="L56">		} catch (JAXBException e) {</span>
-<span class="nc" id="L57">			e.printStackTrace();</span>
+<span class="nc" id="L56">			m = new Model(v);</span>
+<span class="nc" id="L57">		} catch (JAXBException e) {</span>
+<span class="nc" id="L58">			e.printStackTrace();</span>
 		}
-<span class="nc" id="L59">		List&lt;Sensor&gt; list = new ArrayList&lt;Sensor&gt;();</span>
-<span class="nc" id="L60">		List&lt;Sample&gt; sensor1list = new ArrayList&lt;Sample&gt;();</span>
-<span class="nc" id="L61">		sensor1list.add(sample1);</span>
-<span class="nc" id="L62">		Sensor sensor1 = new Sensor(&quot;sensor1&quot;, 0, sensor1list);</span>
-<span class="nc" id="L63">		List&lt;Sample&gt; sensor2list = new ArrayList&lt;Sample&gt;();</span>
-<span class="nc" id="L64">		sensor2list.add(sample2);</span>
-<span class="nc" id="L65">		Sensor sensor2 = new Sensor(&quot;sensor2&quot;, 0, sensor2list);</span>
-<span class="nc" id="L66">		list.add(sensor1);</span>
-<span class="nc" id="L67">		list.add(sensor2);</span>
-<span class="nc" id="L68">		m.setSensor(list);</span>
-<span class="nc" id="L69">		Position sensor1pos = new Position(0, 0, 0);</span>
-<span class="nc" id="L70">		sensor1.setPosition(sensor1pos);</span>
-<span class="nc" id="L71">		Position sensor2pos = new Position(10, 1, 1);</span>
-<span class="nc" id="L72">		sensor2.setPosition(sensor2pos);</span>
-<span class="nc" id="L73">		HeaterPlugin heaterPlugin = new HeaterPlugin(m, v);</span>
-<span class="nc" id="L74">		Application app = new Application();</span>
-<span class="nc" id="L75">		AppStateManager stateManager = new AppStateManager(app);</span>
-<span class="nc" id="L76">		heaterPlugin.initialize(stateManager, app);</span>
-<span class="nc" id="L77">		heaterPlugin.setDaten(m);</span>
-<span class="nc" id="L78">		heaterPlugin.update(20);</span>
+<span class="nc" id="L60">		List&lt;Sensor&gt; list = new ArrayList&lt;Sensor&gt;();</span>
+<span class="nc" id="L61">		List&lt;Sample&gt; sensor1list = new ArrayList&lt;Sample&gt;();</span>
+<span class="nc" id="L62">		sensor1list.add(sample1);</span>
+<span class="nc" id="L63">		Sensor sensor1 = new Sensor(&quot;sensor1&quot;, 0, sensor1list);</span>
+<span class="nc" id="L64">		sensor1.setPosition(new Position(0, 0, 0));</span>
+<span class="nc" id="L65">		List&lt;Sample&gt; sensor2list = new ArrayList&lt;Sample&gt;();</span>
+<span class="nc" id="L66">		sensor2list.add(sample2);</span>
+<span class="nc" id="L67">		Sensor sensor2 = new Sensor(&quot;sensor2&quot;, 0, sensor2list);</span>
+<span class="nc" id="L68">		sensor2.setPosition(new Position(10, 0, 0));</span>
+<span class="nc" id="L69">		list.add(sensor1);</span>
+<span class="nc" id="L70">		list.add(sensor2);</span>
+<span class="nc" id="L71">		m.setSensor(list);</span>
+<span class="nc" id="L72">		Position sensor1pos = new Position(0, 0, 0);</span>
+<span class="nc" id="L73">		sensor1.setPosition(sensor1pos);</span>
+<span class="nc" id="L74">		Position sensor2pos = new Position(10, 1, 1);</span>
+<span class="nc" id="L75">		sensor2.setPosition(sensor2pos);</span>
+<span class="nc" id="L76">		HeaterPlugin heaterPlugin = new HeaterPlugin(m, v);</span>
+<span class="nc" id="L77">		Application app = new Application();</span>
+<span class="nc" id="L78">		app.setAssetManager(new DesktopAssetManager(true));</span>
+<span class="nc" id="L79">		AppStateManager stateManager = new AppStateManager(app);</span>
+<span class="nc" id="L80">		heaterPlugin.initialize(stateManager, app);</span>
+<span class="nc" id="L81">		heaterPlugin.setDaten(m);</span>
+<span class="nc" id="L82">		heaterPlugin.update(20);</span>
+<span class="nc" id="L83">		Sample sample3 = new Sample(&quot;heater&quot;, &quot;celsius&quot;, 22, 0);</span>
+<span class="nc" id="L84">		list.remove(sensor1);</span>
+<span class="nc" id="L85">		sensor1.addToSamples(sample3);</span>
+<span class="nc" id="L86">		list.add(sensor1);</span>
+<span class="nc" id="L87">		m.setSensor(list);</span>
+		try {
+<span class="nc" id="L89">			m.getGroundplan().load();</span>
+<span class="nc" id="L90">		} catch (JAXBException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L92">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L94">		heaterPlugin.stateAttached(stateManager);</span>
+<span class="nc" id="L95">		heaterPlugin.update(40);</span>
+<span class="nc" id="L96">		Sample sample4 = new Sample(&quot;heater&quot;, &quot;celsius&quot;, 25, 20);</span>
+<span class="nc" id="L97">		List&lt;Sample&gt; sensor3List = new ArrayList&lt;Sample&gt;();</span>
+<span class="nc" id="L98">		sensor3List.add(sample4);</span>
+<span class="nc" id="L99">		Sensor sensor3 = new Sensor(&quot;sensor3&quot;, 20, sensor3List);</span>
+<span class="nc" id="L100">		list.add(sensor3);</span>
+<span class="nc" id="L101">		m.setSensor(list);</span>
+<span class="nc" id="L102">		heaterPlugin.stateDetached(stateManager);</span>
 		
-<span class="nc" id="L80">		assertNotNull(m);</span>
-<span class="nc" id="L81">		assertNotNull(v);</span>
-<span class="nc" id="L82">	}</span>
+<span class="nc" id="L104">		assertNotNull(m);</span>
+<span class="nc" id="L105">		assertNotNull(v);</span>
+<span class="nc" id="L106">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.6.201201232323</span>Merged (15.03.2012 22:06:37)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>Vision (16.03.2012 17:11:45)</div></body></html>

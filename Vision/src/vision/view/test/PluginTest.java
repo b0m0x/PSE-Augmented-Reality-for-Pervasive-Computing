@@ -26,7 +26,7 @@ import vision.view.HeaterPlugin;
 import vision.view.View;
 
 public class PluginTest {
-
+	
 	@Test
 	public void testHeaterPluginInitialize() {
 		Model m = null;
@@ -61,9 +61,11 @@ public class PluginTest {
 		List<Sample> sensor1list = new ArrayList<Sample>();
 		sensor1list.add(sample1);
 		Sensor sensor1 = new Sensor("sensor1", 0, sensor1list);
+		sensor1.setPosition(new Position(0, 0, 0));
 		List<Sample> sensor2list = new ArrayList<Sample>();
 		sensor2list.add(sample2);
 		Sensor sensor2 = new Sensor("sensor2", 0, sensor2list);
+		sensor2.setPosition(new Position(10, 0, 0));
 		list.add(sensor1);
 		list.add(sensor2);
 		m.setSensor(list);
@@ -78,6 +80,26 @@ public class PluginTest {
 		heaterPlugin.initialize(stateManager, app);
 		heaterPlugin.setDaten(m);
 		heaterPlugin.update(20);
+		Sample sample3 = new Sample("heater", "celsius", 22, 0);
+		list.remove(sensor1);
+		sensor1.addToSamples(sample3);
+		list.add(sensor1);
+		m.setSensor(list);
+		try {
+			m.getGroundplan().load();
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		heaterPlugin.stateAttached(stateManager);
+		heaterPlugin.update(40);
+		Sample sample4 = new Sample("heater", "celsius", 25, 20);
+		List<Sample> sensor3List = new ArrayList<Sample>();
+		sensor3List.add(sample4);
+		Sensor sensor3 = new Sensor("sensor3", 20, sensor3List);
+		list.add(sensor3);
+		m.setSensor(list);
+		heaterPlugin.stateDetached(stateManager);
 		
 		assertNotNull(m);
 		assertNotNull(v);
