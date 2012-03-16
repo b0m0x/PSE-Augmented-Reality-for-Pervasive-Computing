@@ -56,5 +56,10 @@ public class JSONConverterTest extends TestCase {
 		assertEquals(json.getSensorList(), empty);
 	}
 	
+	@Test
+	public void testLocalCoordinates() {
+		
+	}
+	
 
 }

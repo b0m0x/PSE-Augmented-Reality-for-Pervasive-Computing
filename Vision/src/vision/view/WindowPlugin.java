@@ -40,12 +40,20 @@ public class WindowPlugin extends Plugin {
 	private View view;
 	Logger log = Logger.getLogger(WindowPlugin.class.getName());
 
+	/**
+	 * Constructs the WindowPlugin
+	 * @param model
+	 * @param view
+	 */
 	public WindowPlugin(Model model, View view) {
 		super(model, new String[] { "window" });
 		this.model = model;
 		this.view = view;
 	}
 
+	/**
+	 * initialization of the WindowPlugin
+	 */
 	@Override
 	public void initialize(AppStateManager stateManager, Application app) {
 		super.initialize(stateManager, app);
@@ -62,6 +70,12 @@ public class WindowPlugin extends Plugin {
 		windows.clear();
 	}
 
+	/**
+	 * loads window model from file
+	 * puts a dummy window in every hole in the walls
+	 * 
+	 * @param app the application
+	 */
 	private void initwindows(Application app) {
 		windowclosed = app.getAssetManager().loadModel(
 				"Models/window.j3o");
@@ -86,6 +100,10 @@ public class WindowPlugin extends Plugin {
 		updatewindows();
 	}
 
+	/**
+	 * checks if any windowPlugin as bin initialized
+	 * if change has been detected calling update function of windowPlugin
+	 */
 	protected void clientUpdate(Application application, boolean changed) {
 		if (windowSpatial == null) {
 			initwindows(application);
@@ -95,9 +113,14 @@ public class WindowPlugin extends Plugin {
 		}
 	}
 
+	/**
+	 * checks if a sensor has been added, removes dummy from hole and puts sensor window in hole
+	 */
 	private void updatewindows() {
 		for (Sensor s : getSensors()) {
+			// checks if window already exists in list
 			if (!windows.containsKey(s.getId())) {
+				// if sensor is new remove dummy from hole
 				Spatial dummy = windowclosed.clone();
 				dummy.setLocalTranslation(s.getPosition().getX(), s
 						.getPosition().getY(), s.getPosition().getZ());
@@ -110,8 +133,10 @@ public class WindowPlugin extends Plugin {
 						
 					}
 				}
+				// add new sensor in hole and list
 				addwindowSpatial(s);
 			} else {
+				// updates window if new state of window is set
 			for (Sample samp : s.getSamples()) {
 				if (samp.getType().equals("window")) {
 					view.getRootNode().detachChild(windows.get(s.getId()));
@@ -128,6 +153,11 @@ public class WindowPlugin extends Plugin {
 		}
 	}
 
+	/**
+	 * creates new window Spatial with given sensor parameters
+	 * 
+	 * @param sensor holds parameters for new Spatial
+	 */
 	private void addwindowSpatial(final Sensor sensor) {
 		windowSpatial = null;
 		float status = 0;
@@ -166,12 +196,19 @@ public class WindowPlugin extends Plugin {
 		view.getRootNode().attachChild(windowSpatial);
 	}
 
+	/**
+	 * searches neares hole and puts window into it
+	 * 
+	 * @param windowSpatial object to fit in hole
+	 * @return new position and shape of windowSpatial
+	 */
 	private Spatial fitInHole(Spatial windowSpatial) {
 		List<Wall> walls = model.getGroundplan().getWalls();
 		Vector3f windowSpatialpos = windowSpatial.getLocalTranslation();
 		Hole smallestHole = walls.get(0).getHole().get(0);
 		Wall smallestWall = walls.get(0);
 		float distance = 10000000.00f;
+		// searches closest hole to windowSpatial
 		for (Wall w : walls) {
 			List<Hole> holes = w.getHole();
 			for (Hole h : holes) {
@@ -187,6 +224,7 @@ public class WindowPlugin extends Plugin {
 				}
 			}
 		}
+		// sets new Location of windowSpatial into hole
 		HoleAdapter holeAdapter = new HoleAdapter(smallestHole);
 		WallAdapter wallAdapter = new WallAdapter(smallestWall);
 		float rotation = wallAdapter.getRotation();
@@ -207,6 +245,13 @@ public class WindowPlugin extends Plugin {
 		return windowSpatial;
 	}
 
+	/**
+	 * calculates worldPosition from given parameters
+	 * 
+	 * @param wallAdapter wall with Position data
+	 * @param holeAdapter hole with local Position data
+	 * @return world position data of hole
+	 */
 	private Vector3f getWorldPosition(WallAdapter wallAdapter,
 			HoleAdapter holeAdapter) {
 		float newX = -(float) (Math.sin(-Math.PI / 2
@@ -221,6 +266,12 @@ public class WindowPlugin extends Plugin {
 		return HoleVec3;
 	}
 
+	/**
+	 * creates dummy window for empty holes
+	 * 
+	 * @param vec position of dummy window
+	 * @param app the application
+	 */
 	private void createDummy(Vector3f vec, Application app) {
 		windowSpatial = windowclosed.clone();
 		windowSpatial.setLocalTranslation(vec);
