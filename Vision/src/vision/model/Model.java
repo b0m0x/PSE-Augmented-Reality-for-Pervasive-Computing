@@ -7,24 +7,25 @@ import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBException;
 
-import com.jme3.material.Material;
-import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
-
 import vision.Config;
 import vision.controller.PluginController;
 import vision.model.xml.FloorCeiling;
 import vision.model.xml.Groundplan;
 import vision.model.xml.Hole;
 import vision.model.xml.Light;
+import vision.model.xml.ObjectFactory;
 import vision.model.xml.Reference;
 import vision.model.xml.StaticGeometry;
 import vision.model.xml.Wall;
 import vision.view.Plugin;
 import vision.view.View;
+
+import com.jme3.material.Material;
+import com.jme3.math.Vector2f;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 
 /**
  * provides a facade for all objects belonging to the model
@@ -75,20 +76,26 @@ public class Model {
 		
 	}
 	
-	public Model(View view) throws JAXBException {
-
+	private Model(View view) throws JAXBException {
 
 		this.groundplan = new vision.model.xml.Groundplan().load();
 //		 sensor = createTestSensors();
 		sensor = Collections.emptyList();
 		this.view = view;
 		loadPlugins();
-
-		updater = new UpdateThread(this);
-		updater.start();
-
 		Logger.getLogger("").setLevel(Config.LOG_LEVEL);
-
+	}
+	
+	public static Model createModel(View v) {
+		Model m;
+		try {
+			m = new Model(v);
+		} catch (JAXBException e) {
+			return null;
+		}
+		m.updater = new UpdateThread(m);
+		m.updater.start();
+		return m;
 	}
 
 	private void loadPlugins() {

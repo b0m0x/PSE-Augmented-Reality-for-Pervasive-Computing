@@ -1,10 +1,9 @@
 package vision.model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import vision.model.Position;
 import vision.model.WallAdapter;
 import vision.model.xml.Wall;
 

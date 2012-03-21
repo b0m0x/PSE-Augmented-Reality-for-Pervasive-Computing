@@ -1,5 +1,12 @@
 package vision.view;
 
+import java.util.List;
+import java.util.logging.Logger;
+
+import vision.controller.Controller;
+import vision.model.Model;
+import vision.model.xml.Light;
+
 import com.jme3.animation.LoopMode;
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -33,13 +40,6 @@ import com.jme3.scene.Spatial.CullHint;
 import com.jme3.scene.control.CameraControl.ControlDirection;
 import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
-
-import java.util.List;
-import java.util.logging.Logger;
-
-import vision.controller.Controller;
-import vision.model.Model;
-import vision.model.xml.Light;
 
 /**
  * Renders all static objects and rooms

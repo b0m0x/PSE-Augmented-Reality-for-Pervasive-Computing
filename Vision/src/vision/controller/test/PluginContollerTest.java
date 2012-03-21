@@ -1,8 +1,6 @@
 package vision.controller.test;
 
-import static org.junit.Assert.*;
-
-import javax.xml.bind.JAXBException;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -18,13 +16,7 @@ public class PluginContollerTest {
 	@Test
 	public void testHeaterController() {
 		View view = new View();
-		Model model = null;
-		try {
-			model = new Model(view = new View());
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Model model = Model.createModel(view);
 		HeaterPlugin heaterPlugin = new HeaterPlugin(model, view);
 		HeaterController heaterController = new HeaterController(model,
 				heaterPlugin);
@@ -38,13 +30,7 @@ public class PluginContollerTest {
 	@Test
 	public void testWindowController() {
 		View view = new View();
-		Model model = null;
-		try {
-			model = new Model(view = new View());
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Model model = Model.createModel(view);
 		WindowPlugin windowPlugin = new WindowPlugin(model, view);
 		WindowController windowController = new WindowController(model,
 				windowPlugin);

@@ -1,20 +1,18 @@
 package vision.model.test;
 
-import static org.junit.Assert.*;
-
-import javax.xml.bind.JAXBException;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import vision.model.Database;
 import vision.model.JSONConverter;
-import vision.model.Update;
 import vision.model.Model;
+import vision.model.Update;
 
 public class UpdateTest {
 	@Test
-	public void test() throws JAXBException {
-		Model model = new Model(null);
+	public void test() {
+		Model model = Model.createModel(null);
 		Update update = new Update(model);
 		
 		assertEquals(model, update.getDaten());
@@ -25,6 +23,7 @@ public class UpdateTest {
 		assertEquals(json, update.getJSONConverter());
 		
 		Database data = new Database();
+		data.connect(null);
 		update.setDatabase(data);
 		
 		assertEquals(data, update.getDatabase());

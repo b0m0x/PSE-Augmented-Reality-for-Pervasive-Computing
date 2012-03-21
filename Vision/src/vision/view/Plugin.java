@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import vision.controller.PluginController;
 import vision.model.Model;
 import vision.model.Sensor;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
 import com.jme3.app.state.AppStateManager;
-import vision.controller.PluginController;
 /**
  * This class defines the Plugins.
  *

@@ -3,18 +3,14 @@ package vision.model;
 import java.nio.FloatBuffer;
 import java.util.Collections;
 import java.util.Comparator;
-import javax.vecmath.Quat4f;
 
 import vision.model.xml.Hole;
 import vision.model.xml.Wall;
 
-
-import com.bulletphysics.linearmath.QuaternionUtil;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.bullet.util.CollisionShapeFactory;
-import com.jme3.bullet.util.Converter;
 import com.jme3.material.Material;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -22,7 +18,6 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.VertexBuffer.Type;
-import com.jme3.scene.debug.Arrow;
 import com.jme3.scene.shape.Box;
 
 /**

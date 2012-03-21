@@ -3,7 +3,6 @@ package vision.view;
 import vision.controller.Controller;
 import vision.controller.PluginController;
 import vision.model.Model;
-import vision.model.Sensor;
 
 import com.jme3.app.Application;
 import com.jme3.app.state.AbstractAppState;
@@ -11,9 +10,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.niftygui.NiftyJmeDisplay;
 
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.NiftyEventAnnotationProcessor;
 import de.lessvoid.nifty.builder.PanelBuilder;
-import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
 import de.lessvoid.nifty.controls.label.builder.LabelBuilder;

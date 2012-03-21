@@ -5,8 +5,6 @@ package vision.view;
 
 
 
-import java.util.logging.Logger;
-
 import vision.controller.Controller;
 import vision.model.Model;
 
@@ -14,14 +12,11 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
-import com.jme3.input.KeyInput;
-import com.jme3.input.event.KeyInputEvent;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.post.filters.BloomFilter;
-import com.jme3.post.filters.DepthOfFieldFilter;
 
 import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
 

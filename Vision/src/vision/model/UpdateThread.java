@@ -21,14 +21,13 @@ public class UpdateThread extends Thread {
 	public UpdateThread(Model model) {
 		running = true;
 		this.model = model;
+		update = new Update(model);
 	}
 	
 	/**
 	 * 
 	 */
 	public void run() {
-
-		update = new Update(model);
 		update.getDatabase().connect(this);
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {

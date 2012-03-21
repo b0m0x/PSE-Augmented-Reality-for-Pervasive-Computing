@@ -1,11 +1,11 @@
 package vision.model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import javax.xml.bind.JAXBException;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBException;
 
 import vision.model.xml.Groundplan;
 import vision.model.xml.Wall;

@@ -4,15 +4,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import vision.model.Sample;
-
-
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.effects.EffectImpl;
 import de.lessvoid.nifty.effects.EffectProperties;
 import de.lessvoid.nifty.effects.Falloff;
 import de.lessvoid.nifty.elements.Element;
-
-
 import de.lessvoid.nifty.render.NiftyRenderEngine;
 
 /**

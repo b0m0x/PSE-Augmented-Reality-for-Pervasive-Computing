@@ -1,8 +1,5 @@
 package vision.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,15 +9,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import javax.vecmath.Matrix3d;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.bulletphysics.linearmath.MatrixUtil;
-import com.jme3.math.Matrix3f;
 
 import vision.Config;
 import vision.model.xml.Reference;

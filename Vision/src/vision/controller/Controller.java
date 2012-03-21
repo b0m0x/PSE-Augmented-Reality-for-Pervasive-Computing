@@ -1,32 +1,21 @@
 package vision.controller;
 
-import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.builder.PanelBuilder;
-import de.lessvoid.nifty.controls.ButtonClickedEvent;
-import de.lessvoid.nifty.controls.CheckBox;
-import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
-import de.lessvoid.nifty.controls.Menu;
-import de.lessvoid.nifty.controls.checkbox.CheckboxControl;
-import de.lessvoid.nifty.controls.checkbox.builder.CheckboxBuilder;
-import de.lessvoid.nifty.controls.label.builder.LabelBuilder;
-import de.lessvoid.nifty.elements.Element;
-import de.lessvoid.nifty.elements.render.TextRenderer;
-import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.tools.SizeValue;
-
-import java.awt.peer.ButtonPeer;
 import java.util.Collection;
 import java.util.logging.Logger;
-
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.AnalogListener;
-import com.jme3.scene.Geometry;
 
 import vision.model.Model;
 import vision.view.Plugin;
 import vision.view.View;
+
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.AnalogListener;
+
+import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
+import de.lessvoid.nifty.controls.CheckBoxStateChangedEvent;
+import de.lessvoid.nifty.screen.Screen;
+import de.lessvoid.nifty.screen.ScreenController;
 
 /**
  * the main controller that passes key presses, user inputs and events to the

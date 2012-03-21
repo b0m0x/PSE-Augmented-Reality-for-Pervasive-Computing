@@ -1,8 +1,6 @@
 package vision.view.test;
 
-import static org.junit.Assert.*;
-
-import javax.xml.bind.JAXBException;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -21,14 +19,7 @@ public class ViewTest {
 		settings.setSettingsDialogImage("9.jpg");
 		
 		View mainView = new View();
-		Model mainModel = null;
-		try {
-			mainModel = new Model(mainView);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-			fail();
-			return;
-		}
+		Model mainModel = Model.createModel(mainView);
 		Controller mainController = new Controller(mainView, mainModel);
 		mainView.setShowSettings(false);
 		mainView.setSettings(settings);

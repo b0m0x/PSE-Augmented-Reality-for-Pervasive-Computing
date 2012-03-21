@@ -2,13 +2,10 @@ package vision.model.test;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.JAXBException;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
-import junit.framework.TestCase;
 import vision.model.JSONConverter;
 import vision.model.Model;
 import vision.model.Sensor;
@@ -21,11 +18,7 @@ public class JSONConverterTest extends TestCase {
 	
 	
 	private JSONConverter init() {
-		try {
-			model = new Model(null);
-			} catch (JAXBException e) {
-				
-			}
+		model = Model.createModel(new View());
 		JSONConverter json = new JSONConverter(model);
 		return json;
 	}

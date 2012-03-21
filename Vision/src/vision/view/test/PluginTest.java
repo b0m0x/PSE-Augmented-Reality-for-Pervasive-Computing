@@ -1,23 +1,13 @@
 package vision.view.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
-import net.java.games.util.plugins.Plugin;
-
 import org.junit.Test;
-
-import com.jme3.app.Application;
-import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.AppStateManager;
-import com.jme3.asset.DesktopAssetManager;
-import com.jme3.scene.Spatial;
 
 import vision.model.Model;
 import vision.model.Position;
@@ -27,18 +17,16 @@ import vision.view.HeaterPlugin;
 import vision.view.View;
 import vision.view.WindowPlugin;
 
+import com.jme3.app.Application;
+import com.jme3.app.state.AppStateManager;
+import com.jme3.asset.DesktopAssetManager;
+
 public class PluginTest {
 	
 	@Test
 	public void testHeaterPluginInitialize() {
-		Model m = null;
-		View v = null;
-		try {
-			m = new Model(v = new View());
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		View v = new View();
+		Model m = Model.createModel(v);
 		
 		Application app = new Application();
 		AppStateManager stateManager = new AppStateManager(app);
@@ -52,13 +40,8 @@ public class PluginTest {
 	public void testHeaterPLugin(){
 		Sample sample1 = new Sample("heater", "celsius", 20, 0);
 		Sample sample2 = new Sample("heater", "celsius", 21, 0);
-		Model m = null;
 		View v = new View();
-		try {
-			m = new Model(v);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+		Model m = Model.createModel(v);
 		List<Sensor> list = new ArrayList<Sensor>();
 		List<Sample> sensor1list = new ArrayList<Sample>();
 		sensor1list.add(sample1);
@@ -112,13 +95,8 @@ public class PluginTest {
 	public void testWindowPlugin() {
 		Sample sample1 = new Sample("window", "", 100, 0);
 		Sample sample2 = new Sample("light", "", 1, 0);
-		Model m = null;
 		View v = new View();
-		try {
-			m = new Model(v);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+		Model m = Model.createModel(v);
 		List<Sensor> list = new ArrayList<Sensor>();
 		List<Sample> sensor1list = new ArrayList<Sample>();
 		sensor1list.add(sample1);

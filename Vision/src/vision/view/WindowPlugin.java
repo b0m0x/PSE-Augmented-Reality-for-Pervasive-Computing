@@ -1,6 +1,5 @@
 package vision.view;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +8,8 @@ import java.util.logging.Logger;
 
 import javax.vecmath.Quat4f;
 
-import vision.controller.WindowController;
 import vision.model.HoleAdapter;
 import vision.model.Model;
-import vision.model.Position;
 import vision.model.Sample;
 import vision.model.Sensor;
 import vision.model.WallAdapter;

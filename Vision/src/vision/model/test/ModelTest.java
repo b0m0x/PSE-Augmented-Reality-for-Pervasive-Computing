@@ -1,10 +1,8 @@
 package vision.model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-
-import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
@@ -17,8 +15,8 @@ import vision.view.View;
 
 public class ModelTest {
 	@Test
-	public void test() throws JAXBException {
-		Model model = new Model(null);
+	public void test() {
+		Model model = Model.createModel(null);
 		
 		model.getTaggedSensors(null);
 		

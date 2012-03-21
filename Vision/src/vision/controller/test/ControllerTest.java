@@ -3,8 +3,6 @@ package vision.controller.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-
 import junit.framework.TestCase;
 
 import org.junit.Test;

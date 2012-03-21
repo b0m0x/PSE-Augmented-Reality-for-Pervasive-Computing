@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-
-
 import vision.model.HoleAdapter;
 import vision.model.MaterialHelper;
 import vision.model.Model;
